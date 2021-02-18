@@ -160,16 +160,6 @@ public class ClassScanner {
 		return classNames;
 	}
 
-	// es gibt vermutlich 3 kostspielige Operationen, die sehr lange dauern, das
-	// müsste per Zeitmessung geprüft werden:
-	// 1. schemaLoader.loadURI(...) -> 95 % -> wegen Festplattenzugriff
-	// 2. ClassTree aus dem XSModel -> 4 % -> wegen Rekursion
-	// 3. TreeViewItem für JavaFX -> 1 % -> wegen Rekursion
-	// TODO : Untersuchen, ob Vermutung stimmt
-	// Lösungsstrategie: beim Öffnen des Programms werden im Hintergrund die 5
-	// zuletzt geöffneten Schemata geparst und das XSModel für diese Schemata
-	// gechacht, sofern möglich
-
 	public List<String> getElementsInFile(String pathToScheme) throws ClassNotFoundException, InstantiationException,
 			IllegalAccessException, ClassCastException, FileNotFoundException {
 

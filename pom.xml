@@ -6,7 +6,7 @@
 	<artifactId>xsd-visualization</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>mapping</name>
+	<name>xsd-visualization</name>
 	<url>http://maven.apache.org</url>
 	<properties>
 		<servlet.version>3.1.0</servlet.version>
