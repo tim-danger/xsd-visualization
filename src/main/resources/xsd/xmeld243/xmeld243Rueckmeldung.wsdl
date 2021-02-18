@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Rueckmeldung.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Rueckmeldung"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Rueckmeldung.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst zur Rückmeldung gemäß OSCI-XMeld</title></head><body><h1>Dienst zur Rückmeldung gemäß OSCI-XMeld</h1><p>Dieses WSDL-Dokument beschreibt den Dienst zur Rückmeldung gemäß OSCI-XMeld(siehe: <link>http://www.osci.de</link>).</p><p>Folgende Rückmelde-Nachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeRueckmeldung</i> zulässig:<ul><ul>
+            <li>xmeld:rueckmeldung.anmeldunginland.0201</li>
+            <li>xmeld:rueckmeldung.anmeldungausland.0202</li>
+            <li>xmeld:rueckmeldung.auswertung.0203</li>
+            <li>xmeld:rueckmeldung.unplausibel.0204</li>
+            <li>xmeld:rueckmeldung.statuswechsel.0206</li>
+            <li>xmeld:rueckmeldung.anmeldungauswaertigereglp.0221</li>
+            <li>xmeld:rueckmeldung.auswertungauswaertigereglp.0223</li>
+            <li>xmeld:rueckmeldung.unplausibelauswaertigereglp.0224</li>
+         </ul></ul></p><p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der achtstellige Amtliche Gemeindeschlüssel (AGS); der zu verwendende Präfix lautet "<b>ags:</b>". </p><p>Zulässige Dienstanbieter und Dienstnutzer sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". Anfragen ans DVDV vom Typ <i>verify.category</i> sollten daher die Zuordnung zu dieser Kategorie prüfen lassen.</p></body></html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <wsdl:types>
+      <xs:schema xmlns="http://www.osci.de/xmeld243"
+                 targetNamespace="http://www.osci.de/xmeld243/xmeld243Rueckmeldung.wsdl">
+         <xs:import namespace="http://www.osci.de/xmeld243"
+                    schemaLocation="http://www.osci.de/xmeld243/xmeld-nachrichten-rueckmeldung.xsd"/>
+         <xs:complexType name="rueckmeldungSchemata">
+            <xs:choice>
+               <xs:element name="rueckmeldung.anmeldungausland.0202"/>
+               <xs:element name="rueckmeldung.anmeldungauswaertigereglp.0221"/>
+               <xs:element name="rueckmeldung.anmeldunginland.0201"/>
+               <xs:element name="rueckmeldung.auswertung.0203"/>
+               <xs:element name="rueckmeldung.auswertungauswaertigereglp.0223"/>
+               <xs:element name="rueckmeldung.statuswechsel.0206"/>
+               <xs:element name="rueckmeldung.unplausibel.0204"/>
+               <xs:element name="rueckmeldung.unplausibelauswaertigereglp.0224"/>
+            </xs:choice>
+         </xs:complexType>
+      </xs:schema>
+   </wsdl:types>
+   <message name="rueckmeldungNachricht">
+      <part name="rueckmeldungNachricht" type="tns:rueckmeldungSchemata"/>
+      <part name="optionaleNachricht" type="xs:anyType"/>
+   </message>
+   <portType name="osciRueckmeldungInterface">
+      <operation name="sendeRueckmeldung">
+         <input message="tns:rueckmeldungNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciRueckmeldungInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeRueckmeldung">
+         <osci:operation communicationType="one-way-active" subject="XMeld 2.4.3 Rueckmeldung"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:rueckmeldungNachricht"/>
+               </osci:part>
+            </osci:container>
+            <osci:container signatureLevel="none" encrypted="false" required="false">
+               <osci:part>
+                  <osci:content part="tns:optionaleNachricht"/>
+               </osci:part>
+            </osci:container>
+         </input>
+      </operation>
+   </binding>
+   <service name="osciRueckmeldungService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciRueckmeldungInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>required</tpl:use> Dieser Port ist nicht optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciRueckmeldungTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

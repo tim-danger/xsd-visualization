@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" xmlns:auskunft="http://www.kba.de/zfzr/auskunft" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe GEBÜHR, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:import schemaLocation="StrukturelementeAuskunft.xsd" namespace="http://www.kba.de/zfzr/auskunft" />
+  <xs:complexType name="Type.Gebuehren.AnfrageUebermittlungGebuehrenrueckstand.0102">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gebuehren.anfrageuebermittlunggebuehrenrueckstand.0102'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:choice>
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0102'</xs:documentation>
+            </xs:annotation>
+            <xs:element ref="xkfz:gebuehrenrueckstandFuerPersonAnfragen">
+              <xs:annotation>
+                <xs:documentation>Nutzdaten der Nachricht 'gebuehren.anfrageuebermittlunggebuehrenrueckstand.0102'. Diese Datenstruktur wird im Rahmen der Anfrage nach Gebührenrückständen für einen Halter bei einem HKR-Verfahren im Rahmen der Bearbeitung eines Kfz-Zulassungsvorgangs durch eine Kfz-Zulassungsstelle verwendet.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+            <xs:element ref="xkfz:gebuehrenrueckstandBeiHKRAnfragen">
+              <xs:annotation>
+                <xs:documentation>Nutzdaten der Nachricht 'gebuehren.anfrageuebermittlunggebuehrenrueckstand.0102'. Diese Datenstruktur wird im Rahmen der Anfrage nach Gebührenrückständen für einen Halter bei einem HKR-Verfahren im Rahmen der Bearbeitung eines Kfz-Zulassungsvorgangs durch eine Kfz-Zulassungsstelle verwendet.
+Abweichend zur anderen Struktur sind die Angaben zur Geburt optional. Die andere Struktur wird mit der kommenden nicht-abwärtskompatiblen Version entfernt.</xs:documentation>
+              </xs:annotation>
+            </xs:element>
+          </xs:choice>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="gebuehrenrueckstandBeiHKRAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gebuehren.anfrageuebermittlunggebuehrenrueckstand.0102'. Diese Datenstruktur wird im Rahmen der Anfrage nach Gebührenrückständen für einen Halter bei einem HKR-Verfahren im Rahmen der Bearbeitung eines Kfz-Zulassungsvorgangs durch eine Kfz-Zulassungsstelle verwendet.
+Abweichend zur anderen Struktur sind die Angaben zur Geburt optional. Die andere Struktur wird mit der kommenden nicht-abwärtskompatiblen Version entfernt.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageGebuehrenrueckstand" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gebuehrenrueckstandFuerPersonAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gebuehren.anfrageuebermittlunggebuehrenrueckstand.0102'. Diese Datenstruktur wird im Rahmen der Anfrage nach Gebührenrückständen für einen Halter bei einem HKR-Verfahren im Rahmen der Bearbeitung eines Kfz-Zulassungsvorgangs durch eine Kfz-Zulassungsstelle verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="auskunft:PersonAnfrageTyp" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gebuehren.anfrageuebermittlunggebuehrenrueckstand.0102">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Übermittlung Gebührenrückstand', vgl. Verweis zu XKfz-Nachricht 0102 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gebuehren.AnfrageUebermittlungGebuehrenrueckstand.0102" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

@@ -1,0 +1,661 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe KOMMUNIKATIONSSTRUKTURIERUNG, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-auskunft.xsd" />
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:include schemaLocation="xkfz-feinstaub.xsd" />
+  <xs:include schemaLocation="xkfz-gebuehren.xsd" />
+  <xs:include schemaLocation="xkfz-gutachten.xsd" />
+  <xs:include schemaLocation="xkfz-hauptuntersuchung.xsd" />
+  <xs:include schemaLocation="xkfz-kennzeichen.xsd" />
+  <xs:include schemaLocation="xkfz-konfiguration.xsd" />
+  <xs:include schemaLocation="xkfz-referenzdatei.xsd" />
+  <xs:include schemaLocation="xkfz-vorsystem.xsd" />
+  <xs:include schemaLocation="xkfz-zulassungsmitteilung.xsd" />
+  <xs:complexType name="Type.Kommunikation.AnfrageVerfuegbarkeit.0004">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kommunikation.anfrageverfuegbarkeit.0004'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:anfrageVerfuegbarkeit">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0004'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kommunikation.ErgebnisVerfuegbarkeit.0005">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kommunikation.ergebnisverfuegbarkeit.0005'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:ergebnisVerfuegbarkeit">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0004'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kommunikation.Quittung.0002">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kommunikation.quittung.0002'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisQuittung">
+        <xs:sequence>
+          <xs:element ref="xkfz:quittung">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0002'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kommunikation.Sammelnachricht.0001">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kommunikation.sammelnachricht.0001'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:listeNachrichten">
+            <xs:annotation>
+              <xs:documentation>Datentyp zur XKfz-Nachricht 'kommunikation.sammelnachricht.0001'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kommunikation.VerschluesselteNachricht.0003">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kommunikation.verschluesseltenachricht.0003'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:verschluesselteNachricht">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0003'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.XKfzFehlernachrichten">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Sammlung aller XKfz-Fehler- und Quittungsnachrichten. Dieser Datentyp wird komplett oder in eingeschränkter Form überall da eingesetzt, wo eine Sammlung von XKfz-Fehler- und Quittungsnachrichten benötigt wird.  Elemente dieses Datentyps können darüber hinaus zur Gestaltung von Web Services eingesetzt werden.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:restriction base="xkfz:Type.XKfzNachrichten">
+        <xs:choice>
+          <xs:element ref="xkfz:kommunikation.quittung.0002">
+            <xs:annotation>
+              <xs:documentation>Nachricht 'Quittierung von Nachrichten (XKfz-Quittung)', vgl. Verweis zu XKfz-Nachricht 0002 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:choice>
+      </xs:restriction>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.XKfzNachrichten">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Sammlung aller XKfz-Nachrichten. Dieser Datentyp wird komplett oder in eingeschränkter Form überall da eingesetzt, wo eine Sammlung aller oder spezieller Nachrichten des XKfz-Standards benötigt wird. Elemente dieses Datentyps können darüber hinaus zur Gestaltung von Web Services eingesetzt werden.</xs:documentation>
+    </xs:annotation>
+    <xs:choice>
+      <xs:element ref="xkfz:kommunikation.sammelnachricht.0001">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Sammlung von Nachrichten', vgl. Verweis zu XKfz-Nachricht 0001 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kommunikation.quittung.0002">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Quittierung von Nachrichten (XKfz-Quittung)', vgl. Verweis zu XKfz-Nachricht 0002 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kommunikation.verschluesseltenachricht.0003">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Verschluesselte Nachricht', vgl. Verweis zu XKfz-Nachricht 0003 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kommunikation.anfrageverfuegbarkeit.0004">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Verfügbarkeit', vgl. Verweis zu XKfz-Nachricht 0004 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kommunikation.ergebnisverfuegbarkeit.0005">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis Verfügbarkeit', vgl. Verweis zu XKfz-Nachricht 0005 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gebuehren.anfrageuebermittlunggebuehrenrueckstand.0102">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Übermittlung Gebührenrückstand', vgl. Verweis zu XKfz-Nachricht 0102 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.anfrageuebermittlunggutachten.0201">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Übermittlung Gutachten', vgl. Verweis zu XKfz-Nachricht 0201 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.ergebnisuebermittlunggutachten.0202">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Auskunft Übermittlung Gutachten', vgl. Verweis zu XKfz-Nachricht 0202 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.fehleruebermittlunggutachten.0203">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übermittlung Status bei Abruf Gutachten', vgl. Verweis zu XKfz-Nachricht 0203 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.anfragegutachtengenutzt.0204">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Gutachten für Zulassungsprozess genutzt', vgl. Verweis zu XKfz-Nachricht 0204 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.anfragegutachtenfreigeben.0205">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Gutachten freigeben', vgl. Verweis zu XKfz-Nachricht 0205 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.anfragegutachtenstorno.0206">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Storno', vgl. Verweis zu XKfz-Nachricht 0206 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.anfragegutachtennummerpruefen.0207">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Gutachtennummer prüfen', vgl. Verweis zu XKfz-Nachricht 0207 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:gutachten.ergebnisgutachtenstatus.0208">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Gutachtennummer bestätigen', vgl. Verweis zu XKfz-Nachricht 0208 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.anfragedatumhauptuntersuchung.0301">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Übermittlung HU- und SP-Datum', vgl. Verweis zu XKfz-Nachricht 0301 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.ergebnisdatumhauptuntersuchung.0302">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Auskunft Übermittlung HU- und SP-Datum', vgl. Verweis zu XKfz-Nachricht 0302 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.mitteilungtechnischeuntersuchung.0303">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übermittlung von HU- oder SP-Daten', vgl. Verweis zu XKfz-Nachricht 0303 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.stornierungtechnischeuntersuchung.0304">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Stornierung von bereits gespeichert HU- und SP-Daten', vgl. Verweis zu XKfz-Nachricht 0304 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.anfrageschluesselpruefziffer.0305">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Übermittlung eines Schlüssels', vgl. Verweis zu XKfz-Nachricht 0305 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.ergebnisschluesselpruefziffer.0306">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Auskunft Übermittlung eines Schlüssels', vgl. Verweis zu XKfz-Nachricht 0306 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.aenderungwirkdatumschluesselpruefziffer.0307">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zur Änderung des Wirkdatums eines Schlüssels', vgl. Verweis zu XKfz-Nachricht 0307 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.anfragepruefziffer.0308">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zur HU- / SP-Prüfzifferngenerierung', vgl. Verweis zu XKfz-Nachricht 0308 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.ergebnispruefziffer.0309">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis der HU- / SP-Prüfzifferngenerierung', vgl. Verweis zu XKfz-Nachricht 0309 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.mitteilungtechnischeuntersuchungzs.0310">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übermittlung von HU-Daten (an die Zentrale Stelle)', vgl. Verweis zu XKfz-Nachricht 0310 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.stornierungtechnischeuntersuchungzs.0311">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Stornierung bereits gespeicherter HU-Daten (der Zentralen Stelle)', vgl. Verweis zu XKfz-Nachricht 0311 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.anfragetechnischeuntersuchungzfzr.0312">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage von Daten zur Hauptuntersuchung oder Sicherheitsprüfung an das ZFZR', vgl. Verweis zu XKfz-Nachricht 0312 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:hauptuntersuchung.auskunfttechnischeuntersuchungzfzr.0313">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Auskunft zur Hauptuntersuchung oder Sicherheitsprüfung aus dem ZFZR', vgl. Verweis zu XKfz-Nachricht 0313 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:zulassungsmitteilung.anfragegebuehrenrueckstand.0401">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Gebührenrückstände (Zulassungsmitteilung)', vgl. Verweis zu XKfz-Nachricht 0401 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:zulassungsmitteilung.ergebnisgebuehrenrueckstand.0402">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis Gebührenrückstände (Zulassungsmitteilung)', vgl. Verweis zu XKfz-Nachricht 0402 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:zulassungsmitteilung.anfragefremdausfuehrunggeschaeftsvorfall.0403">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Mitteilung über die Fremdausführung eines Geschäftsvorfalls', vgl. Verweis zu XKfz-Nachricht 0403 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:zulassungsmitteilung.anfragesicherheitscodes.0404">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Übermittlung der Sicherheitscodes', vgl. Verweis zu XKfz-Nachricht 0404 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:zulassungsmitteilung.ergebnissicherheitscodes.0405">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis Übermittlung der Sicherheitscodes', vgl. Verweis zu XKfz-Nachricht 0405 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragekennzeichensuche.0601">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Kennzeichensuche', vgl. Verweis zu XKfz-Nachricht 0601 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.ergebniskennzeichensuche.0602">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis Kennzeichensuche', vgl. Verweis zu XKfz-Nachricht 0602 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragenaechstesfreieskennzeichen.0603">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage nächstes freies Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0603 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.ergebnisnaechstesfreieskennzeichen.0604">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis nächstes freies Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0604 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragekennzeichenzurbearbeitungsperren.0605">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Kennzeichen zur Bearbeitung sperren', vgl.Verweis zu XKfz-Nachricht 0605 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragekennzeichenfreigeben.0606">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Kennzeichen freigeben (Storno)', vgl. Verweis zu XKfz-Nachricht 0606 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragekennzeichenreservierung.0607">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Kennzeichenreservierung', vgl. Verweis zu XKfz-Nachricht 0607 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.ergebniskennzeichenreservierung.0608">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis Kennzeichenreservierung', vgl. Verweis zu XKfz-Nachricht 0608 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragemassenreservierung.0609">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Massenreservierung von Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0609 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.ergebnismassenreservierung.0610">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis Massenreservierung von Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0610 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragekennzeichenreservierungpruefen.0611">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Kennzeichenreservierung prüfen', vgl. Verweis zu XKfz-Nachricht 0611 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:kennzeichen.anfragekennzeichenfuerzulassungverwenden.0612">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Kennzeichen für Zulassung verwenden', vgl. Verweis zu XKfz-Nachricht 0612 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.anfragepruefung.0701">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zur Prüfung eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0701 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.anfrageimport.0702">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zur Übernahme (Import) des aktuellen Stands eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0702 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.anfragestatus.0703">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zum aktuellen Status eines zuvor übermittelten elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0703 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.anfragestatuswechsel.0704">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zum Statuswechsel eines zuvor übermittelten elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0704 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.anfrageexport.0705">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zur Rückübernahme (Export) des aktuellen Stands eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0705 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.status.0706">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übertragung des Status eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0706 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.antrag.0707">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übertragung des aktuellen Inhalts eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0707 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.antragausserbetriebsetzunggrosskunde.0708">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Großkundenantrag auf Außerbetriebsetzung', vgl. Verweis zu XKfz-Nachricht 0708 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.antragskopie.0709">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übertragung einer Kopie des elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0709 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:vorsystem.zustaendigkeit.0710">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übertragung der Zuständigkeit für einen elektronischen Zulassungsantrag', vgl. Verweis zu XKfz-Nachricht 0710 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:auskunft.anfragehalterauskunft.0801">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zur Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0801 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:auskunft.halterauskunft.0802">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übertragung der Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0802 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:auskunft.anfragestatus.0803">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zum aktuellen Status einer zuvor übermittelten Anfrage zur Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0803 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:auskunft.status.0804">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übertragung des Status einer zuvor übermittelten Anfrage zur Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0804 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:auskunft.anfragezulassungsbescheinigungteil2vorhanden.0805">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zum Verbleib der Zulassungsbescheinigung Teil 2 bei der zuständigen Zulassungsbehörde', vgl. Verweis zu XKfz-Nachricht 0805 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:auskunft.zulassungsbescheinigungteil2vorhanden.0806">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Antwort zum Verbleib der Zulassungsbescheinigung Teil 2 bei der zuständigen Zulassungsbehörde', vgl. Verweis zu XKfz-Nachricht 0806 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:referenzdatei.anfragereferenzdatei.0901">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zur Übermittlung der Referenzdatei', vgl. Verweis zu XKfz-Nachricht 0901 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:referenzdatei.referenzdatei.0902">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Übermittlung der Referenzdatei', vgl. Verweis zu XKfz-Nachricht 0902 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:feinstaub.anfragefeinstaubplakette.1001">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage Feinstaubplakette', vgl. Verweis zu XKfz-Nachricht 1001 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:feinstaub.ergebnisfeinstaubplakette.1002">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Ergebnis Feinstaubplakette', vgl. Verweis zu XKfz-Nachricht 1002 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:konfiguration.anfragezertifikat.1101">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Anfrage zum Abruf eines Zertifikats', vgl. Verweis zu XKfz-Nachricht 1101 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="xkfz:konfiguration.zertifikat.1102">
+        <xs:annotation>
+          <xs:documentation>Nachricht 'Bereitgestelltes Zertifikat', vgl. Verweis zu XKfz-Nachricht 1102 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:choice>
+  </xs:complexType>
+  <xs:complexType name="Type.XKfzNachrichtenListe">
+    <xs:annotation>
+      <xs:documentation>Liste von XKfz-Nachrichten</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="anzahlDerNachrichten" type="xs:nonNegativeInteger">
+        <xs:annotation>
+          <xs:documentation>Anzahl der in der Liste enthaltenen XKfz-Nachrichten</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="nachricht" minOccurs="0" maxOccurs="unbounded" type="xkfz:Type.XKfzNachrichten">
+        <xs:annotation>
+          <xs:documentation>XKfz-Nachricht</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="anfrageVerfuegbarkeit">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kommunikation.anfrageverfuegbarkeit.0004'. Diese Datenstruktur wird verwendet um Verfügbarkeit eines Kommunikationspartners zu erfragen.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="zeitpunktAnfrage" type="xs:dateTime">
+          <xs:annotation>
+            <xs:documentation>Zeitpunkt der Anfrage</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ergebnisVerfuegbarkeit">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kommunikation.ergebnisverfuegbarkeit.0005'. Diese Datenstruktur wird verwendet um die eigene Verfügbarkeit zu bestätigen. Die Zeitstempel geben Auskunft über die Geschwindigkeit der Kommunikation. Optional kann mitgeteilt werden, welche XKfz-Nachrichten das System zur Verarbeitung annimmt.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="zeitpunktAnfrage" type="xs:dateTime">
+          <xs:annotation>
+            <xs:documentation>Zeitpunkt der Anfrage, übernommen aus der Anfragenachricht (0004)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="zeitpunktEmpfang" type="xs:dateTime">
+          <xs:annotation>
+            <xs:documentation>Zeitpunkt des Empfangs der Anfragenachricht (0004)</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="zeitpunktBestaetigung" type="xs:dateTime">
+          <xs:annotation>
+            <xs:documentation>Zeitpunkt des Versands der Ergebnisnachricht</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="verfuegbareNachrichten" minOccurs="0" type="xkfz:Type.ListeVerfuegbarerNachrichten">
+          <xs:annotation>
+            <xs:documentation>Liste der Nachrichten, die im eigenen System verarbeitet werden.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listeNachrichten">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kommunikation.sammelnachricht.0001'</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.XKfzNachrichtenListe" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="quittung">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kommunikation.quittung.0002'. Diese Datenstruktur wird als XKfz-Quittung verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.XKfzQuittung" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="verschluesselteNachricht">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kommunikation.verschluesselte.0003'. Diese Datenstruktur wird verwendet um eine XKfz-Nachricht mit XML-Encryption verschlüsselt zu übermitteln.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="typDerVerschluesseltenNachricht" type="xkfz:Code.Nachrichtentyp">
+          <xs:annotation>
+            <xs:documentation>Typ der verschlüsselten Nachricht</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="verschluesselteDaten" type="xkfz:Type.PlatzhalterEncryptedData">
+          <xs:annotation>
+            <xs:documentation>Verschlüsselte Nachricht</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="xkfzFehlernachrichten">
+    <xs:annotation>
+      <xs:documentation>Sammlung aller XKfz-Fehlernachrichten. Dieses globale Element ist zur Verwendung als Fehlermeldung (Fault Message) bei der Erstellung von Web Services-Operationen gedacht.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.XKfzFehlernachrichten" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="xkfzNachrichten">
+    <xs:annotation>
+      <xs:documentation>Sammlung aller XKfz-Nachrichten. Dieses globale Element ist zur Verwendung als Nutzdatenbestandteil (Input bzw. Output Message) bei der Erstellung von Web Services-Operationen gedacht.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.XKfzNachrichten" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kommunikation.sammelnachricht.0001">
+    <xs:annotation>
+      <xs:appinfo>
+        <sender>jeder XKfz-Kommunikationspartner</sender>
+        <empfaenger>jeder XKfz-Kommunikationspartner</empfaenger>
+        <rechtsgrundlage>Diese Nachricht dient der Optimierung der Kommunikation über den XKfz-Standard. Eine explizite Rechtsgrundlage ist daher nicht erforderlich.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Sammlung von Nachrichten', vgl. Verweis zu XKfz-Nachricht 0001 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kommunikation.Sammelnachricht.0001" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kommunikation.quittung.0002">
+    <xs:annotation>
+      <xs:appinfo>
+        <sender>jeder XKfz-Kommunikationspartner</sender>
+        <empfaenger>jeder XKfz-Kommunikationspartner</empfaenger>
+        <rechtsgrundlage>Diese Nachricht dient der Absicherung der Kommunikation über den XKfz-Standard. Eine explizite Rechtsgrundlage ist daher nicht erforderlich.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Quittierung von Nachrichten (XKfz-Quittung)', vgl. Verweis zu XKfz-Nachricht 0002 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kommunikation.Quittung.0002" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kommunikation.verschluesseltenachricht.0003">
+    <xs:annotation>
+      <xs:appinfo>
+        <sender>jeder XKfz-Kommunikationspartner</sender>
+        <empfaenger>jeder XKfz-Kommunikationspartner</empfaenger>
+        <rechtsgrundlage>Diese Nachricht dient der Optimierung der Kommunikation über den XKfz-Standard. Eine explizite Rechtsgrundlage ist daher nicht erforderlich.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Verschluesselte Nachricht', vgl. Verweis zu XKfz-Nachricht 0003 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kommunikation.VerschluesselteNachricht.0003" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kommunikation.anfrageverfuegbarkeit.0004">
+    <xs:annotation>
+      <xs:appinfo>
+        <sender>jeder XKfz-Kommunikationspartner</sender>
+        <empfaenger>jeder XKfz-Kommunikationspartner</empfaenger>
+        <rechtsgrundlage>Diese Nachricht dient der Optimierung der Kommunikation über den XKfz-Standard. Eine explizite Rechtsgrundlage ist daher nicht erforderlich.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Verfügbarkeit', vgl. Verweis zu XKfz-Nachricht 0004 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kommunikation.AnfrageVerfuegbarkeit.0004" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kommunikation.ergebnisverfuegbarkeit.0005">
+    <xs:annotation>
+      <xs:appinfo>
+        <sender>jeder XKfz-Kommunikationspartner</sender>
+        <empfaenger>jeder XKfz-Kommunikationspartner</empfaenger>
+        <rechtsgrundlage>Diese Nachricht dient der Optimierung der Kommunikation über den XKfz-Standard. Eine explizite Rechtsgrundlage ist daher nicht erforderlich.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis Verfügbarkeit', vgl. Verweis zu XKfz-Nachricht 0005 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kommunikation.ErgebnisVerfuegbarkeit.0005" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

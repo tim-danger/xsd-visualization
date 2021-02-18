@@ -1,0 +1,366 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:complexType name="StA2ZTR.AngabenZurPerson">
+      <xs:annotation>
+         <xs:documentation>In diesem Datentyp sind alle Angaben zur betroffenen Person zusammengefasst.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="betroffenePerson" type="xpersonenstand:StA2ZTR.VerstorbenePerson">
+            <xs:annotation>
+               <xs:documentation>Hier werden Namen, Geburtsdaten und der Familienstand zu der betroffenen Person mitgeteilt. Sofern bekannt können Anschrift und die Staatsangehörigkeit mitgeteilt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="eheOderLebenspartner"
+                     minOccurs="0"
+                     type="xpersonenstand:StA2ZTR.EheOderLebenspartner">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt werden hier die Angaben zum Ehe- oder Lebenspartner des Betroffenen mitgeteilt. Wird die Nachricht aufgrund der Eintragung eines Hinweises in ein Geburtenregister (vgl. ) versendet, werden keine Angaben über Ehegatten oder Lebenspartner übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="auskunftsgeber"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xpersonenstand:Auskunftsgeber">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt, werden ein oder mehrere Auskunftsgeber mitgeteilt. Dieses ist erforderlich, um Nachfragen der Nachlassgerichte bei den Standesämter zu reduzieren.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kind"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xpersonenstand:Auskunftsgeber.NatuerlichePerson">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt, werden die Kinder des Erblassers mitgeteilt. Im Element beziehung ist dazu Kind mitzuteilen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="nachlass" minOccurs="0" type="xpersonenstand:Nachlass">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt, können hier Angaben zum Nachlass übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2ZTR.Berichtigung.BeurkundeteDaten">
+      <xs:annotation>
+         <xs:documentation>Dieser Datentyp schränkt den Datentyp BeurkundeteDaten.Registereintrag so ein, dass nur die Informationen zum Sterbefall übermittelt werden können, die im Rahmen einer Berichtigung an das ZTR benötigt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:BeurkundeteDaten.Registereintrag">
+            <xs:sequence>
+               <xs:element name="ereignisort" minOccurs="0" type="xpersonenstand:Ereignisort">
+                  <xs:annotation>
+                     <xs:documentation>Dies sind die Informationen über den beurkundeten Ort, z. B. den Geburtsort oder den Ort der Eheschließung.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ereignisdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Dies ist das Datum des Ereignisses, das beurkundet wird, z. B. das Datum der Geburt oder der Eheschließung.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2ZTR.Berichtigung.ZTR.FamilienstandVerstorbenePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Übermittlung von Daten zum Ehegatten oder Lebenspartner der verstorbenen Person im Kontext der Berichtigungen an das ZTR</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält alle Informationen zum Ehegatten oder Lebenspartner der verstorbenen Person, die im Rahmen einer Berichtigung an das ZTR übermittelt werden können.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="familienstand"
+                     type="xpersonenstand:Code.FamilienstandPersonenstandswesen">
+            <xs:annotation>
+               <xs:documentation>Es wird der Familienstand des Verstorbenen mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="nameEheOderLebenspartner" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Name des Ehegatten oder Lebenspartners der verstorbenen Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2ZTR.Berichtigung.ZTR.Sterbefall">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Übermittlung von Daten zum Sterbefall im Kontext der Berichtigungen an das ZTR</title>
+         </xs:appinfo>
+         <xs:documentation>In diesem Datentyp sind alle Informationen zum Sterbefall zusammengefasst, die im Rahmen einer Berichtigung an das ZTR übermittelt werden können.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:StA2ZTR.Berichtigung.BeurkundeteDaten">
+            <xs:sequence>
+               <xs:element name="ereignisDatumAnfang"
+                           minOccurs="0"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Sofern angegeben, ist in diesem optionalen Element der Anfang des Zeitraums eingetragen in dem der Sterbefall liegt. Das Ende dieses Zeitraums wird durch das Element ereignisdatum angegeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2ZTR.Berichtigung.ZTR.VerstorbenePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Übermittlung von Daten zur verstorbenen Person im Kontext der Berichtigungen an das ZTR</title>
+         </xs:appinfo>
+         <xs:documentation>In diesem Datentyp sind alle Informationen zu der verstorbenen Person zusammengefasst, die im Rahmen einer Berichtigung an das ZTR übermittelt werden können.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Name der verstorbenen Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht"
+                     minOccurs="0"
+                     type="xpersonenstand:Code.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt, werden hier Angaben zum Geschlecht des Verstorbenen übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" type="xpersonenstand:BeurkundeteDaten.Registereintrag">
+            <xs:annotation>
+               <xs:documentation>Hier werden die Informationen zu der Geburt der verstorbenen Person mitgeteilt. Für den Ereignisort sind die Datenelemente strasse und hausnummer nicht mitzuteilen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="letzteAnschrift"
+                     minOccurs="0"
+                     type="xpersonenstand:Anschrift.InlandAusland">
+            <xs:annotation>
+               <xs:documentation>Hier wird, sofern sie bekannt ist, die Anschrift der letzten Hauptwohnung des Verstorbenen mitgeteilt, um das zuständige Nachlassgericht zu ermitteln. Das ZTR sendet Berichtigungen der Wohnanschrift an das Nachlassgericht, das Empfänger der Originalnachricht war. Ergibt sich aus der neuen Wohnanschrift eine Änderung der nachlassgerichtlichen Zuständigkeit, kann sich das Nachlassgericht in diesem Fall für unzuständig erklären und den Fall an das zuständige Nachlassgericht abgeben. Die Abgabe läuft ohne Beteiligung der Standesämter und des ZTR.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2ZTR.EheOderLebenspartner">
+      <xs:annotation>
+         <xs:documentation>Dieser Datentyp enthält alle Informationen zum Ehegatten oder Lebenspartner der verstorbenen Person.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Name des Ehegatten oder Lebenspartners der verstorbenen Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt"
+                     minOccurs="0"
+                     type="xpersonenstand:BeurkundeteDaten.Registereintrag">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt, werden hier die Daten zur Geburt des Ehegatten oder Lebenspartners der verstorbenen Person mitgeteilt. Für den Ereignisort sind die Datenelemente strasse und hausnummer nicht mitzuteilen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="sterbefall"
+                     minOccurs="0"
+                     type="xpersonenstand:BeurkundeteDaten.Registereintrag">
+            <xs:annotation>
+               <xs:documentation>Im Falle des Vorversterbens des Ehegatten oder Lebenspartners der verstorbenen Person können hier, sofern bekannt, Tag, Ort und Registrierungsdaten von dessen Tod mitgeteilt werden. Für den Ereignisort sind die Datenelemente strasse und hausnummer nicht mitzuteilen. Beim Zeitraum wird immer der letzte Tag des Zeitraums als Zeitpunkt des Sterbefalls übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2ZTR.VerstorbenePerson">
+      <xs:annotation>
+         <xs:documentation>In diesem Datentyp sind alle Informationen zu der verstorbenen Person zusammengefasst.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Name der verstorbenen Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" type="xpersonenstand:BeurkundeteDaten.Registereintrag">
+            <xs:annotation>
+               <xs:documentation>Hier werden die Informationen zu der Geburt der verstorbenen Person mitgeteilt. Für den Ereignisort sind die Datenelemente strasse und hausnummer nicht mitzuteilen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="letzteAnschrift"
+                     minOccurs="0"
+                     type="xpersonenstand:Anschrift.InlandAusland">
+            <xs:annotation>
+               <xs:documentation>Hier wird, sofern sie bekannt ist, die Anschrift der letzten Hauptwohnung des Verstorbenen mitgeteilt, um das zuständige Nachlassgericht zu ermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staatsangehoerigkeit"
+                     minOccurs="0"
+                     type="xpersonenstand:Code.Staatsangehoerigkeit">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt, wird die Staatsangehörigkeit des Verstorbenen mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienstand"
+                     type="xpersonenstand:Code.FamilienstandPersonenstandswesen">
+            <xs:annotation>
+               <xs:documentation>Es wird der Familienstand des Verstorbenen mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht"
+                     minOccurs="0"
+                     type="xpersonenstand:Code.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Sofern bekannt, werden hier Angaben zum Geschlecht des Verstorbenen übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="stA2ZTR.Sterbefall.064100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Bundesnotarkammer</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2 PStV</rechtsgrundlage>
+            <title>Berichtigung eines Sterbefalls an das Zentrale Testamentsregister</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Sterberegister vorgenommen wurde und diese Berichtigung an dasztr mitzuteilen ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="registereintragsidentifikation"
+                              type="xpersonenstand:Quelleintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Registereintragsidentifikation des Sterbeeintrags übermittelt, auf den sich die Berichtigung bezieht.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sterbefall" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Sterbefall ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der Anlage 1 zur PStV der Stand vor und nach der Berichtigung übermittelt werden: 4140, 4142, 4150, 4155, 4157.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2ZTR.Berichtigung.ZTR.Sterbefall"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2ZTR.Berichtigung.ZTR.Sterbefall"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="verstorbenePerson" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Sterbefall ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der Anlage 1 zur PStV der Stand vor und nach der Berichtigung übermittelt werden: 4201-4206, 4220, 4240, 4250, 4255, 4257, 4270, 4271, 4275, 4290-4294, 4297.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt"
+                                       type="xpersonenstand:StA2ZTR.Berichtigung.ZTR.VerstorbenePerson"/>
+                           <xs:element name="neu"
+                                       type="xpersonenstand:StA2ZTR.Berichtigung.ZTR.VerstorbenePerson"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="familienstandVerstorbenePerson" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Familienstand der verstorbenen Person ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der Anlage 1 zur PStV der Stand vor und nach der Berichtigung übermittelt werden: 4300, 4301-4306.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt"
+                                       type="xpersonenstand:StA2ZTR.Berichtigung.ZTR.FamilienstandVerstorbenePerson"/>
+                           <xs:element name="neu"
+                                       type="xpersonenstand:StA2ZTR.Berichtigung.ZTR.FamilienstandVerstorbenePerson"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2ZTR.Sterbefall.065010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Bundesnotarkammer</empfaenger>
+            <rechtsgrundlage>§ 78e BNotO i.V.m. § 58 Abs. 4  Nr. 4 PStV</rechtsgrundlage>
+            <title>Mitteilung über einen Sterbefall an das Zentrale Testamentsregister</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt das stamt dem ztr die Beurkundung eines Sterbefalls im Sterberegister, eine Folgebeurkundung über einen Sterbefall im Ausland in einem Ehe- oder Lebenspartnerschaftsregister sowie die Eintragung eines Hinweises in ein Geburtenregister aufgrund eines Sterbefalls im Ausland mit.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="verstorbenePerson" type="xpersonenstand:StA2ZTR.AngabenZurPerson">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Informationen zu der verstorbenen Person mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="tod"
+                              type="xpersonenstand:BeurkundeteDaten.Zeitraum.Registereintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Angaben zum Sterbefall (Eintragsnummer, Ort, Tag) mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beurkundungsdatum" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Dabei handelt es sich um das Beurkundungsdatum des Sterbefalls, das nach § 6 Abs. 1 Nr. 11 ZTRV erforderlicher Bestandteil der Sterbemitteilung ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2ZTR.SammlungUeberTodeserklaerungen.066010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt I in Berlin</sender>
+            <empfaenger>Bundesnotarkammer</empfaenger>
+            <rechtsgrundlage>§ 78e BNotO i.V.m. § 60 Abs. 2  Nr. 4 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Todeserklärung an das Zentrale Testamentsregister</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt das sta1b dem ztr die Aufnahme eines Beschlusses in die Sammlung der Beschlüsse über Todeserklärungen im Standesamt I in Berlin mit.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="betroffenePerson" type="xpersonenstand:StA2ZTR.AngabenZurPerson">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Informationen zu der betroffenen Person mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachweisdatenTodeserklaerung"
+                              type="xpersonenstand:NachweisdatenTodeserklaerung">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Nachweisdaten über die Todeserklärung oder die gerichtliche Feststellung der Todeszeit mitgeteilt. Behördenname, Aktenzeichen und Beschlussdatum sind immer mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

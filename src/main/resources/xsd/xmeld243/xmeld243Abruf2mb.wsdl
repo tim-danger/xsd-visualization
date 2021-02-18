@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Abruf2mb.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Abruf2mb"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Abruf2mb.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst zur Übermittlung Suchanfragen bei Datenabrufen nach § 38 BMG gemäß OSCI-XMeld</title></head><body><h1>Dienst zur Übermittlung Suchanfragen bei Datenabrufen nach § 38 BMG gemäß OSCI-XMeld</h1><p>Dieses WSDL-Dokument beschreibt den Dienst für die Entgegennahme von Suchanfragen nach & 38 BMG in OSCI-XMeld (siehe: <link>http://www.osci.de</link>).</p><p>Folgende Nachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeDatenuebermittlung</i> zulässig:<ul><ul>
+            <li>xmeld:datenabrufe.suchanfrage.asynchron.1324</li>
+         </ul></ul></p><p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der achtstellige Amtliche Gemeindeschlüssel (AGS); der zu verwendende Präfix lautet "<b>ags:</b>". </p><p>Zulässige Dienstanbieter sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". </p>
+<p>Zulässige Dienstnutzer sind Behörden der DVDV-Behördenkategorien "<b>§ 38 1 einfache Behörde</b>", "<b>§ 38 3 und 5 Sicherheitsbehörde</b>" und "<b>§ 38 1 und 5 einfache Behörde</b>". Anfragen ans DVDV vom Typ <i>verify.category</i> sollten die Zuordnung der anfragenden Stelle zu einer DVDV-Kategorie prüfen lassen.</p></body></html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <import namespace="http://www.osci.de/xmeld243"
+           location="http://www.osci.de/xmeld243/xmeld-nachrichten-datenabrufe.xsd"/>
+   <message name="abruf2mbNachricht">
+      <part name="abruf2mbNachricht"
+            element="xmeld:datenabrufe.suchanfrage.asynchron.1324"/>
+      <part name="optionaleNachricht" type="xs:anyType"/>
+   </message>
+   <portType name="osciAbruf2mbInterface">
+      <operation name="sendeAbruf2mb">
+         <input message="tns:abruf2mbNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciAbruf2mbInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeAbruf2mb">
+         <osci:operation communicationType="one-way-active" subject="XMeld 2.4.3 Abruf2mb"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:abruf2mbNachricht"/>
+               </osci:part>
+            </osci:container>
+            <osci:container signatureLevel="none" encrypted="false" required="false">
+               <osci:part>
+                  <osci:content part="tns:optionaleNachricht"/>
+               </osci:part>
+            </osci:container>
+         </input>
+      </operation>
+   </binding>
+   <service name="osciAbruf2mbService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciAbruf2mbInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>required</tpl:use> Dieser Port ist nicht optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciAbruf2mbTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

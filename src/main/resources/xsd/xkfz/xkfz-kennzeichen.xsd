@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" xmlns:el="http://www.kba.de/elemente" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe KENNZEICHENVERWALTUNG, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:import schemaLocation="Elementdefinitionen.xsd" namespace="http://www.kba.de/elemente" />
+  <xs:complexType name="Type.Kennzeichen.AnfrageKennzeichenFreigeben.0606">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragekennzeichenfreigeben.0606'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:kennzeichenFreigeben">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0606'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.AnfrageKennzeichenFuerZulassungVerwenden.0612">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragekennzeichenfuerzulassungverwenden.0612'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:kennzeichenVerwenden">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0606'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.AnfrageKennzeichenZurBearbeitungSperren.0605">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragekennzeichenzurbearbeitungsperren.0605'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:kennzeichenZurBearbeitungSperren">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0605'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.AnfrageKennzeichenreservierung.0607">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragekennzeichenreservierung.0607'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:kennzeichenreservierung">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0606'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.AnfrageKennzeichenreservierungPruefen.0611">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragekennzeichenreservierungpruefen.0611'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:pruefungKennzeichenreservierung">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0606'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.AnfrageKennzeichensuche.0601">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragekennzeichensuche.0601'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:kennzeichensucheWunschkennzeichen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0601'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.AnfrageMassenreservierung.0609">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragekennzeichenfreigeben.0609'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:massenreservierungKennzeichen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0606'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.AnfrageNaechstesFreiesKennzeichen.0603">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.anfragenaechstesfreieskennzeichen.0603'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:kennzeichensucheNaechstesFreiesKennzeichen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0603'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.ErgebnisKennzeichenreservierung.0608">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.ergebniskennzeichenreservierung.0608'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:bestaetigungKennzeichenreservierung">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0606'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.ErgebnisKennzeichensuche.0602">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.ergebniskennzeichensuche.0602'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:listeFreierKennzeichen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0602'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.ErgebnisMassenreservierung.0610">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.ergebnismassenreservierung.0610'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:listeReservierterKennzeichen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0606'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Kennzeichen.ErgebnisNaechstesFreiesKennzeichen.0604">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'kennzeichen.ergebnisnaechstesfreieskennzeichen.0604'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:naechstesFreiesKennzeichen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0604'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="bestaetigungKennzeichenreservierung">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.ergebniskennzeichenreservierung.0608'. Diese Datenstruktur wird im Rahmen der Kennzeichenreservierung verwendet, um eine erfolgte Reservierung mit einem Reservierungs-PIN zu bestätigen.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichenreservierung" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichenFreigeben">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragekennzeichenfreigeben.0606'. Diese Datenstruktur wird im Rahmen der Anfrage zur Freigabe eines gesperrten Kennzeichens im Bestand der zuständigen Kfz-Zulassungsbehörde verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:Kennzeichen">
+          <xs:annotation>
+            <xs:documentation>freizugebendes Kennzeichen</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichenVerwenden">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragekennzeichenfreigeben.0606'. Diese Datenstruktur wird im Rahmen der Anfrage zur Freigabe eines gesperrten Kennzeichens im Bestand der zuständigen Kfz-Zulassungsbehörde verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:Kennzeichen">
+          <xs:annotation>
+            <xs:documentation>Im Rahmen der Zulassung zugeteiltes Kennzeichen</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="el:Fahrzeugidentifizierungsnummer">
+          <xs:annotation>
+            <xs:documentation>Fahrzeug-Identifizierungnummer des zugelassenen Fahrzeugs.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="el:SchluesselHersteller" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Herstellerschlüsselnummer des zugelassenen Fahrzeugs bei nicht Eindeutigkeit durch FIN.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="el:DatumErstzulassung" minOccurs="0">
+          <xs:annotation>
+            <xs:documentation>Erstzulassungsdatum des zugelassenen Fahrzeugs bei nicht Eindeutigkeit durch FIN.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="listeReferenz" minOccurs="0" type="xkfz:Type.ListeReferenz">
+          <xs:annotation>
+            <xs:documentation>Weitere Referenzen, bei Bedarf.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichenZurBearbeitungSperren">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragekennzeichenzurbearbeitungsperren.0605'. Diese Datenstruktur wird im Rahmen der Anfrage zur Sperre eines Kennzeichens zur Bearbeitung im Register der zuständigen Kfz-Zulassungsbehörde verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.KennzeichenZurBearbeitungSperren" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichenreservierung">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragekennzeichenreservierung.0607'. Diese Datenstruktur wird verwendet, um nach einer Kennzeichensuche ein spezifisches Kennzeichen im Kennzeichenverwaltungssystem der zuständigen Kfz-Zulassungsbehörde zu reservieren.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichenreservierung" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichensucheNaechstesFreiesKennzeichen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragenaechstesfreieskennzeichen.0603'. Diese Datenstruktur wird im Rahmen der Anfrage für eine Suche nach dem nächsten freien Kennzeichen im Bestand der zuständigen Kfz-Zulassungsbehörde verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.KennzeichensucheNaechstesFreiesKennzeichen" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichensucheWunschkennzeichen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragekennzeichensuche.0601'. Diese Datenstruktur wird im Rahmen der Anfrage für eine Suche nach freien (Wunsch-)Kennzeichen im Bestand der zuständigen Kfz-Zulassungsbehörde verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichensuche" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listeFreierKennzeichen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.ergebniskennzeichensuche.0602'. Diese Datenstruktur wird im Rahmen der Übermittlung der Ergebnisliste für die Kennzeichensuche im Bestand der zuständigen Zulassungsbehörde verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichenliste" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="listeReservierterKennzeichen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.ergebnismassenreservierung.0610'. Diese Datenstruktur wird im Rahmen der Massenreservierung von Kennzeichen verwendet, um dem Vorsystem mitzuteilen welche Kennzeichen automatisch reserviert wurden.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichenliste" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="massenreservierungKennzeichen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragemassenreservierung.0609'. Diese Datenstruktur wird verwendet, um vorbereitend für eine Fahrzeugzulassung einen Kennzeichenpool im Kennzeichenverwaltungsystem der zuständigen Kfz-Zulassungsbehörde zu reservieren.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.MassenreservierungKennzeichen" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="naechstesFreiesKennzeichen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.ergebnisnaechstesfreieskennzeichen.0604'. Diese Datenstruktur wird im Rahmen der Übermittlung des Ergebnisses für die Suche nach dem nächsten freien Kennzeichen verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:annotation>
+            <xs:documentation>Das nächste freie Kennzeichen kann dem Pool der einzelnen Kennzeichen oder dem Pool der Wechselkennzeichen entstammen.</xs:documentation>
+          </xs:annotation>
+          <xs:element ref="el:Kennzeichen">
+            <xs:annotation>
+              <xs:documentation>Der Listeneintrag enthält ein einfaches Kennzeichen.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="wechselkennzeichen" type="xkfz:Type.Wechselkennzeichen">
+            <xs:annotation>
+              <xs:documentation>Der Listeneintrag enthält ein Wechselkennzeichen.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="pruefungKennzeichenreservierung">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'kennzeichen.anfragekennzeichenreservierungpruefen.0611'. Diese Datenstruktur wird im Rahmen der Fahrzeugzulassung verwendet, um die Korrektheit einer Kennzeichenreservierung zu verifizieren.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichenreservierung" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragekennzeichensuche.0601">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Kennzeichensuche', vgl. Verweis zu XKfz-Nachricht 0601 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageKennzeichensuche.0601" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.ergebniskennzeichensuche.0602">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis Kennzeichensuche', vgl. Verweis zu XKfz-Nachricht 0602 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.ErgebnisKennzeichensuche.0602" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragenaechstesfreieskennzeichen.0603">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage nächstes freies Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0603 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageNaechstesFreiesKennzeichen.0603" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.ergebnisnaechstesfreieskennzeichen.0604">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis nächstes freies Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0604 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.ErgebnisNaechstesFreiesKennzeichen.0604" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragekennzeichenzurbearbeitungsperren.0605">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Kennzeichen zur Bearbeitung sperren', vgl.Verweis zu XKfz-Nachricht 0605 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageKennzeichenZurBearbeitungSperren.0605" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragekennzeichenfreigeben.0606">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Kennzeichen freigeben (Storno)', vgl. Verweis zu XKfz-Nachricht 0606 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageKennzeichenFreigeben.0606" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragekennzeichenreservierung.0607">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Kennzeichenreservierung', vgl. Verweis zu XKfz-Nachricht 0607 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageKennzeichenreservierung.0607" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.ergebniskennzeichenreservierung.0608">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis Kennzeichenreservierung', vgl. Verweis zu XKfz-Nachricht 0608 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.ErgebnisKennzeichenreservierung.0608" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragemassenreservierung.0609">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Massenreservierung von Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0609 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageMassenreservierung.0609" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.ergebnismassenreservierung.0610">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis Massenreservierung von Kennzeichen', vgl. Verweis zu XKfz-Nachricht 0610 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.ErgebnisMassenreservierung.0610" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragekennzeichenreservierungpruefen.0611">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Kennzeichenreservierung prüfen', vgl. Verweis zu XKfz-Nachricht 0611 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageKennzeichenreservierungPruefen.0611" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kennzeichen.anfragekennzeichenfuerzulassungverwenden.0612">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Kennzeichen für Zulassung verwenden', vgl. Verweis zu XKfz-Nachricht 0612 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Kennzeichen.AnfrageKennzeichenFuerZulassungVerwenden.0612" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

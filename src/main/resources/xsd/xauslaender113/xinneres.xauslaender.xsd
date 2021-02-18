@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://www.osci.de/xauslaender1130"
+           version="1.13.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:include schemaLocation="xauslaender-allgemeine-datentypen.xsd"/>
+   <xs:include schemaLocation="xauslaender-basistypen.xsd"/>
+   <xs:include schemaLocation="xauslaender-baukasten.xsd"/>
+   <xs:include schemaLocation="xauslaender-codes.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachricht-asyl.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachricht-berd.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachrichten-abh-abh.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachrichten-abh-mb.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachrichten-administration.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachrichten-azr.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachrichten-bamf-abh.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachrichten-bamftgs.xsd"/>
+   <xs:include schemaLocation="xauslaender-nachrichten-mb-abh.xsd"/>
+</xs:schema>

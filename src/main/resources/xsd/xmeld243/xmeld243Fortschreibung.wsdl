@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Fortschreibung.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Fortschreibung"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Fortschreibung.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst zur Fortschreibung gemäß OSCI-XMeld</title></head><body><h1>Dienst zur Fortschreibung gemäß OSCI-XMeld</h1><p>Dieses WSDL-Dokument beschreibt den Dienst zur Fortschreibung gemäß OSCI-XMeld (siehe: <link>http://www.osci.de</link>).</p><p>Folgende Fortschreibungsnachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeFortschreibung</i> zulässig:<ul><ul>
+            <li>xmeld:fortschreibung.geschlecht.0001</li>
+            <li>xmeld:fortschreibung.geschlecht.0002</li>
+            <li>xmeld:fortschreibung.geburt.0003</li>
+            <li>xmeld:fortschreibung.dokument.0006</li>
+            <li>xmeld:fortschreibung.geburt.0014</li>
+            <li>xmeld:fortschreibung.tod.0040</li>
+            <li>xmeld:fortschreibung.dokument.0063</li>
+            <li>xmeld:fortschreibung.dokument.0064</li>
+            <li>xmeld:fortschreibung.dokument.0065</li>
+            <li>xmeld:fortschreibung.religion.0066</li>
+            <li>xmeld:fortschreibung.staatsangehoerigkeit.0067</li>
+            <li>xmeld:fortschreibung.staatsangehoerigkeit.0068</li>
+            <li>xmeld:fortschreibung.staatsangehoerigkeit.0069</li>
+            <li>xmeld:fortschreibung.staatsangehoerigkeit.0070</li>
+            <li>xmeld:fortschreibung.todBerichtigung.0074</li>
+            <li>xmeld:fortschreibung.stornoperson.0075</li>
+            <li>xmeld:fortschreibung.staatsangehoerigkeit.0078</li>
+            <li>xmeld:fortschreibung.staatsangehoerigkeit.0079</li>
+            <li>xmeld:fortschreibung.anschrift.0081</li>
+            <li>xmeld:fortschreibung.beigeschriebenerpartner.0085</li>
+            <li>xmeld:fortschreibung.wohnungsbild.0088</li>
+            <li>xmeld:fortschreibung.wohnungsbild.0089</li>
+            <li>xmeld:fortschreibung.anschrift.0090</li>
+            <li>xmeld:fortschreibung.name.0091</li>
+            <li>xmeld:fortschreibung.name.0092</li>
+            <li>xmeld:fortschreibung.auskunftssperre.0093</li>
+            <li>xmeld:fortschreibung.auskunftssperre.0094</li>
+            <li>xmeld:fortschreibung.gesetzlicherVertreter.0095</li>
+            <li>xmeld:fortschreibung.gesetzlicherVertreter.0096</li>
+            <li>xmeld:fortschreibung.partner.0097</li>
+            <li>xmeld:fortschreibung.partner.0098</li>
+            <li>xmeld:fortschreibung.kind.0099</li>
+            <li>xmeld:fortschreibung.kind.0100</li>
+            <li>xmeld:fortschreibung.waffenUndSprengstoff.0103</li>
+            <li>xmeld:fortschreibung.waffenUndSprengstoff.0104</li>
+            <li>xmeld:fortschreibung.BeigeschriebenePersonAbweichung.0197</li>
+            <li>xmeld:fortschreibung.keineeinwohnerschaft.0198</li>
+         </ul></ul></p><p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der achtstellige Amtliche Gemeindeschlüssel (AGS); der zu verwendende Präfix lautet "<b>ags:</b>". </p><p>Zulässige Dienstanbieter und Dienstnutzer sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". Anfragen ans DVDV vom Typ <i>verify.category</i> sollten daher die Zuordnung zu dieser Kategorie prüfen lassen.</p></body></html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <wsdl:types>
+      <xs:schema xmlns="http://www.osci.de/xmeld243"
+                 targetNamespace="http://www.osci.de/xmeld243/xmeld243Fortschreibung.wsdl">
+         <xs:import namespace="http://www.osci.de/xmeld243"
+                    schemaLocation="http://www.osci.de/xmeld243/xmeld-nachrichten-fortschreibung.xsd"/>
+         <xs:complexType name="fortschreibungSchemata">
+            <xs:choice>
+               <xs:element name="fortschreibung.BeigeschriebenePersonAbweichung.0197"/>
+               <xs:element name="fortschreibung.anschrift.0081"/>
+               <xs:element name="fortschreibung.anschrift.0090"/>
+               <xs:element name="fortschreibung.auskunftssperre.0093"/>
+               <xs:element name="fortschreibung.auskunftssperre.0094"/>
+               <xs:element name="fortschreibung.beigeschriebenerpartner.0085"/>
+               <xs:element name="fortschreibung.dokument.0006"/>
+               <xs:element name="fortschreibung.dokument.0063"/>
+               <xs:element name="fortschreibung.dokument.0064"/>
+               <xs:element name="fortschreibung.dokument.0065"/>
+               <xs:element name="fortschreibung.geburt.0003"/>
+               <xs:element name="fortschreibung.geburt.0014"/>
+               <xs:element name="fortschreibung.geschlecht.0001"/>
+               <xs:element name="fortschreibung.geschlecht.0002"/>
+               <xs:element name="fortschreibung.gesetzlicherVertreter.0095"/>
+               <xs:element name="fortschreibung.gesetzlicherVertreter.0096"/>
+               <xs:element name="fortschreibung.keineeinwohnerschaft.0198"/>
+               <xs:element name="fortschreibung.kind.0099"/>
+               <xs:element name="fortschreibung.kind.0100"/>
+               <xs:element name="fortschreibung.name.0091"/>
+               <xs:element name="fortschreibung.name.0092"/>
+               <xs:element name="fortschreibung.partner.0097"/>
+               <xs:element name="fortschreibung.partner.0098"/>
+               <xs:element name="fortschreibung.religion.0066"/>
+               <xs:element name="fortschreibung.staatsangehoerigkeit.0067"/>
+               <xs:element name="fortschreibung.staatsangehoerigkeit.0068"/>
+               <xs:element name="fortschreibung.staatsangehoerigkeit.0069"/>
+               <xs:element name="fortschreibung.staatsangehoerigkeit.0070"/>
+               <xs:element name="fortschreibung.staatsangehoerigkeit.0078"/>
+               <xs:element name="fortschreibung.staatsangehoerigkeit.0079"/>
+               <xs:element name="fortschreibung.stornoperson.0075"/>
+               <xs:element name="fortschreibung.tod.0040"/>
+               <xs:element name="fortschreibung.todBerichtigung.0074"/>
+               <xs:element name="fortschreibung.waffenUndSprengstoff.0103"/>
+               <xs:element name="fortschreibung.waffenUndSprengstoff.0104"/>
+               <xs:element name="fortschreibung.wohnungsbild.0088"/>
+               <xs:element name="fortschreibung.wohnungsbild.0089"/>
+            </xs:choice>
+         </xs:complexType>
+      </xs:schema>
+   </wsdl:types>
+   <message name="fortschreibungNachricht">
+      <part name="fortschreibungNachricht" type="tns:fortschreibungSchemata"/>
+      <part name="optionaleNachricht" type="xs:anyType"/>
+   </message>
+   <portType name="osciFortschreibungInterface">
+      <operation name="sendeFortschreibung">
+         <input message="tns:fortschreibungNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciFortschreibungInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeFortschreibung">
+         <osci:operation communicationType="one-way-active" subject="XMeld 2.4.3 Fortschreibung"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:fortschreibungNachricht"/>
+               </osci:part>
+            </osci:container>
+            <osci:container signatureLevel="none" encrypted="false" required="false">
+               <osci:part>
+                  <osci:content part="tns:optionaleNachricht"/>
+               </osci:part>
+            </osci:container>
+         </input>
+      </operation>
+   </binding>
+   <service name="osciFortschreibungService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciFortschreibungInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>required</tpl:use> Dieser Port ist nicht optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciFortschreibungTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

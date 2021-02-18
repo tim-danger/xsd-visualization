@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xink="http://www.osci.de/xinneres/basisnachricht/4"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/basisnachricht/4/xinneres-basisnachricht.xsd"
+              namespace="http://www.osci.de/xinneres/basisnachricht/4"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:element name="stA2FamK.Geburt.131010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Familienkasse</empfaenger>
+            <rechtsgrundlage>Während des Pilotbetriebs: Erfolgte Zustimmung der Eltern zur Übermittlung der Daten an die Familienkasse</rechtsgrundlage>
+            <title>Mitteilung über die Beurkundung einer Geburt an die Familienkasse</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Mitteilung wird vom stamt an die zuständige Familienkasse gesendet, um dieser eine im Geburtenregister beurkundete Geburt mitzuteilen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="geburtseintragKind" type="xpersonenstand:Quelleintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben des Registereintrags übermittelt, in dem die Geburt beurkundet wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsort" type="xpersonenstand:Ereignisort">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Angaben zum Geburtsort übermittelt. Es ist nur der Ort zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtstag" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist der Tag der Geburt zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtszeit"
+                              minOccurs="0"
+                              type="xpersonenstand:UhrzeitPersonenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist bei Mehrlingsgeburten die Uhrzeit der Geburt zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenKind" type="xpersonenstand:PersonName.Veraenderung">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Namen des Kindes mitgeteilt. Der Vorname des Kindes wird im Feld "vorname" gespeichert, der Geburtsname des Kindes im Feld "familienname". Das Feld "geburtsname" darf nicht befüllt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist das Geschlecht des Kindes zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenElternteil1" type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Namen des ersten Elternteils (Mutter) mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenElternteil2"
+                              minOccurs="0"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Falls beurkundet, müssen hier die Namen des zweiten Elternteils (Vater) übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="auftragsnummer" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist die Auftragsnummer zu übermitteln, sofern diese dem Standesamt bekannt ist, z. B. durch die nachricht.ref.081021.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

@@ -1,0 +1,451 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" xmlns:auskunft="http://www.kba.de/zfzr/auskunft" xmlns:el="http://www.kba.de/elemente" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe ZULASSUNGSMITTEILUNG, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-basisdatentypen.xsd" />
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:import schemaLocation="Elementdefinitionen.xsd" namespace="http://www.kba.de/elemente" />
+  <xs:import schemaLocation="StrukturelementeAuskunft.xsd" namespace="http://www.kba.de/zfzr/auskunft" />
+  <xs:complexType name="Type.AbfrageGebuehrenrueckstand">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur zur Anfrage hinsichtlich des Vorliegens von Gebührenrückständen</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="person" type="xkfz:Type.PersonGebuehrenrueckstandAnfrage">
+        <xs:annotation>
+          <xs:documentation>Personendaten der natürlichen oder juristischen Person, für die das Vorliegen von Gebührenrückständen geprüft werden soll</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Kennzeichen" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.AnfrageSicherheitscode">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur zum Abruf von Sicherheitscodes aus einem Fahrzeugregister</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.BasisSicherheitscodeAbfrage" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.BasisSicherheitscodeAbfrage">
+    <xs:annotation>
+      <xs:documentation>Basisdaten (Schlüssel) für die Anfrage und die Übermittlung von in einem Fahrzeugregister hinterlegten Sicherheitscodes</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="el:Kennzeichen">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugidentifizierungsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:NummerZulBeschTeil1">
+        <xs:annotation>
+          <xs:documentation>Nummer der Zulassungsbescheinigung Teil I</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.ErgebnisAbfrageGebuehrenrueckstand">
+    <xs:annotation>
+      <xs:documentation>Übermittlung der Antwort auf die Anfrage nach dem Vorliegen von Gebührenrückständen. Die Art der Antwort (Hinweis oder Aufstellung) wird durch den Datenschutz bestimmt.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice>
+        <xs:annotation>
+          <xs:documentation>Art der Antwort auf die Gebührenrüchstandsanfrage (Hinweis oder Aufstellung)</xs:documentation>
+        </xs:annotation>
+        <xs:element name="merkmalGebuehrenrueckstand" type="xs:boolean">
+          <xs:annotation>
+            <xs:documentation>Hinweis über das Vorliegen von Gebührenrückständen</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="listeGebuehrenrueckstand" type="xkfz:Type.Gebuehrenrueckstandsliste">
+          <xs:annotation>
+            <xs:documentation>Liste von Gebührenrückständen</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.FremdausfuehrungGeschaeftsvorfall">
+    <xs:annotation>
+      <xs:documentation>Übermittlung der Informationen zur Fremdausführung eines Geschäftsvorfalls. Für den Abruf der geänderten Registerdaten durch die zuständige Kfz-Zulassungsstelle aus dem ZFZR sind insbesondere die Referenzdaten des Kraftfahrt-Bundesamtes (Kennzeichen, Fahrzeugidentifizierungsnummer, KBA-Arbeitsgang, Zeitpunkt der Änderung) so anzugeben, wie sie im ZFZR im Rahmen der Änderung gespeichert werden.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="el:Kennzeichen">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugidentifizierungsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:NummerZulBeschTeil2">
+        <xs:annotation>
+          <xs:documentation>Nummer der Zulassungsbescheinigung Teil II</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kbaArbeitsgang" type="xkfz:Code.KBAArbeitsgangZulassungsmitteilung">
+        <xs:annotation>
+          <xs:documentation>ausgeführter KBA-Arbeitsgang</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="geaenderteDatenRegistersatz" maxOccurs="unbounded" type="xkfz:Code.DatengruppenRegistersatz">
+        <xs:annotation>
+          <xs:documentation>im Rahmen der Ausführung des Geschäftsvorfalls veränderte Datengruppen des Registersatzes</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:ZeitpunktAenderung">
+        <xs:annotation>
+          <xs:documentation>Datum und Uhrzeit der Änderung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="steuerzahlweise" minOccurs="0" type="xkfz:Code.Steuerzahlweise">
+        <xs:annotation>
+          <xs:documentation>Zahlweise der Steuer, z.B. jährlich</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="verbleibKennzeichen" minOccurs="0" type="xkfz:Type.ZulassungsmitteilungVerbleibKennzeichen">
+        <xs:annotation>
+          <xs:documentation>Handelt es sich um ein Verbleibskennzeichen? Dann ist diese Datenstruktur zu befüllen.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="sicherheitscodes" minOccurs="0" type="xkfz:Type.Sicherheitscodes">
+        <xs:annotation>
+          <xs:documentation>Sicherheitscodes, wenn sie im Rahmen der Fremdausführung des Geschäftsvorfalls verändert wurden</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.NatuerlichePersonGebuehrenrueckstandAnfrage">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur für natürliche Personen im Rahmen der Gebührenrückstandsabfrage</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="auskunft:NatuerlichePersonAnfrageTyp" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.PersonGebuehrenrueckstandAnfrage">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur für Personendaten inkl. Anschrift im Rahmen der Gebührenrückstandsabfrage</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:choice>
+        <xs:annotation>
+          <xs:documentation>Personendaten</xs:documentation>
+        </xs:annotation>
+        <xs:element name="natuerlichePerson" type="xkfz:Type.NatuerlichePersonGebuehrenrueckstandAnfrage">
+          <xs:annotation>
+            <xs:documentation>natürliche Person</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element name="natuerlichePersonHKR" type="xkfz:Type.AnfrageNatuerlichePerson">
+          <xs:annotation>
+            <xs:documentation>Natürliche Person mit optionalen Angaben zur Geburt.</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="el:NameJuristischePerson">
+          <xs:annotation>
+            <xs:documentation>juristische Person</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element ref="el:Postleitzahl">
+        <xs:annotation>
+          <xs:documentation>Postleitzahl</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Strasse">
+        <xs:annotation>
+          <xs:documentation>Straße</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.Sicherheitscodes">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur zum Übermittlung von Sicherheitscodes aus einem Fahrzeugregister</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.BasisSicherheitscodeAbfrage">
+        <xs:sequence>
+          <xs:element name="druckstuecknummerKennzeichen" minOccurs="0" maxOccurs="2" type="xkfz:Type.Druckstuecknummer">
+            <xs:annotation>
+              <xs:documentation>Druckstücknummer(n) zu dem oder den Kennzeichen des Fahrzeugs</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="sicherheitscodeKennzeichen" minOccurs="0" maxOccurs="2" type="xkfz:Type.DOLSicherheitscode3">
+            <xs:annotation>
+              <xs:documentation>Sicherheitscode(s) zu dem oder den Kennzeichen des Fahrzeugs</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="druckstuecknummerWkFahrzeugbezogenerTeil" minOccurs="0" type="xkfz:Type.Druckstuecknummer">
+            <xs:annotation>
+              <xs:documentation>Druckstücknummer(n) zum fahrzeugbezogenen Teil des Wechselkennzeichens des Fahrzeugs</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="sicherheitscodeWkFahrzeugbezogenerTeil" minOccurs="0" type="xkfz:Type.DOLSicherheitscode3">
+            <xs:annotation>
+              <xs:documentation>Sicherheitscode zum fahrzeugbezogenen Teil des Wechselkennzeichens des Fahrzeugs</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="druckstuecknummerZulBeschTeil1" minOccurs="0" type="xkfz:Type.Druckstuecknummer">
+            <xs:annotation>
+              <xs:documentation>Druckstücknummer zum Aufkleber auf der Zulassungsbescheinigung Teil I</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="sicherheitscodeZulBeschTeil1" minOccurs="0" type="xkfz:Type.DOLSicherheitscode7">
+            <xs:annotation>
+              <xs:documentation>Sicherheitscode zum Aufkleber auf der Zulassungsbescheinigung Teil I</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Zulassungsmitteilung.AnfrageFremdausfuehrungGeschaeftsvorfall.0403">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'zulassungsmitteilung.anfragefremdausfuehrunggeschaeftsvorfall.0403'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:fremdausfuehrungGeschaeftsvorfall">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0403'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Zulassungsmitteilung.AnfrageGebuehrenrueckstand.0401">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'zulassungsmitteilung.anfragegebuehrenrueckstand.0401'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:gebuehrenrueckstandAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0401'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Zulassungsmitteilung.AnfrageSicherheitscodes.0404">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'zulassungsmitteilung.anfragesicherheitscodes.0404'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:sicherheitscodesAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0404'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Zulassungsmitteilung.ErgebnisGebuehrenrueckstand.0402">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'zulassungsmitteilung.ergebnisgebuehrenrueckstand.0402'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:gebuehrenrueckstand">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0402'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Zulassungsmitteilung.ErgebnisSicherheitscodes.0405">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'zulassungsmitteilung.ergebnissicherheitscodes.0405'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:sicherheitscodes">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0405'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.ZulassungsmitteilungVerbleibKennzeichen">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur zur Übermittlung der Daten zum Verbleib eines Kennzeichens nach der Ausserbetriebsetzung</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="merkmalReservierungKennzeichen" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Wurde das Kennzeichen reserviert?</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="datumReservierungGueltigBis" minOccurs="0" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Datum, bis zu dem eine Reservierung des Kennzeichens gültig ist</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="pin" minOccurs="0" type="xkfz:Type.PINReservierungKennzeichen">
+        <xs:annotation>
+          <xs:documentation>PIN für den Nachweis der Verfügungsberechtigung über das reservierte Kennzeichen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="fremdausfuehrungGeschaeftsvorfall">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht  'zulassungsmitteilung.anfragefremdausfuehrunggeschaeftsvorfall.0403'. Diese Datenstruktur wird im Rahmen der Übermittlung der Informationen zur Fremdausführung eines Geschäftsvorfalls verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.FremdausfuehrungGeschaeftsvorfall" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gebuehrenrueckstand">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'zulassungsmitteilung.ergebnisgebuehrenrueckstand.0402'. Diese Datenstruktur wird im Rahmen der Übermittlung der Antwort auf die Anfrage nach dem Vorliegen von Gebührenrückständen verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.ErgebnisAbfrageGebuehrenrueckstand" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gebuehrenrueckstandAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'zulassungsmitteilung.anfragegebuehrenrueckstand.0401'. Diese Datenstruktur wird im Rahmen Anfrage hinsichtlich des Vorliegens von Gebührenrückständen verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AbfrageGebuehrenrueckstand" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sicherheitscodes">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'zulassungsmitteilung.ergebnissicherheitscodes.0405'. Diese Datenstruktur wird im Rahmen der Übermittlung von Sicherheitscodes verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Sicherheitscodes" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="sicherheitscodesAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'zulassungsmitteilung.anfragesicherheitscodes.0404'. Diese Datenstruktur wird im Rahmen des Abrufs von Sicherheitscodes verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageSicherheitscode" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zulassungsmitteilung.anfragegebuehrenrueckstand.0401">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Gebührenrückstände (Zulassungsmitteilung)', vgl. Verweis zu XKfz-Nachricht 0401 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Zulassungsmitteilung.AnfrageGebuehrenrueckstand.0401" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zulassungsmitteilung.ergebnisgebuehrenrueckstand.0402">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis Gebührenrückstände (Zulassungsmitteilung)', vgl. Verweis zu XKfz-Nachricht 0402 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Zulassungsmitteilung.ErgebnisGebuehrenrueckstand.0402" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zulassungsmitteilung.anfragefremdausfuehrunggeschaeftsvorfall.0403">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Mitteilung über die Fremdausführung eines Geschäftsvorfalls', vgl. Verweis zu XKfz-Nachricht 0403 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Zulassungsmitteilung.AnfrageFremdausfuehrungGeschaeftsvorfall.0403" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zulassungsmitteilung.anfragesicherheitscodes.0404">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Übermittlung der Sicherheitscodes', vgl. Verweis zu XKfz-Nachricht 0404 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Zulassungsmitteilung.AnfrageSicherheitscodes.0404" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zulassungsmitteilung.ergebnissicherheitscodes.0405">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis Übermittlung der Sicherheitscodes', vgl. Verweis zu XKfz-Nachricht 0405 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Zulassungsmitteilung.ErgebnisSicherheitscodes.0405" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

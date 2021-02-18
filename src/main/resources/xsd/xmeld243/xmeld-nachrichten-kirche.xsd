@@ -1,0 +1,1631 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xmeld="http://www.osci.de/xmeld243"
+           xmlns:xian="http://www.osci.de/xinneres/allgemeinername/2"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xikomm="http://www.osci.de/xinneres/kommunikation/3"
+           xmlns:xipa="http://www.osci.de/xinneres/postanschrift/3"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://www.osci.de/xmeld243"
+           version="2.4.3"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XMeld</nameLang>
+            <nameKurz>XMeld</nameKurz>
+            <nameTechnisch>xinneres.xmeld</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xmeld</kennung>
+            <beschreibung>OSCI–XMeld ist das XInneres-Fachmodul der Innenverwaltung für den elektronischen Datenaustausch
+im Meldewesen und mit dem Meldewesen. Es ist Kern eines elektronischen Informationsverbundes zwischen
+den Meldebehörden und den Kommunikationspartnern der Meldebehörden. Weitere Bestandteile
+des elektronischen Informationsverbundes sind die Intermediäre und Clearingstellenbetreiber, deren
+Aufgabe die Übermittlung und Zustellung der XMeld-Nachrichten ist. Für die Übermittlung wird OSCITransport
+genutzt. Für die Zustellung und Adressierung der XMeld-Nachrichten das Deutsche Verwaltungsdienste-
+Verzeichnis (DVDV).
+Entwickelt wird OSCI–XMeld durch ein Expertengremium mit Vertreterinnen und Vertretern aus der
+Verwaltung und von Verfahrensherstellern. Die Koordnierungsstelle für IT-Standards (KoSIT) ist dabei
+federführend. Auftraggeber für die Erstellung und Weiterentwicklung ist der Arbeitskreis I (AK I) der
+Innenministerkonferenz (IMK).
+Seit 2007 ist OSCI–XMeld im praktischen Einsatz für die Kommunikation von und mit den Meldebehörden
+und wird seit dem kontinuierlich weiterentwickelt und an geänderte rechtliche Vorgaben angepasst.
+Zur Einführung des Bundesmeldegesetzes wurde OSCI–XMeld vollständig überarbeitet und setzt die
+Anforderungen des Bundesmeldegesetzes in der praktischen Datenübermittlung um.</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>2.4.3</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xmeld-nachrichten-basistypen.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/allgemeinername/2/xinneres-name.xsd"
+              namespace="http://www.osci.de/xinneres/allgemeinername/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/kommunikation/3/xinneres-kommunikation.xsd"
+              namespace="http://www.osci.de/xinneres/kommunikation/3"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/postanschrift/3/xinneres-postanschrift.xsd"
+              namespace="http://www.osci.de/xinneres/postanschrift/3"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="type.Kirche.Anschrift">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Anschrift</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Typ wird eine Anschrift im Kontext der Datenübermittlung an die öffentlich-rechtlichen Religionsgesellschaften beschrieben. Es kann sich um eine Inlands-, Auslands- oder unbekannte Anschrift handeln.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="anschrift.inland" type="xmeld:type.Kirche.Anschrift.Inland">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird eine Inlandsanschrift übermittelt, ggf. ergänzt um den Straßenschlüssel.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift.ausland" type="xmeld:type.AnschriftMelderecht.Ausland">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird eine Auslandsanschrift übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift.unbekannt"
+                     type="xmeld:type.AnschriftMelderecht.Unbekannt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache übermittelt, dass eine Anschrift unbekannt ist.Im Rahmen der Datenübermittlung an kirche.oeffentlich_rechtliche_religionsgesellschaften ist nur die Tatsache zu übermitteln, Angaben zum Sachverhalt sind nicht zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.Anschrift.Inland">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Inlandsanschrift</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Typ wird eine inländische Anschrift im Kontext der Datenübermittlung an die öffentlich-rechtlichen Religionsgesellschaften beschrieben. Sofern es sich um eine Anschrift außerhalb der liefernden Gemeinde handelt, ist der Straßenschlüssel nicht zu befüllen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xmeld:type.AnschriftMelderecht.InlandMitSperrvermerk">
+            <xs:sequence>
+               <xs:element name="strassenschluessel" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Sofern vorhanden kann hier bei Anschriften in der Gemeinde, für die übermittelt wird, der Straßenschlüssel der Anschrift ergänzt werden. Bei Anschriften außerhalb der Gemeinde ist kein Straßenschlüssel anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.AnschriftMelderechtMitDruckbildUndSperrvermerk">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Anschriftendarstellung mit Druckbild für Auslandsanschriften und mit bedingtem Sperrvermerk nach § 52 BMG für Inlandsanschriften</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp berücksichtigt alle melderechtlichen Anforderungen an eine dsm-konform strukturierte Anschrift. Der Datentyp ist an den allgemeinen Datentyp type.AnschriftMelderecht angelehnt, verwendet aber im Unterschied zu diesem für das Element anschrift.inland den Datentyp type.AnschriftMelderecht.InlandMitSperrvermerk für die Möglichkeit der Übermittlung der Tatsache des Vorliegens eines bedingten Sperrvermerks nach § 52 BMG zur Inlandsanschrift, sowie für das Element anschrift.ausland den Datentyp type.Auslandsanschrift.Druckbild für die vollständige Druckbild-Darstellung der Auslandsanschrift.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="anschrift.inland"
+                     type="xmeld:type.AnschriftMelderecht.InlandMitSperrvermerk"/>
+         <xs:element name="anschrift.ausland" type="xmeld:type.Auslandsanschrift.Druckbild"/>
+         <xs:element name="anschrift.unbekannt"
+                     type="xmeld:type.AnschriftMelderecht.Unbekannt"/>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.DatenNachLandesrechtMitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten nach Landesrecht für das Kirchenmitglied</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt zusätzliche Daten zum Kirchenmitglied. Die Informationen sind nur zu übermitteln, wenn das jeweilige Landesrecht die Übermittlung dieser Daten zulässt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="uebermittlungssperreJubilaeenLiegtVor"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache des Vorliegens einer Übermittlungssperre nach § 50 Abs. 5 i. V. m. § 50 Abs. 2 BMG (Alters- und Ehejubilare) übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.DatenNachLandesrechtNichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten nach Landesrecht für Nichtmitglieder</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt zusätzliche Daten zum familienangehörigen Nichtmitglied. Die Informationen sind nur zu übermitteln, wenn das jeweilige Landesrecht die Übermittlung dieser Daten zulässt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="weitereNamen"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.WeitereNamenDesNichtmitglieds"/>
+         <xs:element name="staatsangehoerigkeit"
+                     minOccurs="0"
+                     maxOccurs="4"
+                     type="xmeld:type.StaatsangehoerigkeitOhneUnionsbuergerschaft">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die derzeitige Staatsangehörigkeit des familienangehörigen Nichtmitglieds übermittelt. Besitzt das familienangehörige Nichtmitglied derzeitig mehrere Staatsangehörigkeiten, so sind alle anzugeben, indem das Element mehrfach übermittelt wird.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="uebermittlungssperreJubilaeenLiegtVor"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache des Vorliegens einer Übermittlungssperre nach § 50 Abs. 5 i. V. m. § 50 Abs. 2 BMG (Alters- und Ehejubilare) übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.ErreichbareStelle">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Erreichbare Stelle im Datenaustausch mit den öffentlich-rechtlichen Religionsgesellschaften</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die Daten der erreichbaren Stelle ohne Behördenkennung im Datenaustausch mit den öffentlich-rechtlichen Religionsgesellschaften abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Name der erreichbaren Stelle übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift" type="xipa:PostalischeInlandsanschrift">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anschrift der erreichbaren Stelle übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="erreichbarkeit"
+                     maxOccurs="unbounded"
+                     type="xikomm:Kommunikation">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten zur Erreichbarkeit der Stelle übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.Familienstand">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Familienstand</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt Angaben zum Familienstand.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="datumBeginn" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum der letzten Eheschließung oder der Begründung der letzten Lebenspartnerschaft übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienstand" type="xmeld:Code.Partnerschaftsinformation">
+            <xs:annotation>
+               <xs:documentation>Es ist der Familienstand anzugeben. Der Familienstand beschränkt auf die Angabe, ob verheiratet oder eine Lebenspartnerschaft führend oder nicht.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ort.letzte.ehe.oder.lp"
+                     minOccurs="0"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Ort der Eheschließung oder Begründung der Lebenspartnerschaft übermittelt. Reichen 40 Stellen für die Angabe des Ortes nicht aus, ist der Ortsname sinnvoll zu kürzen. Ist der Ort der letzten Eheschließung oder Begründung der letzten Lebenspartnerschaft nicht zu ermitteln, so wird unbekannt angegeben. Falls vorhanden, kann hinter dem Ort der Kreis angegeben werden; in diesem Fall folgen auf den Ort ein Schrägstrich und die Bezeichnung des Kreises. Bei Überschreiten der Stellenzahl wird die Kreisangabe nicht gekürzt, sondern abgebrochen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ortstaat.letzte.ehe.oder.lp"
+                     minOccurs="0"
+                     type="xmeld:Code.Gebiet">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird bei Eheschließung oder Begründung der Partnerschaft im Ausland der Staat angegeben. Aus dieser Tabelle sind alle Staaten-Codes zugelassen (Spalte DESTATIS_Schluessel_Staat). Zusätzlich sind von den Gebiets-Codes (Spalte DESTATIS_Schluessel_Gebiet) die beiden Einträge zugelassen: Schlüssel 459 Palästinensische Gebiete und 465 Taiwan.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumBeginnVorausgegangeneLP"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum der Begründung der bei der Eheschließung bereits bestehenden Lebenspartnerschaft übermittelt (siehe DSMeld-Blatt 1402a).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.FortschreibungNichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Fortschreibung eines weiterhin bestehenden Nichtmitglieds</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp beschreibt die Fortschreibung eines weiterhin bestehenden familienangehörigen Nichtmitglieds.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="identifikation"
+                     type="xmeld:type.Kirche.IdentifikationNichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das familienangehörige Nichtmitglied identifiziert.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Name eines familienangehörigen Nichtmitglied mitgeteilt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert" type="xmeld:type.Kirche.NameNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird ein unveränderter Name mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine Fortschreibung des Namens des familienangehörigen Nichtmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher" type="xmeld:type.Kirche.NameNichtmitglied"/>
+                           <xs:element name="nachher" type="xmeld:type.Kirche.NameNichtmitglied"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="geburt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Geburtsdaten eines familienangehörigen Nichtmitglied mitgeteilt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert" type="xmeld:type.Kirche.GeburtNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die unveränderten Daten zur Geburt mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zur Geburt des familienangehörigen Nichtmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher" type="xmeld:type.Kirche.GeburtNichtmitglied"/>
+                           <xs:element name="nachher" type="xmeld:type.Kirche.GeburtNichtmitglied"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geschlecht eines familienangehörigen Nichtmitglied mitgeteilt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert" type="xmeld:type.Geschlecht">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das unveränderte Geschlecht mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zum Geschlecht des familienangehörigen Nichtmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher" type="xmeld:type.Geschlecht"/>
+                           <xs:element name="nachher" type="xmeld:type.Geschlecht"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="religion">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Zugehörigkeit eines familienangehörigen Nichtmitglieds zu einer öffentlich-rechtlichen Religionsgesellschaft mitgeteilt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert" type="xmeld:type.Religion">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die unveränderte Religionszugehörigkeit mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zur Religionszugehörigkeit des familienangehörigen Nichtmitglieds mitgeteilt. Da sich eine Mitgliedschaft aus der Religionszugehörigkeit ergibt, kann es sich bei einer hier übermittelten Fortschreibung nicht um einen Wechsel in die Religionsgesellschaft des Kirchenmitglieds handeln, zu dem dieses Nichtmitglied übermittelt wird. In diesem Fall entfiele das Nichtmitglied und würde als neues Kirchenmitglied (Nachricht nachricht.1603) übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher" type="xmeld:type.Religion"/>
+                           <xs:element name="nachher" type="xmeld:type.Religion"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="aktuelleWohnung" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die aktuellen Wohnungen eines familienangehörigen Nichtmitglied mitgeteilt. Es sind auch die unveränderten Wohnungen anzugeben.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert" type="xmeld:type.Kirche.WohnungNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine unveränderte Wohnung mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="hinzukommend" type="xmeld:type.Kirche.WohnungNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine hinzukommende Wohnung mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine Fortschreibung einer weiterhin bestehenden Wohnung des familienangehörigen Nichtmitglieds mitgeteilt (z. B. nach Statuswechsel oder Änderung des Straßen- oder Gemeindenamens der Anschrift).</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher" type="xmeld:type.Kirche.WohnungNichtmitglied"/>
+                           <xs:element name="nachher" type="xmeld:type.Kirche.WohnungNichtmitglied"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="wegfallend">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine wegfallende Wohnung mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="wegfallendeWohnung" type="xmeld:type.Kirche.WohnungNichtmitglied">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Daten der wegfallenden Wohnung angegeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="datumDesAuszugs"
+                                       minOccurs="0"
+                                       type="xida:TeilbekanntesDatumMitUnbekannt">
+                              <xs:annotation>
+                                 <xs:appinfo>
+                                    <implementationHint>Der DSMeld erlaubt für dieses Datum keine nur teilweise bekannte oder unbekannte Angabe eines Auszugsdatums. Die Möglichkeit der Angabe eines teilweise bekannten oder unbekannten Datums für inaktuelle Wohnungen, zu denen das Auszugsdatum fehlt oder nur nicht vollständig vorliegt, wird in XMeld aber geschaffen, da in der Praxis nicht immer ein vollständiges Datum vorliegt.</implementationHint>
+                                 </xs:appinfo>
+                                 <xs:documentation>Mit diesem Element wird das Datum des Auszugs aus der Wohnung übermittelt. Besteht nach dem Auszug aus der Wohnung keine Wohnung mehr im Zuständigkeitsbereich der Meldebehörde, so ist das Auszugsdatum identisch mit dem Wegzugsdatum aus dem Zuständigkeitsbereich der Meldebehörde (siehe auch DSMeld-Blatt 1306).</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="auskunftssperreLiegtVor">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird mitgeteilt, ob für das familienangehörige Nichtmitglied eine Auskunftssperre nach § 51 BMG mit einem Schlüssel 1, 3 oder 11 vorliegt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die unveränderte Information ob eine Auskunftssperre vorliegt mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Ändert sich die Tatsache, dass eine Auskunftssperre nach § 51 BMG mit einem Schlüssel 1, 3 oder 11 vorliegt bzw. nicht vorliegt, ist diese Änderung mit diesem Element zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher" type="xs:boolean"/>
+                           <xs:element name="nachher" type="xs:boolean"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="nurFuerSteuerlicheZwecke">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird mitgeteilt, ob die Daten zu einem familienangehörigen Nichtmitglied nur zu steuerlichen Zwecken genutzt werden dürfen, da eine Übermittlungssperre nach § 42 Abs. 3 BMG vorliegt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die unveränderte Information ob die Daten nur für steuerliche Zwecke genutzt werden dürfen mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Ändert sich die Tatsache, dass der Familienangehörige der Übermittlung widersprochen hat, ist diese Änderung mit diesem Element zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher" type="xs:boolean"/>
+                           <xs:element name="nachher" type="xs:boolean"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="letzteFruehereAnschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.Anschrift.Inland">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anschrift der inaktuellen Haupt- oder alleinigen Wohnung im Inland mit dem jüngsten Datum des Auszugs / der Abmeldung, ist diese Änderung mit diesem Element zu übermitteln. Die letzte frühere Anschrift des familienangehörigen Nichtmitglieds ist nur von dessen AW-/HW-Meldebehörde zu liefern. Anmerkung: Die inaktuelle Haupt- oder alleinige Wohnung kann in derselben Gemeinde liegen, wie die aktuelle Haupt- oder alleinige Wohnung (nach Umzug oder Statuswechsel innerhalb der Gemeinde) oder kann in einer anderen Gemeinde liegen (nach Zuzug aus dem Inland, nach Umzug mit Gemeindewechsel, nach Wiederzuzug aus dem Ausland und nach Statuswechsel über Gemeindegrenzen).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datenNachLandesrecht" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten nach Landesrecht zu einem familienangehörigen Nichtmitglied mitgeteilt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="unveraendert"
+                              type="xmeld:type.Kirche.DatenNachLandesrechtNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden unveränderte Daten nach Landesrecht mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zum familienangehörigen Nichtmitglied nach Landesrecht mitgeteilt. Falls zukünftig keine Daten nach Landesrecht mehr vorhanden sind, entfällt das Element nachher. Falls erstmalig Daten nach Landesrecht übermittelt werden, entfällt das Element vorher.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorher"
+                                       minOccurs="0"
+                                       type="xmeld:type.Kirche.DatenNachLandesrechtNichtmitglied"/>
+                           <xs:element name="nachher"
+                                       minOccurs="0"
+                                       type="xmeld:type.Kirche.DatenNachLandesrechtNichtmitglied"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.GeburtNichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Geburtsdaten eines familienangehörigen Nichtmitgliedes</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt alle Angaben zur Geburt eines familienangehörigen Nichtmitgliedes, wie sie den kirche.oeffentlich_rechtlichen_religionsgesellschaften gemäß § 42 BMG Abs. 2 mitgeteilt werden können.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.Geburt">
+            <xs:sequence>
+               <xs:element name="geburtsort" minOccurs="0" type="xoev-lc:String.Latin"/>
+               <xs:element name="geburtsdatum"
+                           minOccurs="0"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Geburtsdatum übermittelt. Sofern das vollständige Geburtsdatum vorliegt, ist das Element jahrMonatTag zu befüllen, sofern die Tagesangabe fehlt, das Element jahrMonat, sofern die Tagesangabe und die Monatsangabe fehlen, das Element jahr und sofern alle Angaben zum Geburtsdatum fehlen, das Element unbekannt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.GesetzlicherVertreter">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Gesetzlicher Vertreter</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt den gesetzlichen Vertreter.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xmeld:type.GesetzlicherVertreter.Name">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Namensinformationen des gesetzlichen Vertreters übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Falls es sich bei dem gesetzlichen Vertreter um eine natürliche Person handelt, wird in diesem Element das Geburtsdatum des gesetzlichen Vertreters übermittelt. Bei einer juristischen Person als gesetzlicher Vertreter, darf dieses Element nicht übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geschlecht des gesetzlichen Vertreters übermittelt, sofern es sich beim gesetzlichen Vertreter um eine natürliche Person handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift" type="xmeld:type.Kirche.Anschrift">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anschrift des gesetzlichen Vertreters übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesetzlichervertreterschluessel"
+                     type="xmeld:Code.Gesetzlicher.Vertreter">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Art der Vertretung übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="auskunftssperreLiegtVor"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache des Vorliegens einer Auskunftssperre übermittelt. Liegt eine Auskunftssperre nach § 51 BMG mit einem Schlüssel 3 oder 11 vor, ist das Element zu übermitteln (Die Sperren 6 und 12 führen nie zu der Übermittlung einer Tatsache, dass eine Auskunftssperre vorliegt).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.IdentifikationGesetzlicherVertreter">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Identifikation eines gesetzlichen Vertreters</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp wird ein gesetzlicher Vertreter identifiziert.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xmeld:type.GesetzlicherVertreter.Name">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Namensinformationen des gesetzlichen Vertreters übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Falls es sich bei dem gesetzlichen Vertreter um eine natürliche Person handelt, wird in diesem Element das Geburtsdatum des gesetzlichen Vertreters übermittelt. Bei einer juristischen Person als gesetzlicher Vertreter, darf dieses Element nicht übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geschlecht des gesetzlichen Vertreters übermittelt, sofern es sich beim gesetzlichen Vertreter um eine natürliche Person handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.IdentifikationMitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Identifikation eines Kirchenmitglieds</title>
+         </xs:appinfo>
+         <xs:documentation>Datentyp zur Identifikation des Kirchenmitgliedes zum Zweck der Kommunikation mit der Meldebehörde, welche diesen Datensatz geliefert hat.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ordnungsmerkmal" type="xmeld:type.Kirche.Ordnungsmerkmal"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.IdentifikationNichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Identifikation eines familienangehörigen Nichtmitglieds</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp wird ein familienangehöriges Nichtmitglied identifiziert.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xmeld:type.Kirche.NameNichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Name des familienangehörigen Nichtmitglieds übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" type="xmeld:type.Kirche.GeburtNichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Geburtsdaten des familienangehörigen Nichtmitglieds übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geschlecht des familienangehörigen Nichtmitglieds übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.Mitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>kirchenmitglied</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ umfasst alle Daten eines kirchenmitgliedes nach § 42 Abs. 1 BMG sowie der kirche.familienangehoerigen_nichtmitglieder nach § 42 Abs. 2 BMG zu diesem Kirchenmitglied.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ordnungsmerkmal" type="xmeld:type.Kirche.Ordnungsmerkmal"/>
+         <xs:element name="name" type="xmeld:type.NameNatuerlichePerson"/>
+         <xs:element name="geburt" type="xmeld:type.Geburt"/>
+         <xs:element name="vertreter"
+                     minOccurs="0"
+                     maxOccurs="4"
+                     type="xmeld:type.Kirche.GesetzlicherVertreter"/>
+         <xs:element name="geschlecht" type="xmeld:type.Geschlecht"/>
+         <xs:element name="staatsangehoerigkeit"
+                     maxOccurs="4"
+                     type="xmeld:type.StaatsangehoerigkeitOhneUnionsbuergerschaft">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die derzeitige Staatsangehörigkeit des Kirchenmitglieds übermittelt. Besitzt das Kirchenmitglied derzeitig mehrere Staatsangehörigkeiten, so sind alle anzugeben, indem das Element mehrfach übermittelt wird.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="religion" type="xmeld:type.Religion"/>
+         <xs:element name="aktuelleWohnung"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Kirche.WohnungMitglied">
+            <xs:annotation>
+               <xs:documentation>Es sind alle derzeitigen Wohnungen des Kirchenmitglieds anzugeben, inklusive Nebenwohnungen. Es sind auch Wohnungen außerhalb des Zuständigkeitsbereichs der Meldebehörde anzugeben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zuzugGemeinde" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Gemeinde übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienstand" type="xmeld:type.Kirche.Familienstand"/>
+         <xs:element name="anzahlMinderjaehrigeKinder" type="xs:nonNegativeInteger">
+            <xs:annotation>
+               <xs:documentation>Es ist die Anzahl der zum kirchenmitglied eingetragenen minderjährigen Kinder anzugeben. Falls auswärtige Kinder des kirchenmitglieds im Melderegister gespeichert sind, sind auch diese zu berücksichtigen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="auskunftssperreLiegtVor"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache des Vorliegens einer Auskunftssperre übermittelt. Liegt eine Auskunftssperre nach § 51 BMG mit einem Schlüssel 1, 3 oder 11 vor, ist das Element zu übermitteln (Die Sperren 6 und 12 führen nie zu der Übermittlung einer Tatsache, dass eine Auskunftssperre vorliegt).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="partnerNichtmitglied"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.Nichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Es ist der Ehegatte oder Lebenspartner des kirchenmitgliedes zu übermitteln, der keiner oder einer anderen Religionsgesellschaft angehört.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kindNichtmitglied"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Kirche.Nichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Es sind die Kinder des kirchenmitgliedes zu übermitteln, die keiner oder einer anderen Religionsgesellschaft angehören.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="elternteilNichtmitglied"
+                     minOccurs="0"
+                     maxOccurs="2"
+                     type="xmeld:type.Kirche.Nichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Es sind die Eltern des minderjährigen kirchenmitglieds mitzuteilen, die keiner oder einer anderen Religionsgesellschaft angehören.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="letzteFruehereAnschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.Anschrift.Inland">
+            <xs:annotation>
+               <xs:documentation>Es ist die Anschrift der inaktuellen Haupt- oder alleinigen Wohnung im Inland mit dem jüngsten Datum des Auszugs / der Abmeldung zu übermitteln. Anmerkung: Die inaktuelle Haupt- oder alleinige Wohnung kann in derselben Gemeinde liegen, wie die aktuelle Haupt- oder alleinige Wohnung (nach Umzug oder Statuswechsel innerhalb der Gemeinde) oder kann in einer anderen Gemeinde liegen (nach Zuzug aus dem Inland, nach Umzug mit Gemeindewechsel, nach Wiederzuzug aus dem Ausland und nach Statuswechsel über Gemeindegrenzen).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datenNachLandesrecht"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.DatenNachLandesrechtMitglied"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.NameNichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Name eines familienangehörigen Nichtmitgliedes</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt die Namen eines familienangehörigen Nichtmitgliedes gemäß § 42 Abs. 2.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.NameNatuerlichePerson">
+            <xs:sequence>
+               <xs:element name="familienname" type="xmeld:type.Nachname"/>
+               <xs:element name="familienname.unstrukturiert"
+                           minOccurs="0"
+                           type="xmeld:type.FamiliennameUnstrukturiert"/>
+               <xs:element name="vornamen" minOccurs="0" type="xian:AllgemeinerName"/>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.Nichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Familienangehöriges Nichtmitglied</title>
+         </xs:appinfo>
+         <xs:documentation>Für ein kirche.familienangehoeriges_nichtmitglied, werden die zulässigen Informationen mit diesem Datentyp übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xmeld:type.Kirche.NameNichtmitglied"/>
+         <xs:element name="geburt"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.GeburtNichtmitglied"/>
+         <xs:element name="geschlecht" type="xmeld:type.Geschlecht"/>
+         <xs:element name="religion" type="xmeld:type.Religion"/>
+         <xs:element name="aktuelleWohnung"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Kirche.WohnungNichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Es sind alle derzeitigen Wohnungen des familienangehörigen Nichtmitglieds anzugeben, inklusive Nebenwohnungen. Es sind auch Wohnungen außerhalb der Gemeinde anzugeben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="auskunftssperreLiegtVor"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache des Vorliegens einer Auskunftssperre übermittelt. Liegt eine Auskunftssperre nach § 51 BMG mit einem Schlüssel 1, 3 oder 11 vor, ist das Element zu übermitteln (Die Sperren 6 und 12 führen nie zu der Übermittlung einer Tatsache, dass eine Auskunftssperre vorliegt).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="nurFuerSteuerlicheZwecke"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Hat der Familienangehörige der Übermittlung nach § 42 Abs. 3 BMG widersprochen, ist der Leser mit diesem Element darauf hinzuweisen, dass diese Daten ausschließlich für steuerliche Zwecke verarbeitet werden dürfen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="letzteFruehereAnschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.Anschrift.Inland">
+            <xs:annotation>
+               <xs:documentation>Es ist die Anschrift der inaktuellen Haupt- oder alleinigen Wohnung im Inland mit dem jüngsten Datum des Auszugs / der Abmeldung zu übermitteln. Die letzte frühere Anschrift wird nur übermittelt, wenn das kirche.familienangehoerige_nichtmitglied im Zuständigkeitsbereich der Meldebehörde mit Haupt- oder alleiniger Wohnung geführt wird. Anmerkung: Die inaktuelle Haupt- oder alleinige Wohnung kann in derselben Gemeinde liegen, wie die aktuelle Haupt- oder alleinige Wohnung (nach Umzug oder Statuswechsel innerhalb der Gemeinde) oder kann in einer anderen Gemeinde liegen (nach Zuzug aus dem Inland, nach Umzug mit Gemeindewechsel, nach Wiederzuzug aus dem Ausland und nach Statuswechsel über Gemeindegrenzen).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datenNachLandesrecht"
+                     minOccurs="0"
+                     type="xmeld:type.Kirche.DatenNachLandesrechtNichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Die Informationen in diesem Typ sind nur zu füllen, wenn das jeweilige Landesrecht die Übermittlung dieser Daten zulässt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.Ordnungsmerkmal">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Ordnungsmerkmal</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Typ kann ein Ordnungsmerkmal gemäß § 4 BMG des Datensatzes des kirchenmitgliedes übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ordnungsmerkmal" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element ist das Ordnungsmerkmal gemäß § 4 BMG des Datensatzes des kirchenmitgliedes zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.WeitereNamenDesNichtmitglieds">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Weitere Namen eines familienangehörigen Nichtmitgliedes</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt weitere Namen eines familienangehörigen Nichtmitgliedes gemäß § 42 Abs. 2.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.NameNatuerlichePerson">
+            <xs:sequence>
+               <xs:element name="geburtsname" minOccurs="0" type="xmeld:type.Nachname"/>
+               <xs:element name="geburtsname.unstrukturiert"
+                           minOccurs="0"
+                           type="xian:AllgemeinerName"/>
+               <xs:element name="frueherer.familienname"
+                           minOccurs="0"
+                           maxOccurs="unbounded"
+                           type="xmeld:type.FruehererFamilienname">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird ein früherer Familienname in strukturierter und unstrukturierter Darstellung übermittelt. Die Änderung eines Geburtsnamens durch Adoption wird nicht als Namensänderung behandelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="doktorgrad" minOccurs="0" type="xmeld:type.Doktorgrad">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element werden die Doktorgrade einer Person übermittelt. Es sind nur diejenigen Doktorgrade anzugeben, die in Pässe eingetragen werden dürfen. Zulässig sind: DR., Dr., DR.HC., Dr.hc., Dr.EH. und Dr.eh. Sind mehrere Doktorgrade anzugeben, so sind sie durch ein Leerzeichen zu trennen.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.WohnungMitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Wohnung eines Kirchenmitglieds</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt eine Wohnung eines kirchenmitgliedes, wie sie gemäß § 42 BMG an die kirche.oeffentlich_rechtlichen_religionsgesellschaften zu übermitteln ist.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift" type="xmeld:type.Kirche.Anschrift"/>
+         <xs:element name="datumDesBeziehens"
+                     minOccurs="0"
+                     type="xida:TagesdatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Beziehens der Wohnung übermittelt; vgl. Blatt 1301.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesWohnungsstatuswechsels"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Wirksamwerdens des neuen Wohnungsstatus übermittelt (siehe DSMeld-Blatt 1301a).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="statusderwohnung" type="xmeld:Code.Wohnungsstatus">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Status der Wohnung übermittelt. Es ist zu unterscheiden, ob es sich um die alleinige bzw. die Haupt- oder eine Nebenwohnung handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.WohnungNichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Wohnung eines familienangehörigen Nichtmitglieds</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ beschreibt eine Wohnung eines familienangehörigen Nichtmitglieds, wie sie gemäß § 42 Abs. 2 BMG an die kirche.oeffentlich_rechtlichen_religionsgesellschaften zu übermitteln ist.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift" type="xmeld:type.Kirche.Anschrift"/>
+         <xs:element name="statusderwohnung" type="xmeld:Code.Wohnungsstatus">
+            <xs:annotation>
+               <xs:documentation>Es ist anzugeben, ob es sich bei der Wohnung um die alleinige bzw. die Haupt- oder eine Nebenwohnung handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Kirche.ZugangFortschreibungWegfallNichtmitglied">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Zugang, Fortschreibung oder Wegfall eines familienangehörigen Nichtmitglieds</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält alle Angaben zu einem Familienangehörigen, vor und nach der Änderung, die im Rahmen von Datenübermittlungen an die kirche.oeffentlich_rechtlichen_religionsgesellschaften übermittelt werden können.Gegebenenfalls wird der Sterbetag eines Familienangehörigen angegeben.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="unveraendert" type="xmeld:type.Kirche.Nichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das unveränderte familienangehörige Nichtmitglied mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="hinzukommend" type="xmeld:type.Kirche.Nichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Zugang eines familienangehörigen Nichtmitglieds zu dem Kirchenmitglied mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="fortschreibung"
+                     type="xmeld:type.Kirche.FortschreibungNichtmitglied">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Fortschreibung der Daten eines weiterhin bestehenden familienangehörigen Nichtmitglieds mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="wegfallend">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Wegfall eines familienangehörigen Nichtmitglieds zu dem Kirchenmitglied mitgeteilt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="wegfallendesNichtmitglied"
+                              type="xmeld:type.Kirche.IdentifikationNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das wegfallende familienangehörige Nichtmitglied identifiziert.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sterbetag" minOccurs="0" type="xmeld:type.Sterbetag">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das Datum des Sterbetages übermittelt. Ist im Sterbeeintrag für den Zeitpunkt des Todes ein Zeitraum eingetragen (Nr. 31.2 der Allgemeinen Verwaltungsvorschrift zum Personenstandsgesetz (PStG-VwV) in der jeweils gültigen Fassung), so ist hier das zweite (spätere) Datum anzugeben. Ggf. ist der Zeitpunkt des Todes, einer Todeserklärung oder einer gerichtlichen Feststellung der Todeszeit anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:element name="kirche.bestandslieferung.1600">
+      <xs:annotation>
+         <xs:appinfo>
+            <rechtsgrundlage>§ 42 BMG</rechtsgrundlage>
+            <title>Bestandslieferung von Kirchenmitgliedern</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird ausschließlich für die einmalige Übermittlung der Bestandsdaten verwendet. Die zugrunde liegenden Bestandsdaten stammen aus dem einmaligen, stichtagsbezogenen Datenabzug. Die Nachricht ist erst unmittelbar vor der Lieferung zu erstellen. Diese Nachricht wird versendet von der hauptwohnungs_mb oder der alleinigewohnungs_mb im Rahmen der bestandsdatenlieferung und quittierung (Prozess siehe bzw. ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="paketierung" type="xmeld:type.paketierung"/>
+                  <xs:element name="sachzusammenhang" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Daten einzelner kirchenmitglieder in ihrem Sachzusammenhang innerhalb derselben Gemeinde zu übermitteln. Im Falle von verheirateten oder verpartnerten Kirchenmitgliedern bilden diese beiden kirchenmitglieder den Sachzusammenhang. In allen anderen Fällen bildet nur ein Datensatz den Sachzusammenhang. Der Sachzusammenhang zwischen zwei kirchenmitgliedern wird innerhalb einer Lieferung nur einmal übertragen (also nicht ein zweites Mal in spiegelbildlicher Anordnung).</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="initialGeliefertesKirchenmitglied" maxOccurs="2">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="kirchenmitglied" type="xmeld:type.Kirche.Mitglied"/>
+                                    <xs:element name="identifikation.ereignis"
+                                                type="xmeld:type.Identifikation.Ereignis">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind. Im Rahmen von Bestandsdatenlieferungen ist im Element ereignis.zeitpunkt der Zeitpunkt des Datenabzugs zum Stichtag zu verwenden.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="kirche.fortschreibung.1601">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung der Änderung eines Kirchenmitgliedes</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht werden Fortschreibungen der Daten eines kirchenmitgliedes oder eines kirche.familienangehoerigen_nichtmitgliedes des kirchenmitgliedes an die kirche.oeffentlich_rechtlichen_religionsgesellschaften mitgeteilt. Diese Nachricht wird versendet von der hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines umzug_ohne_AGS-wechsel (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines bezug_nebenwohnung (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer aufgabe_nebenwohnung (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.namen_doktorgrad (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.geburtsdaten (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.geschlecht (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.gesetzlicher-vertreter (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.staatsangehoerigkeit (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.religion (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.anschriften ohne Änderung des AGS (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines fortschreibung.wohnungsstatuswechsel_ohne_AGS-wechsel (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.familienstand (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.ehegatten_lebenspartner (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.kinder (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.auskunfts_uebermittlungssperren (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.ordnungsmerkmal (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="identifikation" type="xmeld:type.Kirche.IdentifikationMitglied"/>
+                  <xs:element name="identifikation.ereignis"
+                              type="xmeld:type.Identifikation.Ereignis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anlass" type="xmeld:Code.XMeld.Datenuebermittlungsanlaesse">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Anlass der Fortschreibung des Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="name">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Name eines Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.NameNatuerlichePerson">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird ein unveränderter Name mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung des Namens mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xmeld:type.NameNatuerlichePerson"/>
+                                    <xs:element name="nachher" type="xmeld:type.NameNatuerlichePerson"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="geburt">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Geburtsdaten eines Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.Geburt">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die unveränderten Daten zur Geburt mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zur Geburt des Kirchenmitglieds mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xmeld:type.Geburt"/>
+                                    <xs:element name="nachher" type="xmeld:type.Geburt"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="gesetzlicherVertreter" minOccurs="0" maxOccurs="8">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten zu einem gesetzlichen Vertreter eines Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.Kirche.GesetzlicherVertreter">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die unveränderten Daten zum gesetzlichen Vertreter mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="hinzukommend" type="xmeld:type.Kirche.GesetzlicherVertreter">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird ein hinzukommender gesetzlicher Vertreter mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten eines gesetzlichen Vertreters des Kirchenmitglieds mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="identifikation"
+                                                type="xmeld:type.Kirche.IdentifikationGesetzlicherVertreter">
+                                       <xs:annotation>
+                                          <xs:documentation>Identifikation des gesetzlichen Vertreters vor der Fortschreibung.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="vorher" type="xmeld:type.Kirche.GesetzlicherVertreter"/>
+                                    <xs:element name="nachher" type="xmeld:type.Kirche.GesetzlicherVertreter"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="wegfallend">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird ein wegfallender gesetzlicher Vertreter mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="wegfallenderGesetzlicherVertreter"
+                                                type="xmeld:type.Kirche.IdentifikationGesetzlicherVertreter">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird der wegfallende gesetzliche Vertreter identifiziert.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="tagDerBeendigung" minOccurs="0" type="xida:Tagesdatum">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird, sofern vorhanden, das Datum übermittelt, an dem die gesetzliche Vertretung bzw. das Betreuungsverhältnis endet.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="sterbetag" minOccurs="0" type="xmeld:type.Sterbetag">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird das Datum des Sterbetages übermittelt. Ist im Sterbeeintrag für den Zeitpunkt des Todes ein Zeitraum eingetragen (Nr. 31.2 der Allgemeinen Verwaltungsvorschrift zum Personenstandsgesetz (PStG-VwV) in der jeweils gültigen Fassung), so ist hier das zweite (spätere) Datum anzugeben. Ggf. ist der Zeitpunkt des Todes, einer Todeserklärung oder einer gerichtlichen Feststellung der Todeszeit anzugeben.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="geschlecht">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das Geschlecht eines Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.Geschlecht">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das unveränderte Geschlecht mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zum Geschlecht des Kirchenmitglieds mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xmeld:type.Geschlecht"/>
+                                    <xs:element name="nachher" type="xmeld:type.Geschlecht"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="staatsangehoerigkeit"
+                              maxOccurs="4"
+                              type="xmeld:type.StaatsangehoerigkeitOhneUnionsbuergerschaft">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die derzeitige Staatsangehörigkeit des Kirchenmitglieds übermittelt. Besitzt das Kirchenmitglied derzeitig mehrere Staatsangehörigkeiten, so sind alle anzugeben, indem das Element mehrfach übermittelt wird.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="religion">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Zugehörigkeit des Kirchenmitglieds zu einer öffentlich-rechtlichen Religionsgesellschaft mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.Religion">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die unveränderte Religionszugehörigkeit mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zur Religionszugehörigkeit des Kirchenmitglieds mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xmeld:type.Religion"/>
+                                    <xs:element name="nachher" type="xmeld:type.Religion"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="aktuelleWohnung" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird eine Wohnung des Kirchenmitglieds mitgeteilt. Es sind alle derzeitigen Wohnungen des Kirchenmitglieds zu berücksichtigen, auch Nebenwohnungen und Wohnungen außerhalb des Zuständigkeitsbereichs der Meldebehörde. Es sind auch die unveränderten Wohnungen anzugeben.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.Kirche.WohnungMitglied">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine unveränderte Wohnung mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="hinzukommend" type="xmeld:type.Kirche.WohnungMitglied">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine hinzukommende Wohnung mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung einer Wohnung mitgeteilt, zum Beispiel aufgrund eines Statuswechsels oder einer Änderung des Straßennamens der Anschrift.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xmeld:type.Kirche.WohnungMitglied"/>
+                                    <xs:element name="nachher" type="xmeld:type.Kirche.WohnungMitglied"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="wegfallend">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine wegfallende Wohnung mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="wegfallendeWohnung" type="xmeld:type.Kirche.WohnungMitglied">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element werden die Daten der wegfallenden Wohnung angegeben.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="datumDesAuszugs" minOccurs="0" type="xida:Tagesdatum">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird das Datum des Auszugs aus der Wohnung übermittelt. Besteht nach dem Auszug aus der Wohnung keine Wohnung mehr im Zuständigkeitsbereich der Meldebehörde, so ist das Auszugsdatum identisch mit dem Wegzugsdatum aus dem Zuständigkeitsbereich der Meldebehörde (siehe auch DSMeld-Blatt 1306).</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="familienstand">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Familienstand eines Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.Kirche.Familienstand">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird der unveränderte Familienstand mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zum Familienstand des Kirchenmitglieds mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xmeld:type.Kirche.Familienstand"/>
+                                    <xs:element name="nachher" type="xmeld:type.Kirche.Familienstand"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="anzahlMinderjaehrigerKinder">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Anzahl minderjähriger Kinder eines Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die unveränderte Anzahl minderjähriger Kinder mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zur Anzahl der minderjährigen Kinder des Kirchenmitglieds mitgeteilt. Falls auswärtige Kinder des Kirchenmitglieds im Melderegister gespeichert sind, sind auch diese zu berücksichtigen.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xs:nonNegativeInteger"/>
+                                    <xs:element name="nachher" type="xs:nonNegativeInteger"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="auskunftssperreLiegtVor">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, ob für das Kirchenmitglied eine Auskunftssperre nach § 51 BMG mit einem Schlüssel 1, 3 oder 11 vorliegt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xs:boolean">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die unveränderte Information ob eine Auskunftssperre vorliegt mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Ändert sich die Tatsache, dass eine Auskunftssperre nach § 51 BMG mit einem Schlüssel 1, 3 oder 11 vorliegt bzw. nicht vorliegt, ist diese Änderung mit diesem Element zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xs:boolean"/>
+                                    <xs:element name="nachher" type="xs:boolean"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="kindNichtmitglied"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.Kirche.ZugangFortschreibungWegfallNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird ein Kind des kirchenmitgliedes übermittelt, das keiner oder einer anderen Religionsgesellschaft angehört. Es sind auch die unveränderten Kinder anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="partnerNichtmitglied"
+                              minOccurs="0"
+                              maxOccurs="2"
+                              type="xmeld:type.Kirche.ZugangFortschreibungWegfallNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird ein Ehegatte oder Lebenspartner des kirchenmitgliedes übermittelt, der keiner oder einer anderen Religionsgesellschaft angehört. Es ist auch ein unveränderter Ehegatte oder Lebenspartner anzugeben. Es dürfen nur dann zwei Elemente partnerNichtMitglied übermittelt werden, wenn eines ein wegfallender Ehegatte oder Lebenspartner und eines ein hinzukommender Ehegatte oder Lebenspartner ist - z. B. nach einer Korrektur des Melderegisters.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternteilNichtmitglied"
+                              minOccurs="0"
+                              maxOccurs="4"
+                              type="xmeld:type.Kirche.ZugangFortschreibungWegfallNichtmitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird ein Elternteil des minderjährigen kirchenmitgliedes übermittelt, die keiner oder einer anderen kirche.oeffentlich_rechtlichen_religionsgesellschaft angehören. Es sind auch die unveränderten Elternteile anzugeben. Es dürfen nur dann mehr als zwei Elemente elternteilNichtMitglied übermittelt werden, wenn gleichzeitig wegfallende und hinzukommende Elternteile übermittelt werden - z. B. nach einer Korrektur des Melderegisters.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ordnungsmerkmal">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal eines Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert" type="xmeld:type.Kirche.Ordnungsmerkmal">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das unveränderte Ordnungsmerkmal mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung des Ordnungsmerkmals mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher" type="xmeld:type.Kirche.Ordnungsmerkmal"/>
+                                    <xs:element name="nachher" type="xmeld:type.Kirche.Ordnungsmerkmal"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="datenNachLandesrecht" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten nach Landesrecht zu einem Kirchenmitglied mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="unveraendert"
+                                       type="xmeld:type.Kirche.DatenNachLandesrechtMitglied">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die unveränderten Daten nach Landesrecht mitgeteilt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="fortschreibung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird eine Fortschreibung der Daten zum kirchenmitglied nach Landesrecht mitgeteilt. Falls zukünftig keine Daten nach Landesrecht mehr vorhanden sind, entfällt das Element nachher. Falls erstmalig Daten nach Landesrecht übermittelt werden, entfällt das Element vorher.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorher"
+                                                minOccurs="0"
+                                                type="xmeld:type.Kirche.DatenNachLandesrechtMitglied"/>
+                                    <xs:element name="nachher"
+                                                minOccurs="0"
+                                                type="xmeld:type.Kirche.DatenNachLandesrechtMitglied"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="letzteFruehereAnschrift"
+                              minOccurs="0"
+                              type="xmeld:type.Kirche.Anschrift.Inland">
+                     <xs:annotation>
+                        <xs:documentation>Es ist die Anschrift der inaktuellen Haupt- oder alleinigen Wohnung im Inland mit dem jüngsten Datum des Auszugs / der Abmeldung zu übermitteln. Anmerkung: Die inaktuelle Haupt- oder alleinige Wohnung kann in derselben Gemeinde liegen, wie die aktuelle Haupt- oder alleinige Wohnung (nach Umzug oder Statuswechsel innerhalb der Gemeinde) oder kann in einer anderen Gemeinde liegen (nach Zuzug aus dem Inland, nach Umzug mit Gemeindewechsel, nach Wiederzuzug aus dem Ausland und nach Statuswechsel über Gemeindegrenzen).</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="kirche.zugang.1603">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung des Zugangs eines Kirchenmitgliedes</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht kann der Zugang eines kirchenmitgliedes der jeweiligen kirche.oeffentlich_rechtlichen_religionsgesellschaft mitgeteilt werden. Diese Nachricht wird versendet von der zuzugs_mb im Falle eines zuzug_inland aus Sicht der zuzugs_mb (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines umzug mit Wechsel des AGS (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle Umzug der Haupt- oder alleinigen Wohnung ohne Wechsel des AGS (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines erstmaligen zuzug_ausland (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines wiederzuzug_ausland (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.religion (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.anschriften mit Änderung des AGS der Haupt- oder alleinigen Wohnung (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines fortschreibung.wohnungsstatuswechsel (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer Rücknahme des Wegzug in das Ausland oder nach Unbekannt (Prozess siehe ). hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer Rücknahme der Stornierung einer Person (Prozess siehe ). hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer Rücknahme eines Sterbefalls (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="sachzusammenhang">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können ein einzelnes Kirchenmitglied oder zwei Kirchenmitglieder im Sachzusammenhang übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="zugehendesKirchenmitglied" maxOccurs="2">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element ist das zugehende kirchenmitglied zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="identifikation.ereignis"
+                                                type="xmeld:type.Identifikation.Ereignis">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="kirchenmitglied" type="xmeld:type.Kirche.Mitglied"/>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="bereitsUebermitteltesKirchenmitglied"
+                                       minOccurs="0"
+                                       type="xmeld:type.Kirche.Mitglied">
+                              <xs:annotation>
+                                 <xs:documentation>Ist das im Sachzusammenhang stehende andere Kirchenmitglied bereits in der Zugangsgemeinde (AGS) gemeldet, so sind in diesem Element die Daten des bereits gemeldeten Ehegatten oder Lebenspartners zu liefern. In diesem Fall darf nur ein Element zugehendesKirchenmitglied übermittelt werden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="anlass" type="xmeld:Code.XMeld.Datenuebermittlungsanlaesse">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Anlass für den Zugang des Kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="kirche.wegfall.1604">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung des Wegfalls eines Kirchenmitgliedes</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht kann der kirche.wegfall_eines_kirchenmitgliedes der jeweiligen kirche.oeffentlich_rechtlichen_religionsgesellschaft mitgeteilt werden. Diese Nachricht wird versendet von der hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines zuzug_inland bezogen auf die wegzugs_mb (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines umzug mit Wechsel des AGS (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines wegzug_ausland (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines wegzug_unbekannt (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.religion (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.anschriften mit Änderung des AGS der Haupt- oder alleinigen Wohnung (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines fortschreibung.wohnungsstatuswechsel (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines fortschreibung.sterbefall (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer stornierung_person (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="kirchenmitglied" type="xmeld:type.Kirche.Mitglied">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element sind die Daten des Kirchenmitglieds zu übermitteln, wie sie vor dem Wegfall des Kirchenmitglieds im Melderegister gespeichert waren.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identifikation.ereignis"
+                              type="xmeld:type.Identifikation.Ereignis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anlass" type="xmeld:Code.XMeld.Datenuebermittlungsanlaesse">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Anlass für den Wegfall des kirchenmitglieds mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="weitereAngaben" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Falls zu dem Anlass des Wegfalls weitere Informationen anzugeben sind, werden sie in diesem Element mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="wegzug">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="wegzugsanschrift"
+                                                type="xmeld:type.Kirche.AnschriftMelderechtMitDruckbildUndSperrvermerk">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird die zukünftige Anschrift der Haupt- oder alleinigen Wohnung des Kirchenmitglieds im Inland oder die Auslandsanschrift übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="datumDesAuszugs" minOccurs="0" type="xida:Tagesdatum">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird das Datum des Auszugs aus der Wohnung übermittelt. Besteht nach dem Auszug aus der Wohnung keine Wohnung mehr im Zuständigkeitsbereich der Meldebehörde, so ist das Auszugsdatum identisch mit dem Wegzugsdatum aus dem Zuständigkeitsbereich der Meldebehörde (siehe auch DSMeld-Blatt 1306).</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="datumDesWohnungsstatuswechsels"
+                                                minOccurs="0"
+                                                type="xida:Tagesdatum">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird das Datum des Wirksamwerdens des neuen Wohnungsstatus übermittelt (siehe DSMeld-Blatt 1301a).</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="sterbefall" type="xmeld:type.Tod">
+                              <xs:annotation>
+                                 <xs:documentation>Falls das wegfallende kirchenmitglied verstorben ist, sind hier die Informationen zum Tod mitzuteilen.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="kirche.bildungSachzusammenhang.1605">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung der Bildung eines Sachzusammenhangs</title>
+         </xs:appinfo>
+         <xs:documentation>Werden zwei Kirchenmitglieder derselben Religionsgesellschaft in einer Gemeinde als Ehegatten oder Lebenspartner verknüpft, so übermittelt die Meldebehörde einmalig die Bildung des Sachzusammenhangs zwischen den beiden Ehegatten oder Lebenspartnern. Diese Nachricht wird versendet von der hauptwohnungs_mb oder alleinigewohnungs_mb im Falle einer fortschreibung.ehegatten_lebenspartner (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="identifikation.ereignis"
+                              type="xmeld:type.Identifikation.Ereignis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sachzusammenhang">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann der Sachzusammenhang hergestellt werden.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="mitglied"
+                                       minOccurs="2"
+                                       maxOccurs="2"
+                                       type="xmeld:type.Kirche.Mitglied">
+                              <xs:annotation>
+                                 <xs:documentation>In diesem Element sind die Daten der kirchenmitglieder anzugeben, zwischen denen der Sachzusammenhang hergestellt werden soll.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="kirche.zugehoerigkeit.1610">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Erklärung der Zugehörigkeit zu einer öffentlich-rechtlichen Religionsgesellschaft</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt eine öffentlich-rechtliche Religionsgesellschaft mit, dass ein Einwohner in der kommunalen Gemeinde der Haupt- oder alleinigen Wohnung Kirchenmitglied dieser öffentlich-rechtlichen Religionsgesellschaft ist. Diese Nachricht wird versendet von der kirche.oeffentlich_rechtlichen_religionsgesellschaft im Falle einer Erklärung der Zugehörigkeit zu einer kirche.oeffentlich_rechtlichen_religionsgesellschaft (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="identifikation" type="xmeld:type.identifikation.personanschrift"/>
+                  <xs:element name="identifikation.ereignis"
+                              type="xmeld:type.Identifikation.Ereignis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="religion" type="xmeld:type.Religion">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Religionsschlüssel mitgeteilt, der dem Kirchenmitglied zugeordnet werden soll.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eintrittsdatum" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Eintrittsdatum in die Religionsgesellschaft übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kirchlicheStelle" type="xmeld:type.Kirche.ErreichbareStelle">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die kirchliche Stelle übermittelt, die die Zugehörigkeitserklärung ausgelöst hat und, die für Nachfragen zur Zugehörigkeitserklärung zuständig ist ( z.B. eine Pfarrei, Kirchengemeinde oder Kirchengemeindeverband).</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="uebergeordneteStelle"
+                              minOccurs="0"
+                              type="xmeld:type.Kirche.ErreichbareStelle">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die kirchliche Stelle übermittelt, die der kirchlichen Stelle, die die Zugehörigkeitserkärung ausgelöst hat, übergeordnet ist. Es ist die höchste Hierarchiestufe zu verwenden, also z. B. Bistum oder Landeskirche.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="hintergrundinformation"
+                              type="xmeld:Code.Kirche.Hintergrundinformation">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Hintergrundinformationen für den Sachbearbeiter zur Erklärung der Zugehörigkeit zu einer öffentlich-rechtlichen Religionsgesellschaft übermittelt. Diese können ggf. auch in der Kommunikation mit der betroffenen Person hilfreich sein.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="kirche.austritt.1612">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Erklärung des Austritts aus einer öffentlich-rechtlichen Religionsgesellschaft</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt eine öffentlich-rechtliche Religionsgesellschaft mit, dass ein Kirchenmitglied aus der öffentlich-rechtlichen Religionsgesellschaft ausgetreten ist. Die Nachricht darf nur versendet werden, sofern das jeweilige Landesrecht dies vorsieht. Diese Nachricht wird versendet von der kirche.oeffentlich_rechtlichen_religionsgesellschaft im Falle einer Erklärung des Austritts aus einer öffentlich-rechtlichen Religionsgesellschaft (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="identifikation">
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="identifikationsdaten"
+                                       type="xmeld:type.identifikation.personanschrift">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Identifikationsdaten der betroffenen Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ordnungsmerkmal" type="xmeld:type.Kirche.Ordnungsmerkmal">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal der betroffenen Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="religion" type="xmeld:type.Religion">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Religionsschlüssel des Kirchenmitglieds vor dessen Austritt aus der öffentlich-rechtlichen Religionsgesellschaft übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="austrittsdatum" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das Austrittsdatum aus der öffentlich-rechtlichen Religionsgesellschaft übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kirchlicheStelle" type="xmeld:type.Kirche.ErreichbareStelle">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die kirchliche Stelle übermittelt, die die Austrittserklärung ausgelöst hat und die für Nachfragen zur Zugehörigkeitserklärung zuständig ist (z.B. eine Pfarrei, Kirchengemeinde oder Kirchengemeindeverband).</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="uebergeordneteStelle"
+                              minOccurs="0"
+                              type="xmeld:type.Kirche.ErreichbareStelle">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die kirchliche Stelle übermittelt, die der kirchlichen Stelle, die die Austrittserklärung ausgelöst hat, übergeordnet ist. Es ist die höchste Hierarchiestufe zu verwenden, also z. B. Bistum oder Landeskirche.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identifikation.ereignis"
+                              type="xmeld:type.Identifikation.Ereignis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

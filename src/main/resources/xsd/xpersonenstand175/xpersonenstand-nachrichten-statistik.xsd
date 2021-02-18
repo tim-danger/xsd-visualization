@@ -1,0 +1,715 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="Nachricht.StA2Stat" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse bildet den abstrakten, allgemeinen Typ einer Nachricht von einem Standesamt an die Statistik.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+            <xs:sequence>
+               <xs:element name="beurkundungsjahr" type="xs:gYear">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Jahr der Beurkundung übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="beurkundungsmonat" type="xs:gMonth">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Monat der Beurkundung übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="einzelfallidentifikator" type="xpersonenstand:Quelleintrag">
+                  <xs:annotation>
+                     <xs:documentation>Als Einzelfallidentifikator wird hier die Registereintragsidentifikation mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2Stat.Hinterbliebener">
+      <xs:annotation>
+         <xs:documentation>Dieser Container enthält die Daten über den überlebenden Ehegatten oder Lebenspartner.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Statistik.Hinterbliebener">
+            <xs:sequence>
+               <xs:element name="ueberlebenderGeschlecht" type="xpersonenstand:Code.Geschlecht">
+                  <xs:annotation>
+                     <xs:documentation>Hier kann das Geschlecht des überlebenden Ehegatten oder Lebenspartners mitgeteilt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ueberlebenderGeburtsdatum"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier kann das Geburtsdatum des überlebenden Ehegatten oder Lebenspartners mitgeteilt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2Stat.Kind">
+      <xs:annotation>
+         <xs:documentation>Dieser Container enthält alle Daten über das neugeborene Kind.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Statistik.Kind">
+            <xs:sequence>
+               <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Geburtsdatum des Kindes mitgeteilt. Handelt es sich um ein Findelkind mit unbekanntem Geburtsdatum, so wird das Geburtsdatum amtlich festgelegt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                  <xs:annotation>
+                     <xs:documentation>Dieses Feld enthält das Geschlecht des Kindes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="totgeburt" minOccurs="0" fixed="true" type="xs:boolean">
+                  <xs:annotation>
+                     <xs:documentation>Im Falle einer Totgeburt wird hier true übermittelt. Es entspricht dem Datenfeld 1090 Anlage 1 der PStV.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="auslandsgeburt" type="xs:boolean">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird übermittelt, ob es sich um eine Auslandsgeburt handelt. true = Auslandsgeburt false = Inlandsgeburt</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="staatsangehoerigkeitserwerb"
+                           minOccurs="0"
+                           fixed="true"
+                           type="xs:boolean">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Staatsangehörigkeitserwerb des Kindes nach § 4 Abs. 3 StAG mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2Stat.Mehrlingsgeburt">
+      <xs:annotation>
+         <xs:documentation>Dieser Container enthält alle Daten zur Beschreibung einer Mehrlingsgeburt. Wenn es sich um eine Einzelgeburt handelt, wird dieser Container nicht übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Statistik.Mehrlingsgeburt">
+            <xs:sequence>
+               <xs:element name="anzahlKnaben" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Knaben übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="anzahlMaedchen" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Mädchen übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="anzahlUnbestimmt" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Kinder ohne bestimmbares Geschlecht übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="registernummerMehrling"
+                           minOccurs="0"
+                           type="xpersonenstand:Quelleintrag">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird bei Mehrlingsgeburten, für einen Rückverweis auf vorhergehende Beurkundungen im gleichen Standesamt, die Registereintragsidentifikation des vorhergehenden Geburtseintrages der Mehrlingsgeburt mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2Stat.Mutter">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse bildet die Grundlage zur Übermittlung von statistischen Daten zur Mutter.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Statistik.Mutter">
+            <xs:sequence>
+               <xs:element name="anschrift" type="xpersonenstand:Statistik.Anschrift">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Anschrift der Mutter mitgeteilt. Bei Findelkindern wird die amtlich zugewiesene Anschrift mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsdatum"
+                           minOccurs="0"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Geburtsdatum der Mutter mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsort" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Geburtsort der Mutter mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsstaat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Geburtsstaat der Mutter mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="totgeburtenDerMutter" type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Dieses Feld enthält die Anzahl aller Totgeburten der Mutter inklusive des jetzt evtl. tot geborenen Kindes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="kinderDerMutter" type="xs:positiveInteger">
+                  <xs:annotation>
+                     <xs:documentation>Dieses Feld enthält die Anzahl aller lebend und tot geborenen Kinder der Mutter inklusive des jetzt geborenen Kindes.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="vorangegangeneGeburt"
+                           minOccurs="0"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Datum der letzten vorangegangenen Geburt eines Kindes der Mutter des neugeborenen Kindes mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="staatsangehoerigkeit"
+                           minOccurs="0"
+                           type="xpersonenstand:Code.Staatsangehoerigkeit">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Staatsangehörigkeit der Mutter mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2Stat.Partner">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse bildet die Grundlage zur Übermittlung von statistischen Daten zum Ehegatten oder Lebenspartner.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Statistik.Partner">
+            <xs:sequence>
+               <xs:element name="anschrift" type="xpersonenstand:Statistik.Anschrift">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Anschrift der Hauptwohnung eines Ehegatten oder Lebenspartners zum Zeitpunkt der Eheschließung mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Geburtsdatum des Ehegatten oder Lebenspartners mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="bisherigerFamilienstand"
+                           type="xpersonenstand:Code.FamilienstandPersonenstandswesen">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Familienstand eines Ehegatten oder eines Lebenspartners vor der Eheschließung oder vor der Begründung einer Lebenspartnerschaft mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="staatsangehoerigkeit"
+                           type="xpersonenstand:Code.Staatsangehoerigkeit">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Staatsangehörigkeit des Ehegatten oder Lebenspartners zu statistischen Zwecken mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Geschlecht des Ehegatten oder Lebenspartners zu statistischen Zwecken mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2Stat.Verstorbener">
+      <xs:annotation>
+         <xs:documentation>Dieser Container enthält die Daten über den Verstorbenen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Statistik.Verstorbener">
+            <xs:sequence>
+               <xs:element name="anschrift"
+                           minOccurs="0"
+                           type="xpersonenstand:Statistik.Anschrift">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Anschrift des Verstorbenen mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Geschlecht des Verstorbenen mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsdatum"
+                           minOccurs="0"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Geburtsdatum des Verstorbenen mitgeteilt. Handelt es sich um ein Findelkind mit unbekannten Geburtsdatum, so wird das Geburtsdatum amtlich festgelegt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsort" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Geburtsort des Verstorbenen mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsstaat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Geburtsstaat des Verstorbenen mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="sterbedatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Sterbedatum des Verstorbenen mitgeteilt. Bei einem Sterbezeitraum wird der späteste Zeitpunkt mitgeteilt (mit Sicherheit tot).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="familienstand"
+                           minOccurs="0"
+                           type="xpersonenstand:Code.FamilienstandPersonenstandswesen">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Familienstand des Verstorbenen mitgeteilt. Sofern kein anderer Familienstand vorliegt, wird für Personen unter 16 Jahren der Familienstand ledig mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="staatsangehoerigkeit"
+                           minOccurs="0"
+                           type="xpersonenstand:Code.Staatsangehoerigkeit">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Staatsangehörigkeit des Verstorbenen mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="stA2Stat.Geburt.051010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 2 Abs. 3 und 5 BevStatG i. V. m. § 61 PStV</rechtsgrundlage>
+            <title>Mitteilung über eine Geburt an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird zur Mitteilung einer Erstbeurkundung einer Geburt verwendet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2Stat">
+               <xs:sequence>
+                  <xs:element name="kind" type="xpersonenstand:StA2Stat.Kind">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zu dem neugeborenen Kind mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="vater" minOccurs="0" type="xpersonenstand:Statistik.Vater">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, werden hier die Daten zum Vater mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mutter" minOccurs="0" type="xpersonenstand:StA2Stat.Mutter">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, werden hier die Daten zur Mutter mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternVerheiratet" minOccurs="0" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird mitgeteilt, ob die Eltern zum Zeitpunkt der Geburt miteinander verheiratet waren. true = miteinander verheiratet false = nicht miteinander verheiratet Wenn dieser Sachverhalt nicht bekannt ist, wird dieses Feld nicht übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessungsdatum"
+                              minOccurs="0"
+                              type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier das Eheschließungsdatum der Eltern mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kinderDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier übermittelt, als wievieltes Kind der Ehe dieses Kind geboren wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="totgeburtenDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier die Anzahl der in dieser Ehe totgeborenen Kinder übermittelt, inklusive des jetzt totgeborenen Kindes.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mehrlingsgeburt"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2Stat.Mehrlingsgeburt">
+                     <xs:annotation>
+                        <xs:documentation>Dieser Datentyp enthält Informationen zu einer Mehrlingsgeburt. Wenn es sich um eine Einzelgeburt handelt, wird dieser Datentyp nicht übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kindVerheirateterMuetter" minOccurs="0" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird mitgeteilt, ob es sich bei den Eltern um miteinander verheiratete Frauen handelt. true = Eltern sind zwei miteinander verheiratete Frauen false = Eltern sind nicht zwei miteinander verheiratete Frauen Wenn dieser Sachverhalt nicht bekannt ist, wird dieses Feld nicht übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2Stat.Hinweis.051020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 4 Abs. 3 StAG und § 2 Abs. 4 und 6 BevStatG</rechtsgrundlage>
+            <title>Mitteilung über die Staatsangehörigkeit nach § 4 Abs. 3 StAG an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird im Zusammenhang mit der Erstbeurkundung einer Geburt mitgeteilt, nach Eintragung eines Hinweises zum Staatsangehörigkeitserwerb nach § 4 Abs. 3 StAG.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2Stat">
+               <xs:sequence>
+                  <xs:element name="staatsangehoerigkeitserwerb" fixed="true" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Staatsangehörigkeitserwerb des Kindes nach § 4 Abs. 3 StAG mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2Stat.Geburt.051100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 2 Abs. 4 und 6 BevStatG</rechtsgrundlage>
+            <title>Mitteilung über die Berichtigung eines Geburtseintrags an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird zur Berichtigung einer Mitteilung einer Erstbeurkundung einer Geburt verwendet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2Stat">
+               <xs:sequence>
+                  <xs:element name="kinderDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann berichtigt werden, als wievieltes Kind der Ehe dieses Kind geboren wurde. Sofern die übermittelte Anzahl falsch war und gar kein Kind während des Bestehens der Ehe geboren wurde, wird hier der Wert 0 übermittelt. Sofern eine vorher übermittelte Zahl sich nachträglich als unbekannt heraus stellt, wird der Wert 999 übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="totgeburtenDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Anzahl der in dieser Ehe totgeborenen Kinder berichtigt, inklusive des jetzt totgeborenen Kindes. Sofern die übermittelte Anzahl falsch war und gar keine Totgeburt während des Bestehens der Ehe erfolgte, wird hier der Wert 0 übermittelt. Sofern eine vorher übermittelte Zahl sich nachträglich als unbekannt heraus stellt, wird der Wert 999 übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternVerheiratet" minOccurs="0" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird berichtigt, ob die Eltern zum Zeitpunkt der Geburt miteinander verheiratet waren. true = miteinander verheiratet false = nicht miteinander verheiratet</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessungsdatum"
+                              minOccurs="0"
+                              type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird das Eheschließungsdatum der Eltern berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kind" minOccurs="0" type="xpersonenstand:Statistik.Kind">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zu dem neugeborenen Kind berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mutter" minOccurs="0" type="xpersonenstand:Statistik.Mutter">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur Mutter berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="vater" minOccurs="0" type="xpersonenstand:Statistik.Vater">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zum Vater berichtigt. Sollte sich im Nachhinein herausstellen, dass kein Vater bekannt ist, so wird die Berichtigung konventionell mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mehrlingsgeburt"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2Stat.Mehrlingsgeburt">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur Mehrlingsgeburt berichtigt. Sollte sich im Nachhinein herausstellen, dass keine Mehrlingsgeburt vorliegt, so wird dies konventionell mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kindVerheirateterMuetter" minOccurs="0" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird mitgeteilt, ob es sich bei den Eltern um miteinander verheiratete Frauen handelt. true = Eltern sind zwei miteinander verheiratete Frauen false = Eltern sind nicht zwei miteinander verheiratete Frauen Wenn dieser Sachverhalt nicht bekannt ist, wird dieses Feld nicht übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2Stat.Ehe.052010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 2 Abs. 2 und 5 BevStatG i. V. m. § 61 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Eheschließung an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird zur Mitteilung einer Erstbeurkundung einer Eheschließung verwendet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2Stat">
+               <xs:sequence>
+                  <xs:element name="ehegatte2" type="xpersonenstand:StA2Stat.Partner">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zum zweiten Ehegatten mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte1" type="xpersonenstand:StA2Stat.Partner">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zum ersten Ehegatten mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessungsdatum" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird das Datum der Eheschließung mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="gemeinsameKinder" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Feld enthält die Anzahl der von den Eheschließenden in die Ehe eingebrachten gemeinsamen Kinder.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessungAusland" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird mitgeteilt, ob es sich um eine im Ausland geschlossene Ehe handelt. true = Eheschließung im Ausland false = Eheschließung in Deutschland</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2Stat.Ehe.052100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 2 Abs. 2 und 6 BevStatG</rechtsgrundlage>
+            <title>Mitteilung über die Berichtigung eines Eheeintrags an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird zur Berichtigung einer Mitteilung einer Erstbeurkundung einer Eheschließung verwendet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2Stat">
+               <xs:sequence>
+                  <xs:element name="eheschliessungsdatum" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird das Datum der Eheschließung berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessungAusland" minOccurs="0" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird berichtigt, ob es sich um eine im Ausland geschlossene Ehe handelt. true = Eheschließung im Ausland false = Eheschließung in Deutschland</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="gemeinsameKinder" minOccurs="0" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Anzahl der von den Eheschließenden in die Ehe eingebrachten gemeinsamen Kinder berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte1"
+                              minOccurs="0"
+                              type="xpersonenstand:Statistik.Partner">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zum ersten Ehegatten berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte2"
+                              minOccurs="0"
+                              type="xpersonenstand:Statistik.Partner">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zum zweiten Ehegatten berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2Stat.Sterbefall.054010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 2 Abs. 4 und 5 BevStatG i. V. m. § 61 PStV</rechtsgrundlage>
+            <title>Mitteilung über einen Sterbefall an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird zur Mitteilung von Sterbefällen verwendet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2Stat">
+               <xs:sequence>
+                  <xs:element name="verstorbener" type="xpersonenstand:StA2Stat.Verstorbener">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zum Verstorbenen mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="saeuglingsalter" minOccurs="0" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Lebensdauer eines verstorbenen Säuglings bei einer Lebensdauer unter 24 Stunden in Stunden mitgeteilt. Bei älteren Kindern entfällt dieses Feld.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="auslandssterbefall" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird mitgeteilt, ob es sich um einen Auslandssterbefall handelt. true = Sterbefall im Ausland false = Sterbefall in Deutschland</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sterbestaat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                     <xs:annotation>
+                        <xs:documentation>Sofern es sich um einen Auslandssterbefall handelt, wird hier der Staat mitgeteilt, in dem der Auslandssterbefall eingetreten ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ueberlebenderEhegatte"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2Stat.Hinterbliebener">
+                     <xs:annotation>
+                        <xs:documentation>Hier können Angaben zum überlebenden Ehegatten oder Lebenspartners mitgeteilt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2Stat.Sterbefall.054100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 2 Abs. 5 und 6 BevStatG</rechtsgrundlage>
+            <title>Mitteilung über die Berichtigung eines Sterbeeintrags an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird zur Berichtigung von Mitteilung von Sterbefällen verwendet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2Stat">
+               <xs:sequence>
+                  <xs:element name="auslandssterbefall" minOccurs="0" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Mitteilung, ob es sich um einen Auslandssterbefall handelt, berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sterbestaat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Staat berichtigt, in dem der Auslandssterbefall eingetreten ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="verstorbener"
+                              minOccurs="0"
+                              type="xpersonenstand:Statistik.Verstorbener">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zum Verstorbenen berichtigt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ueberlebenderEhegatte"
+                              minOccurs="0"
+                              type="xpersonenstand:Statistik.Hinterbliebener">
+                     <xs:annotation>
+                        <xs:documentation>Hier können Angaben zum überlebenden Ehegatten oder Lebenspartner berichtigt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="saeuglingsalter" minOccurs="0" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann das Säuglingsalter zum Säuglingssterbefall berichtigt werden. Sollte sich im Nachhinein herausstellen, dass das Säuglingsalter versehentlich mitgeteilt wurde, so wird dies konventionell mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2Stat.Abschluss.055010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Statistik</empfaenger>
+            <rechtsgrundlage>§ 2 Abs. 2 bis 5 BevStatG</rechtsgrundlage>
+            <title>Monatsmeldung und Jahresabschluss an die Bevölkerungsstatistik</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird zur Mitteilung der Vollständigkeit der Registereintragsnummern verwendet. Rückfragen zu den Abschlüssen werden konventionell behandelt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="beurkundungsjahr" type="xs:gYear">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird das Beurkundungsjahr des Abschlusses mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beurkundungsmonat" minOccurs="0" type="xs:gMonth">
+                     <xs:annotation>
+                        <xs:documentation>Sofern es sich um einen Monatsabschluss handelt, wird hier der Monat mitgeteilt. Bei einem Jahresabschluss wird dieses Element nicht mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="registerart" type="xpersonenstand:Code.Registerart">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Registerart mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="jahresabschluss"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Sofern es sich um einen Jahresabschluss handelt, wird true mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eintragsnummerNichtVorhanden"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden alle seit Jahresbeginn nicht verwendeten Eintragsnummern mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eintragsnummerMin" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die kleinste seit Jahresbeginn verwendete Eintragsnummer mitgeteilt. Es wird der Wert 0 mitgeteilt, sofern seit Jahresbeginn keine Beurkundung stattgefunden hat.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eintragsnummerMax" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die größte seit Jahresbeginn verwendete Eintragsnummer mitgeteilt. Es wird der Wert 0 mitgeteilt, sofern seit Jahresbeginn keine Beurkundung stattgefunden hat.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

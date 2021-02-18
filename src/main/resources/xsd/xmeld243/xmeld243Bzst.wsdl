@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Bzst.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Bzst"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Bzst.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst zur Datenübermittlung ans BZSt gemäß OSCI-XMeld</title></head><body><h1>Dienst zur Datenübermittlung ans BZSt gemäß OSCI-XMeld</h1><p>Dieses WSDL-Dokument beschreibt den Dienst zur Datenübermittlung ans BZSt gemäß OSCI-XMeld (siehe: <link>http://www.osci.de</link>).</p><p>Folgende Datenübermittlungs-Nachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeDatenuebermittlung</i> zulässig:<ul><ul>
+            <li>xmeld:datenuebermittlung.anforderungIdNr.0500</li>
+            <li>xmeld:datenuebermittlung.aenderungSteuerpflichtiger.0502</li>
+            <li>xmeld:datenuebermittlung.zustaendigkeitSteuerpflichtiger.0504</li>
+            <li>xmeld:datenuebermittlung.stornierungperson.0507</li>
+            <li>xmeld:datenuebermittlung.zustaendigkeit.0509</li>
+            <li>xmeld:datenuebermittlung.endeZustaendigkeitSteuerpflichtiger.0510</li>
+            <li>xmeld:datenuebermittlung.nichtzustaendigkeit.0511</li>
+            <li>xmeld:datenuebermittlung.zustaendigkeitnachdublette.0512</li>
+            <li>xmeld:datenuebermittlung.nichtMehrZustaendig.0513</li>
+            <li>xmeld:datenuebermittlung.mitteilungAufUndAbspaltung.0515</li>
+            <li>xmeld:datenuebermittlung.anfrageidnrauswaertigerehegattelebenspartner.0518</li>
+            <li>xmeld:datenuebermittlung.nichtZustaendigFuerKonfliktklaerung.0521</li>
+            <li>xmeld:datenuebermittlung.datenNachAenderungIdNr.0523</li>
+         </ul></ul></p><p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der zwölfstellige DVDV-Schlüssel "490010010000 "; der zu verwendende Präfix lautet "<b>dbs:</b>". </p><p>Dienstanbieter ist das Bundeszentralamt für Steuern (BZSt), DVDV-Behördenkategorie "<b>Bundesbehörde</b>". Zulässige Dienstnutzer sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". Anfragen ans DVDV vom Typ <i>verify.category</i> sollten daher die Zuordnung zu dieser Kategorie prüfen lassen.</p></body></html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <wsdl:types>
+      <xs:schema xmlns="http://www.osci.de/xmeld243"
+                 targetNamespace="http://www.osci.de/xmeld243/xmeld243Bzst.wsdl">
+         <xs:import namespace="http://www.osci.de/xmeld243"
+                    schemaLocation="http://www.osci.de/xmeld243/xmeld-nachrichten-datenuebermittlung.xsd"/>
+         <xs:complexType name="bzstSchemata">
+            <xs:choice>
+               <xs:element name="datenuebermittlung.aenderungSteuerpflichtiger.0502"/>
+               <xs:element name="datenuebermittlung.anforderungIdNr.0500"/>
+               <xs:element name="datenuebermittlung.anfrageidnrauswaertigerehegattelebenspartner.0518"/>
+               <xs:element name="datenuebermittlung.datenNachAenderungIdNr.0523"/>
+               <xs:element name="datenuebermittlung.endeZustaendigkeitSteuerpflichtiger.0510"/>
+               <xs:element name="datenuebermittlung.mitteilungAufUndAbspaltung.0515"/>
+               <xs:element name="datenuebermittlung.nichtMehrZustaendig.0513"/>
+               <xs:element name="datenuebermittlung.nichtZustaendigFuerKonfliktklaerung.0521"/>
+               <xs:element name="datenuebermittlung.nichtzustaendigkeit.0511"/>
+               <xs:element name="datenuebermittlung.stornierungperson.0507"/>
+               <xs:element name="datenuebermittlung.zustaendigkeit.0509"/>
+               <xs:element name="datenuebermittlung.zustaendigkeitSteuerpflichtiger.0504"/>
+               <xs:element name="datenuebermittlung.zustaendigkeitnachdublette.0512"/>
+            </xs:choice>
+         </xs:complexType>
+      </xs:schema>
+   </wsdl:types>
+   <message name="bzstNachricht">
+      <part name="bzstNachricht" type="tns:bzstSchemata"/>
+      <part name="optionaleNachricht" type="xs:anyType"/>
+   </message>
+   <portType name="osciBzstInterface">
+      <operation name="sendeBzst">
+         <input message="tns:bzstNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciBzstInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeBzst">
+         <osci:operation communicationType="one-way-active" subject="XMeld 2.4.3 Bzst"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:bzstNachricht"/>
+               </osci:part>
+            </osci:container>
+            <osci:container signatureLevel="none" encrypted="false" required="false">
+               <osci:part>
+                  <osci:content part="tns:optionaleNachricht"/>
+               </osci:part>
+            </osci:container>
+         </input>
+      </operation>
+   </binding>
+   <service name="osciBzstService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciBzstInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>required</tpl:use> Dieser Port ist nicht optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciBzstTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

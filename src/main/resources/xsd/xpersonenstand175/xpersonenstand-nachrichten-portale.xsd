@@ -1,0 +1,2133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xibehoerde="http://www.osci.de/xinneres/behoerde/4"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xikomm="http://www.osci.de/xinneres/kommunikation/3"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/behoerde/4/xinneres-behoerde.xsd"
+              namespace="http://www.osci.de/xinneres/behoerde/4"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/kommunikation/3/xinneres-kommunikation.xsd"
+              namespace="http://www.osci.de/xinneres/kommunikation/3"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="Anz2StA.Elternteil">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zum Vater in der Voranzeige</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können in der Voranzeige einer Geburt alle Angaben zu dem Elternteil übermittelt werden, das das Kind nicht geboren hat.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Anz2StA.Person">
+            <xs:sequence>
+               <xs:element name="anschrift"
+                           minOccurs="0"
+                           type="xpersonenstand:Portal2StA.Anschrift">
+                  <xs:annotation>
+                     <xs:documentation>Angaben zur Wohnanschrift</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="kontaktdaten"
+                           minOccurs="0"
+                           maxOccurs="unbounded"
+                           type="xikomm:Kommunikation"/>
+               <xs:element name="geburtseintragBehoerde"
+                           minOccurs="0"
+                           type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Der Name der Behörde, in der die Geburt des Elternteils beurkundet wurde.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="erstbeurkundungsjahr" minOccurs="0" type="xs:gYear">
+                  <xs:annotation>
+                     <xs:documentation>Das Jahr der Erstbeurkundung der Geburt des Elternteils.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtseintragNummer"
+                           minOccurs="0"
+                           type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Die laufende Eintragsnummer der Geburt des Elternteils.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Anz2StA.Geburt.AngabenEreignis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zu einem Ereignis im Rahmen der Anzeige einer Geburt</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp dient zur Übermittlung von Angaben zu einem Ereignis im Rahmen einer Anzeige einer Geburt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ort" type="xpersonenstand:Ereignisort">
+            <xs:annotation>
+               <xs:documentation>Dieses Element enthält den Ort des Ereignisses.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="tag" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Dieses Element enthält den Tag des Ereignisses.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Anz2StA.Geburt.Elternteil.Basis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Basisangaben eines Elternteils für die Geburtsanzeige</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp dient zur Übermittlung von Basisangaben zu Elternteilen im Rahmen der Anzeige der Geburt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="namen" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Dieses Element enthält die Namen des Elternteils.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Anz2StA.Geburt.Elternteil.Erweitert">
+      <xs:annotation>
+         <xs:documentation>Dieser Datentyp dient zur Übermittlung von weiteren Angaben zu Elternteilen im Rahmen der Anzeige der Geburt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Anz2StA.Geburt.Elternteil.Basis">
+            <xs:sequence>
+               <xs:element name="religion" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Dieses Element enthält die Zugehörigkeit des Elternteils zu einer Religionsgemeinschaft, die Körperschaft des öffentlichen Rechts ist.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburt"
+                           minOccurs="0"
+                           type="xpersonenstand:Anz2StA.Geburt.AngabenEreignis">
+                  <xs:annotation>
+                     <xs:documentation>Dieses Element enthält Angaben zur Geburt des Elternteils.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                  <xs:annotation>
+                     <xs:documentation>Dieses Element enthält das Geschlecht des Elternteils.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="staatsangehoerigkeit"
+                           type="xpersonenstand:Code.Staatsangehoerigkeit">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Staatsangehörigkeit des Elternteils übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="weitereStaatsangehoerigkeit"
+                           minOccurs="0"
+                           type="xpersonenstand:Code.Staatsangehoerigkeit">
+                  <xs:annotation>
+                     <xs:documentation>Falls ein Elternteil über mehr als eine Staatsangehörigkeit verfügt, so ist hier eine weitere Staatangehörigkeit zu übermitteln. Das Standesamt kann hiermit den Beratungsbedarf feststellen.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="anschrift"
+                           minOccurs="0"
+                           type="xpersonenstand:Anschrift.Inland">
+                  <xs:annotation>
+                     <xs:documentation>Dieses Element enthält die Anschrift des Elternteils. Diese wird zur Erfüllung von Mitteilungspflichten benötigt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Anz2StA.Geburt.Kind">
+      <xs:annotation>
+         <xs:documentation>Dieser Datentyp dient zur Übermittlung der Angaben zu einem neugeborenen Kind im Rahmen der Anzeige der Geburt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Dieses Element enthält das Geschlecht des Kindes.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="namen"
+                     minOccurs="0"
+                     type="xpersonenstand:PersonName.Veraenderung">
+            <xs:annotation>
+               <xs:documentation>Dieses Element enthält die Namen des Kindes. Der Vorname des Kindes wird im Feld "vorname" gespeichert, der Geburtsname des Kindes im Feld "familienname". Das Feld "geburtsname" darf nicht befüllt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Anz2StA.Mutter">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zur Mutter in der Voranzeige</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp fasst alle Angaben zur Mutter zusammen, die in der Voranzeige einer Geburt übermittelt werden können. Gemäß § 1591 BGB ist Mutter eines Kindes die Frau, die es geboren hat.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Anz2StA.Person">
+            <xs:sequence>
+               <xs:element name="familienstand" minOccurs="0" type="xoev-lc:String.Latin"/>
+               <xs:element name="kinderDerMutter" minOccurs="0" type="xs:positiveInteger">
+                  <xs:annotation>
+                     <xs:documentation>Die Anzahl aller lebend und tot geborenen Kinder der Mutter inklusive des jetzt geborenen Kindes</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="vorangegangeneGeburt"
+                           minOccurs="0"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Das Datum der letzten vorangegangenen Geburt eines Kindes der Mutter</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="anschrift"
+                           minOccurs="0"
+                           type="xpersonenstand:Portal2StA.Anschrift">
+                  <xs:annotation>
+                     <xs:documentation>Angaben zur Wohnanschrift</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="kontaktdaten"
+                           maxOccurs="unbounded"
+                           type="xikomm:Kommunikation"/>
+               <xs:element name="totgeburtenDerMutter"
+                           minOccurs="0"
+                           type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Die Anzahl aller Totgeburten der Mutter inklusive des jetzt evtl. tot geborenen Kindes</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtseintragBehoerde"
+                           minOccurs="0"
+                           type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Der Name der Behörde, in der die Geburt der Mutter beurkundet wurde.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="erstbeurkundungsjahr" minOccurs="0" type="xs:gYear">
+                  <xs:annotation>
+                     <xs:documentation>Das Jahr der Erstbeurkundung der Geburt der Mutter.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtseintragNummer"
+                           minOccurs="0"
+                           type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Die laufende Eintragsnummer der Geburt der Mutter.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Anz2StA.Person">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zu einer Person in der Voranzeige</title>
+         </xs:appinfo>
+         <xs:documentation>Diese abstrakte Klasse fasst Angaben zu einer Person im Kontext der Voranzeigen an das Standesamt zusammen.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="vorname" minOccurs="0" type="xoev-lc:String.Latin"/>
+         <xs:element name="familienname" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Familienname übermittelt. In den Fällen in denen der Vorname einer Person nicht identifiziert werden kann oder nicht existiert, wird der Name vollständig in diesem Element übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsname" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Der Geburtsname ist nur anzugeben, wenn er vom Familiennamen abweicht.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtstag" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Es wird kein Geburtsdatum übermittelt, wenn das Geburtsdatum nur teilbekannt ist. Teilbekannt ist ein Geburtsdatum bspw. wenn zwar das Jahr und der Monat der Geburt bekannt sind, der Tag der Geburt aber unbekannt ist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsort" minOccurs="0">
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="ort" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Die allgemein übliche deutsche Bezeichnung des Ereignisortes.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Die Kreisbezeichnung wird nur angegeben, um Städte mit gleichem Städtenamen unterscheiden zu können, z. B. beim Städtenamen Neustadt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="staat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann der Staat genannt werden, in dem der Ort liegt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="staatsangehoerigkeit"
+                     minOccurs="0"
+                     type="xpersonenstand:Code.Staatsangehoerigkeit"/>
+         <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Portal2StA.Anschrift">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Anschrift für die Eingabe durch Bürger oder Einrichtungen</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zu einer inländischen oder ausländischen Anschrift, wie sie durch den Bürger oder eine anzeigende Stelle erfasst werden. Um den Zusatzaufwand der Bürger und anzeigenden Stellen zu minimieren, wird an dieser Stelle davon abgesehen, die stark strukturierte Meldeanschrift zu verwenden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="strasse" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Enthält neben der Bezeichnung der Strasse auch die Hausnummern und eventuell vorhandene Zusatzbuchstaben oder -ziffern.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="plz" minOccurs="0" type="xoev-lc:String.Latin"/>
+         <xs:element name="ort" minOccurs="0" type="xoev-lc:String.Latin"/>
+         <xs:element name="ortsteil" minOccurs="0" type="xoev-lc:String.Latin"/>
+         <xs:element name="staat" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Sofern es sich um eine ausländische Anschrift handelt, ist hier der Staat mitzuteilen, dem die Anschrift zuzuordnen ist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Portal2StA.Anschrift.MitOrt">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Anschrift für die Eingabe durch Bürger</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zu einer inländischen oder ausländischen Anschrift, wie sie durch den Bürger erfasst wird. Der Wohnort muss hierbei angegeben werden. Um den Zusatzaufwand der Bürger und anzeigenden Stellen zu minimieren, wird an dieser Stelle davon abgesehen, die stark strukturierte Meldeanschrift zu verwenden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Portal2StA.Anschrift">
+            <xs:sequence>
+               <xs:element name="strasse" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Enthält neben der Bezeichnung der Strasse auch die Hausnummern und eventuell vorhandene Zusatzbuchstaben oder -ziffern.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="plz" minOccurs="0" type="xoev-lc:String.Latin"/>
+               <xs:element name="ort" type="xoev-lc:String.Latin"/>
+               <xs:element name="ortsteil" minOccurs="0" type="xoev-lc:String.Latin"/>
+               <xs:element name="staat" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Sofern es sich um eine ausländische Anschrift handelt, ist hier der Staat mitzuteilen, dem die Anschrift zuzuordnen ist.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.Anschrift.Antragsteller">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zur Anschrift des Antragstellers</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zur Anschrift des Antragstellers der Urkundenanforderung.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="strasse" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Strasse inklusive der Hausnummer übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="plz" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Postleitzahl übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ort" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Wohnort übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ortsteil" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier kann der Ortsteil übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staat" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Staat übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.Antragssteller">
+      <xs:annotation>
+         <xs:documentation>Dieser Datentyp enthält Angaben zum Antragsteller der Urkundenanforderung, wenn es sich dabei um eine juristische Person handelt.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="juristischePerson"
+                     type="xpersonenstand:Urkundenanforderung.Antragsteller.JuristischePerson">
+            <xs:annotation>
+               <xs:documentation>Dieser Datentyp enthält Angaben zum Antragsteller der Urkundenanforderung, wenn es sich dabei um eine juristische Person handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="natuerlichePerson"
+                     type="xpersonenstand:Urkundenanforderung.Antragsteller.NatuerlichePerson">
+            <xs:annotation>
+               <xs:documentation>Dieser Datentyp enthält Angaben zum Antragsteller der Urkundenanforderung, wenn es sich dabei um eine natürliche Person handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.Antragsteller.JuristischePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zum Antragsteller, wenn es sich um eine juristische Person handelt</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zum Antragsteller der Urkundenanforderung, wenn es sich dabei um eine juristische Person handelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Dieses Feld dient zur Übermittlung des Namens der juristischen Person.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift"
+                     type="xpersonenstand:Urkundenanforderung.Anschrift.Antragsteller">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Anschrift der juristischen Person übermitteln, an die später die Urkunden versendet werden sollen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kommunikation"
+                     maxOccurs="unbounded"
+                     type="xikomm:Kommunikation">
+            <xs:annotation>
+               <xs:documentation>Hier werden Kontaktinformationen der juristischen Person angegeben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ansprechpartner" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Da es sich bei dem Antragssteller um eine juristische Person handelt, kann hier nocheinmal ein Ansprechpartner übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="berechtigtesInteresse" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Zur Prüfung nach § 62 PStG muss hier die Berechtigung des Interesses der juristischen Person an der Ausstellung der angeforderten Urkunden begründet werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesicherteIdentifikationErfolgt"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Hier kann übermittelt werden, ob der Antragsteller vom Eingabeverfahren gesichert identifiziert wurde. Mit der Übermittlung sichert das Eingabeverfahren zu, dass sich die Angaben zu Name und Anschrift aus der Identifikation ergeben und nicht auf Angaben des Antragstellers basieren.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.Antragsteller.NatuerlichePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zum Antragsteller, wenn es sich um eine natürliche Person handelt</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zum Antragsteller der Urkundenanforderung, wenn es sich dabei um eine natürliche Person handelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anrede" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Anrede des Antragstellers übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienname"
+                     type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Familienname des Antragstellers übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="vorname"
+                     type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Vorname des Antragstellers übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsdatum" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Hier wird das Geburtsdatum des Antragstellers übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift"
+                     type="xpersonenstand:Urkundenanforderung.Anschrift.Antragsteller">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Anschrift des Antragstellers übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kommunikation"
+                     maxOccurs="unbounded"
+                     type="xikomm:Kommunikation">
+            <xs:annotation>
+               <xs:documentation>Hier werden Kontaktinformationen des Antragstellers übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="verwandtschaftsverhaeltnis" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Zur Prüfung der zulässigkeit der Urkundenausstellung nach § 62 PStG muss hier das Verwandtschaftsverhältnis des Antragstellers zur beurkundeten Person angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="berechtigtesInteresse"
+                     minOccurs="0"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Zur Prüfung nach § 62 PStG muss hier die Berechtigung des Interesses der natürlichen Person an der Ausstellung der angeforderten Urkunden begründet werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesicherteIdentifikationErfolgt"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Hier kann übermittelt werden, ob der Antragsteller vom Eingabeverfahren gesichert identifiziert wurde (z.B. mittels e-ID). Mit der Übermittlung sichert das Eingabeverfahren zu, dass sich die Angaben zu Name, Geburtsdatum und Anschrift aus der Identifikation ergeben und nicht auf Angaben des Antragstellers basieren.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.ArtDerUrkunde.Basis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Urkundenart und -anzahl bei der Erstbeurkundung der Geburt</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zu Anzahl und Art der angeforderten Urkunden bei der Erstbeurkundung der Geburt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anzahlStandardformat"
+                     minOccurs="0"
+                     type="xs:nonNegativeInteger">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Anzahl der Urkunden im Standardformat übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anzahlStammbuchformat"
+                     minOccurs="0"
+                     type="xs:nonNegativeInteger">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Anzahl der Urkunden im Stammbuchformat übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anzahlMehrsprachig"
+                     minOccurs="0"
+                     type="xs:nonNegativeInteger">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Anzahl des mehrsprachigen Auszugs aus dem Register (internationale Urkunde) übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.ArtDerUrkunde.Erweitert">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Urkundenart und -anzahl</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zu Anzahl und Art der angeforderten Urkunden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Urkundenanforderung.ArtDerUrkunde.Basis">
+            <xs:sequence>
+               <xs:element name="anzahlRegisterausdruck"
+                           minOccurs="0"
+                           type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Anzahl der beglaubigten Auszüge aus dem Register übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="anzahlSozialversicherung"
+                           minOccurs="0"
+                           type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Anzahl der gebührenfreien Urkunden für Sozialversicherungszwecke übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.ArtDerUrkunde.Erweitert.MitGeburtszeit">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Urkundenart und -anzahl inklusive Bescheinigung mit Geburtszeit</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container enthält Informationen über die angeforderten Urkunden. Er ergänzt den Typ Urkundenanforderung.Urkunde.Zweck um die Bescheinigung mit Geburtszeitzeit.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Urkundenanforderung.ArtDerUrkunde.Erweitert">
+            <xs:sequence>
+               <xs:element name="anzahlMitGeburtszeit"
+                           minOccurs="0"
+                           type="xs:nonNegativeInteger">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die Anzahl der Bescheinigungen der Geburtszeit übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.BeurkundetesEreignis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Angaben zum beurkundeten Ereignis</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält Angaben zum beurkundeten Ereignis.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="namen" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Hier werden die Namen der beurkundeten Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsdatum" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Hier das Geburtsdatum der beurkundeten Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="registernummer" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier kann die Registernummer der beurkundeten Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.Modalitaeten">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Modalitäten bei einer Urkundenanforderung</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp dient zur Übermittlung der Modalitäten einer Urkundenanforderung, namentlich ob die Urkunden im Standesamt abgeholt werden und wie sie bezahlt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="abholungImStandesamt"
+                     minOccurs="0"
+                     default="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Wenn die Urkunden im Standesamt abgeholt werden muss es dieses Feld geben, ansonsten darf es nicht vorhanden sein.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zahlungErfolgt"
+                     minOccurs="0"
+                     default="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Ist die Zahlung der Urkunden bereits vor Versenden der Nachricht erfolgt, muss es dieses Feld geben, ansonsten darf es nicht vorhanden sein.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zahlungsinformationen"
+                     minOccurs="0"
+                     type="xpersonenstand:Urkundenanforderung.Zahlungsinformationen">
+            <xs:annotation>
+               <xs:documentation>In diesem Feld werden Informationen zur Zahlung übermittelt. Kosten werden dabei nur für angeforderte Urkunden angegeben, das Feld dient nicht zur Mitteilung von Preisen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Urkundenanforderung.Zahlungsinformationen">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Abbildung der Zahlungsinformationen</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container enthält Informationen über die Zahlung. Es sind hier nur Kosten für beantragte Urkunden anzugeben, keine Preise mitzuteilen.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="kostenErstesExemplar" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Ist eine beantragte Urkunde die erste Urkunde, die von ihrem Typ beantragt wird, sind hier Typ und Kosten in Eurocent anzugeben.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="standardformat" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn die Urkunde im Standardformat beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="stammbuchformat" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn die Urkunde im Stammbuchformat beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="registerausdruck" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn ein beglaubigter Auszug aus dem Register beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mehrsprachig" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn ein mehrsprachiger Auszug aus dem Register (internationale Urkunde) beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mitGeburtszeit" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn die Urkunde mit Geburtszeit beantragt wurde. Dieses Format gibt es nur bei Geburtsurkunden, deswegen soll dieses Feld nur in der Nachricht 081030 gesetzt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="kostenWeiteresExemplar" minOccurs="0" maxOccurs="unbounded">
+            <xs:annotation>
+               <xs:documentation>Ist eine beantragte Urkunde nicht die erste Urkunde, die von ihrem Typ beantragt wird, sind hier Typ und Kosten in Eurocent anzugeben.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="standardformat" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn die Urkunde im Standardformat beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="stammbuchformat" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn die Urkunde im Stammbuchformat beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="registerausdruck" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn ein beglaubigter Auszug aus dem Register beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mehrsprachig" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn ein mehrsprachiger Auszug aus dem Register (internationale Urkunde) beantragt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mitGeburtszeit" type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Kosten in Eurocent übermittelt, wenn die Urkunde mit Geburtszeit beantragt wurde. Dieses Format gibt es nur bei Geburtsurkunden, deswegen soll dieses Feld nur in der Nachricht 081030 gesetzt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="zahlungsart" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Sofern eine der Zahlungsarten Lastschrift, Vorkasse, Nachnahme oder Rechnung verwendet wird, sind die entsprechenden Daten hier anzugeben. Wird eine alternative Zahlungsart, z.B. ein ePayment-Verfahren, verwendet, so ist diese Teilstruktur nicht anzugeben.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="lastschrift">
+                     <xs:annotation>
+                        <xs:documentation>Bei Lastschrift ist die Kontoverbindung des Antragstellers anzugeben.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="kontoinhaber" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist der Kontoinhaber anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="bank" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist der Name der Bank anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="iBAN" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist die IBAN anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="sWIFT" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Sofern benötigt, ist die SWIFT anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="vorkasse">
+                     <xs:annotation>
+                        <xs:documentation>Bei Vorkasse ist die Kontoverbindung des Standesamtes anzugeben.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="kontoinhaber" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist der Kontoinhaber anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="bank" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist der Name der Bank anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="iBAN" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist die IBAN anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="sWIFT" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Sofern benötigt, ist die SWIFT anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="nachnahme" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Es ist anzugeben, ob die Urkunden per Nachnahme bezahlt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="rechnung" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Es ist anzugeben, ob die Urkunden per Rechnung bezahlt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="buchungsreferenz" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Es kann die Buchungsreferenz angegeben werden. Dies ist insbesondere bei ePayment-Verfahren für die Nachverfolgung notwendig.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="sonstigeZahlungsinformationen"
+                     minOccurs="0"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Es können weitere Informationen zur Zahlung übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesamtkosten" type="xs:nonNegativeInteger">
+            <xs:annotation>
+               <xs:documentation>Es sind die Gesamtkosten für alle beantragten Urkunden in Eurocent anzugeben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="portal2StA.Geburt.081010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 18 PStG i. V. m. § 20 PStG</rechtsgrundlage>
+            <title>Voranzeige einer Geburt</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht können die Angaben zu einer Geburt im Rahmen einer elektronischen Voranzeige dem Standesamt übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="geburtstag" type="xs:date">
+                     <xs:annotation>
+                        <xs:documentation>Datum des Tages der Geburt</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtszeit" type="xpersonenstand:UhrzeitPersonenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Die Stunde und Minute der Geburt Bei der Umstellung von der Sommer- auf die Winterzeit, wird die erste Stunde (von 2 Uhr bis 3 Uhr mitteleuropäischer Sommerzeit) mit 2A und die zweite Stunde (von 2 Uhr bis 3 Uhr mitteleuropäischer Zeit) mit 2B bezeichnet.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsort">
+                     <xs:annotation>
+                        <xs:documentation>Angaben zum Ort der Geburt</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="strasse" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>In diesem Element wird der Name / die Bezeichnung einer Straße übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="hausnummer" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Zur Hausnummer zählen auch Zusatzangaben aus Buchstaben (123a) oder Bereichsangaben (12...17).</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ort" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist die amtlich festgelegte Schreibweise des Geburtsortes zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ortsteil" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Die Angabe des Ortsteils ist nur bei entsprechender landesrechtlicher Vorgabe erforderlich.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Die Kreisbezeichnung wird nur angegeben, um Städte mit gleichem Städtenamen unterscheiden zu können, z. B. beim Städtenamen Neustadt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="totgeburt" minOccurs="0" fixed="true" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Im Fall einer Totgeburt wird true übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="vorname" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Wenn die Eltern den Vornamen des Kindes bereits bestimmt haben, soll dieser hier übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsname" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Wenn der Geburtsname des Kindes bereits bestimmt wurde, soll dieser hier übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                     <xs:annotation>
+                        <xs:documentation>Das Geschlecht des neugeborenen Kindes</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mutter" type="xpersonenstand:Anz2StA.Mutter">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zur Mutter übermittelt. Gemäß § 1591 BGB ist Mutter eines Kindes die Frau, die es geboren hat.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anderesElternteil"
+                              minOccurs="0"
+                              type="xpersonenstand:Anz2StA.Elternteil">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, werden hier Angaben zu dem Elternteil mitgeteilt, das nicht Mutter des Kindes ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheDerEltern" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Wenn die Eltern des Neugeborenen miteinander verheiratet sind, werden hier weitere Angaben zur Ehe der Eltern angegeben.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="tagEheEltern" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Es wird kein Datum der Eheschließung übermittelt, wenn es nur teilbekannt ist. Teilbekannt ist das Datum der Eheschließung bspw. wenn zwar das Jahr und der Monat bekannt sind, der Tag aber unbekannt ist.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ortEheEltern" minOccurs="0">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="ort" minOccurs="0" type="xoev-lc:String.Latin">
+                                       <xs:annotation>
+                                          <xs:documentation>Die allgemein übliche deutsche Bezeichnung des Ereignisortes.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+                                       <xs:annotation>
+                                          <xs:documentation>Die Kreisbezeichnung wird nur angegeben, um Städte mit gleichem Städtenamen unterscheiden zu können, z. B. beim Städtenamen Neustadt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="staat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier kann der Staat genannt werden, in dem der Ort liegt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="kinderDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die Angabe, als wievieltes Kind der Ehe dieses Kind geboren wurde.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="totgeburtenDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die Anzahl der in dieser Ehe totgeborenen Kinder, inklusive des evtl. jetzt totgeborenen Kindes</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="eheeintragBehoerde" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Der Name der Behörde, in dem die Ehe geschlossen wurde.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="erstbeurkundungsjahr" minOccurs="0" type="xs:gYear">
+                              <xs:annotation>
+                                 <xs:documentation>Das Jahr der Erstbeurkundung der Ehe.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="eheeintragNummer" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Die laufende Eintragsnummer der Ehe.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="mehrlingsgeburt" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Im Fall einer Mehrlingsgeburt werden hier Angaben zur Mehrlingsgeburt übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:restriction base="xpersonenstand:Statistik.Mehrlingsgeburt">
+                              <xs:sequence>
+                                 <xs:element name="anzahlKnaben" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Knaben übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="anzahlMaedchen" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Mädchen übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="anzahlUnbestimmt" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Kinder ohne bestimmbares Geschlecht übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:restriction>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="zahlDerUrkunden" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann die gewünschte Zahl der Geburtsurkunden angegeben werden.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="zahlDerUrkundenStandard"
+                                       minOccurs="0"
+                                       type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die gewünschte Zahl der Urkunden im Standardformat (DIN A4).</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zahlDerUrkundenStammbuch"
+                                       minOccurs="0"
+                                       type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die gewünschte Zahl der Urkunden im Stammbuchformat.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zahlDerUrkundenMehrsprachig"
+                                       minOccurs="0"
+                                       type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die gewünschte Zahl der internationalen Urkunden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.Geburt.081020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 18 (1) PStG i.V.m. § 20 PStG sowie § 3a (2) VwVfG i.V.m. § 63 PStV</rechtsgrundlage>
+            <title>Anzeige der Geburt durch eine Einrichtung</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht kann eine Einrichtung, in der Geburten stattfinden (hauptsächlich Geburtskliniken) der gesetzlichen Anzeigepflicht einer Geburt nachkommen. Zur besseren Zuordenbarkeit der Anzeige der Einrichtung sowie der ergänzenden Datenlieferung der Eltern kann eine menschenlesbare, eindeutige ID in dem Element zuordnungGeburtsanzeige übermittelt werden, die in der zugehörigen Nachricht 081021 identisch übermittelt wird.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="nameEinrichtung" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Name der anzeigenden Einrichtung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsangaben">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Angaben zur Geburt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="xpersonenstand:Anz2StA.Geburt.AngabenEreignis">
+                              <xs:sequence>
+                                 <xs:element name="uhrzeit" type="xpersonenstand:UhrzeitPersonenstandswesen">
+                                    <xs:annotation>
+                                       <xs:documentation>Dieses Element enthält die Uhrzeit der Geburt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="totgeburt" minOccurs="0" fixed="true" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Feld wird nur bei einer Totgeburt übermittelt. In diesem Fall wird true übermittelt. Es entspricht dem Datenfeld 1090 Anlage 1 der PStV.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kind" type="xpersonenstand:Anz2StA.Geburt.Kind">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält Angaben zum Neugeborenen. Die Namen des Kindes werden nur zum Zweck der Zuordnung zur Datenlieferung der Eltern übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mutter">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Basisangaben zur Mutter. Die Angaben werden nur zum Zweck der Zuordnung zur Datenlieferung der Eltern übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="xpersonenstand:Anz2StA.Geburt.Elternteil.Basis">
+                              <xs:sequence>
+                                 <xs:element name="anschrift" type="xpersonenstand:Anschrift.Inland">
+                                    <xs:annotation>
+                                       <xs:documentation>Dieses Element enthält die Anschrift der Mutter. Diese kann von der Einrichtung zweifelsfrei erbracht werden, da sie der eID-Karte (z. B. Personalausweis) der Mutter entnommen werden kann.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="kontakt"
+                                             minOccurs="0"
+                                             maxOccurs="unbounded"
+                                             type="xikomm:Kommunikation">
+                                    <xs:annotation>
+                                       <xs:documentation>Dieses Element enthält die Kontaktdaten der Mutter. Diese werden benötigt um sie zu kontaktieren, falls keine ergänzende Datenlieferung der Eltern das Standesamt erreicht.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="elternteil2"
+                              minOccurs="0"
+                              type="xpersonenstand:Anz2StA.Geburt.Elternteil.Basis">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Basisangaben zum zweiten Elternteil, sonfern sie der Einrichtung bekannt sind. Die Angaben werden nur zum Zweck der Zuordnung zur Datenlieferung der Eltern übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mehrlingsgeburt" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält Angaben zu einer Mehrlingsgeburt. Wenn eine Mehrlingsgeburt stattgefunden hat, muss dieses Feld befüllt werden. Ansonsten darf es nicht verwendet werden.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:restriction base="xpersonenstand:Statistik.Mehrlingsgeburt">
+                              <xs:sequence>
+                                 <xs:element name="anzahlKnaben" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Knaben übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="anzahlMaedchen" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Mädchen übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="anzahlUnbestimmt" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Bei einer Mehrlingsgeburt wird hier die Anzahl der Kinder ohne bestimmbares Geschlecht übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:restriction>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="schriftformersatz"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xs:base64Binary">
+                     <xs:annotation>
+                        <xs:documentation>Vom Eingabeverfahren selbst erstellte Dokumente zum Schriftformersatz, die vom Standesamt in die Sammelakte übernommen werden (siehe auch ).</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zuordnungGeburtsanzeige"
+                              minOccurs="0"
+                              type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann eine menschenlesbare Zeichenkette übermittelt werden, die eine eindeutige Zuordnung der Anzeige der Einrichtung (081020) zur Datenlieferung der Eltern (081021) ermöglicht.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.Geburt.081021">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 18 (1) i.V.m. § 20 i.V.m. § 19 PStG</rechtsgrundlage>
+            <title>Zusätzliche Datenlieferung der Eltern zur Anzeige der Geburt durch die Einrichtung</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht können Eltern die Anzeige der Geburt um diejenigen Angaben, die die anzeigende Einrichtung unter Umständen nicht erbringen kann, digital ergänzen. Zur besseren Zuordenbarkeit der Anzeige der Einrichtung sowie der ergänzenden Datenlieferung der Eltern kann eine menschenlesbare, eindeutige ID in dem Element zuordnungGeburtsanzeige übermittelt werden, die in der zugehörigen Nachricht 081020 identisch übermittelt wird.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="geburtsangaben">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Angaben zur Geburt. Die Angaben werden nur zum Zweck der Zuordnung zur Anzeige der Einrichtung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="xpersonenstand:Anz2StA.Geburt.AngabenEreignis">
+                              <xs:sequence>
+                                 <xs:element name="uhrzeit" type="xpersonenstand:UhrzeitPersonenstandswesen">
+                                    <xs:annotation>
+                                       <xs:documentation>Dieses Element enthält die Uhrzeit der Geburt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="kind" type="xpersonenstand:Anz2StA.Geburt.Kind">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält Angaben zum Neugeborenen. Die Angabe des Geschlechts wird nur zum Zweck der Zuordnung zur Anzeige der Einrichtung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="mutter">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält alle Angaben zur Mutter.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="xpersonenstand:Anz2StA.Geburt.Elternteil.Erweitert">
+                              <xs:sequence>
+                                 <xs:element name="anzahlKinder" minOccurs="0" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Dieses Feld enthält die Anzahl aller lebend und tot geborenen Kinder der Mutter inklusive des jetzt geborenen Kindes.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="anzahlTotgeburten" minOccurs="0" type="xs:nonNegativeInteger">
+                                    <xs:annotation>
+                                       <xs:documentation>Dieses Feld enthält die Anzahl aller Totgeburten der Mutter inklusive des jetzt evtl. tot geborenen Kindes.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="geburtsdatumVorherigesKind"
+                                             minOccurs="0"
+                                             type="xida:Tagesdatum">
+                                    <xs:annotation>
+                                       <xs:documentation>Dieses Element enthält das Geburtsdatum des vorherigen Kindes der Mutter, zur Übermittlung an die Statistik.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="elternteil2"
+                              minOccurs="0"
+                              type="xpersonenstand:Anz2StA.Geburt.Elternteil.Erweitert">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält alle Angaben zum zweiten Elternteil.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternVerheiratet"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Falls die Eltern des Kindes miteinander verheiratet sind, so wird hier quottruequot übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehe" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Angaben zur Ehe.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="ereignis"
+                                       minOccurs="0"
+                                       type="xpersonenstand:Anz2StA.Geburt.AngabenEreignis">
+                              <xs:annotation>
+                                 <xs:documentation>Dieses Element enthält Tag und Ort der Eheschließung.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="kinderDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Sofern bekannt, wird hier übermittelt, als wievieltes Kind der Ehe dieses Kind geboren wurde.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="totgeburtenDerEhe" minOccurs="0" type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Sofern bekannt, wird hier die Anzahl der in dieser Ehe totgeborenen Kinder übermittelt, inklusive des jetzt totgeborenen Kindes.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="vorangegangenesKind" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Falls die Eltern keinen Ehenamen führen, enthält dieses Element Angaben zu einem vorangegangenen Kind, für das die beiden Elternteile gemeinsame Sorge tragen. Diese Angaben werden benötigt, um eine eventuelle Bindungswirkung der Namenswahl festzustellen.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="namen" type="xpersonenstand:PersonName">
+                              <xs:annotation>
+                                 <xs:documentation>Dieses Element enthält die Namen des vorangegangenen Kindes.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburt" type="xpersonenstand:Anz2StA.Geburt.AngabenEreignis">
+                              <xs:annotation>
+                                 <xs:documentation>Dieses Element enthält Angaben zur Geburt des vorangegangenen Kindes.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="kontaktdaten"
+                              maxOccurs="unbounded"
+                              type="xikomm:Kommunikation">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält Kontaktdaten zu den Eltern.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="urkundenbestellung"
+                              type="xpersonenstand:Urkundenanforderung.ArtDerUrkunde.Basis">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält Angaben zu den bestellten Urkunden im Rahmen der Erstbeurkundung einer Geburt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zahlungErfolgt"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Falls die Bezahlung der bestellten Urkunden bereits erfolgt ist, so wird hier quottruequot übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="willenserklaerungen"
+                              maxOccurs="unbounded"
+                              type="xs:base64Binary">
+                     <xs:annotation>
+                        <xs:documentation>Vom Eingabeverfahren selbst erstellte Dokumente zur Abgabe von Willenserklärungen, die vom Standesamt in die Sammelakte übernommen werden (siehe auch ).</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="auftragsnummer" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält eine menschenlesbare Auftragsnummer zur Zuordnung des Kindergeldantrags der Eltern zur Mitteilung an die Familienkasse. Die Auftragsnummer wird durch das Eingabeverfahren erzeugt und übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zuordnungGeburtsanzeige"
+                              minOccurs="0"
+                              type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann eine menschenlesbare Zeichenkette übermittelt werden, die eine eindeutige Zuordnung der Datenlieferung der Eltern (081021) zur Anzeige der Einrichtung (081020) ermöglicht.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zustaendigeFamilienkasse" type="xibehoerde:Behoerde">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die zuständige Familienkasse übermittelt, der die Beurkundung der Geburt mitzuteilen ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.Geburt.081030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 62 PStG i.V.m. § 55 PStG</rechtsgrundlage>
+            <title>Anforderung von Urkunden aus dem Geburtsregister</title>
+         </xs:appinfo>
+         <xs:documentation>Anforderung von Urkunden aus dem Geburtsregister.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="antragsteller"
+                              type="xpersonenstand:Urkundenanforderung.Antragssteller">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zum Antragsteller übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="modalitaeten"
+                              minOccurs="0"
+                              type="xpersonenstand:Urkundenanforderung.Modalitaeten">
+                     <xs:annotation>
+                        <xs:documentation>Dieser Feld dient zur Übermittlung der Modalitäten einer Urkundenanforderung, namentlich ob die Urkunden im Standesamt abgeholt werden und wie sie bezahlt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="verwendungszweck" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann optional der Verwendungszweck angegeben werden, für den die Urkunden bestellt werden. Damit kann das Standesamt prüfen, ob die bestellten Urkunden zum Verwendungszweck passen, und gegebenefalls fälschliche Urkundenausstellungen verhindern.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kind">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zum Kind übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="xpersonenstand:Urkundenanforderung.BeurkundetesEreignis">
+                              <xs:sequence>
+                                 <xs:element name="geburtsort" type="xoev-lc:String.Latin">
+                                    <xs:annotation>
+                                       <xs:documentation>Hier wird der Geburtsort der beurkundeten Person übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="artDerUrkunde"
+                              type="xpersonenstand:Urkundenanforderung.ArtDerUrkunde.Erweitert.MitGeburtszeit">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Angaben zur Art und Anzahl der auszustellenden Urkunden übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.Ehe.082020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>Vorbereitung einer Anmeldung nach § 12 PStG</rechtsgrundlage>
+            <title>Voranmeldung einer Eheschließung</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht können die Angaben zur Anmeldung einer Eheschließung im Rahmen einer elektronischen Voranmeldung dem Standesamt übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="angabenEheschliessende" minOccurs="2" maxOccurs="2">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Angaben zu den Eheschließenden übermittelt, damit das Standesamt einerseits eine Vorprüfung auf die Ehefähigkeit durchführen kann. Außerdem teilt es den Eheschließenden in einfachen Fällen (ledig bzw. letzte Ehe oder Lebenspartnerschaft in Deutschland) die mitzubringen Nachweise mit. In den anderen Fällen nimmt es persönlichen Kontakt zu den Eheschließenden auf, um die notwendigen Nachweise zu ermitteln.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="familienname" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist der Familienname des jeweiligen Eheschließenden zu übermitteln. Führt der Eheschließenden nach ausländischem Namensrecht keinen Vornamen, so ist der ausländische Name als Familienname zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburtsname" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist, falls vorhanden, der Geburtsname des jeweiligen Eheschließenden zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="vornamen" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier sind, falls vorhanden, die Vornamen des jeweiligen Eheschließenden zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburtsdatum" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist das Geburtsdatum des jeweiligen Eheschließenden anzugeben. Nur teilweise bekannte Geburtsdaten sind nicht zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburtsort" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist der Geburtsort des jeweiligen Eheschließenden zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburtsstaat" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist der Geburtsstaat des jeweiligen Eheschließenden zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist das Geschlecht des jeweiligen Eheschließenden zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="anzahlVorehen" minOccurs="0" type="xs:positiveInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Bestand für den jeweiligen Eheschließenden eine Vorehe, so ist hier die Anzahl der Vorehen zu übermitteln. Andernfalls entfällt die Übermittlung.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="anzahlVorherigeLP" minOccurs="0" type="xs:positiveInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Bestand für den jeweiligen Eheschließenden eine vorherige Lebenspartnerschaft, so ist hier die Anzahl der vorherigen Lebenspartnerschaften zu übermitteln. Andernfalls entfällt die Übermittlung.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="letzteEheLPInDeutschland" minOccurs="0" type="xs:boolean">
+                              <xs:annotation>
+                                 <xs:documentation>Bestand für den jeweiligen Eheschließenden eine vorherige Lebenspartnerschaft/Ehe, so ist hier zu übermitteln, ob diese in Deutschland geschlossen wurde. Wenn die letzte Lebenspartnerschaft/Ehe in Deutschland geschlossen wurde, so liegt ein einfacher Fall vor, zur Ermittlung der zu erbringenden Nachweise ist in der Regel keine weitere Information vonnöten. Wenn die letzte Lebenspartnerschaft/Ehe im Ausland geschlossen wurde, so ist die Ermittlung der zu erbringenden Nachweise aufwendig, da eine komplette Historie der Lebenspartnerschaften/Ehen ermittelt werden muss. Dies geschieht im Rahmen des konventionellen Kontakts des Standesamts mit dem Bürger.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="staatsangehoerigkeit"
+                                       maxOccurs="unbounded"
+                                       type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier sind die Staatsangehörigkeiten des jeweiligen Eheschließenden zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="anschrift" type="xpersonenstand:Portal2StA.Anschrift.MitOrt">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist die aktuelle Wohnanschrift des jeweiligen Eheschließenden zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="kontaktdaten"
+                                       maxOccurs="unbounded"
+                                       type="xikomm:Kommunikation">
+                              <xs:annotation>
+                                 <xs:documentation>Es sind mindestens eine EMail-Adresse oder eine Telefonnummer des jeweiligen Eheschließenden anzugeben.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="anzahlGemeinsamerKinder"
+                              minOccurs="0"
+                              type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann die Anzahl der gemeinsamen Kinder der Eheschließenden übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="wunschtermin" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann ein Wunschtermin für die Eheschließung übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="wunschort" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann ein Wunschort für die Eheschließung übermittelt werden, insbesondere falls dieser vom zuständigen Standesamt abweicht.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.Ehe.082030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 62 PStG i.V.m. § 55 PStG</rechtsgrundlage>
+            <title>Anforderung von Urkunden aus dem Eheregister</title>
+         </xs:appinfo>
+         <xs:documentation>Nachricht zur Anforderung von Urkunden aus dem Eheregister.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="antragsteller"
+                              type="xpersonenstand:Urkundenanforderung.Antragssteller">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zum Antragsteller übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="modalitaeten"
+                              minOccurs="0"
+                              type="xpersonenstand:Urkundenanforderung.Modalitaeten">
+                     <xs:annotation>
+                        <xs:documentation>Dieser Feld dient zur Übermittlung der Modalitäten einer Urkundenanforderung, namentlich ob die Urkunden im Standesamt abgeholt werden und wie sie bezahlt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="verwendungszweck" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann optional der Verwendungszweck angegeben werden, für den die Urkunden bestellt werden. Damit kann das Standesamt prüfen, ob die bestellten Urkunden zum Verwendungszweck passen, und gegebenefalls fälschliche Urkundenausstellungen verhindern.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beurkundeteEhe">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zur beurkundeten Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="ehegatte1" type="xpersonenstand:PersonName">
+                              <xs:annotation>
+                                 <xs:documentation>Hier werden die Namen des einen Ehegatten übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ehegatte2" type="xpersonenstand:PersonName">
+                              <xs:annotation>
+                                 <xs:documentation>Hier werden die Namen des anderen Ehegatten übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="datumEhe" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist das Datum der Eheschließung zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ortEhe" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist der Ort der Eheschließung zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="registernummer" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier kann die Registernummer des Eheeintrags übermittelt werden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="artDerUrkunde"
+                              type="xpersonenstand:Urkundenanforderung.ArtDerUrkunde.Erweitert">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Angaben zur Art und Anzahl der auszustellenden Urkunden übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.LP.083030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 62 PStG i.V.m. § 55 PStG</rechtsgrundlage>
+            <title>Anforderung von Urkunden aus dem Lebenspartnerschaftsregister</title>
+         </xs:appinfo>
+         <xs:documentation>Nachricht zur Anforderung von Urkunden aus dem Lebenspartnerschaftsregister.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="antragsteller"
+                              type="xpersonenstand:Urkundenanforderung.Antragssteller">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zum Antragsteller übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="modalitaeten"
+                              minOccurs="0"
+                              type="xpersonenstand:Urkundenanforderung.Modalitaeten">
+                     <xs:annotation>
+                        <xs:documentation>Dieser Feld dient zur Übermittlung der Modalitäten einer Urkundenanforderung, namentlich ob die Urkunden im Standesamt abgeholt werden und wie sie bezahlt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="verwendungszweck" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann optional der Verwendungszweck angegeben werden, für den die Urkunden bestellt werden. Damit kann das Standesamt prüfen, ob die bestellten Urkunden zum Verwendungszweck passen, und gegebenefalls fälschliche Urkundenausstellungen verhindern.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beurkundeteLP">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zur beurkundeten Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="lebenspartner1" type="xpersonenstand:PersonName">
+                              <xs:annotation>
+                                 <xs:documentation>Hier werden die Namen des einen Lebenspartners übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="lebenspartner2" type="xpersonenstand:PersonName">
+                              <xs:annotation>
+                                 <xs:documentation>Hier werden die Namen des anderen Lebenspartners übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="datumBegruendung" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist das Datum der Begründung der Lebenspartnerschaft zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ortBegruendung" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier ist der Ort der Begründung der Lebenspartnerschaft zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="registernummer" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier kann die Registernummer des Eintrags der Lebenspartnerschaft übermittelt werden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="artDerUrkunde"
+                              type="xpersonenstand:Urkundenanforderung.ArtDerUrkunde.Erweitert">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Angaben zur Art und Anzahl der auszustellenden Urkunden übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.Sterbefall.084010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 28 PStG i. V. m. § 30 PStG</rechtsgrundlage>
+            <title>Voranzeige eines Sterbefalls</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht können die Angaben zu einem Sterbefall im Rahmen einer elektronischen Voranzeige dem Standesamt übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="todestag">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind Angaben zum Zeitpunkt des Todes zu übermitteln. Sofern der Todestag und die Todeszeit festgestellt werden konnten, sind die Angaben im Element todestag zu übermitteln. Sollte kein Todestag sondern nur ein Sterbezeitraum festgestellt worden sein, sind die Angaben im Element sterbezeitraum zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="todestag">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="todestag" type="xida:Tagesdatum"/>
+                                    <xs:element name="todeszeit"
+                                                type="xpersonenstand:UhrzeitPersonenstandswesenMitExakt">
+                                       <xs:annotation>
+                                          <xs:documentation>Sofern zur Todeszeit nur ungefähre Angaben gemacht werden können, sind sie entsprechend zu kennzeichnen.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="sterbezeitraum">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="letzterTagLebend" minOccurs="0" type="xida:Tagesdatum">
+                                       <xs:annotation>
+                                          <xs:documentation>Sollte kein Todestag sondern nur der Sterbezeitraum bekannt sein, ist hier der Tag mitzuteilen, an dem der Verstorbene zuletzt lebend gesehen wurde.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="letzterTagLebendUhrzeit"
+                                                minOccurs="0"
+                                                type="xpersonenstand:UhrzeitPersonenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Sollte kein Todestag sondern nur der Sterbezeitraum bekannt sein, ist hier die Uhrzeit mitzuteilen, zu der der Verstorbene zuletzt lebend gesehen wurde.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="mitSicherheitTotTag" type="xida:Tagesdatum">
+                                       <xs:annotation>
+                                          <xs:documentation>Sollte kein Todestag sondern nur der Sterbezeitraum bekannt sein, ist hier der Tag mitzuteilen, an dem der Verstorbene mit Sicherheit tot war.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="mitSicherheitTotUhrzeit"
+                                                type="xpersonenstand:UhrzeitPersonenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Sollte kein Todestag sondern nur der Sterbezeitraum bekannt sein, ist hier die Uhrzeit mitzuteilen, zu der der Verstorbene mit Sicherheit tot war.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="sterbeort">
+                     <xs:annotation>
+                        <xs:documentation>Angaben zum Sterbeort</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="strasse" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>In diesem Element wird der Name / die Bezeichnung einer Straße übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="hausnummer" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Zur Hausnummer zählen auch Zusatzangaben aus Buchstaben (123a) oder Bereichsangaben (12...17).</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ort" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Es ist die amtlich festgelegte Schreibweise des Geburtsortes zu übermitteln.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ortsteil" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Die Angabe des Ortsteils ist nur bei entsprechender landesrechtlicher Vorgabe erforderlich.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Die Kreisbezeichnung wird nur angegeben, um Städte mit gleichem Städtenamen unterscheiden zu können, z. B. beim Städtenamen Neustadt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="verstorbener">
+                     <xs:annotation>
+                        <xs:documentation>Angaben zum Verstorbenen</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="xpersonenstand:Anz2StA.Person">
+                              <xs:sequence>
+                                 <xs:element name="familienstand"
+                                             minOccurs="0"
+                                             type="xpersonenstand:Code.FamilienstandPersonenstandswesen"/>
+                                 <xs:element name="eintragReligionVerstorbener"
+                                             minOccurs="0"
+                                             fixed="false"
+                                             type="xs:boolean">
+                                    <xs:annotation>
+                                       <xs:documentation>Mit diesem Element kann angegeben werden, ob die Religion des Verstorbenen eingetragen werden soll.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="religionVerstorbener"
+                                             minOccurs="0"
+                                             type="xoev-lc:String.Latin">
+                                    <xs:annotation>
+                                       <xs:documentation>Die Angabe über die Religionszugehörigkeit des Verstorbenen.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="berufVerstorbener" minOccurs="0" type="xoev-lc:String.Latin">
+                                    <xs:annotation>
+                                       <xs:documentation>Die Angabe über den Beruf des Verstorbenen.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="letzterWohnsitz"
+                                             minOccurs="0"
+                                             type="xpersonenstand:Portal2StA.Anschrift"/>
+                                 <xs:element name="geburtseintragBehoerde"
+                                             minOccurs="0"
+                                             type="xoev-lc:String.Latin">
+                                    <xs:annotation>
+                                       <xs:documentation>Der Name der Behörde, in dem die Geburt beurkundet wurde.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="geburtseintragNummer"
+                                             minOccurs="0"
+                                             type="xoev-lc:String.Latin">
+                                    <xs:annotation>
+                                       <xs:documentation>Die laufende Eintragsnummer der Geburt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="erstbeurkundungsjahrGeburt" minOccurs="0" type="xs:gYear">
+                                    <xs:annotation>
+                                       <xs:documentation>Das Jahr der Erstbeurkundung der Geburt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="partnerDesVerstorbenen" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>War der Verstorbene verheiratet oder führte eine Lebenspartnerschaft können hier Angaben zum hinterbliebenen Ehegatten bzw. Lebenspartner gemacht werden. War der Verstorbene verwitwet oder die Lebenspartnerschaft durch Tod aufgelöst, können hier die Angaben zum letzten Ehegatten bzw. Lebenspartner gemacht werden.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorname" minOccurs="0" type="xoev-lc:String.Latin"/>
+                           <xs:element name="familienname" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Hier wird der Familienname übermittelt. In den Fällen in denen der Vorname des Partners des Verstorbenen nicht identifiziert werden kann oder nicht existiert, wird der Name vollständig in diesem Element übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburtsname" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Der Geburtsname ist nur anzugeben, wenn er vom Familiennamen abweicht.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geschlecht"
+                                       minOccurs="0"
+                                       type="xpersonenstand:Code.Geschlecht"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="auskunftsgeber" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Angaben zum Auskunftgeber</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="vorname" minOccurs="0" type="xoev-lc:String.Latin"/>
+                           <xs:element name="familienname" minOccurs="0" type="xoev-lc:String.Latin"/>
+                           <xs:element name="geburtsname" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Der Geburtsname ist nur anzugeben, wenn er vom Familiennamen abweicht.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="anschrift"
+                                       minOccurs="0"
+                                       type="xpersonenstand:Portal2StA.Anschrift"/>
+                           <xs:element name="kontaktdaten"
+                                       maxOccurs="unbounded"
+                                       type="xikomm:Kommunikation"/>
+                           <xs:element name="verhaeltnisVerstorbener"
+                                       minOccurs="0"
+                                       type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Angaben über das verwandtschaftliche Verhältnis des Auskunftgebers zum Verstorbenen (z.B. Sohn, Ehefrau, etc.).</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="anzahlKinderVolljaehrig"
+                              minOccurs="0"
+                              type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Die Zahl der volljährigen Kinder des Verstorbenen</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anzahlKinderMinderjaehrig"
+                              minOccurs="0"
+                              type="xs:nonNegativeInteger">
+                     <xs:annotation>
+                        <xs:documentation>Die Zahl der minderjährigen Kinder des Verstorbenen</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="artDerBestattung"
+                              minOccurs="0"
+                              type="xpersonenstand:Code.Bestattungsart">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann die Art der Bestattung übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zahlDerUrkunden" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann die gewünschte Zahl der Sterbeurkunden angegeben werden</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="zahlDerUrkundenStandard"
+                                       minOccurs="0"
+                                       type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die gewünschte Zahl der Urkunden im Standardformat (DIN A4).</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zahlDerUrkundenStammbuch"
+                                       minOccurs="0"
+                                       type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die gewünschte Zahl der Urkunden im Stammbuchformat.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zahlDerUrkundenMehrsprachig"
+                                       minOccurs="0"
+                                       type="xs:nonNegativeInteger">
+                              <xs:annotation>
+                                 <xs:documentation>Die gewünschte Zahl der internationalen Urkunden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="angabenVermoegen" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt können hier Angaben zu den Vermögenswerten (Haus, Barvermögen, o. Ä.) des Verstorbenen gemacht werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheLpVerstorbener" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Wenn der Verstorbene zum Zeitpunkt des Todes verheiratet, verwitwet oder geschieden war oder in eingetragener Lebenspartnerschaft lebte oder die Lebenspartnerschaft aufgelöst war, werden hier die Angaben zur Eheschließung bzw. zur Begründung der Lebenspartnerschaft gemacht.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="tagEheLpVerstorbener" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Es wird kein Datum übermittelt, wenn es nur teilbekannt ist. Teilbekannt ist das Datum bspw. wenn zwar das Jahr und der Monat bekannt sind, der Tag aber unbekannt ist.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="ortEheLpVerstorbener" minOccurs="0">
+                              <xs:annotation>
+                                 <xs:documentation>Im Kontext der Voranzeigen werden mit diesem Datentyp Ortsangaben zu Personenstandsfällen übermittelt.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="ort" minOccurs="0" type="xoev-lc:String.Latin">
+                                       <xs:annotation>
+                                          <xs:documentation>Die allgemein übliche deutsche Bezeichnung des Ereignisortes.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+                                       <xs:annotation>
+                                          <xs:documentation>Die Kreisbezeichnung wird nur angegeben, um Städte mit gleichem Städtenamen unterscheiden zu können, z. B. beim Städtenamen Neustadt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="staat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier kann der Staat genannt werden, in dem der Ort liegt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="eheLpeintragBehoerde"
+                                       minOccurs="0"
+                                       type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Der Name der Behörde, in dem die Ehe geschlossen bzw. die Lebenspartnerschaft begründet wurde</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="eheLpeintragNummer" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Die laufende Eintragsnummer der Ehe bzw. der Lebenspartnerschaft.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="erstbeurkundungsjahrEheLp" minOccurs="0" type="xs:gYear">
+                              <xs:annotation>
+                                 <xs:documentation>Das Jahr der Erstbeurkundung der Ehe bzw. Lebenspartnerschaft.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="aufloesungEheLpVerstorbener" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Hier können Angaben zur Auflösung der Ehe oder Lebenspartnerschaft des Verstorbenen übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="todestagPartner" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Hier kann der Todestag des verstorbenen Ehegatten oder Lebenspartners angegeben werden. Es wird kein Sterbedatum übermittelt, wenn es nur teilbekannt ist. Teilbekannt ist das Sterbedatum bspw. wenn zwar das Jahr und der Monat bekannt sind, der Tag aber unbekannt ist.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="sterbeortPartner" minOccurs="0">
+                              <xs:annotation>
+                                 <xs:documentation>Der Sterbeort des vorverstorbenen Ehegatten oder Lebenspartners.</xs:documentation>
+                              </xs:annotation>
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="ort" minOccurs="0" type="xoev-lc:String.Latin">
+                                       <xs:annotation>
+                                          <xs:documentation>Die allgemein übliche deutsche Bezeichnung des Ereignisortes.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+                                       <xs:annotation>
+                                          <xs:documentation>Die Kreisbezeichnung wird nur angegeben, um Städte mit gleichem Städtenamen unterscheiden zu können, z. B. beim Städtenamen Neustadt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="staat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier kann der Staat genannt werden, in dem der Ort liegt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="sterbeeintragPartnerBehoerde"
+                                       minOccurs="0"
+                                       type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Der Name der Behörde, die den Tod des Ehegatten oder Lebenspartners beurkundet hat.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="erstbeurkundungsjahrTodPartner" minOccurs="0" type="xs:gYear">
+                              <xs:annotation>
+                                 <xs:documentation>Das Jahr der Erstbeurkundung des Todes des Ehegatten oder Lebenspartners.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="sterbeeintragNummerPartner"
+                                       minOccurs="0"
+                                       type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Die laufende Eintragsnummer des Sterbeeintrags des Ehegatten oder Lebenspartners.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="tagAufloesungGerichtEheLp"
+                                       minOccurs="0"
+                                       type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Das Wirksamkeitsdatum der Auflösung der Ehe oder Lebenspartnerschaft durch Gerichtsentscheid.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="aufloesungBehoerde" minOccurs="0" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Der Name des Gerichts, welches die Scheidung der Ehe oder die Aufhebung der Lebenspartnerschaft entschieden hat.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="portal2StA.Sterbefall.084030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Portal</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 62 PStG i.V.m. § 55 PStG</rechtsgrundlage>
+            <title>Anforderung von Urkunden aus dem Sterberegister</title>
+         </xs:appinfo>
+         <xs:documentation>Nachricht zur Anforderung von Urkunden aus dem Sterberegister.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="antragsteller"
+                              type="xpersonenstand:Urkundenanforderung.Antragssteller">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zum Antragsteller übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="modalitaeten"
+                              minOccurs="0"
+                              type="xpersonenstand:Urkundenanforderung.Modalitaeten">
+                     <xs:annotation>
+                        <xs:documentation>Dieser Feld dient zur Übermittlung der Modalitäten einer Urkundenanforderung, namentlich ob die Urkunden im Standesamt abgeholt werden und wie sie bezahlt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="verwendungszweck" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann optional der Verwendungszweck angegeben werden, für den die Urkunden bestellt werden. Damit kann das Standesamt prüfen, ob die bestellten Urkunden zum Verwendungszweck passen, und gegebenefalls fälschliche Urkundenausstellungen verhindern.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beurkundeterSterbefall">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Daten zur beurkundeten Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:complexContent>
+                           <xs:extension base="xpersonenstand:Urkundenanforderung.BeurkundetesEreignis">
+                              <xs:sequence>
+                                 <xs:element name="sterbedatum" minOccurs="0" type="xida:Tagesdatum">
+                                    <xs:annotation>
+                                       <xs:documentation>Hier wird das Sterbedatum übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                                 <xs:element name="sterbeort" type="xoev-lc:String.Latin">
+                                    <xs:annotation>
+                                       <xs:documentation>Hier wird das Sterbeort übermittelt.</xs:documentation>
+                                    </xs:annotation>
+                                 </xs:element>
+                              </xs:sequence>
+                           </xs:extension>
+                        </xs:complexContent>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="artDerUrkunde"
+                              type="xpersonenstand:Urkundenanforderung.ArtDerUrkunde.Erweitert">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Angaben zur Art und Anzahl der auszustellenden Urkunden übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

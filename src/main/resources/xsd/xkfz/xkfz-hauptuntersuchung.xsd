@@ -1,0 +1,833 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" xmlns:auskunft="http://www.kba.de/zfzr/auskunft" xmlns:el="http://www.kba.de/elemente" xmlns:typ="http://www.kba.de/typen" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe HU- UND SP-DATUM, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:import schemaLocation="Elementdefinitionen.xsd" namespace="http://www.kba.de/elemente" />
+  <xs:import schemaLocation="Typdefinitionen.xsd" namespace="http://www.kba.de/typen" />
+  <xs:import schemaLocation="StrukturelementeAuskunft.xsd" namespace="http://www.kba.de/zfzr/auskunft" />
+  <xs:complexType name="Type.AnfrageUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Anfrage von Daten zu einer Hauptuntersuchung oder Sicherheitsprüfung an das Zentrale Fahrzeugregister (ZFZR)</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="zusatzprotokollierung" type="auskunft:ZusatzprotokollierungAnlass0">
+        <xs:annotation>
+          <xs:documentation>Daten der Zusatzprotokollierung gem. § 41 FZV.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="schluesselnummerUeberwachungsinstitutionOderZDK" type="xkfz:Code.SchluesselnummerDerUeberwachungsinstitutionOderZDK">
+        <xs:annotation>
+          <xs:documentation>Schluesselnummer der Überwachungsinstitution bzw. Gemeinschaftseinrichtung der anerkannten Werkstätten, bei welcher die Untersuchung/Prüfung durchgeführt wurde, gem. XKfz-Codeliste.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:KontrollnummerSP" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kontrollnummer der anerkannten Kraftfahrzeugwerkstatt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="artDerUntersuchung" type="xkfz:Code.ArtDerUntersuchung">
+        <xs:annotation>
+          <xs:documentation>Art der technischen Untersuchung (Hauptuntersuchung oder Sicherheitsprüfung). Code der Schlüsseltabelle Art der Untersuchung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="fahrzeugidentifizierungsnummer" type="typ:typ-Fahrzeugidentifizierungsnummer">
+        <xs:annotation>
+          <xs:documentation>Fahrzeug-Identifizierungsnummer des untersuchten Fahrzeugs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="kennzeichen" minOccurs="0" type="typ:typ-KennzeichenHUSP">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen des untersuchten Fahrzeugs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Berichtsnummer" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Nummer des Untersuchungsberichts bzw. Prüfprotokolls.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="Type.Anfragedaten">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung der Daten der ursprünglichen Anfrage in einer Auskunft</xs:documentation>
+    </xs:annotation>
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="500" />
+      <xs:minLength value="1" />
+      <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="Type.AuskunftDetails">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung von Details zur Auskunft</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="anfragedaten" type="xkfz:Type.Anfragedaten">
+        <xs:annotation>
+          <xs:documentation>Die Daten der Anfrage, einschließlich der Daten zur Zusatzprotokollierung werden zur Kontrolle in Zeilenform, jeweils getrennt durch Semikolon, übermittelt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.AuskunftUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Auskunft über eine Hauptuntersuchung oder Sicherheitsprüfung aus dem Zentralen Fahrzeugregister (ZFZR)</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="auskunftDetails" type="xkfz:Type.AuskunftDetails">
+        <xs:annotation>
+          <xs:documentation>Details zur Auskunft. Anfragedaten.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="untersuchungsabschnitt" type="xkfz:Type.Untersuchungsabschnitt">
+        <xs:annotation>
+          <xs:documentation>Untersuchungsabschnitt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.BasisDatumHauptuntersuchung">
+    <xs:annotation>
+      <xs:documentation>Basisdatenstruktur für die Anfrage und Übermittlung des (Fälligkeits-)Datums der nächsten Hauptuntersuchung. Es müssen stets die Schlüsseldaten (Fahrzeugidentifizierungsnummer, Herstellerschlüssel und Erstzulassungsdatum) angegeben werden. Die Angabe des Kennzeichens erfolgt optional.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugidentifizierungsnummer (FIN)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:SchluesselHersteller">
+        <xs:annotation>
+          <xs:documentation>Herstellerschlüssel (HSN)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:DatumErstzulassung">
+        <xs:annotation>
+          <xs:documentation>Datum der ersten Zulassung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Kennzeichen" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kennzeichen</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:TextHersteller" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Text Hersteller</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.DatenPruefziffer">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung einer HU-/SP-Prüfziffer sowie der Daten zu deren Generierung.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="fahrzeugidentifizierungsnummer" type="xkfz:Type.Fahrzeugidentifizierungsnummer17">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugidentifizierungsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="monatJahrErstzulassung" type="xkfz:Type.MonatJahr">
+        <xs:annotation>
+          <xs:documentation>Jahr und Monat der Erstzulassung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="datumUntersuchung" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Datum an dem die Untersuchung/Prüfung durchgeführt wurde.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="merkmalBestanden" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Merkmal, ob die Untersuchung/Prüfung bestanden wurde:
+true= bestanden
+false= nicht bestanden</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:choice>
+        <xs:annotation>
+          <xs:documentation>Struktur zur Unterscheidung der Datum der nächsten Untersuchung oder Prüfung.</xs:documentation>
+        </xs:annotation>
+        <xs:element ref="el:NaechsteHauptuntersuchung">
+          <xs:annotation>
+            <xs:documentation>Datum der nächsten Hauptuntersuchung</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+        <xs:element ref="el:NaechsteSicherheitspruefung">
+          <xs:annotation>
+            <xs:documentation>Datum der nächsten Sicherheitsprüfung</xs:documentation>
+          </xs:annotation>
+        </xs:element>
+      </xs:choice>
+      <xs:element name="schluesselnummerUeberwachungsinstitutionOderZDK" type="xkfz:Code.SchluesselnummerDerUeberwachungsinstitutionOderZDK">
+        <xs:annotation>
+          <xs:documentation>Schluesselnummer der Überwachungsinstitution bzw. Gemeinschaftseinrichtung der anerkannten Werkstätten, bei welcher die Untersuchung/Prüfung durchgeführt wurde, gem. XKfz-Codeliste.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="pruefziffer" minOccurs="0" type="xkfz:Type.Pruefziffer">
+        <xs:annotation>
+          <xs:documentation>Inaktive (noch nicht produktiv genutzte) HU-/SP-Prüfziffer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.DatumHauptuntersuchung">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur zur Übermittlung des (Fälligkeits-)Datums der nächsten Hauptuntersuchung und ggf. auch der nächsten Sicherheitsprüfung</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.BasisDatumHauptuntersuchung">
+        <xs:sequence>
+          <xs:element ref="el:NaechsteHauptuntersuchung">
+            <xs:annotation>
+              <xs:documentation>Nächste Hauptuntersuchung</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element ref="el:NaechsteSicherheitspruefung" minOccurs="0">
+            <xs:annotation>
+              <xs:documentation>Nächste Sicherheitsprüfung</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.AenderungWirkdatumSchluesselPruefziffer.0307">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.aenderungwirkdatumschluesselpruefziffer.0307'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:schluesselPruefziffer">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0307'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.AnfrageDatumHauptuntersuchung.0301">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.anfragedatumhauptuntersuchung.0301'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:datumHauptuntersuchungAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0301'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.AnfragePruefziffer.0308">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.anfragepruefziffer.0308'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:datenPruefziffer">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0308'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.AnfrageSchluesselPruefziffer.0305">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.anfrageschluesselpruefziffer.0305'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:schluesselPruefziffer">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0305'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.AnfrageTechnischeUntersuchungZFZR.0312">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.anfragetechnischeuntersuchungzfzr.0312'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:anfrageUntersuchungZFZR">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0312'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.AuskunftTechnischeUntersuchungZFZR.0313">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.auskunfttechnischeuntersuchungzfzr.0313'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:auskunftUntersuchungZFZR">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0313'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.ErgebnisDatumHauptuntersuchung.0302">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.ergebnisdatumhauptuntersuchung.0302'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:datumHauptuntersuchung">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0302'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.ErgebnisPruefziffer.0309">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.ergebnispruefziffer.0309'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:datenPruefziffer">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0309'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.ErgebnisSchluesselPruefziffer.0306">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.ergebnisschluesselpruefziffer.0306'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:schluesselPruefziffer">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0306'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.MitteilungTechnischeUntersuchung.0303">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.mitteilungtechnischeuntersuchung.0303'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:mitteilungUntersuchungZFZR">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0303'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.MitteilungTechnischeUntersuchungZS.0310">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.mitteilungtechnischeuntersuchungzs.0310'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:mitteilungUntersuchungZS">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0310'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.StornierungTechnischeUntersuchung.0304">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.stornierungtechnischeuntersuchung.0304'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:stornierungUntersuchungZFZR">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0304'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Hauptuntersuchung.StornierungTechnischeUntersuchungZS.0311">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'hauptuntersuchung.stornierungtechnischeuntersuchungzs.0311'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:stornierungUntersuchungZS">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0311'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.MitteilungUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung von Daten zu einer Hauptuntersuchung oder Sicherheitsprüfung an das Zentrale Fahrzeugregister (ZFZR).</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="identifizierungFahrzeug" type="xkfz:Type.IdentifizierungFahrzeug">
+        <xs:annotation>
+          <xs:documentation>Fahrzeug beschreibende Daten, welche bei einer HU/SP erfasst wurden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="beschreibungFahrzeug" minOccurs="0" type="xkfz:Type.BeschreibungFahrzeug">
+        <xs:annotation>
+          <xs:documentation>Daten, welche das betroffene Fahrzeug näher beschreiben</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="identifizierungUntersuchung" type="xkfz:Type.IdentifizierungUntersuchung">
+        <xs:annotation>
+          <xs:documentation>Daten, welche die betroffene Untersuchung bzw. Prüfung identifizieren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ergebnisUntersuchung" type="xkfz:Type.ErgebnisUntersuchung">
+        <xs:annotation>
+          <xs:documentation>Ergebnisse und Messwerte der Untersuchung bzw. Prüfung</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="listeMaengel" minOccurs="0" type="xkfz:Type.ListeMaengel">
+        <xs:annotation>
+          <xs:documentation>Liste über die bei einer Hauptuntersuchung festgestellten Mängel gem. Mangelbaum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="listeMonetaereEinnahmen" minOccurs="0" type="xkfz:Type.ListeMonetaereEinnahmen">
+        <xs:annotation>
+          <xs:documentation>Liste über die Entgelte und Gebühren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="listeHinweise" minOccurs="0" type="xkfz:Type.ListeHinweise">
+        <xs:annotation>
+          <xs:documentation>Liste zur Übermittlung von weiteren Hinweisen über die in der Zukunft durch Verschleiß, Korrosion oder andere Umstände sich abzeichnende Mängel.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.MitteilungUntersuchungZS">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung von Daten zu einer Hauptuntersuchung oder Sicherheitsprüfung an die Zentrale Stelle (ZS)</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="identifizierungFahrzeug" type="xkfz:Type.IdentifizierungFahrzeugZS">
+        <xs:annotation>
+          <xs:documentation>Fahrzeug beschreibende Daten, welche bei einer HU erfasst wurden.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="beschreibungFahrzeug" type="xkfz:Type.BeschreibungFahrzeugZS">
+        <xs:annotation>
+          <xs:documentation>Daten, welche das betroffene Fahrzeug näher beschreiben.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="identifizierungUntersuchung" type="xkfz:Type.IdentifizierungUntersuchungZS">
+        <xs:annotation>
+          <xs:documentation>Daten, welche die betroffene Untersuchung identifizieren.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ergebnisUntersuchung" type="xkfz:Type.ErgebnisUntersuchungZS">
+        <xs:annotation>
+          <xs:documentation>Ergebnisse und Messwerte der Untersuchung bzw. Prüfung.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="listeMaengel" minOccurs="0" type="xkfz:Type.ListeMaengel">
+        <xs:annotation>
+          <xs:documentation>Liste über die bei einer Hauptuntersuchung festgestellten Mängel gem. Mangelbaum.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="listeUmruestungen" minOccurs="0" type="xkfz:Type.ListeUmruestungen">
+        <xs:annotation>
+          <xs:documentation>Benennung zu jeder festgestellten Rück- oder Hochrüstung des Fahrzeugs</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="technischePruefergebnisse" minOccurs="0" type="xs:base64Binary">
+        <xs:annotation>
+          <xs:documentation>Technische Prüfergebnisse in Base64-Kodierung. Den Inhalt beschreibt das Dokument der ZS: "Kombinierte Bereitstellung aller technischen Prüfergebnisse". Eine API-Funktion in der Software der ZS exportiert dafür die technischen Ergebnisse der durchgeführten Prüfverfahren in ein Datenpaket. Die Datenpakete sollen anschließend für Auswertungen für den Verordnungsgeber bzw. zur Optimierung der Prüfverfahren möglichst zügig an die Zentrale Stelle übermittelt werden. FSD.HU21 API: IFsdHu21Job.GetResults(ResultType.TechnicalInspectionResults)
+Bitte beachten Sie, dass der Rückgabewert der FSD.HU21-API-Funktion vom Datentyp Bytearray ist und dieser für die Datenübertragung im XML-Format mittels Base64 kodiert werden muss.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.SchluesselPruefziffer">
+    <xs:annotation>
+      <xs:documentation>Datenstruktur zur Generierung, Übermittlung und Änderung eines Schlüssels zur Prüfzifferngenerierung.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="untersuchungsstelle" type="xkfz:Type.Untersuchungsstelle">
+        <xs:annotation>
+          <xs:documentation>Untersuchungsstelle welche die Anfrage stellt</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="wirkdatum" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Datum an dem ein Schlüssel zur Generierung einer HU- / SP-Prüfziffer vsl. aktiviert wird.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="schluessel" minOccurs="0" type="xkfz:Type.Pruefziffer">
+        <xs:annotation>
+          <xs:documentation>Schüssel zur Generierung einer HU- / SP-Prüfziffer. Wird nur durch das KBA gesetzt.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="ablaufdatum" minOccurs="0" type="xs:date">
+        <xs:annotation>
+          <xs:documentation>Datum an dem ein Schlüssel abläuft.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.StornierungUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung einer Stornierung für einen HU-/SP-Eintrag im ZFZR.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="identifizierungFahrzeug" type="xkfz:Type.IdentifizierungFahrzeug">
+        <xs:annotation>
+          <xs:documentation>Daten, welche das betroffene Fahrzeug identifizieren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="identifizierungUntersuchung" type="xkfz:Type.IdentifizierungUntersuchung">
+        <xs:annotation>
+          <xs:documentation>Daten, welche die betroffene Untersuchung bzw. Prüfung identifizieren</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.StornierungUntersuchungZS">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung einer Stornierung für einen HU-Eintrag in der ZS.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="identifizierungUntersuchung" type="xkfz:Type.IdentifizierungUntersuchungStornierungZS">
+        <xs:annotation>
+          <xs:documentation>Daten, welche die betroffene Untersuchung bzw. Prüfung identifizieren.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="anfrageUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.anfragetechnischeuntersuchungzfzr.0312'. Diese Datenstruktur wird im Rahmen der Anfrage von Daten zu Hauptuntersuchungen und Sicherheitsprüfungen an das Zentrale Fahrzeugregister (ZFZR) verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageUntersuchungZFZR" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auskunftUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.auskunfttechnischeuntersuchungzfzr.0313'. Diese Datenstruktur wird im Rahmen der Auskunft zu Hauptuntersuchungen und Sicherheitsprüfungen aus dem Zentrale Fahrzeugregister (ZFZR) verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AuskunftUntersuchungZFZR" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="datenPruefziffer">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.anfragepruefziffer.0308' und 'hauptuntersuchung.ergebnispruefziffer.0309'. Diese Datenstruktur wird im Rahmen der Erprobung der Gernerieung  Daten von Hauptuntersuchungen und Sicherheitsprüfungen an das Zentrale Fahrzeugregister (ZFZR) verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.DatenPruefziffer" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="datumHauptuntersuchung">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.ergebnisdatumhauptuntersuchung.0302'. Diese Datenstruktur wird im Rahmen der Übermittlung des (Fälligkeits-)Datums der nächsten Hauptuntersuchung verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.DatumHauptuntersuchung" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="datumHauptuntersuchungAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.anfragedatumhauptuntersuchung.0301'. Diese Datenstruktur wird im Rahmen Anfrage nach dem (Fälligkeits-)Datum der nächsten Hauptuntersuchung verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.BasisDatumHauptuntersuchung" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mitteilungUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.mitteilungtechnischeuntersuchungzfzr.0303'. Diese Datenstruktur wird im Rahmen der Übermittlung der Daten von Hauptuntersuchungen und Sicherheitsprüfungen an das Zentrale Fahrzeugregister (ZFZR) verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.MitteilungUntersuchungZFZR" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="mitteilungUntersuchungZS">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.mitteilungtechnischeuntersuchungzs.0310'. Diese Datenstruktur wird im Rahmen der regelmäßigen Übermittlung der Daten von Hauptuntersuchungen an die Zentrale Stelle (ZS) verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.MitteilungUntersuchungZS" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="schluesselPruefziffer">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.anfrageschluesselpruefziffer.0305', 'hauptuntersuchung.ergebnisschluesselpruefziffer.0306', 'hauptuntersuchung.aenderungwirkdatumschluesselpruefziffer.0307'. Diese Datenstruktur wird im Rahmen der Generierung eines Schlüssels, welcher wiederum zur Generierung der HU-/SP-Prüfziffer dient, sowie zur Änderung des Zeitpunktes, an welchem der Schlüssel produktive Verwendung finden soll (Wirkdatum).</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.SchluesselPruefziffer" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stornierungUntersuchungZFZR">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.stornierungtechnischeuntersuchungzfzr.0304'. Diese Datenstruktur veranlasst eine Stornierung eines im Rahmen der Übermittlung der Daten von Hauptuntersuchungen und Sicherheitsprüfungen an das Zentrale Fahrzeugregister (ZFZR) gesendeten Datensatzes.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.StornierungUntersuchungZFZR" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="stornierungUntersuchungZS">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'hauptuntersuchung.stornierungtechnischeuntersuchungzs.0311'. Diese Datenstruktur veranlasst eine Stornierung eines im Rahmen der Übermittlung der Daten von Hauptuntersuchungen an die Zentrale Stelle (ZS) gesendeten Datensatzes.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.StornierungUntersuchungZS" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.anfragedatumhauptuntersuchung.0301">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Übermittlung HU- und SP-Datum', vgl. Verweis zu XKfz-Nachricht 0301 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.AnfrageDatumHauptuntersuchung.0301" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.ergebnisdatumhauptuntersuchung.0302">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Auskunft Übermittlung HU- und SP-Datum', vgl. Verweis zu XKfz-Nachricht 0302 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.ErgebnisDatumHauptuntersuchung.0302" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.mitteilungtechnischeuntersuchung.0303">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übermittlung von HU- oder SP-Daten', vgl. Verweis zu XKfz-Nachricht 0303 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.MitteilungTechnischeUntersuchung.0303" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.stornierungtechnischeuntersuchung.0304">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Stornierung von bereits gespeichert HU- und SP-Daten', vgl. Verweis zu XKfz-Nachricht 0304 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.StornierungTechnischeUntersuchung.0304" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.anfrageschluesselpruefziffer.0305">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Übermittlung eines Schlüssels', vgl. Verweis zu XKfz-Nachricht 0305 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.AnfrageSchluesselPruefziffer.0305" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.ergebnisschluesselpruefziffer.0306">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Auskunft Übermittlung eines Schlüssels', vgl. Verweis zu XKfz-Nachricht 0306 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.ErgebnisSchluesselPruefziffer.0306" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.aenderungwirkdatumschluesselpruefziffer.0307">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zur Änderung des Wirkdatums eines Schlüssels', vgl. Verweis zu XKfz-Nachricht 0307 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.AenderungWirkdatumSchluesselPruefziffer.0307" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.anfragepruefziffer.0308">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zur HU- / SP-Prüfzifferngenerierung', vgl. Verweis zu XKfz-Nachricht 0308 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.AnfragePruefziffer.0308" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.ergebnispruefziffer.0309">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis der HU- / SP-Prüfzifferngenerierung', vgl. Verweis zu XKfz-Nachricht 0309 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.ErgebnisPruefziffer.0309" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.mitteilungtechnischeuntersuchungzs.0310">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Anlage VIIIe (zu Anlage VIIIa Nr. 1 und 3 sowie Anlage VIIIb Nr. 2.3) StVZO</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übermittlung von HU-Daten (an die Zentrale Stelle)', vgl. Verweis zu XKfz-Nachricht 0310 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.MitteilungTechnischeUntersuchungZS.0310" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.stornierungtechnischeuntersuchungzs.0311">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Dritte Verordnung zur Änderung der Fahrzeug-Zulassungsverordnung und anderer straßenverkehrsrechtlicher Vorschriften</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Stornierung bereits gespeicherter HU-Daten (der Zentralen Stelle)', vgl. Verweis zu XKfz-Nachricht 0311 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.StornierungTechnischeUntersuchungZS.0311" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.anfragetechnischeuntersuchungzfzr.0312">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Sechstes Gesetz zur Änderung des Straßenverkehrsgesetzes und anderer Gesetze.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage von Daten zur Hauptuntersuchung oder Sicherheitsprüfung an das ZFZR', vgl. Verweis zu XKfz-Nachricht 0312 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.AnfrageTechnischeUntersuchungZFZR.0312" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="hauptuntersuchung.auskunfttechnischeuntersuchungzfzr.0313">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Sechstes Gesetz zur Änderung des Straßenverkehrsgesetzes und anderer Gesetze.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Auskunft zur Hauptuntersuchung oder Sicherheitsprüfung aus dem ZFZR', vgl. Verweis zu XKfz-Nachricht 0313 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Hauptuntersuchung.AuskunftTechnischeUntersuchungZFZR.0313" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

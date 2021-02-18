@@ -1,0 +1,1608 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xmeld="http://www.osci.de/xmeld243"
+           xmlns:xiaz="http://www.osci.de/xinneres/azrnummer/1"
+           xmlns:xibehoerde="http://www.osci.de/xinneres/behoerde/4"
+           xmlns:xicgvz="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xilb="http://www.osci.de/xinneres/lichtbild/1"
+           xmlns:xima="http://www.osci.de/xinneres/meldeanschrift/3"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://www.osci.de/xmeld243"
+           version="2.4.3"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XMeld</nameLang>
+            <nameKurz>XMeld</nameKurz>
+            <nameTechnisch>xinneres.xmeld</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xmeld</kennung>
+            <beschreibung>OSCI–XMeld ist das XInneres-Fachmodul der Innenverwaltung für den elektronischen Datenaustausch
+im Meldewesen und mit dem Meldewesen. Es ist Kern eines elektronischen Informationsverbundes zwischen
+den Meldebehörden und den Kommunikationspartnern der Meldebehörden. Weitere Bestandteile
+des elektronischen Informationsverbundes sind die Intermediäre und Clearingstellenbetreiber, deren
+Aufgabe die Übermittlung und Zustellung der XMeld-Nachrichten ist. Für die Übermittlung wird OSCITransport
+genutzt. Für die Zustellung und Adressierung der XMeld-Nachrichten das Deutsche Verwaltungsdienste-
+Verzeichnis (DVDV).
+Entwickelt wird OSCI–XMeld durch ein Expertengremium mit Vertreterinnen und Vertretern aus der
+Verwaltung und von Verfahrensherstellern. Die Koordnierungsstelle für IT-Standards (KoSIT) ist dabei
+federführend. Auftraggeber für die Erstellung und Weiterentwicklung ist der Arbeitskreis I (AK I) der
+Innenministerkonferenz (IMK).
+Seit 2007 ist OSCI–XMeld im praktischen Einsatz für die Kommunikation von und mit den Meldebehörden
+und wird seit dem kontinuierlich weiterentwickelt und an geänderte rechtliche Vorgaben angepasst.
+Zur Einführung des Bundesmeldegesetzes wurde OSCI–XMeld vollständig überarbeitet und setzt die
+Anforderungen des Bundesmeldegesetzes in der praktischen Datenübermittlung um.</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>2.4.3</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xmeld-nachrichten-basistypen.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/azrnummer/1/xinneres-azrnummer.xsd"
+              namespace="http://www.osci.de/xinneres/azrnummer/1"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/behoerde/4/xinneres-behoerde.xsd"
+              namespace="http://www.osci.de/xinneres/behoerde/4"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2/xinneres-codes-gemeindeverzeichnis.xsd"
+              namespace="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/lichtbild/1/xinneres-lichtbild.xsd"
+              namespace="http://www.osci.de/xinneres/lichtbild/1"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/meldeanschrift/3/xinneres-meldeanschrift.xsd"
+              namespace="http://www.osci.de/xinneres/meldeanschrift/3"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="type.Aussteuerung.Identifikation.Person">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zur ausgesteuerten Suchanfrage</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die Identifikationsdaten der betroffenen Person übermittelt. Sie können entweder aus Personendaten oder aus Daten zum Ordnungsmerkmal bestehen.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="personendaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Personendaten der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="name" type="xmeld:type.NameNatuerlichePerson">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Namen zu betroffenen Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsdatum" type="xmeld:type.Geburtsdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das Geburtsdatum der betroffenen Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anschrift" type="xmeld:type.AnschriftMelderecht.Inland">
+                     <xs:annotation>
+                        <xs:documentation>In diesem Element kann die Anschrift der betroffenen Person zur Identifikation angegeben werden. Es ist die in der Anfrage angegebene Anschrift anzugeben. Ist keine Anschrift in der Suchanfrage vorhanden, ist die Anschrift der aktuellen hauptwohnung oder alleinigen_wohnung oder nebenwohnung bzw. die Wegzugsanschrift anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="datenZumOrdnungsmerkmal">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann ein Ordnungsmerkmal sowie die Gemeinde zur betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="ordnungsmerkmal" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann ein Ordnungsmerkmal zur betroffenen Person übermittelt werden..</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="gemeinde"
+                              type="xicgvz:Code.GemeindeVZ.AmtlicherGemeindeschluessel">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann der AGS der Gemeinde übermittelt werden, in der die betroffene Person gemeldet ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Abrufdaten">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Abrufdaten zum Datenabruf nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die Abrufdaten zum Datenabruf übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="personendaten" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="name"
+                              minOccurs="0"
+                              type="xmeld:type.NameNatuerlichePersonMitNachweis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können die Namen zur betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsangaben"
+                              minOccurs="0"
+                              type="xmeld:type.GeburtMitNachweis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können die Geburtsangaben zur betroffenen Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="wohnung"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.Behoerdenauskunft.Wohnung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können Angaben zur Wohnung der betroffenen Person oder der Zuzugsstaat (DSMeld-Blatt 1223) übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sterbedaten" minOccurs="0" type="xmeld:type.TodMitNachweis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können Sterbeinformationen zur betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="verstorben" minOccurs="0" fixed="true" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann übermittelt werden, dass die betroffene Person verstorben ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Geschlecht der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="staatsangehoerigkeit"
+                              minOccurs="0"
+                              maxOccurs="4"
+                              type="xmeld:type.Staatsangehoerigkeit">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die Staatsangehörigkeit der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="staatsangehoerigkeit.glaubhaftmachung"
+                              minOccurs="0"
+                              maxOccurs="2"
+                              type="xmeld:type.Staatsangehoerigkeit.Glaubhaftmachung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können die Informationen zur Glaubhaftmachung des Erwerbs oder des Verlusts der deutschen Staatsangehörigkeit der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ausweisdokument"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.Behoerdenauskunft.Abrufdaten.Ausweisdokument">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können Informationen zum Ausweisdokument der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="waffenrechtlicheDaten" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können Informationen zu waffenrechtlichen Daten der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:choice>
+                           <xs:element name="waffenrechtlicheErlaubnis"
+                                       maxOccurs="unbounded"
+                                       type="xmeld:type.Behoerdenauskunft.WaffenrechtlicheErlaubnisMitNachweis">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element können Informationen zur Waffenrechtlichen Erlaubnis der betroffenen Person übermittelt werden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="waffenbesitzverbot"
+                                       type="xmeld:type.WaffenbesitzverbotMitNachweis">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element können Informationen zum Waffenbesitzverbot der betroffenen Person übermittelt werden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:choice>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="sprengstoffrechtlicheErlaubnis"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.Behoerdenauskunft.SprengstoffrechtlicheErlaubnisMitNachweis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können Informationen zur Sprengstoffrechtlichen Erlaubnis der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="religionszugehoerigkeit"
+                              minOccurs="0"
+                              type="xmeld:type.Behoerdenauskunft.Religion">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können Daten zur Religionszugehörigkeit der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="auslandsanschrift"
+                              minOccurs="0"
+                              type="xmeld:type.Auslandsanschrift.Druckbild">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die Auslandsanschrift der betroffenen Person übermittelt. Dieses Element ist nur zu nutzen, wenn Auslandsanschrift (DSMeld 1233) und der Wegzugsstaat (DSMeld 1232) zusammen beauskunftet werden sollen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="familienstand"
+                              minOccurs="0"
+                              type="xmeld:type.Abruf.FamilienstandMitNachweis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element können Daten zum Familienstand der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="passversagung"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.PassversagungMitNachweis">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann übermittelt werden, dass zur betroffenen Person Pass-, Personalausweis- oder Vorläufiger Personalausweisversagungsgründe vorliegen sowie die Nachweisdaten dazu.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="optionsdeutscher"
+                              minOccurs="0"
+                              type="xmeld:type.Optionsdeutscher">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Merkmal optionsdeutscher der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anschrift3991" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die Anschrift vom 1. September 1939 übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zuzugBund" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Datum des letzten Zuzugs aus dem Ausland in die Bundesrepublik Deutschland übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zuzugLand" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Datum des Zuzugs in das Land übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zuzugKreis" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Datum des Zuzugs in den Kreis übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zuzugGemeinde" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Datum des Zuzugs in die Gemeinde übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtseintragOhneGeburtsurkunde"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die Tatsache übermittelt werden, dass zur betroffenen Person ein Eintrag im Geburtenregister erfolgt ist, aber keine Geburtsurkunde ausgestellt wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="azrNummer" minOccurs="0" type="xiaz:AZRNummer">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die AZR-Nummer der Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="gesetzlicherVertreter"
+                     minOccurs="0"
+                     maxOccurs="4"
+                     type="xmeld:type.Behoerdenauskunft.Abrufdaten.GesetzlicherVertreter">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Daten zum gesetzlichen Vertreter der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="partner"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Abrufdaten.Partner">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Daten zum Ehegatten oder Lebenspartner der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kind"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Behoerdenauskunft.Abrufdaten.Kind">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Daten zum Kind der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="identifikationsmerkmal"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Identifikationsmerkmal">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann im Falle einer Trefferliste ein Identifikationsmerkmal zum Datensatz übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zusatzfeldNachLandesrecht"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.ZusatzfeldNachLandesrecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können zusätzliche Abrufdaten übermittelt werden, die nach Landesrecht zulässig sind. Dieses Element dient nur der Übermittlung von Feldern, die nicht im bundeseinheitlichen Teil des DSMeld definiert sind.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="informationenZumOrdnungsmerkmal" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann ein Ordnungsmerkmal der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:sequence>
+                  <xs:element name="ordnungsmerkmal" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann das Ordnungsmerkmal der betroffenen Person übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="gemeindeschluessel"
+                              minOccurs="0"
+                              type="xicgvz:Code.GemeindeVZ.AmtlicherGemeindeschluessel"
+                              form="unqualified">
+                     <xs:annotation>
+                        <xs:appinfo>
+                           <implementationHint>Solange die Aktualität der verwendeten Schlüsseltabelle nicht gegeben ist, wird vollständig auf die Plausibilisierung der listVersionID verzichtet.</implementationHint>
+                        </xs:appinfo>
+                        <xs:documentation>Mit diesem Element kann der vom Statistischen Bundesamt herausgegebene bundeseinheitliche Gemeindeschlüssel der Gemeinde angegeben werden, für die das Ordnungsmerkmal der betroffenen Person gilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Abrufdaten.Ausweisdokument">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Ausweisdokument für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp ist es möglich, alle vorkommenden Ausweisarten im Kontext der Datenabrufe nach § 38 BMG abzubilden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="passart"
+                     minOccurs="0"
+                     type="xmeld:Code.Pass.und.Ausweisdokumente">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird sowohl die Art des Personalausweises, als auch die Art des Passes übermittelt (siehe DSMeld-Blatt 1700 und 1704).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gueltigkeitsdauer" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum übermittelt werden, bis zu dem das Ausweisdokument gültig ist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="seriennummer" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Seriennummer eines Ausweisdokuments (Personalausweis, Reisepass).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="behoerde" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Behörde angegeben werden, die das Ausweisdokument ausgestellt hat.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ausstellungsdatum" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum der Ausstellung des gültigen Ausweisdokumentes übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="lichtbild" minOccurs="0" type="xilb:Lichtbild">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Lichtbild des Ausweisdokuments (Personalausweis, Reisepass) übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Abrufdaten.GesetzlicherVertreter">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zum gesetzlichen Vertreter für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Informationen zum Gesetzlichen Vertreter im Kontext der Datenabrufe nach § 38 BMG abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name"
+                     minOccurs="0"
+                     type="xmeld:type.GesetzlicherVertreter.Name">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Name des gesetzlichen Vertreters angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Geburtsdatum des gesetzlichen Vertreters angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Geschlecht des gesetzlichen Vertreters angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.AnschriftMelderecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Anschrift des gesetzlichen Vertreters angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesetzlichervertreterschluessel"
+                     minOccurs="0"
+                     type="xmeld:Code.Gesetzlicher.Vertreter">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Art der gesetzlichen Vertretung angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="sterbetag" minOccurs="0" type="xmeld:type.Sterbetag">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Sterbetag des gesetzlichen Vertreters angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="tagDerBeendigung" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum übermittelt werden, an dem die gesetzliche Vertretung bzw. das Betreuungsverhältnis endet.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Abrufdaten.Kind">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zum Kind für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Informationen zum Kind im Kontext der Datenabrufe nach § 38 BMG abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name"
+                     minOccurs="0"
+                     type="xmeld:type.NameNatuerlichePerson.Kind">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Name des Kindes angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Geburtsdatum des Kindes angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Geschlecht des Kindes angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.AnschriftMelderechtOhneAusland">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Anschrift des Kindes angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="sterbetag" minOccurs="0" type="xmeld:type.Sterbetag">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Sterbetag des Kindes angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Abrufdaten.Partner">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zum Partner für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Informationen zum Partner im Kontext der Datenabrufe nach § 38 BMG abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="partnerschaftstyp"
+                     minOccurs="0"
+                     type="xmeld:Code.Ehegatte.oder.Lebenspartner">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Partnerschaftstyp angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name"
+                     minOccurs="0"
+                     type="xmeld:type.NameNatuerlichePerson.Partner">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Name des Partners angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Geburtsdatum des Partners angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Geschlecht des Partners angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="wohnung"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Behoerdenauskunft.Abrufdaten.Wohnung.Partner">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Informationen zu Wohnungen des Partners angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="sterbetag" minOccurs="0" type="xmeld:type.Sterbetag">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Sterbetag des Partners angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Abrufdaten.Wohnung.Partner">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten zur Wohnung des Partners in Datenabrufen nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die Informationen zur Wohnung für Ehegatten oder Lebenspartner in Datenabrufen nach § 38 BMG abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.AnschriftMelderecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anschrift der Wohnung übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="statusderwohnung"
+                     minOccurs="0"
+                     type="xmeld:Code.Wohnungsstatus">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Status der Wohnung übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="artderwohnung" minOccurs="0" type="xmeld:Code.Wohnungsart">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Art der Wohnung übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Anschrift.InlandMitSperrvermerk">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Inlandsanschrift im Datenabruf nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können alle Informationen zur Anschrift für Datenabrufe nach § 38 BMG mit bedingtem Sperrvermerk gemäß § 52 BMG abgebildet werden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift.inland" type="xima:Meldeanschrift"/>
+         <xs:element name="bedingterSperrvermerk"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache des Vorliegens eines Sperrvermerkes nach § 52 BMG übermittelt. Dieses Element wird nicht in Trefferlistenauskünften übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.AnschriftMelderecht">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Darstellung der Anschrift für Datenabrufe nach § 38 BMG und einfache Melderegisterauskünfte</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können alle Informationen zur Anschrift für Datenabrufe nach § 38 BMG abgebildet werden.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="anschrift.inland"
+                     type="xmeld:type.Behoerdenauskunft.Anschrift.InlandMitSperrvermerk"/>
+         <xs:element name="anschrift.ausland" type="xmeld:type.AnschriftMelderecht.Ausland"/>
+         <xs:element name="anschrift.unbekannt"
+                     type="xmeld:type.AnschriftMelderecht.Unbekannt"/>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.AnschriftMelderechtOhneAusland">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Darstellung der Anschrift für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können alle Informationen zur inländischen Anschrift und zur unbekannten Anschrift für Datenabrufe nach § 38 BMG abgebildet werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.Behoerdenauskunft.AnschriftMelderecht">
+            <xs:choice>
+               <xs:element name="anschrift.inland"
+                           type="xmeld:type.Behoerdenauskunft.Anschrift.InlandMitSperrvermerk"/>
+               <xs:element name="anschrift.unbekannt"
+                           type="xmeld:type.AnschriftMelderecht.Unbekannt"/>
+            </xs:choice>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Auskunft">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zur Auskunft zur Suchanfrage</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die Informationen zur Auskunft übermittelt. Es wird zur Suche jeweils ein Ergebnisstatus (Element ergebnisstatus) übermittelt. Das Element person kann, je nach Suchergebnis entweder weggelassen werden (neutrale Antwort), genau einmal vorkommen (Detailauskunft) oder mehrfach vorkommen (Trefferliste).</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ergebnisstatus"
+                     type="xmeld:Code.Behoerdenauskunft.Ergebnisstatus">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Ergebnisstatus zur Suchanfrage übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zusatzinformationen"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Zusatzinformationen">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Zusatzinformationen zur Antwort auf die Suchanfrage übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="person"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Behoerdenauskunft.Abrufdaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten einer zur Suchanfrage gefundenen Person übermittelt. Welche Kindelemente befüllt werden richtet sich nach den in der suchanfrage ausgewählten Anforderungselementen und den (landes-)rechtlichen Regelungen der Auskunft gebenden Stelle. Wird das Element mehrfach verwendet (Trefferliste) dürfen maximal die Informationen zu Familienname, Vornamen, Geburtsdatum, derzeitige Anschrift, Sterbetag, Identifikationsmerkmal vorhanden sein.Wurde der Sterbetag in der Suchanfrage nicht als Anforderungselement ausgewählt, kann die Tatsache, dass die betroffene Person verstorben ist, mit dem Flag verstorben mitgeteilt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kosteninformation"
+                     minOccurs="0"
+                     type="xmeld:type.Kosteninformation">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Kosteninformationen für eine bearbeitete Anfrage übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Auswahldaten">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Auswahldaten für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Element sind die Auswahldaten zur betroffenen Person für die Suchanfrage zu übermitteln. Dieser Datentyp dient sowohl der Übermittlung von Auswahldaten für die Suchanfrage einer Sicherheits- oder Strafermittlungsbehörde als auch einer anderen Behörde.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="personendaten"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Auswahldaten.Personendaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Daten zur betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesetzlicherVertreter"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Auswahldaten.BeigeschriebenePerson">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Angaben zum gesetzlichen Vertreter der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="partner"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Auswahldaten.BeigeschriebenePerson">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Angaben zum Partner der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kind"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Auswahldaten.BeigeschriebenePerson">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Angaben zum Kind der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ordnungsmerkmal" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann ein Ordnungsmerkmal der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zusatzfeldNachLandesrecht"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.ZusatzfeldNachLandesrecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können zusätzliche Auswahldaten übermittelt werden, die nach Landesrecht zulässig sind. Dieses Element dient nur der Übermittlung von Feldern, die nicht im bundeseinheitlichen Teil des DSMeld definiert sind.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Auswahldaten.BeigeschriebenePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Auswahldaten zur beigeschriebenen Person</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp sind die Auswahldaten zur beigeschriebenen Person für die Suchanfrage zu übermitteln.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.Behoerdenauskunft.Auswahldaten.Personendaten">
+            <xs:sequence>
+               <xs:element name="name" minOccurs="0" type="xmeld:type.Suchprofil.Name">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element kann der Name der beigeschriebenen Person übermittelt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="doktorgrad" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element kann der Doktorgrad der beigeschriebenen Person übermittelt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="anschrift"
+                           minOccurs="0"
+                           type="xmeld:type.Behoerdenauskunft.Suchprofil.Anschrift">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element kann die Anschrift der beigeschriebenen Person übermittelt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsdaten"
+                           minOccurs="0"
+                           type="xmeld:type.Behoerdenauskunft.Suchprofil.Geburt">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element können Angaben zur Geburt der beigeschriebenen Person übermittelt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element kann das Geschlecht der beigeschriebenen Person übermittelt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="sterbedaten" minOccurs="0" type="xmeld:type.Tod">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element können Sterbeinformationen der beigeschriebenen Person übermittelt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Auswahldaten.Personendaten">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Auswahldaten zur betroffenen Person</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp sind die Auswahldaten zur betroffenen Person für die Suchanfrage zu übermitteln. Dieser Datentyp dient sowohl der Übermittlung von Auswahldaten für die Suchanfrage einer Sicherheits- oder Strafermittlungsbehörde als auch einer anderen Behörde.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" minOccurs="0" type="xmeld:type.Suchprofil.Name">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Daten zum Namen der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="doktorgrad" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Angaben zum Doktorgrad übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ordensname" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Ordensname übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kuenstlername" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Künstlername übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Suchprofil.Anschrift">
+            <xs:annotation>
+               <xs:documentation>Sofern Angaben zur Anschrift Bestandteil einer Suche sind, ist dieses Element mit zu übermitteln. Umgang mit exakten Hausnummern: Exakte Hausnummern werden angegeben in den Kindelementen anschrift/hausnummer, anschrift/hausnummerbuchstabezusatzziffer und anschrift/teilnummerderhausnummer. Das Kindelement hausnummern.bis ist in der Suchanfrage nicht zu übermitteln. Die Anschriften der in der Trefferliste übermittelten Personen müssen diesen Suchangaben exakt entsprechen. Umgang mit Hausnummerbereichen: Zu einem Hausnummernbereich gehören ein Anfang und ein Ende. Der Anfang wird definiert in den Kindelementen anschrift/hausnummer, anschrift/hausnummerbuchstabezusatzziffer und anschrift/teilnummerderhausnummer. Das Ende wird definiert in den korrespondierenden Kindelementen von hausnummern.bis. Sofern bei den Anfangs- und Endangaben ausschließlich die jeweiligen Kindelemente hausnummer gefüllt sind, werden in der Trefferliste sämtliche Personen übermittelt, deren Anschriften in Bezug auf die hausnummer (dsm-Blatt 1206: Anschrift - Hausnummer -) Werte im angegebenen Suchbereich aufweisen. Beispiel zur Bereichsanfrage: Wie wird 5 bis 7 ausgewertet? 5 + 5a + 5b + 5c + 6 + 6a + 6 1/7 + 6b + ... + 6m + 7 + 7a + ... Das Angebot einer Suche mit Hausnummernbereichen ist eine Option, die von den Verfahren der Meldebehörden / Landesmeldedatenbeständen nicht verpflichtend umgesetzt werden muss. Weitere Festlegungen bzgl. der Teilnummerbereiche und Hausnummerzusatzzifferbereiche werden hier nicht näher beschrieben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="wohnungsstatus"
+                     minOccurs="0"
+                     type="xmeld:Code.Wohnungsstatus">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Status der Wohnung zu übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsdaten"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Suchprofil.Geburt">
+            <xs:annotation>
+               <xs:documentation>Falls Geburtsdaten in die Suche mit einbezogen werden, ist dieses Element zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Geschlecht der Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staatsangehoerigkeit"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Staatsangehoerigkeit">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Daten zur Staatsangehörigkeit der Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienstand"
+                     minOccurs="0"
+                     type="xmeld:type.Abruf.FamilienstandNurBegruendung">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Angaben zum Familienstand übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="sterbedaten" minOccurs="0" type="xmeld:type.Tod">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Sterbeinformationen übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="religionszugehoerigkeit"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Religion">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Angaben zur Religionszugehörigkeit übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ausweisdokument"
+                     minOccurs="0"
+                     type="xmeld:type.Abruf.AusweisdokumentOhneSperrinformationen">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Informationen zum Ausweisdokument übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="passversagung"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Passversagung">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Informationen zum Vorliegen von Pass-, Personalausweis- oder Vorläufiger Personalausweisversagungsgründen übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="optionsdeutscher"
+                     minOccurs="0"
+                     type="xmeld:type.Optionsdeutscher">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Merkmal optionsdeutscher der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="waffenrechtlicheDaten" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Tatsache übermittelt werden, dass entweder ein Waffenbesitzverbot oder eine waffenrechtliche Erlaubnis vorliegt.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="waffenrechtlicheErlaubnis" fixed="true" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die Tatsache übermittelt werden, dass eine waffenrechtliche Erlaubnis vorliegt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="waffenbesitzverbot" fixed="true" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die Tatsache übermittelt werden, dass ein Waffenbesitzverbot vorliegt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+         <xs:element name="sprengstoffrechtlicheErlaubnis"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Tatsache übermittelt werden, dass eine sprengstoffrechtliche Erlaubnis vorliegt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift3991" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Anschrift vom 1. September 1939 übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.DatenAbrufendeStelle">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten zur abrufenden Stelle</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Informationen zur Suchanfrage übermittelt, die die abrufende Stelle und die Suchanfrage betreffen.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anfrageanlass" type="xmeld:type.anlass.abfrage">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Anlass der Suchanfrage mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="sicherheitsbehoerde" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird mitgeteilt, ob es sich bei der abrufenden Stelle um eine Sicherheits- bzw. Strafermittlungsbehörde oder um eine sonstige öffentliche Stelle handelt. Handelt es sich bei der abrufenden Stelle um eine Sicherheits- oder Strafermittlungsbehörde, ist es mit dem Wert 'true' zu übermitteln. Bei sonstigen öffentlichen Stellen ist der Wert 'false' zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="abrufendeStelle" type="xibehoerde:Behoerde.Erreichbar">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die abrufende Stelle mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anwenderkennung" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anwenderkennung der abrufenden Person mitgeteilt. Die Anwenderkennung ist zwingend zu befüllen, wenn es sich bei dem Datenabruf um eine einfache Behördenauskunft handelt. Das Element ist zwingend zu befüllen, wenn es sich um einen Lichtbildabruf handelt, der auch von der Meldebehörde zu protokollieren ist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="verantwortlichePerson"
+                     minOccurs="0"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Angaben der verantwortlichen bzw. der den Abruf anordnenden Person übermittelt. Das Element ist zwingend zu befüllen, wenn es sich um einen Lichtbildabruf handelt, der auch von der Meldebehörde zu protokollieren ist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="aktenzeichen" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann ein Aktenzeichen übermittelt werden. Das Element ist zwingend zu befüllen, wenn es sich um einen Lichtbildabruf handelt, der auch von der Meldebehörde zu protokollieren ist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Identifikationsmerkmal">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Das Identifikationsmerkmal für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Typ repräsentiert ein Identifikationsmerkmal gem. § 39 Abs. 2 BMG.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="identifikationsmerkmal" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Identifikationsmerkmal zur Kommunikation zwischen abrufender Stelle und Auskunft gebender Stelle übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Religion">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Zugehörigkeit zu einer Religionsgesellschaft für Datenabrufe</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Informationen zur Zugehörigkeit zu einer Religionsgesellschaft einer Person Für Datenabrufe abgebildet. Alle Kindelemente sind optional.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="religion.steuer.erhebend"
+                     minOccurs="0"
+                     type="xmeld:Code.Religion.Steuer.erhebend">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Zugehörigkeit zu einer Steuer erhebenden Religionsgesellschaft, die die Verwaltung der Kirchensteuer auf die Finanzverwaltung übertragen hat übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="religion.nicht.steuer.erhebend"
+                     minOccurs="0"
+                     type="xmeld:Code.Religion.nicht.Steuer.erhebend">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die rechtliche Zugehörigkeit zu einer Religionsgesellschaft übermittelt, die keine Kirchensteuer erhebt oder die Verwaltung der Kirchensteuer nicht auf die Finanzverwaltung übertragen hat.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.SprengstoffrechtlicheErlaubnisMitNachweis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Sprengstoffrechtliche Erlaubnis der Person mit Nachweisdaten</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die sprengstoffrechtliche Erlaubnis der Person sowie die Nachweisdaten abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="sprengstoffrechtlicheerlaubnis"
+                     minOccurs="0"
+                     type="xmeld:type.SprengstoffrechtlicheErlaubnis">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Informationen zur sprengstoffrechtlichen Erlaubnis der Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="nachweisdaten" minOccurs="0" type="xmeld:type.Nachweisdaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Nachweisdaten zur sprengstoffrechtlichen Erlaubnis der Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Staatsangehoerigkeit">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Staatsangehörigkeit für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können Informationen zur Staatsangehörigkeit der betroffenen Person für Datenabrufe nach § 38 BMG übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="staatsangehoerigkeit"
+                     minOccurs="0"
+                     type="xmeld:Code.Staatsangehoerigkeit">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Staatsangehörigkeit der betroffenen Person angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="keineUnionsbuergerschaft"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann mitgeteilt werden, dass für die betroffene Person keine Unionsbürgerschaft besteht.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Steuerungsinformationen">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Steuerungsinformationen für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Steuerungsinformationen zur Suchanfrage übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anforderungselement"
+                     maxOccurs="unbounded"
+                     type="xmeld:Code.Behoerdenauskunft.Anforderungselement">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Anforderungselemente für die Antwort auf die Suchanfrage übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anforderungselementNachLandesrecht"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können zusätzliche Anforderungselemente übermittelt werden, die nach Landesrecht zulässig sind. Dieser Element dient nur der Übermittlung von Feldern, die nicht im bundeseinheitlichen Teil des DSMeld definiert sind.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="aktualitaetSuche"
+                     minOccurs="0"
+                     type="xmeld:Code.Behoerdenauskunft.Aktualitaet.Suche.Status">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Daten zur Aktualität der gesuchten Daten übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="suchbereich" type="xmeld:type.verwaltungspolitische.codierung">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Suchbereich nach verwaltungspolitischer Gliederung angegeben, in dem die Suche durchgeführt werden soll.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="Adresskettenverfolgung" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird übermittelt, ob die abrufende Stelle eine Adresskettenverfolgung wünscht. Sofern der Wert 'true' übermittelt wird, ist eine Adresskettenverfolgung von der abrufenden Stelle gewünscht, wird der Wert 'false' übermittelt, soll keine Adresskettenverfolgung stattfinden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.SuchanfrageAntwort">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zur Antwort auf die Suchanfrage</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp dient der Übermittlung der Informationen zur Antwort auf die Suchanfrage. Die Antwort auf die Suchanfrage enthält entweder Informationen dazu, warum die Auskunft nicht erteilt werden kann oder die zu beauskunftenden Informationen selbst.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="rueckweisung"
+                     type="xmeld:type.Behoerdenauskunft.SuchanfrageNichtMoeglich">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird mitgeteilt, warum die Suchanfrage zurückgewiesen wird.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="auskunft" type="xmeld:type.Behoerdenauskunft.Auskunft">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Suchergebnis der Auskunft gebenden Stelle mitgeteilt.Das Element ergebnisstatus ist sowohl bei positivem als auch bei negativem Suchergebnis zu befüllen. Das Element person darf Bei Verwendung des Schlüssels 01 im Element ergebnisstatus genau einen Datensatz, bei Verwendung des Schlüssels 02 im Element ergebnisstatus mehrere Datensätze, und bei Verwendung des Schlüssels 03 im Element ergebnisstatus keinen Datensatz enthalten.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.SuchanfrageNichtMoeglich">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zur Nichtausführung der Suchanfrage</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Informationen zur nicht ausgeführten Suchanfrage übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="grundDerRueckweisung"
+                     type="xmeld:Code.Behoerdenauskunft.Nichterstellung.Grund">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Grund angegeben, warum die Suchanfrage nicht durchgeführt werden kann.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="freitext" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann eine erläuternde Freitextinformation zur nicht ausgeführten Suchanfrage übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Suchprofil">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Suchprofil für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Angaben zum Suchprofil übermittelt. Es können entweder Auswahldaten übermittelt werden oder ein aus einer vorherige Suche vorliegendes Identifikationsmerkmal. Die übermittelten Suchkriterien sind bei der Auswertung auf Seiten der Meldebehörde durch ein logisches UND zu verknüpfen. Vorgaben zur Suchschnittstelle Groß-/Kleinschreibung Die Suche soll nicht Case-sensitiv sein. Beispiel: Der Suchparameter nachname mit dem Wert meyer trifft sowohl Meyer als auch MEYER Platzhalter (Wildcards) Platzhalter für genau eine Stelle sind als ?, Platzhalter für 0..n Stellen sind als * anzugeben. Platzhalter können grundsätzlich innerhalb eines Suchparameters mehrfach und an beliebiger Stelle verwendet werden. Betroffen sind die Felder in name und anschrift/strasse. Beispiele:Der Suchparameter nachname mit dem Wert Me?er liefert sowohl Meier als auch Meyer. Der Suchparameter nachname mit dem Wert Me*er liefert die im vorherigen Beispiel genannten Werte sowie (unter anderem) Meer und Meier-Müller.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="auswahldaten" type="xmeld:type.Behoerdenauskunft.Auswahldaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element sind die Auswahldaten für die Suchanfrage zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="identifikationsmerkmal"
+                     type="xmeld:type.Behoerdenauskunft.Identifikationsmerkmal">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann ein eventuell bereits vorhandenes Identifikationsmerkmal zu übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Suchprofil.Anschrift">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zur Anschrift für das Suchprofil</title>
+         </xs:appinfo>
+         <xs:documentation>Sofern Angaben zur Anschrift Bestandteil einer Suche sind, ist dieses Element mit zu übermitteln. Umgang mit exakten Hausnummern: Exakte Hausnummern werden angegeben in den Kindelementen anschrift/hausnummer, anschrift/hausnummerbuchstabezusatzziffer und anschrift/teilnummerderhausnummer. Das Kindelement hausnummern.bis ist in der Suchanfrage nicht zu übermitteln. Die Anschriften der in der Trefferliste übermittelten Personen müssen diesen Suchangaben exakt entsprechen. Umgang mit Hausnummerbereichen: Zu einem Hausnummernbereich gehören ein Anfang und ein Ende. Der Anfang wird definiert in den Kindelementen anschrift/hausnummer, anschrift/hausnummerbuchstabezusatzziffer und anschrift/teilnummerderhausnummer. Das Ende wird definiert in den korrespondierenden Kindelementen von hausnummern.bis. Sofern bei den Anfangs- und Endangaben ausschließlich die jeweiligen Kindelemente hausnummer gefüllt sind, werden in der Trefferliste sämtliche Personen übermittelt, deren Anschriften in Bezug auf die hausnummer (dsm-Blatt 1206: Anschrift - Hausnummer -) Werte im angegebenen Suchbereich aufweisen. Beispiel zur Bereichsanfrage: Wie wird 5 bis 7 ausgewertet? 5 + 5a + 5b + 5c + 6 + 6a + 6 1/7 + 6b + ... + 6m + 7 + 7a + ... Das Angebot einer Suche mit Hausnummernbereichen ist eine Option, die von den Verfahren der Meldebehörden / Landesmeldedatenbeständen nicht verpflichtend umgesetzt werden muss. Weitere Festlegungen bzgl. der Teilnummerbereiche und Hausnummerzusatzzifferbereiche werden hier nicht näher beschrieben.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift" minOccurs="0" type="xima:Meldeanschrift">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element sind Angaben zur Anschrift für die Suche anzugeben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="hausnummern.bis"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Suchprofil.Hausnummer.Bis">
+            <xs:annotation>
+               <xs:documentation>Falls ein Hausnummer-Bereich mitzuteilen ist, muss dieses Element übermittelt werden. Die Kindelemente enthalten jeweils den Endwert der Bereichsangabe.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="status.anschrift"
+                     minOccurs="0"
+                     type="xmeld:Code.Behoerdenauskunft.Aktualitaet.Suche.Status">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element ist zu übermitteln, ob aktuelle und/oder inaktuelle Anschriften zu berücksichtigen sind. Sofern der Wert aktuell übermittelt wird, muss die betroffene Person bei einer Einzelauskunft bzw. müssen die betroffenen Personen einer Trefferliste diese Anschrift als aktuelle Wohnung haben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="einzugsdatum" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Einzugsdatum übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="auszugsdatum" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Auszugsdatum übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ausland" minOccurs="0">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann eine Auslandsanschrift (Kindelement auslandsanschrift) oder ein Zuzugsstaat (Kindelement zuzugsstaat) übermittelt werden. Falls eine Unterscheidung von Auslandsanschrift und Zuzugsstaat nicht notwendig ist, kann das Element auslandsanschriftOderZuzugsstaat übermittelt werden.</xs:documentation>
+            </xs:annotation>
+            <xs:complexType>
+               <xs:choice>
+                  <xs:element name="auslandsanschrift" type="xmeld:type.Auslandsanschrift.Druckbild">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann die Auslandsanschrift nach DSMeld-Blatt 1232 und DSMeld-Blatt 1233 übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="zuzugsstaat" type="xmeld:type.AnschriftMelderecht.Ausland">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann der Zuzugsstaat nach DSMeld-Blatt 1223 übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="auslandsanschriftOderZuzugsstaat"
+                              type="xmeld:type.AnschriftMelderecht.Ausland">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element kann ein Staat übermittelt werden, der sowohl eine Auslandsanschrift (ohne Anschriftszone) als auch einen Zuzugsstaat repräsentieren kann.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:choice>
+            </xs:complexType>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Suchprofil.Geburt">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zur Geburt für das Suchprofil</title>
+         </xs:appinfo>
+         <xs:documentation>Falls Geburtsdaten in die Suche mit einbezogen werden, ist dieses Element zu übermitteln.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="geburtstag"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.Suchprofil.Geburtsdaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element können Angaben zum Geburtstag übermittelt werden. Im Melderegister muss eine Suche über das aktuelle Geburtsdatum und alle früheren Geburtsdatumsangaben erfolgen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsort" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Sofern Personen anhand ihres Geburtsortes gesucht werden, ist dieses Feld zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsortstaat" minOccurs="0" type="xmeld:Code.Gebiet">
+            <xs:annotation>
+               <xs:appinfo>
+                  <implementationHint>Deutschland wird immer durch Weglassen dieses Elementes abgebildet.</implementationHint>
+               </xs:appinfo>
+               <xs:documentation>Sofern Personen anhand ihres Geburtsstaates gesucht werden, ist dieses Feld zu übermitteln</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Suchprofil.Geburtsdaten">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zu Geburtsdaten für das Suchprofil</title>
+         </xs:appinfo>
+         <xs:documentation>Es kann entweder über exakte Geburtsdaten gemäß dsm (Kindelement geburtsdatum) oder über einen Zeitraum (Kindelement geburtszeitraum) gesucht werden.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="geburtsdatum" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Dieses Element ist zu verwenden, wenn der Tag der Geburt exakt bekannt ist. Ein nicht vollständig bekanntes Geburtsdatum (YYYY-MM-00 bzw. YYYY-00-00) wird ebenfalls als exaktes Geburtsdatum interpretiert.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtszeitraum"
+                     type="xmeld:type.Behoerdenauskunft.Suchprofil.Geburtszeitraum">
+            <xs:annotation>
+               <xs:documentation>Falls ein Geburtszeitraum in der Suche mit einbezogen wird, muss dieses Element verwendet werden. Sofern der Zeitraum den Ersten eines Monats enthält, muss die von der Meldebehörde erzeugte Trefferliste den Eintrag YYYY-MM-00 des betreffenden Monats enthalten. Sofern der Zeitraum den Ersten eines Jahres enthält, muss die von der Meldebehörde erzeugte Trefferliste zusätzlich den Eintrag YYYY-00-00 des betreffenden Jahres enthalten. Das Angebot einer Suche mit Geburtszeiträumen ist eine Option, die von den Verfahren der Meldebehörden / Landesmeldedatenbeständen nicht verpflichtend umgesetzt werden muss.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Suchprofil.Geburtszeitraum">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zum Geburtszeitraum für das Suchprofil</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp wird ein Geburtszeitraum abgebildet. Sofern der Zeitraum den Ersten eines Monats enthält, muss die von der Meldebehörde erzeugte Trefferliste den Eintrag YYYY-MM-00 des betreffenden Monats enthalten. Sofern der Zeitraum den Ersten eines Jahres enthält, muss die von der Meldebehörde erzeugte Trefferliste zusätzlich den Eintrag YYYY-00-00 des betreffenden Jahres enthalten.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="geburtsdatum.von" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Anfang des Zeitraums mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsdatum.bis" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Ende des Zeitraums mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Suchprofil.Hausnummer.Bis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zum Hausnummer-Bereich</title>
+         </xs:appinfo>
+         <xs:documentation>Falls ein Hausnummer-Bereich mitzuteilen ist, muss dieses Element übermittelt werden. Die Kindelemente enthalten jeweils den Endwert der Bereichsangabe.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="hausnummer.bis" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Soll in einem Hausnummernbereich gesucht werden, so ist hier das Ende dieses Bereichs zu übermitteln. Der Anfang des Bereichs wird in anschrift/hausnummer übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="hausnummerbuchstabezusatzziffer.bis"
+                     minOccurs="0"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Soll in einem Hausnummernbereich gesucht werden, so ist hier das Ende dieses Bereichs zu übermitteln. Der Anfang des Bereichs wird in anschrift/hausnummerbuchstabezusatzziffer übermittelt. Es sind Buchstaben oder Zusatzziffern zur Hausnummer anzugeben; Beispiele: 124 A, 109.5.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="teilnummerderhausnummer.bis"
+                     minOccurs="0"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Soll in einem Hausnummernbereich gesucht werden, so ist hier das Ende dieses Bereichs zu übermitteln. Der Anfang des Bereichs wird in anschrift/teilnummerderhausnummer übermittelt. Es sind Teilnummern zur Hausnummer anzugeben; Beispiel: 16 1/7.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.WaffenrechtlicheErlaubnisMitNachweis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Waffenrechtliche Erlaubnis der Person mit Nachweisdaten</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die waffenrechtliche Erlaubnis der Person sowie die Nachweisdaten abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="waffenrechtlicheerlaubnis"
+                     minOccurs="0"
+                     type="xmeld:type.WaffenrechtlicheErlaubnis">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Informationen zur waffenrechtlichen Erlaubnis der Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="nachweisdaten" minOccurs="0" type="xmeld:type.Nachweisdaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Nachweisdaten zur waffenrechtlichen Erlaubnis der Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Wohnung">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Informationen zur Wohnung für Datenabrufe nach § 38 BMG</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können die Informationen zur Wohnung im Kontext der Datenabrufe nach § 38 BMG übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Behoerdenauskunft.AnschriftMelderecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Anschrift angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumAbmeldungBeiAnmeldebehoerde"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum der tatsächlichen Abmeldung durch den Meldepflichtigen übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumAnmeldungBeiAnmeldebehoerde"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum der tatsächlichen Anmeldung durch den Meldepflichtigen übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDerAbmeldungVonAmtsWegen"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum der Abmeldung von Amts wegen übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDerAnmeldungVonAmtsWegen"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum der Anmeldung von Amts wegen übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesAuszugs"
+                     minOccurs="0"
+                     type="xida:TeilbekanntesDatumMitUnbekannt">
+            <xs:annotation>
+               <xs:appinfo>
+                  <implementationHint>Der DSMeld erlaubt für dieses Datum keine nur teilweise bekannte oder unbekannte Angabe eines Auszugsdatums. Die Möglichkeit der Angabe eines teilweise bekannten oder unbekannten Datums für inaktuelle Wohnungen, zu denen das Auszugsdatum fehlt oder nur nicht vollständig vorliegt, wird in XMeld aber geschaffen, da in der Praxis nicht immer ein vollständiges Datum vorliegt.</implementationHint>
+               </xs:appinfo>
+               <xs:documentation>Mit diesem Element kann das Datum des Auszugs aus der Wohnung übermittelt. Besteht nach dem Auszug aus der Wohnung keine Wohnung mehr im Zuständigkeitsbereich der Meldebehörde, so ist das Auszugsdatum identisch mit dem Wegzugsdatum aus dem Zuständigkeitsbereich der Meldebehörde (siehe auch DSMeld-Blatt 1306).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesBeziehens"
+                     minOccurs="0"
+                     type="xida:TagesdatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum des Beziehens der Wohnung übermittelt werden; vgl. Blatt 1301.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesWohnungsstatuswechselsVonAmtsWegen"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum des Wohnungsstatuswechsels von Amts wegen übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumMitteilungWohnungsstatuswechsel"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum der tatsächlichen Mitteilung des Wohnungsstatuswechsels durch die betroffene Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesWohnungsstatuswechsels"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum des Wirksamwerdens des neuen Wohnungsstatus übermittelt (siehe DSMeld-Blatt 1301a).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="statusderwohnung"
+                     minOccurs="0"
+                     type="xmeld:Code.Wohnungsstatus">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann der Status der Wohnung angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="artderwohnung" minOccurs="0" type="xmeld:Code.Wohnungsart">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann die Art der Wohnung angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumLetzterWegzugAusland"
+                     minOccurs="0"
+                     type="xida:TeilbekanntesDatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann das Datum des letzten Wegzugs in das Ausland übermittelt werden. Das Datum ist identisch mit dem bei der Wegzugsmeldebehörde der letzten Wohnung im Inland erfassten Auszugdatum. Sofern das vollständige Datum vorliegt, ist das Element jahrMonatTag zu befüllen, sofern die Tagesangabe fehlt, das Element jahrMonat, sofern die Tagesangabe und die Monatsangabe fehlen, das Element jahr und sofern alle Angaben zum Datum fehlen, das Element unbekannt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="wohnung.aktuell" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird mitgeteilt, ob es sich um eine aktuelle oder frühere Wohnung der betroffenen Person handelt.Sofern es sich sich um eine aktuelle Wohnung handelt, ist true anzugeben, ansonsten false.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Behoerdenauskunft.Zusatzinformationen">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Zusatzinformationen zur Antwort auf die Suchanfrage</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp dient der Übermittlung zusätzlicher Informationen zur Antwort auf die Suchanfrage.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="zusatzinformationen" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden zusätzliche Angaben zum zulässigen Datenumfang der Antwort der Suchanfrage übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anforderungselementNachLandesrechtUntersagt"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:Code.Behoerdenauskunft.Anforderungselement">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann zusätzlich zum Freitextfeld angegeben werden, dass ein Anforderungselement aus der Suchanfrage nach Landesrecht nicht zulässig ist.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="datenabrufe.suchanfrage.1320">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Suchanfrage (synchron)</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht stellt die abrufende_stelle im Rahmen einer einfachen Behördenauskunft oder einer Auskunft an Sicherheits- und Strafermittlungsbehörden eine synchrone suchanfrage an die auskunft_gebende_stelle. Diese Nachricht wird versendet von der abrufenden_stelle im Rahmen des Datenabrufverfahrens für Sicherheits- und Strafermittlungsbehörden sowie andere öffentliche Stellen (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="datenAbrufendeStelle"
+                              type="xmeld:type.Behoerdenauskunft.DatenAbrufendeStelle">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten zur abrufenden Stelle für die Suchanfrage übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="suchprofil" type="xmeld:type.Behoerdenauskunft.Suchprofil">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das Suchprofil zur Suchanfrage übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="steuerungsinformationen"
+                              type="xmeld:type.Behoerdenauskunft.Steuerungsinformationen">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Steuerungsinformationen zur Suchanfrage übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="datenabrufe.antwort.1321">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Antwort zur Suchanfrage (synchron)</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht antwortet die auskunft_gebende_stelle im Rahmen einer einfachen Behördenauskunft oder einer Auskunft an Sicherheits- und Strafermittlungsbehörden auf eine synchrone suchanfrage einer abrufenden_stelle. Diese Nachricht wird versendet von der auskunft_gebenden_stelle im Rahmen des Datenabrufverfahrens für Sicherheits- und Strafermittlungsbehörden sowie andere öffentliche Stellen (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="suchprofilZitiert" type="xmeld:type.Behoerdenauskunft.Suchprofil">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das suchprofil der Suchanfrage zitiert.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="antwortSuchanfrage"
+                              type="xmeld:type.Behoerdenauskunft.SuchanfrageAntwort">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Antwort auf die suchanfrage mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ursprungsnachricht" type="xmeld:type.Identifikation.Nachricht">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Ursprungsnachricht referenziert, mit der die Suchanfrage mitgeteilt wurde. Als Schlüssel darf im Kindelement nachrichtentyp nur der Wert 1320 übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="datenabrufe.aussteuerung.suchanfrage.1322">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Aussteuerung der Suchanfrage in das manuelle Verfahren</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht steuert die auskunft_gebende_stelle eine suchanfrage nach Feststellung des Vorliegens einer Auskunftssperre nach § 51 bmg oder , im Falle der Aussteuerung einer einfachen Melderegisterauskunft nach § 49 BMG, eines bedingten Sperrvermerkes nach § 52 bmg zur betroffenen_person an die zuständige Meldebehörde aus.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="gefundenePerson"
+                              type="xmeld:type.Aussteuerung.Identifikation.Person">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Daten zur Person übermittelt, zu der eine Auskunftssperre gemäß § 51 bmg oder ein bedingter Sperrvermerk nach § 52 bmg gefunden wurde.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachricht" type="xs:base64Binary">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Ursprungsnachricht aus der, wenn sie eine Sammelnachricht ist, die nicht auszusteuernden Einzelsätze entfernt worden sind. Um technische Probleme mit verschachtelten XML-Dokumenten zu vermeiden, ist der zurückgesandte Inhalt immer base64-codiert zurückzusenden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachrichtenart" type="xmeld:Code.XMeld.Nachrichten">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Nachrichtenart der ausgesteuerten Anfrage mitgeteilt. Es sind nur die Werte 1320, 1324, 0600 und 0602 zulässig.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="datenabrufe.suchanfrage.asynchron.1324">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Suchanfrage (asynchron)</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht stellt die abrufende_stelle im Rahmen einer einfachen Behördenauskunft oder einer Auskunft an Sicherheits- und Strafermittlungsbehörden eine asynchrone suchanfrage an die auskunft_gebende_stelle. Diese Nachricht wird versendet von der abrufenden_stelle im Rahmen des Datenabrufverfahrens für Sicherheits- und Strafermittlungsbehörden sowie andere öffentliche Stellen (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="datenAbrufendeStelle"
+                              type="xmeld:type.Behoerdenauskunft.DatenAbrufendeStelle">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten zur abrufenden Stelle für die Suchanfrage übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="suchprofil" type="xmeld:type.Behoerdenauskunft.Suchprofil">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das Suchprofil zur Suchanfrage übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="steuerungsinformationen"
+                              type="xmeld:type.Behoerdenauskunft.Steuerungsinformationen">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Steuerungsinformationen zur Suchanfrage übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="datenabrufe.antwort.asynchron.1325">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Antwort zur Suchanfrage (asynchron)</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht antwortet die auskunft_gebende_stelle im Rahmen einer einfachen Behördenauskunft oder einer Auskunft an Sicherheits- und Strafermittlungsbehörden auf eine asynchrone suchanfrage einer abrufenden_stelle. Diese Nachricht wird versendet von der auskunft_gebenden_stelle im Rahmen des Datenabrufverfahrens für Sicherheits- und Strafermittlungsbehörden sowie andere öffentliche Stellen (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="suchprofilZitiert" type="xmeld:type.Behoerdenauskunft.Suchprofil">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird das suchprofil der Suchanfrage zitiert.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="antwortSuchanfrage"
+                              type="xmeld:type.Behoerdenauskunft.SuchanfrageAntwort">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Antwort auf die suchanfrage mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ursprungsnachricht" type="xmeld:type.Identifikation.Nachricht">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Ursprungsnachricht referenziert, mit der die Suchanfrage mitgeteilt wurde. Als Schlüssel darf im Kindelement nachrichtentyp nur der Wert 1324 übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

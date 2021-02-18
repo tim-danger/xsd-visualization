@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" xmlns:el="http://www.kba.de/elemente" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:import schemaLocation="Elementdefinitionen.xsd" namespace="http://www.kba.de/elemente" />
+  <xs:complexType name="Type.AnfrageFeinstaubplakette">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur Übermittlung einer Anfrage, ob und welche Feinstaubplakette für ein Fahrzeug zugeteilt werden kann.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="el:SchluesselHersteller">
+        <xs:annotation>
+          <xs:documentation>Herstellerschlüsselnummer des Fahrzeugs</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:SchluesselTyp">
+        <xs:annotation>
+          <xs:documentation>Typ des Fahrzeugs</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:SchluesselVarianteVersion" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Varianten-Versionsschlüsselnummer des Fahrzeugs</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugklasse</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Kraftstoffklasse des Fahrzeugs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:SchluesselEmissionsklasse" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Emissionsklasse des Fahrzeugs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="partikelminderungsstufe" minOccurs="0" type="xkfz:Type.Partikelminderungsstufe">
+        <xs:annotation>
+          <xs:documentation>Partikelminderungsstufe des Fahrzeugs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="gesamtmasse" minOccurs="0" type="xs:nonNegativeInteger">
+        <xs:annotation>
+          <xs:documentation>Gesamtgewicht des Fahrzeugs.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.ErgebnisFeinstaubplakette">
+    <xs:annotation>
+      <xs:appinfo>
+        <codeliste />
+      </xs:appinfo>
+      <xs:documentation>Datentyp zur Beantwortung einer Anfrage, ob und welche Feinstaubplakette für ein Fahrzeug zugeteilt werden kann.</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Code.NummerDerFeinstaubplakette" />
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Feinstaub.AnfrageFeinstaubplakette.1001">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'feinstaub.anfragefeinstaubplakette.1001'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:anfrageFeinstaubplakette">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '1001'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Feinstaub.ErgebnisFeinstaubplakette.1002">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'feinstaub.ergebnisfeinstaubplakette.1002'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:ergebnisFeinstaubplakette">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '1002'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="anfrageFeinstaubplakette">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'feinstaub.anfragefeinstaubplakette.1001'.
+Diese Datenstruktur dient zur Abfrage, welche Feinstaubplakette einem angefragten Fahrzeug zugewiesen werden kann.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageFeinstaubplakette" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ergebnisFeinstaubplakette">
+    <xs:annotation>
+      <xs:appinfo>
+        <codeliste />
+      </xs:appinfo>
+      <xs:documentation>Nutzdaten der Nachricht 'feinstaub.ergebnisfeinstaubplakette.1002'.
+Diese Datenstruktur beantwortet eine Anfrage, welche Feinstaubplakette einem angefragten Fahrzeug zugewiesen werden kann.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.ErgebnisFeinstaubplakette" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="feinstaub.anfragefeinstaubplakette.1001">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der AG XKfz vom 05./06.04.2016</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Feinstaubplakette', vgl. Verweis zu XKfz-Nachricht 1001 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Feinstaub.AnfrageFeinstaubplakette.1001" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="feinstaub.ergebnisfeinstaubplakette.1002">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der AG XKfz vom 05./06.04.2016</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Ergebnis Feinstaubplakette', vgl. Verweis zu XKfz-Nachricht 1002 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Feinstaub.ErgebnisFeinstaubplakette.1002" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Abrufsynchron.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Abrufsynchron"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Abrufsynchron.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst für den Datenabruf durch Sicherheits- und Strafermittlungsbehörden sowie andere öffentliche Stellen</title></head><body><h1>Dienst für den Datenabruf durch Sicherheits- und Strafermittlungsbehörden sowie andere öffentliche Stellen</h1><p>Dieses WSDL-Dokument beschreibt den Dienst für den Datenabruf durch Sicherheits- und Strafermittlungsbehörden sowie andere öffentliche Stellen gemäß OSCI-XMeld(siehe: <link>http://www.osci.de</link>).</p>
+</body>
+
+<p>Folgende Nachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeAnmeldung</i> zulässig:<ul>
+            <li>xmeld:datenabrufe.suchanfrage.1320</li>
+         </ul></p>
+<p>Folgende Nachrichten des XMeld-Schemas sind als Output der einzigen Operation <i>sendeAnmeldung</i> zulässig:<ul>
+            <li>xmeld:datenabrufe.antwort.1321</li>
+         </ul></p>
+<p>Folgende Nachrichten des XMeld-Schemas sind als Fehlermeldung der einzigen Operation <i>sendeAnmeldung</i> zulässig:<ul>
+            <li>xmeld:administration.returntosender.0910</li>
+         </ul></p>
+<p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der achtstellige Amtliche Gemeindeschlüssel (AGS); der zu verwendende Präfix lautet "<b>ags:</b>". </p><p>Zulässige Dienstanbieter sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". </p>
+<p>Zulässige Dienstnutzer sind Behörden der DVDV-Behördenkategorien "<b>§ 38 1 einfache Behörde</b>", "<b>§ 38 3 und 5 Sicherheitsbehörde</b>" und "<b>§ 38 1 und 5 einfache Behörde</b>". Anfragen ans DVDV vom Typ <i>verify.category</i> sollten daher die Zuordnung zu dieser Kategorie prüfen lassen.</p></body>
+</html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <import namespace="http://www.osci.de/xmeld243"
+           location="http://www.osci.de/xmeld243/xmeld-nachrichten-administration.xsd"/>
+   <import namespace="http://www.osci.de/xmeld243"
+           location="http://www.osci.de/xmeld243/xmeld-nachrichten-datenabrufe.xsd"/>
+   <message name="abrufsynchronRequestNachricht">
+      <part name="request" element="xmeld:datenabrufe.suchanfrage.1320"/>
+   </message>
+   <message name="abrufsynchronResponseNachricht">
+      <part name="response" element="xmeld:datenabrufe.antwort.1321"/>
+   </message>
+   <message name="abrufsynchronFaultNachricht">
+      <part name="fault" element="xmeld:administration.returntosender.0910"/>
+   </message>
+   <portType name="osciAbrufsynchronInterface">
+      <operation name="sendeAbrufsynchron">
+         <input message="tns:abrufsynchronRequestNachricht"/>
+         <output message="tns:abrufsynchronResponseNachricht"/>
+         <fault name="faultMessage" message="tns:abrufsynchronFaultNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciAbrufsynchronInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+         <osci:author name="Inhaltsdaten-Signaturzertifikat">
+            <tpl:certificate/>
+         </osci:author>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeAbrufsynchron">
+         <osci:operation communicationType="request-response"
+                         subject="XMeld 2.4.3 Abrufsynchron"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:request"/>
+               </osci:part>
+            </osci:container>
+         </input>
+         <output>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:response"/>
+               </osci:part>
+            </osci:container>
+         </output>
+         <fault name="faultMessage">
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:fault"/>
+               </osci:part>
+            </osci:container>
+         </fault>
+      </operation>
+   </binding>
+   <service name="osciAbrufsynchronService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciAbrufsynchronInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciAbrufsynchronTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

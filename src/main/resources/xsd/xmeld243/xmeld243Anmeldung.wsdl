@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Anmeldung.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Anmeldung"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Anmeldung.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst für das Abrufverfahren zum vorausgefüllten Meldeschein gemäß OSCI-XMeld</title></head><body><h1>Dienst für Abrufverfahren zum vorausgefüllten Meldeschein gemäß OSCI-XMeld</h1><p>Dieses WSDL-Dokument beschreibt den Dienst Dienst für das Abrufverfahren zum vorausgefüllten Meldeschein gemäß OSCI-XMeld (siehe: <link>http://www.osci.de</link>).</p>
+
+<p>Folgende Nachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeAnmeldung</i> zulässig:<ul>
+            <li>xmeld:anmeldung.datenanforderung.0300</li>
+         </ul></p>
+<p>Folgende Nachrichten des XMeld-Schemas sind als Output der einzigen Operation <i>sendeAnmeldung</i> zulässig:<ul>
+            <li>xmeld:anmeldung.datenbereitstellung.0301</li>
+         </ul></p>
+<p>Folgende Nachrichten des XMeld-Schemas sind als Fehlermeldung der einzigen Operation <i>sendeAnmeldung</i> zulässig:<ul>
+            <li>xmeld:administration.returntosender.0910</li>
+         </ul></p>
+<p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der achtstellige Amtliche Gemeindeschlüssel (AGS); der zu verwendende Präfix lautet "<b>ags:</b>". </p><p>Zulässige Dienstanbieter und Dienstnutzer sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". Anfragen ans DVDV vom Typ <i>verify.category</i> sollten daher die Zuordnung zu dieser Kategorie prüfen lassen.</p> </body>
+</html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <import namespace="http://www.osci.de/xmeld243"
+           location="http://www.osci.de/xmeld243/xmeld-nachrichten-administration.xsd"/>
+   <import namespace="http://www.osci.de/xmeld243"
+           location="http://www.osci.de/xmeld243/xmeld-nachrichten-anmeldung.xsd"/>
+   <message name="anmeldungRequestNachricht">
+      <part name="request" element="xmeld:anmeldung.datenanforderung.0300"/>
+   </message>
+   <message name="anmeldungResponseNachricht">
+      <part name="response" element="xmeld:anmeldung.datenbereitstellung.0301"/>
+   </message>
+   <message name="anmeldungFaultNachricht">
+      <part name="fault" element="xmeld:administration.returntosender.0910"/>
+   </message>
+   <portType name="osciAnmeldungInterface">
+      <operation name="sendeAnmeldung">
+         <input message="tns:anmeldungRequestNachricht"/>
+         <output message="tns:anmeldungResponseNachricht"/>
+         <fault name="faultMessage" message="tns:anmeldungFaultNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciAnmeldungInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+         <osci:author name="Inhaltsdaten-Signaturzertifikat">
+            <tpl:certificate/>
+         </osci:author>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeAnmeldung">
+         <osci:operation communicationType="request-response" subject="XMeld 2.4.3 Anmeldung"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:request"/>
+               </osci:part>
+            </osci:container>
+         </input>
+         <output>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:response"/>
+               </osci:part>
+            </osci:container>
+         </output>
+         <fault name="faultMessage">
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:fault"/>
+               </osci:part>
+            </osci:container>
+         </fault>
+      </operation>
+   </binding>
+   <service name="osciAnmeldungService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciAnmeldungInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>required</tpl:use> Dieser Port ist nicht optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciAnmeldungTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

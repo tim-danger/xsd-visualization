@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xauslaender="http://www.osci.de/xauslaender1130"
+           xmlns:xink="http://www.osci.de/xinneres/basisnachricht/4"
+           xmlns:xirts="http://www.osci.de/xinneres/rueckweisung/3"
+           targetNamespace="http://www.osci.de/xauslaender1130"
+           version="1.13.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XAusländer</nameLang>
+            <nameKurz>XAusländer</nameKurz>
+            <nameTechnisch>xinneres.xauslaender</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xauslaender</kennung>
+            <beschreibung>Das Fachmodul XAusländer des Standards XInneres beschreibt die Datenübermittlung im Ausländerwesen.</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.13.0</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>2.6.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xauslaender-allgemeine-datentypen.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/basisnachricht/4/xinneres-basisnachricht.xsd"
+              namespace="http://www.osci.de/xinneres/basisnachricht/4"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/rueckweisung/3/xinneres-rueckweisung.xsd"
+              namespace="http://www.osci.de/xinneres/rueckweisung/3"/>
+   <xs:complexType name="Rueckweisung.Rueckweisungsgrund">
+      <xs:annotation>
+         <xs:documentation>Mit diesem Element wird ein Grund übermittelt, aus dem die synchrone Nachricht zurückgewiesen wird. Die allgemeinen Rückweisungsgründe können durch kontextspezifische Gründe erläutert werden. Sofern in diesem Element XInneres-Fachmodul-spezifische Rückweisungsgründe übermittelt werden sollen, ist in dem Kindelement grund der Schlüssel S999 und in den Kindelementen grundSpezifisch ein oder mehrere dem XInneres-Fachmodul entstammende Rückweisungsgründe zu übermitteln.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="grund" type="xauslaender:Code.Fehlercode.Sychron">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird ein Grund übermittelt, aus dem die Nachricht zurückgewiesen wird. Die im Rahmen der hier zu verwendenden Schlüsseltabelle zur Verfügung gestellten Rückweisungsgründe sind kontextunabhängig und finden daher in allen XInneres-Fachmodulen Anwendung. Sofern der Schlüssel S999 verwendet wird, sind ergänzende Angaben in dem Element grundSpezifisch verpflichtend zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="grundSpezifisch"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xirts:Rueckweisung.GrundSpezifisch">
+            <xs:annotation>
+               <xs:documentation>In diesem Element können weitere - im Allgemeinen kontextspezifische Angaben - zu dem Grund übermittelt werden, aus dem die Nachricht zurückgewiesen wird.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="Administration.RueckweisungSynchron.000002">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Return to Sender-Nachricht für synchrone Kommunikation</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht wird eine an eine Behörde gerichtete Nachricht als fehlerhaft an die sendende Behörde zurückgewiesen, die erhaltene Nachricht wurde nicht verarbeitet. Diese Nachricht ist für die Verwendung in synchronen Prozessen konzipiert.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA">
+               <xs:sequence>
+                  <xs:element name="rueckweisung">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element beinhaltet die Angaben für die synchrone Rückweisung von Nachrichten.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="rueckweisendeStelle"
+                                       minOccurs="0"
+                                       type="xirts:Rueckweisung.RueckweisendeStelle">
+                              <xs:annotation>
+                                 <xs:documentation>Dieses Kindelement ist nur dann zu übermitteln, wenn die Nachricht nicht von dem ursprünglich adressierten Leser zurückgesandt wird, sondern von einer anderen Stelle (zum Beispiel einer Clearingstelle, die im Auftrag der ursprünglich adressierten Behörde eine Prüfung eingehender Nachrichten nach formalen Kriterien durchführt). Wird dieses Element nicht übermittelt, ist die rückweisende Stelle der zurückgewiesenen Nachricht (Kindelement nachricht) zu entnehmen.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="rueckweisungsgrund"
+                                       maxOccurs="unbounded"
+                                       type="xauslaender:Rueckweisung.Rueckweisungsgrund">
+                              <xs:annotation>
+                                 <xs:documentation>In diesem Element werden die Gründe mitgeteilt, aufgrund derer die Nachricht zurückgesandt wird. Generell ist so vorzugehen, dass die Gründe für die Rückweisung so präzise und vollständig wie möglich bezeichnet werden, um eine schnelle Klärung des Sachverhalts zu ermöglichen.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="transportinformationen"
+                                       minOccurs="0"
+                                       type="xirts:Rueckweisung.Transportinformationen">
+                              <xs:annotation>
+                                 <xs:documentation>In diesem Element sind Informationen zu übermitteln, die bei dem Empfang einer als fehlerhaft betrachteten Nachricht möglicherweise der Transportebene entnommen werden konnten. Diese Angaben können gemacht werden, um dem Leser/Empfänger einer Rücksendenachricht die Identifikation der als fehlerhaft betrachteten und nunmehr zurückgesandten Nachricht zu erleichtern. Alle Kindelemente dieses Elementes sind optional, da keine verbindlichen Anforderungen an das Transportprotokoll gestellt werden können.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="idNachricht"
+                                       minOccurs="0"
+                                       type="xink:Identifikation.Nachricht">
+                              <xs:annotation>
+                                 <xs:documentation>In diesem Kindelement wird die die Rückweisung auslösende fachliche Nachricht identifiziert.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="Administration.Sendungswiederholung.000020">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Wiederholung einer Sendung</title>
+         </xs:appinfo>
+         <xs:documentation>In allen Fällen in denen ein synchroner Nachrichtenprozess nicht erfolgreich abgeschlossen werden konnte, ist die ursprüngliche fachliche Nachricht mit Hilfe dieser Container-Nachricht erneut zu versenden. Sollte die Versendung der Container-Nachricht scheitern, ist bei einem weiteren Sendeversuch erneut nur die fachliche Nachricht in dem Container zu transportieren (keine Verschachtelung der Container). Die erneute Versendung der ursprünglichen Nachricht in diesem Container erfolgt ausschließlich in der aktuell gültigen Version des XInneres-Fachmoduls. Diese Regelung gilt sowohl für die Sendungswiederholung als auch für die zu verpackende, ursprüngliche Nachricht.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.erweitert">
+               <xs:sequence>
+                  <xs:element name="nachrichtentyp" type="xauslaender:Code.Nachrichtentyp">
+                     <xs:annotation>
+                        <xs:documentation>Die eindeutige Identifizierungsnummer für den Nachrichtentyp.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachricht" type="xs:base64Binary">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die ursprüngliche Nachricht. Um technische Probleme mit verschachtelten XML-Dokumenten zu vermeiden, ist der zurückgesandte Inhalt immer base64-codiert zurückzusenden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

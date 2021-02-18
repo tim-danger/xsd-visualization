@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe KONFIGURATION, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:complexType name="Type.Konfiguration.AnfrageZertifikat.1101">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'konfiguration.anfragezertifikat.1101'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:zertifikatAbrufen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '1101'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Konfiguration.Zertifikat.1102">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'konfiguration.zertifikat.1102'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisQuittung">
+        <xs:sequence>
+          <xs:element ref="xkfz:zertifikat">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '1102'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="zertifikat">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'konfiguration.zertifikat.1102'. Diese Datenstruktur wird im Rahmen der Bitte um Übermittlung des angefragten Zertifikats (z. B. zur Verschlüsselung von Daten) durch einen XKfz-Kommunikationspartner verwendet. Sie dient der Bereitstellung des angefragten Zertifikates.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Zertifikat" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zertifikatAbrufen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'konfiguration.anfragezertifikat.1101'. Diese Datenstruktur wird im Rahmen der Bitte um Übermittlung des angefragten Zertifikates (z. B. zur Verschlüsselung von Daten) durch einen XKfz-Kommunikationspartner verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.ZertifikatAbrufen" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="konfiguration.anfragezertifikat.1101">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Diese Nachricht dient der Optimierung der Kommunikation über den XKfz-Standard. Eine explizite Rechtsgrundlage ist daher nicht erforderlich.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zum Abruf eines Zertifikats', vgl. Verweis zu XKfz-Nachricht 1101 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Konfiguration.AnfrageZertifikat.1101" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="konfiguration.zertifikat.1102">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Diese Nachricht dient der Absicherung der Kommunikation über den XKfz-Standard. Eine explizite Rechtsgrundlage ist daher nicht erforderlich.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Bereitgestelltes Zertifikat', vgl. Verweis zu XKfz-Nachricht 1102 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Konfiguration.Zertifikat.1102" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

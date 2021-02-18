@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="StA2GB.Geburtsort">
+      <xs:annotation>
+         <xs:documentation>Dieser Datentyp dient der Übermittlung des Geburtsortes an die Gesundheitsbehörde.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Ereignisort">
+            <xs:sequence>
+               <xs:element name="ort" minOccurs="0" type="xoev-lc:String.Latin"/>
+               <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin"/>
+               <xs:element name="staat" minOccurs="0" type="xpersonenstand:Code.Staat"/>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2GB.SterbezeitraumUhrzeit">
+      <xs:annotation>
+         <xs:documentation>Mit diesem Datentyp kann der Sterbezeitpunkt bzw. der Sterbezeitraum durch Uhrzeiten präzisiert werden. Die Uhrzeit im Element ereignisUhrzeitAnfang bezieht sich auf das Datum im Element ereignisDatumAnfang im Datentyp BeurkundeteDaten.Zeitraum.Quelleintrag; wohingegen die Uhrzeit im Element ereignisUhrzeit sich auf das Element ereignisdatum im Datentyp BeurkundeteDaten.Zeitraum.Quelleintrag bezieht. Sofern der konkrete Sterbezeitpunkt bekannt ist, wird nur das Element ereignisUhrzeit mitgeteilt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ereignisUhrzeitAnfang"
+                     minOccurs="0"
+                     type="xpersonenstand:Uhrzeit">
+            <xs:annotation>
+               <xs:documentation>Sofern es sich um einen Sterbezeitraum handelt, kann als Beginn des Zeitraums die Uhrzeit zu dem Datum angegeben werden, zu der die Person zuletzt lebte (Datenfeldnummer 4143 der Anlage 1 der PStV). Die Uhrzeit bezieht sich dabei auf das Datum im Element ereignisDatumAnfang im Datentyp BeurkundeteDaten.Zeitraum.Quelleintrag. Sofern es sich nicht um einen Sterbezeitraum handelt, ist dieses Element nicht mitzuteilen. (Datenfeldnummer 4143 PStV Anlage 1)</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ereignisUhrzeit" type="xpersonenstand:Uhrzeit">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Uhrzeit für den Sterbezeitpunkt bzw. -zeitraum angegeben. Die Uhrzeit bezieht sich auf das Sterbedatum im Element ereignisdatum des Datentyps BeurkundeteDaten.Zeitraum.Quelleintrag. Sofern es sich um einen Sterbezeitraum handelt, ist dies die Uhrzeit, zu der die Person mit Sicherheit tot war.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="stA2GB.Sterbefall.104010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Gesundheitsbehörde</empfaenger>
+            <rechtsgrundlage>§ 60 Abs. 1 Nr. 3 PStV und Bestattungsrechtliche Regelungen der Länder</rechtsgrundlage>
+            <title>Mitteilung über einen Sterbefall an die Gesundheitsbehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Mitteilung wird vom stamt an die zuständige gb gesendet, um dieser einen im Sterberegister beurkundeten Sterbefall mitzuteilen. Die optionalen Datenelemente in dieser Mitteilung dürfen verwendet werden, soweit die landesrechtliche Regelung die Übermittlung zulässt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="sterbeeintrag"
+                              type="xpersonenstand:BeurkundeteDaten.Zeitraum.Quelleintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zur Sterbefallbeurkundung mitgeteilt: Registereintrag, Sterbeort und Sterbezeitpunkt bzw. -zeitraum. Das Element registereintrag im Datentyp BeurkundeteDaten.Zeitraum.Quelleintrag ist dazu obligatorisch mitzuteilen. Soweit bestimmbar, ist hier der Sterbezeitpunkt mitzuteilen; sonst ist hier der Zeitpunkt der Leichenauffindung anzugeben. Dazu wird das Sterbedatum bzw. der Sterbezeitraum mitgeteilt. Der Zeitraum umfasst das Datum und die Uhrzeit des letzten Tages lebend und das Datum und die Uhrzeit des Tages, an dem die Person mit Sicherheit tot war ( (Felder 4142 und 4143 der Anlage 1 der PStV). Das jeweilige Datum wird in den folgenden Elementen mitgeteilt: ereignisdatum Sterbezeitpunkt bzw. Datum, an dem die Person mit Sicherheit tot ist ereignisDatumAnfang Datum des letzten Tages lebend Sofern bekannt, kann die Uhrzeit des Sterbetages bzw. können die Uhrzeiten des Sterbezeitraums in einem weiteren Element sterbeuhrzeit mitgeteilt werden. Im Element ereignisort des Datentyps BeurkundeteDaten.Zeitraum.Quelleintrag ist der Sterbeort oder bei unbekanntem Sterbeort der Auffindungsort mitzuteilen. Ungewöhnliche Orte z.B. Bundesstraße xy Kilometer z werden im Element strasse mitgeteilt. Das Element staat ist nicht mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sterbeuhrzeit"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2GB.SterbezeitraumUhrzeit">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, können hier die Uhrzeit zum Sterbezeitpunkt bzw. die Uhrzeiten zum Sterbezeitraum mitgeteilt werden (siehe im Element sterbeeintrag die Erläuterung zum Sterbezeitpunkt).</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namen" type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Namen der verstorbenen Person mitgeteilt. Sofern nur der Geburtsname und kein davon abweichender Familienname (z.B. ein Ehename oder Lebenspartnerschaftsname) existiert, wird der Geburtsname im Element familienname übermittelt. Gibt es zu dem Geburtsnamen einen abweichenden Familiennamen, wird der Geburtsname im Element geburtsname und der Familienname im Element familienname übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anschrift"
+                              minOccurs="0"
+                              type="xpersonenstand:Anschrift.InlandAusland">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier die Anschrift der letzten Hauptwohnung des Verstorbenen mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kreisbezeichnungInlandsanschrift"
+                              minOccurs="0"
+                              type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier kann die Kreisbezeichnung mitgeteilt werden. Die Kreisbezeichnung ermöglicht die Zuordnung der Städte bei gleichen Städtenamen, z. B. Neustadt. Dadurch kann die Ortsbezeichnung präzisiert werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsdatum"
+                              minOccurs="0"
+                              type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier das Geburtsdatum der verstorbenen Person mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsort"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2GB.Geburtsort">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier der Geburtsort der verstorbenen Person mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geschlecht"
+                              minOccurs="0"
+                              type="xpersonenstand:Code.Geschlecht">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier das Geschlecht des Verstorbenen übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="staatsangehoerigkeit"
+                              minOccurs="0"
+                              type="xpersonenstand:Code.Staatsangehoerigkeit">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier die ausländische Staatsangehörigkeit des Verstorbenen mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

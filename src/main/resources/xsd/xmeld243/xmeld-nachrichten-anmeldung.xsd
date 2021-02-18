@@ -1,0 +1,435 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xmeld="http://www.osci.de/xmeld243"
+           xmlns:xian="http://www.osci.de/xinneres/allgemeinername/2"
+           xmlns:xiaz="http://www.osci.de/xinneres/azrnummer/1"
+           xmlns:xicgvz="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xima="http://www.osci.de/xinneres/meldeanschrift/3"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://www.osci.de/xmeld243"
+           version="2.4.3"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XMeld</nameLang>
+            <nameKurz>XMeld</nameKurz>
+            <nameTechnisch>xinneres.xmeld</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xmeld</kennung>
+            <beschreibung>OSCI–XMeld ist das XInneres-Fachmodul der Innenverwaltung für den elektronischen Datenaustausch
+im Meldewesen und mit dem Meldewesen. Es ist Kern eines elektronischen Informationsverbundes zwischen
+den Meldebehörden und den Kommunikationspartnern der Meldebehörden. Weitere Bestandteile
+des elektronischen Informationsverbundes sind die Intermediäre und Clearingstellenbetreiber, deren
+Aufgabe die Übermittlung und Zustellung der XMeld-Nachrichten ist. Für die Übermittlung wird OSCITransport
+genutzt. Für die Zustellung und Adressierung der XMeld-Nachrichten das Deutsche Verwaltungsdienste-
+Verzeichnis (DVDV).
+Entwickelt wird OSCI–XMeld durch ein Expertengremium mit Vertreterinnen und Vertretern aus der
+Verwaltung und von Verfahrensherstellern. Die Koordnierungsstelle für IT-Standards (KoSIT) ist dabei
+federführend. Auftraggeber für die Erstellung und Weiterentwicklung ist der Arbeitskreis I (AK I) der
+Innenministerkonferenz (IMK).
+Seit 2007 ist OSCI–XMeld im praktischen Einsatz für die Kommunikation von und mit den Meldebehörden
+und wird seit dem kontinuierlich weiterentwickelt und an geänderte rechtliche Vorgaben angepasst.
+Zur Einführung des Bundesmeldegesetzes wurde OSCI–XMeld vollständig überarbeitet und setzt die
+Anforderungen des Bundesmeldegesetzes in der praktischen Datenübermittlung um.</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>2.4.3</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+         <title>Abrufverfahren zum vorausgefüllten Meldeschein</title>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xmeld-nachrichten-basistypen.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/allgemeinername/2/xinneres-name.xsd"
+              namespace="http://www.osci.de/xinneres/allgemeinername/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/azrnummer/1/xinneres-azrnummer.xsd"
+              namespace="http://www.osci.de/xinneres/azrnummer/1"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2/xinneres-codes-gemeindeverzeichnis.xsd"
+              namespace="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/meldeanschrift/3/xinneres-meldeanschrift.xsd"
+              namespace="http://www.osci.de/xinneres/meldeanschrift/3"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="type.Anmeldung.Identifikation.NameNatuerlichePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Name zur Identifikation für den vorausgefüllten Meldeschein</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können die Namensinformationen der betroffenen Person im Kontext des vorausgefüllten Meldescheines übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.NameNatuerlichePerson">
+            <xs:sequence>
+               <xs:element name="familienname" minOccurs="0" type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Der aktuelle Familienname. Familienname kann sein der Geburtsname, der gemeinsam bestimmte Ehename oder Lebenspartnerschaftsname, der Ehename oder der Lebenspartnerschaftsname zusammen mit dem hinzugefügten Begleitnamen.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="familienname.unstrukturiert"
+                           minOccurs="0"
+                           type="xmeld:type.FamiliennameUnstrukturiert">
+                  <xs:annotation>
+                     <xs:documentation>Der aktuelle Familienname, ganzheitlich dargestellt (z.B. 'Bartsch' oder 'von der Schulenburg') ohne strukturierte Trennung der Namensbestandteile.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ehename" minOccurs="0" type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Ein Eintrag erfolgt nur dann, wenn die Ehegatten einen Ehenamen führen und dieser vom geführten Familiennamen abweicht. Dies ist nur dann der Fall, wenn ein Ehegatte dem Ehenamen einen Begleitnamen hinzugefügt hat. Nach §1355 BGB sollen die Ehegatten einen gemeinsamen Familiennamen (Ehenamen) bestimmen. Bestimmen sie keinen Ehenamen, so führen sie ihren zur Zeit der Eheschließung geführten Namen auch nach der Eheschließung. Zum Ehenamen können die Ehegatten durch Erklärung gegenüber dem Standesbeamten den Geburtsnamen des Mannes oder den Geburtsnamen der Frau bestimmen. Ein Ehegatte, dessen Name nicht Ehename wird, kann durch Erklärung gegenüber dem Standesbeamten dem Ehenamen seinen Geburtsnamen oder den zur Zeit der Erklärung geführten Namen voranstellen oder anfügen (§ 1355 Abs. 4 BGB); die Erklärung bedarf der öffentlichen Beglaubigung.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ehename.unstrukturiert"
+                           minOccurs="0"
+                           type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Der Ehename - falls ein solcher geführt wird und dieser vom geführten Familiennamen abweicht - in unstrukturierter Darstellung.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="lebenspartnerschaftsname"
+                           minOccurs="0"
+                           type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Ein Eintrag erfolgt nur dann, wenn die Lebenspartner einen Lebenspartnerschaftsnamen führen und dieser vom geführten Familiennamen abweicht. Lebenspartnerschaftsname ist der Name, den die Lebenspartner durch Erklärung gegenüber dem Standesamt, einer anderen Urkundsperson oder einer anderen Behörde als gemeinsamen Namen bestimmt haben (§ 3 Abs. 1 i. V. m. § 23 Abs. 1 und 2 des Lebenspartnerschaftsgesetzes - LPartG).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="lebenspartnerschaftsname.unstrukturiert"
+                           minOccurs="0"
+                           type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Lebenspartnerschaftsname - falls ein solcher geführt wird und dieser vom Familiennamen abweicht - in unstrukturierter Darstellung.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="vornamen" type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Hier werden die Vornamen der Person dargestellt. Alle Vornamen sind - durch Leerzeichen getrennt - im Kindelement name anzugeben; in der Reihenfolge, wie sie in einer deutschen Personenstandsurkunde eingetragen sind. Das Kindelement name darf nur fehlen, wenn durch den Schalter nichtVorhanden angezeigt wird, dass ein Vorname zu Recht nicht vorhanden ist.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Anmeldung.NatuerlichePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp für die Informationen des vorausgefuellten_meldescheins</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die Daten der betroffenen Person im Kontext des vorausgefüllten Meldescheins abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="auskunftssperre"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Auskunftssperre">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Angaben zu Auskunftssperren der betroffenen_person übermittelt.Es sind in diesem Kontext nur die Schlüssel 1, 3 und 11 zulässig.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name"
+                     minOccurs="0"
+                     type="xmeld:type.NameNatuerlichePersonAktuell">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Angaben zum Namen der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienstand"
+                     minOccurs="0"
+                     type="xmeld:type.FamilienstandNurBegruendung">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Angaben zum Familienstand der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienstand.nachweis"
+                     minOccurs="0"
+                     type="xmeld:type.Nachweisdaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Nachweisdaten zum Familienstand übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Angaben zur Geburt der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="religion" minOccurs="0" type="xmeld:type.Religion">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Angaben zur Zugehörigkeit zu einer Religionsgesellschaft der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staatsangehoerigkeit"
+                     minOccurs="0"
+                     maxOccurs="4"
+                     type="xmeld:type.StaatsangehoerigkeitOhneUnionsbuergerschaft">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Angaben zur Staatsangehörigkeit der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ausweisdokument"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.AusweisdokumentOhneSperrinformationen">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Angaben zu Ausweisdokumenten der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Angaben zum Geschlecht der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="aktuelleWohnung"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.WohnungOhneZusatzdaten">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die aktuelle hauptwohnung bzw. die aktuelle alleinige_wohnung übermittelt, sowie ggf. existierende aktuelle nebenwohnungen. Oder es wird die letzte hauptwohnung bzw. die letzte alleinige_wohnung übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zuzugBund" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Bundesrepublik Deutschland übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="azrNummer" minOccurs="0" type="xiaz:AZRNummer">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die AZR-Nummer der Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtseintragOhneGeburtsurkunde"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache übermittelt, dass zur betroffenen Person ein Eintrag im Geburtenregister erfolgt ist, aber keine Geburtsurkunde ausgestellt wurde.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Anmeldung.Wegzugsanschrift">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Wegzugsanschrift für den vorausgefüllten Meldeschein</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp können die Informationen zur Wegzugsanschrift zur Identifikation im Kontext des vorausgefüllten Meldescheines übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xima:Meldeanschrift">
+            <xs:sequence>
+               <xs:element name="gemeindeschluessel"
+                           minOccurs="0"
+                           type="xicgvz:Code.GemeindeVZ.AmtlicherGemeindeschluessel"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es ist der vom Statistischen Bundesamt herausgegebene bundeseinheitliche Gemeindeschlüssel der Gemeinde anzugeben, in der die Wohnung liegt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="hausnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Hausnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind nur die Ziffern einer Hausnummer anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="hausnummerBuchstabeZusatzziffer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.HausnummerBuchstabeZusatzziffer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Buchstaben oder Zusatzziffern zur Hausnummer anzugeben. Beispiel: 124 A, 109.5</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="postleitzahl"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Postleitzahl"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es ist die Postleitzahl anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="stockwerkswohnungsnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Stockwerkswohnungsnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Stockwerks- und Wohnungsnummern anzugeben, soweit sie für die Adressierung erforderlich sind; Beispiel: IV. Stockwerk, Wohnung 115.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="strasse"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Strasse"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es ist die Bezeichnung der Straße anzugeben. Die Feldlänge ist auf 55 Zeichen beschränkt. Bei Überschreitung einer Länge von 25 Zeichen darf sinnvoll abgekürzt werden. Ist keine Straßenbezeichnung - wohl aber eine Hausnummer - vorhanden, so ist die Zeichenkette Hausnummer anzugeben. Sind weder Straßenbezeichnung noch Hausnummer vorhanden, so ist die Zeichenkette ohne Hausnummer anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="teilnummerDerHausnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.TeilnummerDerHausnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Teilnummern zur Hausnummer anzugeben. Beispiel: 16 1/7</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="zusatzangaben"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Zusatzangaben"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Zusatzangaben zur Anschrift anzugeben. Beispiele: Hinterhaus, Gartenhaus. Bei Überschreitung einer Länge von 21 Zeichen darf sinnvoll abgekürzt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.anmeldung.identifikation">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp für die Identifikation der betroffenen_person an einer Anschrift</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp dient der anforderung_meldescheins für 1 bis n Personen, die in der wegzugs_mb, bisherigen hauptwohnungs_mb bzw. der letzten_inlands_mb mit derselben Anschrift mit dem Wohnungsstatus AW oder HW gemeldet sind. Die Anschrift dient der weiteren Identifikation der betroffenen_personen.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="identifikation.person"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.anmeldung.identifikation.person"/>
+         <xs:element name="wegzugsanschrift" type="xmeld:type.Anmeldung.Wegzugsanschrift">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anschrift der aktuellen hauptwohnung bzw. die Anschrift der aktuellen alleinigen_wohnung übermittelt, oder die Anschrift der letzten Inlandswohnung.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.anmeldung.identifikation.person">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp für die Identifikation der betroffenen_person</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp dient der Identifikation der betroffenen_person im Rahmen des vorausgefuellten_meldescheins.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name"
+                     type="xmeld:type.Anmeldung.Identifikation.NameNatuerlichePerson">
+            <xs:annotation>
+               <xs:documentation>Dieses Element dient dazu, die betroffene_person anhand ihres Namens zu identifizieren. Wenn dieses Element vorhanden ist, müssen mindestens ein Vor- und ein Nachname der betroffenen_person angegeben werden. Weitere Namensangaben sind optional. Im Melderegister des Lesers darf nur in den Feldern gesucht werden, die den Elementen entsprechen (also in Familienname, Ehename bzw. Lebenspartnerschaftsname).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geburtsdatum der betroffenen_person zur Identifikation übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.anmeldung.zuziehende.person">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp für die betroffene Person im Kontext der antwort_meldescheins</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Datentyp enthält die Informationen der betroffenen_person im Kontext der antwort_meldescheins. Zur angefragten betroffenen_person werden maximal die Daten nach § 3 Abs. 1 bmg übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="antwortstatus"
+                     type="xmeld:Code.Vorausgefuellter.Meldeschein.Antwortstatus">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Information übermittelt, ob die betroffene Person gefunden wurde oder nicht. Die Elemente personendaten, vertreter und partner.und.kinder werden nur übermittelt, wenn der antwortstatus den Wert 01 hat.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anfrageprofil" type="xmeld:type.anmeldung.identifikation.person">
+            <xs:annotation>
+               <xs:documentation>Hier wird die ursprüngliche Anfrage wiederholt (zu Vergleichs-/Kontrollzwecken).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="personendaten"
+                     minOccurs="0"
+                     type="xmeld:type.Anmeldung.NatuerlichePerson">
+            <xs:annotation>
+               <xs:documentation>Details zur zuziehenden natürlichen Person.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="vertreter"
+                     minOccurs="0"
+                     maxOccurs="4"
+                     type="xmeld:type.GesetzlicherVertreterOhneBeendigung">
+            <xs:annotation>
+               <xs:documentation>Vertreter der anzumeldenden Person.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="partner.und.kinder"
+                     minOccurs="0"
+                     type="xmeld:type.PartnerUndKinder">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Daten zum Partner und zu Kindern der betroffenen Person übermittelt..</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="wegzugsanschrift"
+                     minOccurs="0"
+                     type="xmeld:type.AnschriftMelderecht">
+            <xs:annotation>
+               <xs:documentation>Sofern die betroffene_person im zustaendigkeitsbereich_mb nicht mit hauptwohnung bzw. alleiniger_wohnung gemeldet ist, wird mit diesem Element die Anschrift der aktuellen hauptwohnung bzw. die Anschrift der aktuellen alleinigen_wohnung übermittelt, oder die Tatsache, dass die Person nach unbekannt bzw. in das Ausland abgemeldet wurde.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="anmeldung.datenanforderung.0300">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>anforderung_meldescheins</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht fordert die Meldebehörde, den vorausgefuellten_meldeschein bei der zuständigen Meldebehörde der betroffenen_personen an. Diese Nachricht wird versendet von der zuzugs_mb im Falle eines zuzugs_inland (Prozess siehe ), nebenwohnungs_mb im Falle eines bezugs_nebenwohnung (Prozess siehe ), zuzugs_mb im Falle eines wiederzuzugs_ausland (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="anwenderkennung" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Anwenderkennung der Person übermittelt, die den vorausgefuellten_meldeschein für die betroffene_person anfordert. Die Anwenderkennung dient der Protokollierung des Datenabrufs.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="betroffene" type="xmeld:type.anmeldung.identifikation">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element dient der anforderung_meldescheins für 1 bis n Personen, die in der wegzugs_mb, der bisherigen hauptwohnungs_mb bzw. der letzten_inlands_mb mit derselben Anschrift mit dem Wohnungsstatus AW oder HW gemeldet sind bzw. waren. Die Anschrift dient der weiteren Identifikation der betroffenen_personen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="anmeldung.datenbereitstellung.0301">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Antwort auf die Anforderung des vorausgefüllten Meldescheines</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht übermittelt die Meldebehörde, die antwort_meldescheins zur betroffenen_person an die anfragende Meldebehörde. Diese Nachricht wird versendet von der wegzugs_mb im Falle eines zuzugs_inland (Prozess siehe ), hauptwohnungs_mb oder alleinigewohnungs_mb im Falle eines bezugs_nebenwohnung (Prozess siehe ), letzten_inlands_mb im Falle eines wiederzuzugs_ausland (Prozess siehe ), Meldebehörde im Falle einer Rückweisung aufgrund fehlender Identifikation (Prozess siehe ), Meldebehörde im Falle einer Rückweisung aufgrund unplausibler Meldeverhältnisse (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="zuziehende.person"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.anmeldung.zuziehende.person">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden für jede betroffene_person die Daten des vorausgefuellten_meldescheins übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ursprungsnachricht" type="xmeld:type.Identifikation.Nachricht">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird die Ursprungsnachricht referenziert, mit der die Anforderung eines vorausgefüllten Meldescheines mitgeteilt wurde. Als Schlüssel darf im Kindelement nachrichtentyp nur der Wert 0300 übermittelt werden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

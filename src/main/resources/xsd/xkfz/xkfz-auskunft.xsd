@@ -1,0 +1,258 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe AUSKUNFT, vgl. Abschnitt   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:complexType name="Type.Auskunft.AnfrageHalterauskunft.0801">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'auskunft.anfragehalterauskunft.0801'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:halterauskunftAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0801'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Auskunft.AnfrageStatus.0803">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'auskunft.anfragestatus.0803'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:statusHalterauskunftAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0803'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Auskunft.AnfrageZulassungsbescheinigungTeil2Vorhanden.0805">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'auskunft.anfrageZulassungsbescheinigungTeil2Vorhanden.0805'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:zulassungsbescheinigungTeil2VorhandenAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0805'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Auskunft.Halterauskunft.0802">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'auskunft.halterauskunft.0802'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:halterauskunft">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0802'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Auskunft.Status.0804">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'auskunft.status.0804'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:statusHalterauskunft">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0804'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Auskunft.ZulassungsbescheinigungTeil2Vorhanden.0806">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'auskunft.zulassungsbescheinigungTeil2Vorhanden.0806'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:zulassungsbescheinigungTeil2Vorhanden">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0806'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="halterauskunft">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'auskunft.halterauskunft.0802'. Diese Datenstruktur wird im Rahmen der Ergebnisübermittlung einer Halterauskunft verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Halterauskunft" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="halterauskunftAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'auskunft.anfragehalterauskunft.0801'. Diese Datenstruktur wird im Rahmen der Anfrage zur Erteilung einer Halterauskunft verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageHalterauskunft" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="statusHalterauskunft">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'auskunft.status.0804'. Diese Datenstruktur wird im Rahmen der Ergebnisübermittlung zum Status einer Halterauskunft verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.ReferenzElektronischerAntragAuskunftMitStatus" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="statusHalterauskunftAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'auskunft.anfragestatus.0803'. Diese Datenstruktur wird im Rahmen der Anfrage nach dem Status einer Halterauskunft verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Referenz" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zulassungsbescheinigungTeil2Vorhanden">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'auskunft.zulassungsbescheinigungTeil2Vorhanden.0806'. Diese Datenstruktur wird im Rahmen der Erbnisübermittlung zur Auskunft,  ob der Zulassungsbehörde eine ZB II bereits vorliegt, verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AuskunftZulBeschTeil2Vorhanden" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="zulassungsbescheinigungTeil2VorhandenAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'auskunft.zulassungsbescheinigungTeil2Vorhanden.0806'. Diese Datenstruktur wird im Rahmen der Ergebnisübermittlung zur Auskunft, ob der Zulassungsbehörde eine ZB II bereits vorliegt, verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageZulBeschTeil2Vorhanden" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auskunft.anfragehalterauskunft.0801">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zur Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0801 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Auskunft.AnfrageHalterauskunft.0801" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auskunft.halterauskunft.0802">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übertragung der Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0802 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Auskunft.Halterauskunft.0802" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auskunft.anfragestatus.0803">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zum aktuellen Status einer zuvor übermittelten Anfrage zur Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0803 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Auskunft.AnfrageStatus.0803" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auskunft.status.0804">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übertragung des Status einer zuvor übermittelten Anfrage zur Halterauskunft aus dem örtlichen Fahrzeugregister', vgl. Verweis zu XKfz-Nachricht 0804 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Auskunft.Status.0804" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auskunft.anfragezulassungsbescheinigungteil2vorhanden.0805">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Diese Nachricht dient der Optimierung der Bürgerkommunikation mit der Zulassungsbehörde und wird in einem die Zulassung vorbereitenden Prozess verwendet. Es bedarf keiner Rechtgrundlage.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zum Verbleib der Zulassungsbescheinigung Teil 2 bei der zuständigen Zulassungsbehörde', vgl. Verweis zu XKfz-Nachricht 0805 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Auskunft.AnfrageZulassungsbescheinigungTeil2Vorhanden.0805" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="auskunft.zulassungsbescheinigungteil2vorhanden.0806">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Diese Nachricht dient der Optimierung der Bürgerkommunikation mit der Zulassungsbehörde und wird in einem die Zulassung vorbereitenden Prozess verwendet. Es bedarf keiner Rechtgrundlage.</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Antwort zum Verbleib der Zulassungsbescheinigung Teil 2 bei der zuständigen Zulassungsbehörde', vgl. Verweis zu XKfz-Nachricht 0806 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Auskunft.ZulassungsbescheinigungTeil2Vorhanden.0806" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

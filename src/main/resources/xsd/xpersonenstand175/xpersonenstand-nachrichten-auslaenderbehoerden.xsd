@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="Nachricht.StA2AB" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Bei jeder Nachricht von einem stamt an eine ab oder umgekehrt werden übermittelt: Nachrichtenkopf mit Angaben zum Absender und Empfänger Angaben zum Erstellungszeitpunkt der Nachricht Angaben über den Grund der Nachricht Identifikationsdaten zum Elternteil, um die betroffene Person bei der empfangenden ab zu identifizieren eine mögliche Vorgangsidentifikation, unter der der Vorgang aufgrund einer Antwort bei dem absendenden stamt wieder aufgefunden werden kann. Dazu ist das Element vorgangsidentifikation aus dem Datentyp Nachricht.G2GXP zu verwenden. Daten zum Kind.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+            <xs:sequence>
+               <xs:element name="kind" type="xpersonenstand:StA2AB.Kind">
+                  <xs:annotation>
+                     <xs:documentation>Hier werden die Daten des Kindes übermittelt, zu dem die Klärung des aufenthaltsrechtlichen Status der Eltern angefragt wird.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="elternteil" type="xpersonenstand:StA2AB.Identifikation.Person">
+                  <xs:annotation>
+                     <xs:documentation>Hier werden die Informationen des Elternteils übermittelt, für den die Klärung des aufenthaltsrechtlichen Status angefragt wird.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="registereintragsidentifikation"
+                           minOccurs="0"
+                           type="xpersonenstand:Quelleintrag">
+                  <xs:annotation>
+                     <xs:documentation>Sofern bekannt, kann hier die Registereintragsidentifikation übermittelt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2AB.AngabenZurGeburt">
+      <xs:annotation>
+         <xs:documentation>Die Klasse beinhaltet Geburtsdatum und Geburtsort einer Person.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Es ist das Geburtsdatum mitzuteilen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsort" type="xpersonenstand:Ereignisort">
+            <xs:annotation>
+               <xs:documentation>Es wird der Geburtsort mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2AB.AufenthaltsrechtlicherStatusAB">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse enthält Informationen über den aufenthaltsrechtlichen Status eines Elternteils zum Zeitpunkt der Geburt des Kindes.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="unbefristetesAufenthaltsrecht"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Es ist true zu übermitteln, sofern der Elternteil ein unbefristetes Aufenthaltsrecht hatte.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="schweizer" minOccurs="0" fixed="true" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Es ist true zu übermitteln, wenn der Elternteil als Staatsangehöriger der Schweiz oder als dessen Familienangehöriger eine Aufenthaltserlaubnis nach dem Freizügigkeitsabkommen EU/Schweiz vom 21.06.1999 (BGBI. II S. 810) hatte.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="achtJahreInland"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Es ist true zu übermitteln, sofern der Elternteil seit acht Jahren im Inland seinen rechtmäßigen gewöhnlichen Aufenthalt hatte.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2AB.AufenthaltsrechtlicherStatusStA">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse enthält Informationen über den aufenthaltsrechtlichen Status eines Elternteils zum Zeitpunkt der Geburt des Kindes sowie die Angabe, ob die Unterlagen dazu vorgelegt oder die Informationen dazu von den Eltern oder des Anzeigenden angegeben wurden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="aufenthaltsstatus" type="xpersonenstand:Code.Aufenthaltsstatus">
+            <xs:annotation>
+               <xs:documentation>Aufenthaltsrechtlicher Status, der angegeben oder nachgewiesen wurde</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="unterlagenVorgelegt"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Sofern der übermittelte aufenthaltsrechtliche Status aus vorgelegten Unterlagen (bspw. Reisepass) übernommen wurde, ist true zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2AB.Identifikation.Person">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse enthält die Daten, die in der Kommunikation zwischen Standesämtern und abpl der Identifikation einer Person dienen. Durch die hier übermittelten Daten soll der Empfänger in die Lage versetzt werden, eine eindeutige Identifikation des Betroffenen auf Basis der im eigenen Register vorliegenden Daten vorzunehmen. Für die Kindelemente name, anschrift, geburt und staatsangehoerigkeit wird jeweils der aktuelle Stand der Daten übermittelt, d. h. insbesondere die Daten werden übermittelt, die aus vorgelegten Dokumenten, etwa Aufenthaltsbescheinigungen, entnommen wurden. Zusätzlich wird der vermutete aufenthaltsrechtliche Status der Person mitgeteilt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="name" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Es wird der Name der Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift" type="xpersonenstand:Anschrift.InlandAusland">
+            <xs:annotation>
+               <xs:documentation>Es wird die Anschrift der Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" type="xpersonenstand:StA2AB.AngabenZurGeburt">
+            <xs:annotation>
+               <xs:documentation>Es werden Angaben zur Geburt der Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staatsangehoerigkeit"
+                     type="xpersonenstand:Code.Staatsangehoerigkeit">
+            <xs:annotation>
+               <xs:appinfo>
+                  <title>Staatsangehörigkeit</title>
+               </xs:appinfo>
+               <xs:documentation>Es wird die Staatsangehörigkeit der Person mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="aufenthaltsrechtlicherStatus"
+                     type="xpersonenstand:StA2AB.AufenthaltsrechtlicherStatusStA">
+            <xs:annotation>
+               <xs:documentation>Es wird der aufenthaltrechtliche Status mitgeteilt. Bei einer Rückmeldung, Abgabenachricht oder Weiterleitung werden die Daten zum aufenthaltsrechtlichen Status aus der Anfrage übernommen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2AB.Kind">
+      <xs:annotation>
+         <xs:documentation>Hier werden die Daten zu dem Kind übermittelt. Der aufenthaltsrechtliche Status der Eltern ist bezogen auf den Zeitpunkt der Geburt des Kindes festzustellen.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="familienname"
+                     minOccurs="0"
+                     type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+            <xs:annotation>
+               <xs:documentation>Sofern ein Name zurecht nicht vorhanden ist, wird im Datentyp Allgemeiner Name der Wert nichtVorhanden auf true gesetzt. Sofern der Name noch nicht bestimmt ist, wird dieses Element nicht übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="vornamen"
+                     minOccurs="0"
+                     type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+            <xs:annotation>
+               <xs:documentation>Sofern ein Name zurecht nicht vorhanden ist, wird im Datentyp Allgemeiner Name der Wert nichtVorhanden auf true gesetzt. Sofern der Name noch nicht bestimmt ist, wird dieses Element nicht übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" type="xpersonenstand:StA2AB.AngabenZurGeburt">
+            <xs:annotation>
+               <xs:documentation>Angaben zur Geburt des Kindes.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="stA2AB.Geburt.071010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Ausländerbehörde</empfaenger>
+            <rechtsgrundlage>§ 34 Abs. 2 PStV</rechtsgrundlage>
+            <title>Anfrage zum Staatsangehörigkeitserwerb an die ab</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung stellt das stamt die Anfrage zur Staatsangehörigkeit nach § 4 Abs. 3 StAG bei der ab. Falls die Empfängerin der Anfrage nicht die zuständige ab ist, stellt sie die korrekte Zuständigkeit durch Nachfrage beim oder Einsicht in das AZR fest und leitet die Anfrage an die zuständige ab weiter.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2AB"/>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2AB.Geburt.071020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Ausländerbehörde</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 34 Abs. 2 PStV
+</rechtsgrundlage>
+            <title>Antwort der Ausländerbehörde auf eine Anfrage zum Staatsangehörigkeitserwerb</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung antwortet die ab auf die Anfrage nach § 4 Abs. 3 StAG. Die Antwort beinhaltet die Ergebnisse der ab über den aufenthaltsrechtlichen Status des in der Anfrage genannten Elternteils. Die Informationen aus der Anfrage werden in Nachricht zur Identifikation der Anfrage ebenfalls übermittelt. Dies sind die Vorgangsidentifikation aus der Anfrage, sofern sie in der Anfrage mitgeteilt wurde, und die Identifikationsdaten zu der Person aus der Anfrage</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2AB">
+               <xs:sequence>
+                  <xs:element name="bemerkung" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird dem stamt als der den Staatsangehörigkeitserwerb nach § 4 Abs. 3 StAG feststellenden Behörde stichwortartig mitgeteilt, aus welchem Grund von den Angaben des Elternteils zum Aufenthaltsstatus abgewichen wird. Das können beispielsweise die Angabe eines falschen Aufenthaltsstatus, Unterbrechungszeiten während des Aufenthalts, die den achtjährigen Mindestaufenthalt im Inland verhindern, Falsche Rechtsauslegung (Elternteil kommt nicht aus einem EU-Staat) sein. Die ab kann in diesem Feld dem stamt auch empfehlen, zur weiteren Prüfung des ius-soli-Erwerbs noch einmal die zuständige Staatsangehörigkeitsbehörde zu hören.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aufenthaltsStatusElternteil"
+                              type="xpersonenstand:StA2AB.AufenthaltsrechtlicherStatusAB">
+                     <xs:annotation>
+                        <xs:documentation>Es wird der aufenthaltsrechtliche Status des Elternteils mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

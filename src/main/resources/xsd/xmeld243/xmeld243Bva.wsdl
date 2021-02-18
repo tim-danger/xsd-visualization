@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Bva.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Bva"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Bva.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst des Bundesverwaltungsamts gemäß OSCI-XMeld</title></head><body><h1>Dienst des Bundesverwaltungsamts gemäß OSCI-XMeld</h1><p>Dieses WSDL-Dokument beschreibt den Dienst des Bundesverwaltungsamts gemäß OSCI-XMeld (siehe: <link>http://www.osci.de</link>).</p><p>Folgende Datenübermittlungs-Nachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeDatenuebermittlung</i> zulässig:<ul><ul>
+            <li>xmeld:datenuebermittlung.optionsmitteilung.0560</li>
+            <li>xmeld:datenuebermittlung.optionsmitteilung.0561</li>
+         </ul></ul></p><p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der zwölfstellige DVDV-Behördenschlüssel "dbs:490030020000" ; der zu verwendende Präfix lautet "<b>dbs:</b>". </p><p>Dienstanbieter ist das Bundesverwaltungsamt (BVA), DVDV-Behördenkategorie "<b>Bundesbehörde</b>". Zulässige Dienstnutzer sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". Anfragen ans DVDV vom Typ <i>verify.category</i> sollten daher die Zuordnung zu dieser Kategorie prüfen lassen.</p></body></html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <wsdl:types>
+      <xs:schema xmlns="http://www.osci.de/xmeld243"
+                 targetNamespace="http://www.osci.de/xmeld243/xmeld243Bva.wsdl">
+         <xs:import namespace="http://www.osci.de/xmeld243"
+                    schemaLocation="http://www.osci.de/xmeld243/xmeld-nachrichten-datenuebermittlung.xsd"/>
+         <xs:complexType name="bvaSchemata">
+            <xs:choice>
+               <xs:element name="datenuebermittlung.optionsmitteilung.0560"/>
+               <xs:element name="datenuebermittlung.optionsmitteilung.0561"/>
+            </xs:choice>
+         </xs:complexType>
+      </xs:schema>
+   </wsdl:types>
+   <message name="bvaNachricht">
+      <part name="bvaNachricht" type="tns:bvaSchemata"/>
+      <part name="optionaleNachricht" type="xs:anyType"/>
+   </message>
+   <portType name="osciBvaInterface">
+      <operation name="sendeBva">
+         <input message="tns:bvaNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciBvaInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeBva">
+         <osci:operation communicationType="one-way-active" subject="XMeld 2.4.3 Bva"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:bvaNachricht"/>
+               </osci:part>
+            </osci:container>
+            <osci:container signatureLevel="none" encrypted="false" required="false">
+               <osci:part>
+                  <osci:content part="tns:optionaleNachricht"/>
+               </osci:part>
+            </osci:container>
+         </input>
+      </operation>
+   </binding>
+   <service name="osciBvaService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciBvaInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>required</tpl:use> Dieser Port ist nicht optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciBvaTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

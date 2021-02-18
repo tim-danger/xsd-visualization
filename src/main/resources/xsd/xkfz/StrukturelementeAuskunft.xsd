@@ -1,0 +1,2148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:auskunft="http://www.kba.de/zfzr/auskunft" xmlns:el="http://www.kba.de/elemente" xmlns:typ="http://www.kba.de/typen" targetNamespace="http://www.kba.de/zfzr/auskunft" version="5.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:import schemaLocation="Elementdefinitionen.xsd" namespace="http://www.kba.de/elemente" />
+  <xs:import schemaLocation="Typdefinitionen.xsd" namespace="http://www.kba.de/typen" />
+  <xs:simpleType name="AnfrageanlassTyp">
+    <xs:restriction base="xs:nonNegativeInteger">
+      <xs:maxInclusive value="9" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:simpleType name="AnzahlIdentifizierungsNrZFZREintragTyp">
+    <xs:restriction base="xs:string">
+      <xs:maxLength value="20" />
+      <xs:minLength value="1" />
+      <xs:pattern value="[0-9]*" />
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:complexType name="BatchEmpfangsbevollmaechtigterTyp">
+    <xs:sequence>
+      <xs:element ref="el:DatumEmpfangsbevollmaechtigung" minOccurs="0" />
+      <xs:group ref="auskunft:PundA" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BatchFahrzeugdatenTyp">
+    <xs:sequence>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:PruefzifferFahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:TextHersteller" minOccurs="0" />
+      <xs:element ref="el:TextMarke" minOccurs="0" />
+      <xs:element ref="el:TextHandelsbezeichnung" minOccurs="0" />
+      <xs:element ref="el:Genehmigungsnummer" minOccurs="0" />
+      <xs:element ref="el:DatumGenehmigung" minOccurs="0" />
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0" />
+      <xs:element ref="el:TextKraftstoff" minOccurs="0" />
+      <xs:element ref="el:kombinierterCo2WertWltp" minOccurs="0" />
+      <xs:element ref="el:NennleistungKW" minOccurs="0" />
+      <xs:element ref="el:BemerkungenAusnahmen" minOccurs="0" />
+      <xs:element ref="el:Beiblatt" minOccurs="0" />
+      <xs:element ref="el:DatumErstzulassung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BatchHalterTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:PundA" />
+      <xs:element ref="auskunft:Fahrtenbuchauflage" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BatchTechnikdatenTyp">
+    <xs:sequence>
+      <xs:element ref="el:HerstellerKurzbezeichnung" minOccurs="0" />
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:SchluesselTyp" minOccurs="0" />
+      <xs:element ref="el:SchluesselVarianteVersion" minOccurs="0" />
+      <xs:element ref="el:TextHersteller" minOccurs="0" />
+      <xs:element ref="el:TextMarke" minOccurs="0" />
+      <xs:element ref="el:TextHandelsbezeichnung" minOccurs="0" />
+      <xs:element ref="el:TextTyp" minOccurs="0" />
+      <xs:element ref="el:TextAufbau" minOccurs="0" />
+      <xs:element ref="el:SchluesselGrundfarbe" minOccurs="0" />
+      <xs:element ref="el:SchluesselZweitfarbe" minOccurs="0" />
+      <xs:element ref="el:ArtGenehmigung" minOccurs="0" />
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselAufbau" minOccurs="0" />
+      <xs:element ref="el:SchluesselEmissionsklasse" minOccurs="0" />
+      <xs:element ref="auskunft:TextEmissionsklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0" />
+      <xs:element ref="el:KombinierterCO2Wert" minOccurs="0" />
+      <xs:element ref="el:kombinierterCo2WertWltp" minOccurs="0" />
+      <xs:element ref="el:Hoechstgeschwindigkeit" minOccurs="0" />
+      <xs:element ref="el:NennleistungKW" minOccurs="0" />
+      <xs:element ref="el:NennleistungUmdrehung" minOccurs="0" />
+      <xs:element ref="el:Hubraum" minOccurs="0" />
+      <xs:element ref="el:Leistungsgewicht" minOccurs="0" />
+      <xs:element ref="el:Nutzlast" minOccurs="0" />
+      <xs:element ref="el:Rauminhalt" minOccurs="0" />
+      <xs:element ref="el:AnzahlStehplaetze" minOccurs="0" />
+      <xs:element ref="el:AnzahlSitzplaetze" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMin" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMax" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:Stuetzlast" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastGebremst" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastUngebremst" minOccurs="0" />
+      <xs:element ref="el:AnzahlAchsen" minOccurs="0" />
+      <xs:element ref="el:AnzahlAntriebsachsen" minOccurs="0" />
+      <xs:element ref="el:Standgeraeusch" minOccurs="0" />
+      <xs:element ref="el:StandgeraeuschUmdrehung" minOccurs="0" />
+      <xs:element ref="el:Fahrgeraeusch" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse1" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse2" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse3" minOccurs="0" />
+      <xs:element ref="el:LaengeMax" minOccurs="0" />
+      <xs:element ref="el:LaengeMin" minOccurs="0" />
+      <xs:element ref="el:BreiteMax" minOccurs="0" />
+      <xs:element ref="el:BreiteMin" minOccurs="0" />
+      <xs:element ref="el:HoeheMax" minOccurs="0" />
+      <xs:element ref="el:HoeheMin" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+      <xs:element ref="el:GenehmigungsnummerPMS" minOccurs="0" />
+      <xs:element ref="el:DatumNachruestung" minOccurs="0" />
+      <xs:element ref="el:BemerkungenAusnahmen" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="BatchVeraeusserungsanzeigeTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:PundA" />
+      <xs:element ref="auskunft:TextErwerberdaten" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="DokumentennummerAuslandAuskunftTyp">
+    <xs:sequence>
+      <xs:element ref="el:Dokument1Ausland" minOccurs="0" />
+      <xs:element ref="el:Dokument2Ausland" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugZCTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:FahrzeugCommon" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugZWTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:FahrzeugCommon" />
+      <xs:element ref="auskunft:MerkmalSondererfassungNutzfahrzeuge" minOccurs="0" />
+      <xs:element ref="el:PlausipruefungAbweichungBestaetigt" minOccurs="0" maxOccurs="10" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugakteEUTyp">
+    <xs:sequence>
+      <xs:element ref="el:IdentifizierungsnummerZFZREintrag" />
+      <xs:element name="Zulassungsabschnitt" maxOccurs="20" type="auskunft:ZulassungsabschnittEUTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugakteZCTyp">
+    <xs:sequence>
+      <xs:element ref="el:IdentifizierungsnummerZFZREintrag" />
+      <xs:element name="Zulassungsabschnitt" maxOccurs="20" type="auskunft:ZulassungsabschnittZCTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugakteZGTyp">
+    <xs:sequence>
+      <xs:element ref="el:IdentifizierungsnummerZFZREintrag" />
+      <xs:element name="Zulassungsabschnitt" maxOccurs="20" type="auskunft:ZulassungsabschnittZGTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugakteZWTyp">
+    <xs:sequence>
+      <xs:element ref="el:IdentifizierungsnummerZFZREintrag" />
+      <xs:element name="Zulassungsabschnitt" maxOccurs="20" type="auskunft:ZulassungsabschnittZWTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugakteZXTyp">
+    <xs:sequence>
+      <xs:element name="Zulassungsabschnitt" maxOccurs="20" type="auskunft:ZulassungsabschnittZXTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungEUTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:FahrzeugbeschreibungCommon" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+      <xs:element ref="el:GenehmigungsnummerPMS" minOccurs="0" />
+      <xs:element ref="el:DatumNachruestung" minOccurs="0" />
+      <xs:element ref="el:radstand" minOccurs="0" />
+      <xs:element ref="el:spurweiteAchse1" minOccurs="0" />
+      <xs:element ref="el:spurweiteAchse2" minOccurs="0" />
+      <xs:element ref="el:elektrischerEnergieverbrauchWltp" minOccurs="0" />
+      <xs:element ref="el:co2EinsparungNedc" minOccurs="0" />
+      <xs:element ref="el:co2EinsparungWltp" minOccurs="0" />
+      <xs:element ref="el:wltpTestmasse" minOccurs="0" />
+      <xs:element ref="el:abweichungsfaktorNedc" minOccurs="0" />
+      <xs:element ref="el:ueberpruefungsfaktorNedc" minOccurs="0" />
+      <xs:element ref="el:codeDerOekoinnovationen" minOccurs="0" />
+      <xs:element ref="el:IdentifikationFahrzeugfamilie" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungZCTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:FahrzeugbeschreibungCommon" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungZFTyp">
+    <xs:sequence>
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:SchluesselEmissionsklasse" minOccurs="0" />
+      <xs:element ref="auskunft:TextFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:AnzahlAchsen" minOccurs="0" />
+      <xs:element ref="auskunft:TextEmissionsklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselAufbau" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMin" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMax" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastGebremst" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastUngebremst" minOccurs="0" />
+      <xs:element ref="el:AnzahlAntriebsachsen" minOccurs="0" />
+      <xs:element ref="el:TextEmissionsklasseEGTypgenehmigung" minOccurs="0" />
+      <xs:element ref="auskunft:TextAufbau" minOccurs="0" />
+      <xs:element ref="el:Stuetzlast" minOccurs="0" />
+      <xs:element ref="el:Hubraum" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungZGTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:FahrzeugbeschreibungCommon" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungZRTyp">
+    <xs:sequence>
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselAufbau" minOccurs="0" />
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0" />
+      <xs:element ref="el:KombinierterCO2Wert" minOccurs="0" />
+      <xs:element ref="el:kombinierterCo2WertWltp" minOccurs="0" />
+      <xs:element ref="el:Hoechstgeschwindigkeit" minOccurs="0" />
+      <xs:element ref="el:NennleistungKW" minOccurs="0" />
+      <xs:element ref="el:NennleistungUmdrehung" minOccurs="0" />
+      <xs:element ref="el:Hubraum" minOccurs="0" />
+      <xs:element ref="el:Leistungsgewicht" minOccurs="0" />
+      <xs:element ref="el:Nutzlast" minOccurs="0" />
+      <xs:element ref="el:Rauminhalt" minOccurs="0" />
+      <xs:element ref="el:AnzahlStehplaetze" minOccurs="0" />
+      <xs:element ref="el:AnzahlSitzplaetze" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMin" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMax" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:Stuetzlast" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastGebremst" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastUngebremst" minOccurs="0" />
+      <xs:element ref="el:AnzahlAchsen" minOccurs="0" />
+      <xs:element ref="el:AnzahlAntriebsachsen" minOccurs="0" />
+      <xs:element ref="el:Standgeraeusch" minOccurs="0" />
+      <xs:element ref="el:StandgeraeuschUmdrehung" minOccurs="0" />
+      <xs:element ref="el:Fahrgeraeusch" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse1" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse2" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse3" minOccurs="0" />
+      <xs:element ref="el:LaengeMax" minOccurs="0" />
+      <xs:element ref="el:LaengeMin" minOccurs="0" />
+      <xs:element ref="el:BreiteMax" minOccurs="0" />
+      <xs:element ref="el:BreiteMin" minOccurs="0" />
+      <xs:element ref="el:HoeheMax" minOccurs="0" />
+      <xs:element ref="el:HoeheMin" minOccurs="0" />
+      <xs:element ref="el:Beiblatt" minOccurs="0" />
+      <xs:element ref="el:BemerkungenAusnahmen" minOccurs="0" />
+      <xs:element ref="auskunft:TextFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="auskunft:TextKraftstoff" minOccurs="0" />
+      <xs:element ref="auskunft:TextAufbau" minOccurs="0" />
+      <xs:element ref="auskunft:TextEmissionsklasse" minOccurs="0" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+      <xs:element ref="el:GenehmigungsnummerPMS" minOccurs="0" />
+      <xs:element ref="el:DatumNachruestung" minOccurs="0" />
+      <xs:element ref="el:DatumErstzulassung" minOccurs="0" />
+      <xs:element ref="el:VerwendungFahrzeug" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungZSTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:FahrzeugbeschreibungCommon" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+      <xs:element ref="el:GenehmigungsnummerPMS" minOccurs="0" />
+      <xs:element ref="el:DatumNachruestung" minOccurs="0" />
+      <xs:element ref="el:DatumErstzulassung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungZWTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:FahrzeugbeschreibungCommon" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+      <xs:element ref="el:GenehmigungsnummerPMS" minOccurs="0" />
+      <xs:element ref="el:DatumNachruestung" minOccurs="0" />
+      <xs:element ref="el:radstand" minOccurs="0" />
+      <xs:element ref="el:spurweiteAchse1" minOccurs="0" />
+      <xs:element ref="el:spurweiteAchse2" minOccurs="0" />
+      <xs:element ref="el:elektrischerEnergieverbrauchWltp" minOccurs="0" />
+      <xs:element ref="el:co2EinsparungNedc" minOccurs="0" />
+      <xs:element ref="el:co2EinsparungWltp" minOccurs="0" />
+      <xs:element ref="el:wltpTestmasse" minOccurs="0" />
+      <xs:element ref="el:abweichungsfaktorNedc" minOccurs="0" />
+      <xs:element ref="el:ueberpruefungsfaktorNedc" minOccurs="0" />
+      <xs:element ref="el:codeDerOekoinnovationen" minOccurs="0" />
+      <xs:element ref="el:IdentifikationFahrzeugfamilie" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugbeschreibungZXTyp">
+    <xs:sequence>
+      <xs:element ref="el:ArtGenehmigung" />
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselAufbau" minOccurs="0" />
+      <xs:element ref="el:SchluesselEmissionsklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0" />
+      <xs:element ref="el:KombinierterCO2Wert" minOccurs="0" />
+      <xs:element ref="el:kombinierterCo2WertWltp" minOccurs="0" />
+      <xs:element ref="el:Hoechstgeschwindigkeit" minOccurs="0" />
+      <xs:element ref="el:NennleistungKW" minOccurs="0" />
+      <xs:element ref="el:Hubraum" minOccurs="0" />
+      <xs:element ref="el:Nutzlast" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMin" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMax" minOccurs="0" />
+      <xs:element ref="el:AnzahlAchsen" minOccurs="0" />
+      <xs:element ref="el:AnzahlAntriebsachsen" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:Stuetzlast" minOccurs="0" />
+      <xs:element ref="el:Standgeraeusch" minOccurs="0" />
+      <xs:element ref="el:Fahrgeraeusch" minOccurs="0" />
+      <xs:element ref="el:AnzahlStehplaetze" minOccurs="0" />
+      <xs:element ref="el:AnzahlSitzplaetze" minOccurs="0" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+      <xs:element ref="el:GenehmigungsnummerPMS" minOccurs="0" />
+      <xs:element ref="el:DatumNachruestung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeughinweiseEUTyp">
+    <xs:sequence>
+      <xs:element ref="el:VerwendungFahrzeug" minOccurs="0" />
+      <xs:group ref="auskunft:FahrzeughinweiseCommon" />
+      <xs:element ref="el:MerkmalVerstossGegenKraftfahrzeugsteuer" minOccurs="0" />
+      <xs:element ref="el:TextSonstigeHinweise" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeughinweiseZCTyp">
+    <xs:sequence>
+      <xs:element ref="el:VerwendungFahrzeug" minOccurs="0" />
+      <xs:group ref="auskunft:FahrzeughinweiseCommon" />
+      <xs:element ref="el:TextMassnahme" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeughinweiseZSTyp">
+    <xs:sequence>
+      <xs:element ref="el:MerkmalVerstossGegenKraftfahrzeugsteuer" minOccurs="0" />
+      <xs:element ref="el:VerwendungFahrzeug" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeughinweiseZWTyp">
+    <xs:sequence>
+      <xs:element ref="el:VerwendungFahrzeug" minOccurs="0" />
+      <xs:group ref="auskunft:FahrzeughinweiseCommon" />
+      <xs:element ref="el:MerkmalVerstossGegenKraftfahrzeugsteuer" minOccurs="0" />
+      <xs:element ref="el:TextSonstigeHinweise" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugidentifizierungZATyp">
+    <xs:sequence>
+      <xs:element ref="el:SchluesselHersteller" minOccurs="0" />
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:PruefzifferFahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:SchluesselTyp" minOccurs="0" />
+      <xs:element ref="el:SchluesselVarianteVersion" minOccurs="0" />
+      <xs:element ref="el:PruefzifferTypVarianteVersion" minOccurs="0" />
+      <xs:element ref="el:Genehmigungsnummer" minOccurs="0" />
+      <xs:element ref="el:DatumGenehmigung" minOccurs="0" />
+      <xs:element ref="el:TextHersteller" minOccurs="0" />
+      <xs:element ref="el:TextMarke" minOccurs="0" />
+      <xs:element ref="el:TextHandelsbezeichnung" minOccurs="0" />
+      <xs:element ref="el:TextTyp" minOccurs="0" />
+      <xs:element ref="el:TextVariante" minOccurs="0" />
+      <xs:element ref="el:TextVersion" minOccurs="0" />
+      <xs:element ref="el:SchluesselGrundfarbe" minOccurs="0" />
+      <xs:element ref="el:SchluesselZweitfarbe" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="FahrzeugidentifizierungZXTyp">
+    <xs:sequence>
+      <xs:element ref="el:SchluesselHersteller" minOccurs="0" />
+      <xs:element ref="el:TextHersteller" minOccurs="0" />
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:PruefzifferFahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:SchluesselTyp" minOccurs="0" />
+      <xs:element ref="el:SchluesselVarianteVersion" minOccurs="0" />
+      <xs:element ref="el:PruefzifferTypVarianteVersion" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HalterZCTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:PundA" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HalterZWTyp">
+    <xs:sequence>
+      <xs:element ref="el:SchluesselBeruf" minOccurs="0" />
+      <xs:element ref="auskunft:DatumAenderungHalterangaben" minOccurs="0" />
+      <xs:group ref="auskunft:PundA" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="HalterZXTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:PundA" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KennzeichendatenZATyp">
+    <xs:sequence>
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:element ref="auskunft:ZeitpunktZuteilungKennzeichen" minOccurs="0" />
+      <xs:element ref="el:DatumKennzeichenGueltigBis" minOccurs="0" />
+      <xs:element ref="el:BetriebszeitraumVon" minOccurs="0" />
+      <xs:element ref="el:BetriebszeitraumBis" minOccurs="0" />
+      <xs:element ref="el:DatumErstzulassung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KennzeichendatenZGTyp">
+    <xs:sequence>
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:element ref="auskunft:MerkmalOldtimerkennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalElektrokennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalWechselkennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalKennzeichenart" minOccurs="0" />
+      <xs:element ref="el:BetriebszeitraumVon" minOccurs="0" />
+      <xs:element ref="el:BetriebszeitraumBis" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalGruenesKennzeichen" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktZuteilungGruenesKennzeichen" minOccurs="0" />
+      <xs:element ref="el:DatumEntstempelungKennzeichen" minOccurs="0" />
+      <xs:element ref="el:DatumKennzeichenGueltigBis" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktZuteilungKennzeichen" minOccurs="0" />
+      <xs:element ref="el:RueckgabegrundRotesKennzeichen" minOccurs="0" />
+      <xs:group ref="auskunft:ZustaendigeBehoerde" />
+      <xs:group ref="auskunft:KennzeichenfuehrendeBehoerde" />
+      <xs:element ref="el:ZeitpunktAusstellungIntZulSchein" minOccurs="0" />
+      <xs:element ref="el:StaatREGINA" minOccurs="0" />
+      <xs:element ref="el:DatumEntstempelungWechselkennzeichen" minOccurs="0" />
+      <xs:element ref="el:DatumAblaufKennzeichenreservierung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KennzeichendatenZRTyp">
+    <xs:sequence>
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:element ref="el:BetriebszeitraumVon" minOccurs="0" />
+      <xs:element ref="el:BetriebszeitraumBis" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalOldtimerkennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalElektrokennzeichen" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalGruenesKennzeichen" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktZuteilungGruenesKennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalKennzeichenart" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktZuteilungKennzeichen" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KennzeichendatenZSTyp">
+    <xs:sequence>
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:element ref="el:BetriebszeitraumVon" minOccurs="0" />
+      <xs:element ref="el:BetriebszeitraumBis" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalGruenesKennzeichen" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktZuteilungGruenesKennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalKennzeichenart" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalOldtimerkennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalElektrokennzeichen" minOccurs="0" />
+      <xs:element ref="el:DatumEntstempelungKennzeichen" minOccurs="0" />
+      <xs:element ref="el:DatumKennzeichenGueltigBis" minOccurs="0" />
+      <xs:element ref="el:RueckgabegrundRotesKennzeichen" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktZuteilungKennzeichen" minOccurs="0" />
+      <xs:element ref="el:MerkmalWechselkennzeichen" minOccurs="0" />
+      <xs:element ref="el:DatumEntstempelungWechselkennzeichen" minOccurs="0" />
+      <xs:group ref="auskunft:ZustaendigeBehoerde" />
+      <xs:group ref="auskunft:KennzeichenfuehrendeBehoerde" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="KennzeichendatenZXTyp">
+    <xs:sequence>
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:group ref="auskunft:ZustaendigeBehoerde" />
+      <xs:group ref="auskunft:KennzeichenfuehrendeBehoerde" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="NatuerlichePersonAnfrageTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:NatuerlichePersonAnfrage" />
+      <xs:element ref="auskunft:PhonetischeSuche" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="PersonAnfrageTyp">
+    <xs:sequence>
+      <xs:choice>
+        <xs:element name="NatuerlichePerson" type="auskunft:NatuerlichePersonAnfrageTyp" />
+        <xs:element ref="el:NameJuristischePerson" />
+        <xs:element ref="el:NameVereinigung" />
+      </xs:choice>
+      <xs:element ref="el:Postleitzahl" minOccurs="0" />
+      <xs:element ref="el:Wohnort" minOccurs="0" />
+      <xs:element ref="auskunft:ExakteSuche" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ReturncodeUndReturntextTyp">
+    <xs:sequence>
+      <xs:element name="Returncode" type="typ:typ-Returncode" />
+      <xs:element name="Returntext" type="typ:typ-Returntext" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SuchvermerkeEUTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:SuchvermerkeCommon" />
+      <xs:element ref="auskunft:TextSuchvermerk" minOccurs="0" />
+      <xs:group ref="auskunft:ZustaendigeBehoerde" />
+      <xs:group ref="auskunft:KennzeichenfuehrendeBehoerde" />
+      <xs:group ref="auskunft:MeldendeBehoerde" />
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="el:Sperrgrund" minOccurs="0" />
+      <xs:element ref="el:DatumVeroeffentlichung" minOccurs="0" />
+      <xs:element ref="el:CodeMangelRueckruf" minOccurs="0" />
+      <xs:element ref="el:TextMangelRueckruf" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SuchvermerkeZCTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:SuchvermerkeCommon" />
+      <xs:element ref="auskunft:TextSuchvermerk" minOccurs="0" />
+      <xs:element ref="auskunft:AktenzeichenAusschreibendeDienststelle" minOccurs="0" />
+      <xs:element ref="auskunft:AusschreibendeDienststelle" minOccurs="0" />
+      <xs:element ref="auskunft:Gegenstandsart" minOccurs="0" />
+      <xs:element ref="el:AnlassDerAusschreibung" minOccurs="0" />
+      <xs:element ref="el:ZweckDerAusschreibung" minOccurs="0" maxOccurs="4" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SuchvermerkeZWTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:SuchvermerkeCommon" />
+      <xs:element ref="auskunft:TextSuchvermerk" minOccurs="0" />
+      <xs:group ref="auskunft:ZustaendigeBehoerde" />
+      <xs:group ref="auskunft:KennzeichenfuehrendeBehoerde" />
+      <xs:group ref="auskunft:MeldendeBehoerde" />
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="el:Sperrgrund" minOccurs="0" />
+      <xs:element ref="el:DatumVeroeffentlichung" minOccurs="0" />
+      <xs:element ref="el:CodeMangelRueckruf" minOccurs="0" />
+      <xs:element ref="el:TextMangelRueckruf" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SuchvermerksdatenEUTyp">
+    <xs:sequence>
+      <xs:element ref="auskunft:AnzahlSuchvermerke" />
+      <xs:element ref="auskunft:SISVermerke" minOccurs="0" maxOccurs="20" />
+      <xs:element name="Suchvermerke" minOccurs="0" maxOccurs="20" type="auskunft:SuchvermerkeEUTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SuchvermerksdatenZCTyp">
+    <xs:sequence>
+      <xs:element ref="auskunft:AnzahlSuchvermerke" />
+      <xs:element name="Suchvermerke" maxOccurs="20" type="auskunft:SuchvermerkeZCTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="SuchvermerksdatenZWTyp">
+    <xs:sequence>
+      <xs:element ref="auskunft:AnzahlSuchvermerke" />
+      <xs:element ref="auskunft:SISVermerke" minOccurs="0" maxOccurs="20" />
+      <xs:element name="Suchvermerke" minOccurs="0" maxOccurs="20" type="auskunft:SuchvermerkeZWTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="UntersuchungsabschnittTyp">
+    <xs:sequence>
+      <xs:element ref="el:IdentifizierungsnummerZFZREintrag" minOccurs="0" />
+      <xs:element ref="el:SchluesselnummerUeberwachungsinstitutionOderZDKCode" minOccurs="0" />
+      <xs:element ref="el:SchluesselnummerUeberwachungsinstitutionOderZDKName" minOccurs="0" />
+      <xs:element ref="el:KontrollnummerSP" minOccurs="0" />
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:SchluesselHersteller" minOccurs="0" />
+      <xs:element ref="el:TextHersteller" minOccurs="0" />
+      <xs:element ref="el:MonatJahrDerErstzulassung" minOccurs="0" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-KennzeichenHUSP" />
+      <xs:element ref="el:Laenderkennzeichen" minOccurs="0" />
+      <xs:element ref="el:Berichtsnummer" minOccurs="0" />
+      <xs:element name="ArtDerUntersuchung" minOccurs="0" type="typ:typ-ArtDerUntersuchung" />
+      <xs:element name="TypDerUntersuchung" minOccurs="0" type="typ:typ-TypDerUntersuchung" />
+      <xs:element ref="el:ZeitpunktUntersuchung" minOccurs="0" />
+      <xs:element name="EntscheidungZuteilungPruefplakettePruefmarke" minOccurs="0" type="typ:typ-EntscheidungZuteilungPruefplakettePruefmarke" />
+      <xs:element ref="el:NaechsteHauptuntersuchung" minOccurs="0" />
+      <xs:element ref="el:NaechsteSicherheitspruefung" minOccurs="0" />
+      <xs:element name="ErgebnisVorOderOhneMaengelschleifeCode" minOccurs="0" type="typ:typ-ErgebnisHUSP" />
+      <xs:element ref="el:ErgebnisVorOderOhneMaengelschleifeName" minOccurs="0" />
+      <xs:element name="ErgebnisNachMaengelschleifeCode" minOccurs="0" type="typ:typ-ErgebnisHUSP" />
+      <xs:element ref="el:ErgebnisNachMaengelschleifeName" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktDerMaengelbehebung" minOccurs="0" />
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:TextTyp" minOccurs="0" />
+      <xs:element ref="el:SchluesselTyp" minOccurs="0" />
+      <xs:element ref="el:TextVariante" minOccurs="0" />
+      <xs:element ref="el:TextVersion" minOccurs="0" />
+      <xs:element ref="el:SchluesselVarianteVersion" minOccurs="0" />
+      <xs:element ref="el:Kilometerstand" minOccurs="0" />
+      <xs:element ref="el:MerkmalFahrleistungUnplausibel" minOccurs="0" />
+      <xs:element ref="el:Meilenstand" minOccurs="0" />
+      <xs:element ref="el:Betriebsstunden" minOccurs="0" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element name="MonatJahrLetzteHU" minOccurs="0" type="typ:typ-MonatJahr" />
+      <xs:element ref="el:SchluesselUntersuchungsort" minOccurs="0" />
+      <xs:element ref="el:TextUntersuchungsort" minOccurs="0" />
+      <xs:element ref="el:BundeslandCode" minOccurs="0" />
+      <xs:element ref="el:BundeslandName" minOccurs="0" />
+      <xs:element ref="el:AnordnungWiedervorfuehrpflicht" minOccurs="0" />
+      <xs:element ref="el:ArtUntersuchungsstelleCode" minOccurs="0" />
+      <xs:element ref="el:ArtUntersuchungsstelleName" minOccurs="0" />
+      <xs:element ref="el:KennnummerPruefer" minOccurs="0" />
+      <xs:element ref="el:MessdrehzahlBeiKraftrad" minOccurs="0" />
+      <xs:element name="StandgeraeuschvergleichswertBeiKraftrad" minOccurs="0" type="typ:typ-StandgeraeuschBeiKraftrad" />
+      <xs:element name="StandgeraeuschwertSollBeiKraftrad" minOccurs="0" type="typ:typ-StandgeraeuschBeiKraftrad" />
+      <xs:element ref="el:KontrollnummerUntersuchungUmweltvertraeglichkeit" minOccurs="0" />
+      <xs:element ref="el:DatumUntersuchungUmweltvertraeglichkeit" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktBearbeitungTU" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktVerarbeitung" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalStornierung" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktStornierung" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="el:MerkmalHUExpressVerfahren" minOccurs="0" />
+      <xs:element name="ZustaendigeBehoerdeKreisschluesselExpress" minOccurs="0" type="typ:typ-BehoerdeKreisschluessel" />
+      <xs:element name="ZustaendigeBehoerdeZusatzzifferExpress" minOccurs="0" type="typ:typ-BehoerdeZusatzziffer" />
+      <xs:element ref="auskunft:SchluesselnummerUeberwachungsinstitutionOderZDKExpress" minOccurs="0" />
+      <xs:element name="FahrzeugidentifizierungsnummerExpress" minOccurs="0" type="typ:typ-Fahrzeugidentifizierungsnummer" />
+      <xs:element name="NaechsteHauptuntersuchungExpress" minOccurs="0" type="typ:typ-MonatJahr" />
+      <xs:element name="NaechsteSicherheitspruefungExpress" minOccurs="0" type="typ:typ-MonatJahr" />
+      <xs:element name="DatumUntersuchungExpress" minOccurs="0" type="typ:typ-Datum" />
+      <xs:element ref="el:DatumAusgabeExpress" minOccurs="0" />
+      <xs:element ref="auskunft:Hinweise" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:Bremsmessung" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:Maengel" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:GebuehrEntgelt" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="el:ZeitpunktKorrekturStempelplaketten" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="el:ZeitpunktKorrekturZB1" minOccurs="0" />
+      <xs:element ref="el:KorrigierendeBehoerdeKreisschluessel" minOccurs="0" />
+      <xs:element ref="el:KorrigierendeBehoerdeZusatzziffer" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VeraeusserungsanzeigeEUTyp">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktVeraeusserungsanzeige" minOccurs="0" />
+      <xs:element ref="el:DatumEingangVeraeusserungsanzeige" minOccurs="0" />
+      <xs:element ref="el:VollstaendigkeitVeraeusserungsanzeige" minOccurs="0" />
+      <xs:group ref="auskunft:PundA" minOccurs="0" />
+      <xs:element ref="auskunft:TextErwerberdaten" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VeraeusserungsanzeigeZCTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:PundA" minOccurs="0" />
+      <xs:element ref="auskunft:TextErwerberdaten" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VeraeusserungsanzeigeZSTyp">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktVeraeusserungsanzeige" minOccurs="0" />
+      <xs:element ref="el:DatumEingangVeraeusserungsanzeige" minOccurs="0" />
+      <xs:element ref="el:VollstaendigkeitVeraeusserungsanzeige" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VeraeusserungsanzeigeZWTyp">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktVeraeusserungsanzeige" minOccurs="0" />
+      <xs:element ref="el:DatumEingangVeraeusserungsanzeige" minOccurs="0" />
+      <xs:element ref="el:VollstaendigkeitVeraeusserungsanzeige" minOccurs="0" />
+      <xs:group ref="auskunft:PundA" minOccurs="0" />
+      <xs:element ref="auskunft:TextErwerberdaten" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VersicherungsdatenEUTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:VersicherungsdatenCommon" />
+      <xs:element ref="el:DatumEingangVersicherungsbestaetigung" minOccurs="0" />
+      <xs:element ref="auskunft:DatumAnlageVersicherung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VersicherungsdatenZATyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:VersicherungsdatenBasic" />
+      <xs:element ref="auskunft:DatumEndeVersicherungsschutz" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VersicherungsdatenZCTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:VersicherungsdatenCommon" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VersicherungsdatenZVTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:VersicherungsdatenCommon" />
+      <xs:element ref="el:DatumEingangVersicherungsbestaetigung" minOccurs="0" />
+      <xs:element ref="auskunft:DatumAnlageVersicherung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="VersicherungsdatenZWTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:VersicherungsdatenCommon" />
+      <xs:element ref="el:DatumEingangVersicherungsbestaetigung" minOccurs="0" />
+      <xs:element ref="auskunft:DatumAnlageVersicherung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittEUTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element ref="auskunft:Veranlasser" minOccurs="0" />
+      <xs:element ref="el:MerkmalMitteilungsart" />
+      <xs:element ref="el:Einplanungssymbol" minOccurs="0" />
+      <xs:element ref="auskunft:Kennzeichendaten" />
+      <xs:element ref="auskunft:WeitereKennzeichen" minOccurs="0" maxOccurs="20" />
+      <xs:element ref="auskunft:ZulassungsbescheinigungTeil1" minOccurs="0" />
+      <xs:element ref="auskunft:ZulassungsbescheinigungTeil2" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrzeugidentifizierung" minOccurs="0" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="auskunft:FahrzeugZWTyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungEUTyp" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZWTyp" />
+      <xs:element name="Veraeusserungsanzeige" minOccurs="0" type="auskunft:VeraeusserungsanzeigeEUTyp" />
+      <xs:element ref="auskunft:Verfuegungsberechtigter" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:Sicherstellungsort" minOccurs="0" />
+      <xs:element ref="auskunft:Verwertungsnachweis" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrtenbuchauflage" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:PruemerVertrag" minOccurs="0" />
+      <xs:element ref="auskunft:Uebermittlungssperre" minOccurs="0" />
+      <xs:element ref="auskunft:TextUebermittlungssperre" minOccurs="0" />
+      <xs:element ref="auskunft:Anzeigenvorfaelle" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Fahrzeughinweise" minOccurs="0" type="auskunft:FahrzeughinweiseEUTyp" />
+      <xs:element ref="auskunft:Anhaengerverzeichnis" minOccurs="0" />
+      <xs:element name="Versicherungsdaten" minOccurs="0" type="auskunft:VersicherungsdatenEUTyp" />
+      <xs:element ref="auskunft:Fehlerhinweise" minOccurs="0" />
+      <xs:element ref="auskunft:Empfangsbevollmaechtigter" minOccurs="0" />
+      <xs:element name="DokumentennummerAusland" minOccurs="0" type="auskunft:DokumentennummerAuslandAuskunftTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZATyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element name="Kennzeichendaten" type="auskunft:KennzeichendatenZATyp" />
+      <xs:element name="Fahrzeugidentifizierung" minOccurs="0" type="auskunft:FahrzeugidentifizierungZATyp" />
+      <xs:element ref="el:VerwendungFahrzeug" minOccurs="0" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZCTyp" />
+      <xs:element name="Veraeusserungsanzeige" minOccurs="0" type="auskunft:VeraeusserungsanzeigeZCTyp" />
+      <xs:element ref="auskunft:Verfuegungsberechtigter" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZCTyp" />
+      <xs:element name="Versicherungsdaten" minOccurs="0" type="auskunft:VersicherungsdatenZATyp" />
+      <xs:element ref="auskunft:Empfangsbevollmaechtigter" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrtenbuchauflage" minOccurs="0" maxOccurs="unbounded" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZCTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element ref="el:MerkmalAusserbetriebsetzung" minOccurs="0" />
+      <xs:element ref="auskunft:Kennzeichendaten" />
+      <xs:element ref="auskunft:ZulassungsbescheinigungTeil1" minOccurs="0" />
+      <xs:element ref="auskunft:ZulassungsbescheinigungTeil2" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrzeugidentifizierung" minOccurs="0" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="auskunft:FahrzeugZCTyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZCTyp" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZCTyp" />
+      <xs:element ref="auskunft:TextUebermittlungssperre" minOccurs="0" />
+      <xs:element name="Veraeusserungsanzeige" minOccurs="0" type="auskunft:VeraeusserungsanzeigeZCTyp" />
+      <xs:element ref="auskunft:Verfuegungsberechtigter" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:Verwertungsnachweis" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrtenbuchauflage" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Fahrzeughinweise" minOccurs="0" type="auskunft:FahrzeughinweiseZCTyp" />
+      <xs:element name="Versicherungsdaten" minOccurs="0" type="auskunft:VersicherungsdatenZCTyp" />
+      <xs:element ref="auskunft:Empfangsbevollmaechtigter" minOccurs="0" />
+      <xs:element name="DokumentennummerAusland" minOccurs="0" type="auskunft:DokumentennummerAuslandAuskunftTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZFTyp">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktBeendigungZulassungsabschnitt" minOccurs="0" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZCTyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZFTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZGTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element ref="el:MerkmalAusserbetriebsetzung" minOccurs="0" />
+      <xs:element name="Kennzeichendaten" type="auskunft:KennzeichendatenZGTyp" />
+      <xs:element name="ZulassungsbescheinigungTeil1" minOccurs="0" type="auskunft:ZulassungsbescheinigungTeil1ZGTyp" />
+      <xs:element ref="auskunft:ZulassungsbescheinigungTeil2" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrzeugidentifizierung" minOccurs="0" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="auskunft:FahrzeugZCTyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZGTyp" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZCTyp" />
+      <xs:element name="Veraeusserungsanzeige" minOccurs="0" type="auskunft:VeraeusserungsanzeigeZCTyp" />
+      <xs:element ref="auskunft:Verfuegungsberechtigter" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:Verwertungsnachweis" minOccurs="0" />
+      <xs:element name="Fahrzeughinweise" minOccurs="0" type="auskunft:FahrzeughinweiseZCTyp" />
+      <xs:element name="Versicherungsdaten" minOccurs="0" type="auskunft:VersicherungsdatenZCTyp" />
+      <xs:element ref="auskunft:Empfangsbevollmaechtigter" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZMTyp">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktBeendigungZulassungsabschnitt" minOccurs="0" />
+      <xs:element ref="el:MerkmalKennzeichenart" minOccurs="0" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:element ref="el:ZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:AnzahlAchsen" minOccurs="0" />
+      <xs:element ref="el:TextHersteller" minOccurs="0" />
+      <xs:element ref="auskunft:TextFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="auskunft:SchluesselEmiklasseMaut" minOccurs="0" />
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+      <xs:element ref="el:BemerkungenAusnahmen" minOccurs="0" />
+      <xs:element ref="el:Beiblatt" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZRTyp">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktBeendigungZulassungsabschnitt" minOccurs="0" />
+      <xs:element name="Kennzeichendaten" minOccurs="0" type="auskunft:KennzeichendatenZRTyp" />
+      <xs:element name="Fahrzeugidentifizierung" minOccurs="0" type="auskunft:FahrzeugidentifizierungZATyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZRTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZSTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element name="Kennzeichendaten" type="auskunft:KennzeichendatenZSTyp" />
+      <xs:element name="ZulassungsbescheinigungTeil1" minOccurs="0" />
+      <xs:element name="Fahrzeugidentifizierung" minOccurs="0" type="auskunft:FahrzeugidentifizierungZATyp" />
+      <xs:element ref="auskunft:Verfuegungsberechtigter" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Veraeusserungsanzeige" minOccurs="0" type="auskunft:VeraeusserungsanzeigeZSTyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZSTyp" />
+      <xs:element name="Fahrzeughinweise" minOccurs="0" type="auskunft:FahrzeughinweiseZSTyp" />
+      <xs:element ref="auskunft:Empfangsbevollmaechtigter" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZUTyp">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktBeendigungZulassungsabschnitt" minOccurs="0" />
+      <xs:element name="Kennzeichen" type="typ:typ-Kennzeichen" />
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0" />
+      <xs:element ref="el:SchluesselEmissionsklasse" minOccurs="0" />
+      <xs:element ref="el:Euronorm" minOccurs="0" />
+      <xs:element ref="el:SteuerEmissionsrelevanteDaten" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZVTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element name="Versicherungsdaten" minOccurs="0" type="auskunft:VersicherungsdatenZVTyp" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZCTyp" />
+      <xs:element ref="el:MerkmalWechselkennzeichen" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZWTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element ref="auskunft:Veranlasser" minOccurs="0" />
+      <xs:element ref="el:MerkmalMitteilungsart" />
+      <xs:element ref="el:Einplanungssymbol" minOccurs="0" />
+      <xs:element ref="auskunft:Kennzeichendaten" />
+      <xs:element ref="auskunft:WeitereKennzeichen" minOccurs="0" maxOccurs="20" />
+      <xs:element ref="auskunft:ZulassungsbescheinigungTeil1" minOccurs="0" />
+      <xs:element ref="auskunft:ZulassungsbescheinigungTeil2" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrzeugidentifizierung" minOccurs="0" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="auskunft:FahrzeugZWTyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZWTyp" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZWTyp" />
+      <xs:element name="Veraeusserungsanzeige" minOccurs="0" type="auskunft:VeraeusserungsanzeigeZWTyp" />
+      <xs:element ref="auskunft:Verfuegungsberechtigter" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:Sicherstellungsort" minOccurs="0" />
+      <xs:element ref="auskunft:Verwertungsnachweis" minOccurs="0" />
+      <xs:element ref="auskunft:Fahrtenbuchauflage" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element ref="auskunft:PruemerVertrag" minOccurs="0" />
+      <xs:element ref="auskunft:Uebermittlungssperre" minOccurs="0" />
+      <xs:element ref="auskunft:TextUebermittlungssperre" minOccurs="0" />
+      <xs:element ref="auskunft:Anzeigenvorfaelle" minOccurs="0" maxOccurs="unbounded" />
+      <xs:element name="Fahrzeughinweise" minOccurs="0" type="auskunft:FahrzeughinweiseZWTyp" />
+      <xs:element ref="auskunft:Anhaengerverzeichnis" minOccurs="0" />
+      <xs:element name="Versicherungsdaten" minOccurs="0" type="auskunft:VersicherungsdatenZWTyp" />
+      <xs:element ref="auskunft:Fehlerhinweise" minOccurs="0" />
+      <xs:element ref="auskunft:Empfangsbevollmaechtigter" minOccurs="0" />
+      <xs:element name="DokumentennummerAusland" minOccurs="0" type="auskunft:DokumentennummerAuslandAuskunftTyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsabschnittZXTyp">
+    <xs:sequence>
+      <xs:group ref="auskunft:ZulassungsabschnittCommon" />
+      <xs:element name="Kennzeichendaten" type="auskunft:KennzeichendatenZXTyp" />
+      <xs:element name="Halter" minOccurs="0" type="auskunft:HalterZXTyp" />
+      <xs:element ref="auskunft:TextUebermittlungssperre" minOccurs="0" />
+      <xs:element name="Fahrzeugidentifizierung" minOccurs="0" type="auskunft:FahrzeugidentifizierungZXTyp" />
+      <xs:element name="Fahrzeugbeschreibung" minOccurs="0" type="auskunft:FahrzeugbeschreibungZXTyp" />
+      <xs:element ref="el:MerkmalVerwertungsnachweis" minOccurs="0" />
+      <xs:element ref="el:DatumErstzulassung" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZulassungsbescheinigungTeil1ZGTyp">
+    <xs:sequence>
+      <xs:element ref="el:NummerZulBeschTeil1" minOccurs="0" />
+      <xs:element ref="el:HinweisRueckgabeEinziehung" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktAusfertigungZulBeschTeil1" minOccurs="0" />
+      <xs:element ref="el:DatumRueckgabeEinziehung" minOccurs="0" />
+      <xs:element ref="el:HinweisAusstellungZweitschrift" minOccurs="0" />
+      <xs:element ref="el:DatumAusstellungZweitschrift" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktEintragungAusserbetriebsetzungZulBeschTeil1" minOccurs="0" />
+      <xs:element ref="el:NaechsteHauptuntersuchung" minOccurs="0" />
+      <xs:element ref="el:NaechsteSicherheitspruefung" minOccurs="0" />
+      <xs:element ref="el:NaechsteAbgasuntersuchung" minOccurs="0" />
+      <xs:element ref="el:DruckstuecknummerZB1" minOccurs="0" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZusatzprotokollierungAnlass0">
+    <xs:annotation>
+      <xs:documentation>Zusatzprotokollierung</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Anfrageanlass">
+        <xs:annotation>
+          <xs:documentation>Schlüssel des Anlasses der Anfrage an das ZFZR (Zusatzprotokollierung).
+Beschreibung des Anlasses gem. § 41 Abs. 1 FZV:
+0: sonstige Anlässe
+Gemäß Schema zugelassene Anfrageanlässe je Verfahren wie folgt:
+ZEVIS ZF, ZG, ZI, ZM, ZS, ZU, ZV = 0
+ZEVIS ZW = 0,1
+ZEVIS ZA, ZC = 0-9
+ZEVIS ZX= 0
+Abruf von HU-/SP-Daten = 0</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="auskunft:AnfrageanlassTyp">
+            <xs:enumeration value="0">
+              <xs:annotation>
+                <xs:appinfo>
+                  <wertErsteBeschreibungsspalte>0</wertErsteBeschreibungsspalte>
+                </xs:appinfo>
+              </xs:annotation>
+            </xs:enumeration>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element ref="auskunft:VerantwortlichePerson">
+        <xs:annotation>
+          <xs:documentation>Verantwortliche Person (Zusatzprotokollierung).
+Angaben zu der für den Abruf verantwortlichen Person, wie Name/Namenskurzzeichen mit Angabe der Dienststelle/Organisationseinheit, Dienstnummer oder andere eindeutige Identifizierungsmerkmale, wie
+- Anwendergruppe (Bundesland, BGS usw.) mit
+- Dienststellenschlüssel und
+- (Personal-)Identifizierungsnummer des Endnutzers</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="auskunft:Ergaenzungstext">
+        <xs:annotation>
+          <xs:documentation>Ergänzungstext (Zusatzprotokollierung).
+Ergänzungstext zur Konkretisierung des Abrufanlasses im Rahmen der ZEVIS-Verfahren.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZusatzprotokollierungAnlass01">
+    <xs:annotation>
+      <xs:documentation>Zusatzprotokollierung</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="Anfrageanlass">
+        <xs:annotation>
+          <xs:documentation>Schlüssel des Anlasses der Anfrage an das ZFZR (Zusatzprotokollierung).
+Beschreibung der Anlässe gem. § 41 Abs. 1 FZV:
+1: Zulassung von Fahrzeugen
+0: sonstige Anlässe
+Gemäß Schema zugelassene Anfrageanlässe je Verfahren wie folgt:
+ZEVIS ZF, ZG, ZI, ZM, ZS, ZU, ZV = 0
+ZEVIS ZW = 0,1
+ZEVIS ZA, ZC = 0-9
+ZEVIS ZX= 0
+Abruf von HU-/SP-Daten = 0</xs:documentation>
+        </xs:annotation>
+        <xs:simpleType>
+          <xs:restriction base="auskunft:AnfrageanlassTyp">
+            <xs:enumeration value="0">
+              <xs:annotation>
+                <xs:appinfo>
+                  <wertErsteBeschreibungsspalte>0</wertErsteBeschreibungsspalte>
+                </xs:appinfo>
+              </xs:annotation>
+            </xs:enumeration>
+            <xs:enumeration value="1">
+              <xs:annotation>
+                <xs:appinfo>
+                  <wertErsteBeschreibungsspalte>1</wertErsteBeschreibungsspalte>
+                </xs:appinfo>
+              </xs:annotation>
+            </xs:enumeration>
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:element ref="auskunft:VerantwortlichePerson">
+        <xs:annotation>
+          <xs:documentation>Verantwortliche Person (Zusatzprotokollierung).
+Angaben zu der für den Abruf verantwortlichen Person, wie Name/Namenskurzzeichen mit Angabe der Dienststelle/Organisationseinheit, Dienstnummer oder andere eindeutige Identifizierungsmerkmale, wie
+- Anwendergruppe (Bundesland, BGS usw.) mit
+- Dienststellenschlüssel und
+- (Personal-)Identifizierungsnummer des Endnutzers</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="auskunft:Ergaenzungstext" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Ergänzungstext (Zusatzprotokollierung).
+Ergänzungstext zur Konkretisierung des Abrufanlasses im Rahmen der ZEVIS-Verfahren.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ZusatzprotokollierungAnlass0bis9">
+    <xs:annotation>
+      <xs:documentation>Zusatzprotokollierung</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element ref="auskunft:Anfrageanlass">
+        <xs:annotation>
+          <xs:documentation>Schlüssel des Anlasses der Anfrage an das ZFZR (Zusatzprotokollierung).
+Beschreibung der Anlässe gem. § 41 Abs. 1 FZV:
+1: Zulassung von Fahrzeugen
+2: bei Überwachung des Straßenverkehrs: keine oder nicht vorschriftsmäßige Papiere oder Verdacht auf  Fälschung der Papiere oder des Kennzeichens oder sonstige verkehrsrechtliche Beanstandungen oder verkehrsbezogenen Anlässe
+3: Nichtbeachten der polizeilichen Anhalteaufforderung oder Verkehrsunfallflucht
+4: Feststellungen bei aufgefundenen oder verkehrsbehindernd abgestellten Fahrzeugen
+5: Verdacht des Diebstahls oder der missbräuchlichen Benutzung eines Fahrzeugs
+6: Grenzkontrolle
+7: Gefahrenabwehr
+8: Verfolgung von Straftaten oder Verkehrsordnungswidrigkeiten
+9: Fahndung, Grenzfahndung, Kontrollstelle
+0: sonstige Anlässe
+Gemäß Schema zugelassene Anfrageanlässe je Verfahren wie folgt:
+ZEVIS ZF, ZG, ZI, ZM, ZS, ZU, ZV = 0
+ZEVIS ZW = 0,1
+ZEVIS ZA, ZC = 0-9
+ZEVIS ZX= 0
+Abruf von HU-/SP-Daten = 0</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="auskunft:VerantwortlichePerson">
+        <xs:annotation>
+          <xs:documentation>Verantwortliche Person (Zusatzprotokollierung).
+Angaben zu der für den Abruf verantwortlichen Person, wie Name/Namenskurzzeichen mit Angabe der Dienststelle/Organisationseinheit, Dienstnummer oder andere eindeutige Identifizierungsmerkmale, wie
+- Anwendergruppe (Bundesland, BGS usw.) mit
+- Dienststellenschlüssel und
+- (Personal-)Identifizierungsnummer des Endnutzers</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="auskunft:Ergaenzungstext" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Ergänzungstext (Zusatzprotokollierung).
+Ergänzungstext zur Konkretisierung des Abrufanlasses im Rahmen der ZEVIS-Verfahren.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:simpleType name="typ-MerkmalHerkunft">
+    <xs:restriction base="xs:string">
+      <xs:enumeration value="0">
+        <xs:annotation>
+          <xs:appinfo>
+            <wertErsteBeschreibungsspalte>0</wertErsteBeschreibungsspalte>
+          </xs:appinfo>
+          <xs:documentation>ausland</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+      <xs:enumeration value="1">
+        <xs:annotation>
+          <xs:appinfo>
+            <wertErsteBeschreibungsspalte>1</wertErsteBeschreibungsspalte>
+          </xs:appinfo>
+          <xs:documentation>zulassungsbehörde</xs:documentation>
+        </xs:annotation>
+      </xs:enumeration>
+    </xs:restriction>
+  </xs:simpleType>
+  <xs:group name="AnzeigenvorfaelleCommon">
+    <xs:sequence>
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktVerarbeitungZFZR" minOccurs="0" />
+      <xs:element ref="el:ArtMassnahme" minOccurs="0" />
+      <xs:element ref="el:GrundMassnahme" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktMassnahme" minOccurs="0" />
+      <xs:element ref="el:TextMassnahme" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="FahrzeugCommon">
+    <xs:sequence>
+      <xs:element ref="el:AnzahlVorhalter" minOccurs="0" />
+      <xs:element ref="el:DatumErstzulassung" minOccurs="0" />
+      <xs:element ref="el:HinweisBeschraenkung" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="FahrzeugbeschreibungCommon">
+    <xs:sequence>
+      <xs:element ref="el:ArtGenehmigung" minOccurs="0" />
+      <xs:element ref="el:SchluesselFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="el:SchluesselAufbau" minOccurs="0" />
+      <xs:element ref="el:SchluesselEmissionsklasse" minOccurs="0" />
+      <xs:element ref="el:TextEmissionsklasseEGTypgenehmigung" minOccurs="0" />
+      <xs:element ref="el:SchluesselKraftstoff" minOccurs="0" />
+      <xs:element ref="el:KombinierterCO2Wert" minOccurs="0" />
+      <xs:element ref="el:kombinierterCo2WertWltp" minOccurs="0" />
+      <xs:element ref="el:Hoechstgeschwindigkeit" minOccurs="0" />
+      <xs:element ref="el:NennleistungKW" minOccurs="0" />
+      <xs:element ref="el:NennleistungUmdrehung" minOccurs="0" />
+      <xs:element ref="el:Hubraum" minOccurs="0" />
+      <xs:element ref="el:Leistungsgewicht" minOccurs="0" />
+      <xs:element ref="el:Nutzlast" minOccurs="0" />
+      <xs:element ref="el:Rauminhalt" minOccurs="0" />
+      <xs:element ref="el:AnzahlStehplaetze" minOccurs="0" />
+      <xs:element ref="el:AnzahlSitzplaetze" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMin" minOccurs="0" />
+      <xs:element ref="el:MasseFahrbereitMax" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeGesamtmasse" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse1" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse2" minOccurs="0" />
+      <xs:element ref="el:TechnischZulaessigeAchslastAchse3" minOccurs="0" />
+      <xs:element ref="el:Stuetzlast" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastGebremst" minOccurs="0" />
+      <xs:element ref="el:AnhaengelastUngebremst" minOccurs="0" />
+      <xs:element ref="el:AnzahlAchsen" minOccurs="0" />
+      <xs:element ref="el:AnzahlAntriebsachsen" minOccurs="0" />
+      <xs:element ref="el:Standgeraeusch" minOccurs="0" />
+      <xs:element ref="el:StandgeraeuschUmdrehung" minOccurs="0" />
+      <xs:element ref="el:Fahrgeraeusch" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse1" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse2" minOccurs="0" />
+      <xs:element ref="el:BereifungAchse3" minOccurs="0" />
+      <xs:element ref="el:LaengeMax" minOccurs="0" />
+      <xs:element ref="el:LaengeMin" minOccurs="0" />
+      <xs:element ref="el:BreiteMax" minOccurs="0" />
+      <xs:element ref="el:BreiteMin" minOccurs="0" />
+      <xs:element ref="el:HoeheMax" minOccurs="0" />
+      <xs:element ref="el:HoeheMin" minOccurs="0" />
+      <xs:element ref="el:Beiblatt" minOccurs="0" />
+      <xs:element ref="el:BemerkungenAusnahmen" minOccurs="0" />
+      <xs:element ref="auskunft:TextFahrzeugklasse" minOccurs="0" />
+      <xs:element ref="auskunft:TextKraftstoff" minOccurs="0" />
+      <xs:element ref="auskunft:TextAufbau" minOccurs="0" />
+      <xs:element ref="auskunft:TextEmissionsklasse" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="FahrzeughinweiseCommon">
+    <xs:sequence>
+      <xs:element ref="el:TextFahrzeugmaengel" minOccurs="0" />
+      <xs:element ref="el:TextFahrzeugschaeden" minOccurs="0" />
+      <xs:element ref="el:TextBerechtigungBetriebFahrzeugTrotzVerkehrsverbot" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Familienname">
+    <xs:sequence>
+      <xs:element ref="el:FamiliennameNachname" />
+      <xs:element ref="el:FamiliennameNamensbestandteil" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Geburt">
+    <xs:sequence>
+      <xs:element ref="el:TagDerGeburt" minOccurs="0" />
+      <xs:element ref="el:Geburtsort" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="GeburtAnfrage">
+    <xs:sequence>
+      <xs:element ref="el:TagDerGeburt" />
+      <xs:element ref="el:Geburtsort" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="Geburtsname">
+    <xs:sequence>
+      <xs:element ref="el:GeburtsnameNachname" minOccurs="0" />
+      <xs:element ref="el:GeburtsnameNamensbestandteil" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="KennzeichendatenZI">
+    <xs:sequence>
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:group ref="auskunft:ZustaendigeBehoerde" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="KennzeichenfuehrendeBehoerde">
+    <xs:sequence>
+      <xs:element ref="el:KennzeichenfuehrendeBehoerdeKreisschluessel" minOccurs="0" />
+      <xs:element ref="el:KennzeichenfuehrendeBehoerdeZusatzziffer" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="MeldendeBehoerde">
+    <xs:sequence>
+      <xs:element ref="el:MeldendeBehoerdeKreisschluessel" minOccurs="0" />
+      <xs:element ref="el:MeldendeBehoerdeZusatzziffer" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="NatuerlichePersonAnfrage">
+    <xs:sequence>
+      <xs:group ref="auskunft:Familienname" />
+      <xs:group ref="auskunft:Geburtsname" />
+      <xs:element ref="el:Vorname" minOccurs="0" />
+      <xs:element ref="el:Ordensname" minOccurs="0" />
+      <xs:element ref="el:Kuenstlername" minOccurs="0" />
+      <xs:group ref="auskunft:GeburtAnfrage" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="NatuerlichePersonCommon">
+    <xs:sequence>
+      <xs:group ref="auskunft:Familienname" />
+      <xs:group ref="auskunft:Geburtsname" />
+      <xs:element ref="el:Vorname" minOccurs="0" />
+      <xs:element ref="el:Ordensname" minOccurs="0" />
+      <xs:element ref="el:Kuenstlername" minOccurs="0" />
+      <xs:group ref="auskunft:Geburt" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="PruemerVertragCommon">
+    <xs:sequence>
+      <xs:element ref="auskunft:TextBestreitungRichtigkeitAngaben" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktVerarbeitungZFZR" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="PundA">
+    <xs:sequence>
+      <xs:element ref="auskunft:Person" minOccurs="0" />
+      <xs:element ref="auskunft:Anschrift" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="SuchvermerkeCommon">
+    <xs:sequence>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+      <xs:element ref="el:SchluesselHersteller" minOccurs="0" />
+      <xs:element name="NummerZulBeschTeil1" minOccurs="0" type="typ:typ-NummerZulBeschTeil1SV" />
+      <xs:element ref="el:VordrucknummerZB1" minOccurs="0" />
+      <xs:element ref="el:NummerZulBeschTeil2" minOccurs="0" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+      <xs:element ref="el:Verkehrsjahr" minOccurs="0" />
+      <xs:element ref="el:TextHersteller" minOccurs="0" />
+      <xs:element ref="el:Vorgangsart" minOccurs="0" />
+      <xs:element ref="el:Vorgangsnummer" minOccurs="0" />
+      <xs:element ref="el:Vorgangsjahr" minOccurs="0" />
+      <xs:element ref="el:DatumTat" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="VersicherungsdatenBasic">
+    <xs:sequence>
+      <xs:element ref="el:DatumVersicherungsbeginn" minOccurs="0" />
+      <xs:element ref="el:Versicherungsunternehmensnummer" minOccurs="0" />
+      <xs:element ref="el:Versicherungsscheinnummer" minOccurs="0" />
+      <xs:element ref="el:Versicherungsbestaetigungsnummer" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="VersicherungsdatenCommon">
+    <xs:sequence>
+      <xs:group ref="auskunft:VersicherungsdatenBasic" />
+      <xs:element ref="el:MerkmalBefreiungVersicherungspflicht" minOccurs="0" />
+      <xs:element ref="auskunft:DatumEndeVersicherungsschutz" minOccurs="0" />
+      <xs:element ref="el:Verkehrsjahr" minOccurs="0" />
+      <xs:element ref="el:DatumNichtbestehenVersicherung" minOccurs="0" />
+      <xs:element ref="el:DatumEingangFehlenderVersicherungsschutz" minOccurs="0" />
+      <xs:element ref="el:MerkmalMassnahmeZulassungsbehoerdeEingeleitet" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="ZulassungsabschnittCommon">
+    <xs:sequence>
+      <xs:element ref="auskunft:ZeitpunktBeendigungZulassungsabschnitt" minOccurs="0" />
+      <xs:element ref="el:IdentifikationZulassungsabschnitt" minOccurs="0" />
+      <xs:element ref="auskunft:Arbeitsgang" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+      <xs:element ref="el:ZeitpunktVerarbeitungZFZR" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalStornierung" minOccurs="0" />
+      <xs:element ref="auskunft:ZeitpunktStornierung" minOccurs="0" />
+      <xs:element ref="auskunft:MerkmalFahrzeugbeschreibung" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:group name="ZustaendigeBehoerde">
+    <xs:sequence>
+      <xs:element ref="el:ZustaendigeBehoerdeKreisschluessel" minOccurs="0" />
+      <xs:element ref="el:ZustaendigeBehoerdeZusatzziffer" minOccurs="0" />
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="AktenzeichenAusschreibendeDienststelle">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="25" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Anfrageanlass" type="auskunft:AnfrageanlassTyp">
+    <xs:annotation>
+      <xs:documentation>Schlüssel des Anlasses der Anfrage an das ZFZR (Zusatzprotokollierung).
+Beschreibung der Anlässe gem. § 41 Abs. 1 FZV:
+1: Zulassung von Fahrzeugen
+2: bei Überwachung des Straßenverkehrs: keine oder nicht vorschriftsmäßige Papiere oder Verdacht auf  Fälschung der Papiere oder des Kennzeichens oder sonstige verkehrsrechtliche Beanstandungen oder verkehrsbezogenen Anlässe
+3: Nichtbeachten der polizeilichen Anhalteaufforderung oder Verkehrsunfallflucht
+4: Feststellungen bei aufgefundenen oder verkehrsbehindernd abgestellten Fahrzeugen
+5: Verdacht des Diebstahls oder der missbräuchlichen Benutzung eines Fahrzeugs
+6: Grenzkontrolle
+7: Gefahrenabwehr
+8: Verfolgung von Straftaten oder Verkehrsordnungswidrigkeiten
+9: Fahndung, Grenzfahndung, Kontrollstelle
+0: sonstige Anlässe
+Gemäß Schema zugelassene Anfrageanlässe je Verfahren wie folgt:
+ZEVIS ZF, ZG, ZI, ZM, ZS, ZU, ZV = 0
+ZEVIS ZW = 0,1
+ZEVIS ZA, ZC = 0-9
+ZEVIS ZX= 0
+Abruf von HU-/SP-Daten = 0</xs:documentation>
+    </xs:annotation>
+  </xs:element>
+  <xs:element name="Anhaengerverzeichnis">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:HinweisAusstellung" minOccurs="0" />
+        <xs:element ref="el:DatumAusstellung" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Anschrift">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:Postleitzahl" minOccurs="0" />
+        <xs:element ref="el:Staat" minOccurs="0" />
+        <xs:element ref="el:Wohnort" minOccurs="0" />
+        <xs:element ref="el:Strasse" minOccurs="0" />
+        <xs:element ref="el:Hausnummer" minOccurs="0" />
+        <xs:element ref="el:Adressierungszusaetze" minOccurs="0" />
+        <xs:element name="Gemeindeschluessel" minOccurs="0" type="typ:typ-GemeindeschluesselAuskunft" />
+        <xs:element ref="el:Strassenschluessel" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnzahlSuchvermerke">
+    <xs:simpleType>
+      <xs:restriction base="xs:nonNegativeInteger">
+        <xs:maxInclusive value="99999" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Anzeigenvorfaelle">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="auskunft:AnzeigenvorfaelleCommon" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Arbeitsgang" type="typ:typ-Arbeitsgang-ZFZR" />
+  <xs:element name="AusschnittFahrzeugakte">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="2" />
+        <xs:minLength value="1" />
+        <xs:pattern value="(a|v|s|z)|[0-9]*" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="AusschreibendeDienststelle">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="45" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="BatchKennzeichendaten">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="auskunft:ZustaendigeBehoerde" />
+        <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+        <xs:element ref="el:MerkmalKennzeichenart" minOccurs="0" />
+        <xs:element ref="el:BetriebszeitraumVon" minOccurs="0" />
+        <xs:element ref="el:BetriebszeitraumBis" minOccurs="0" />
+        <xs:element ref="el:DatumKennzeichenGueltigBis" minOccurs="0" />
+        <xs:element ref="auskunft:MerkmalOldtimerkennzeichen" minOccurs="0" />
+        <xs:element ref="el:MerkmalWechselkennzeichen" minOccurs="0" />
+        <xs:element ref="el:MerkmalElektrokennzeichen" minOccurs="0" />
+        <xs:element ref="auskunft:MerkmalGruenesKennzeichen" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktZuteilungKennzeichen" minOccurs="0" />
+        <xs:element ref="el:Verkehrsjahr" minOccurs="0" />
+        <xs:element ref="auskunft:DatumEndeVersicherungsschutz" minOccurs="0" />
+        <xs:element ref="el:DatumVersicherungsbeginn" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="BearbeitungshinweiseREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="20" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Benutzerkennung">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[A-Z0-9]{10}" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Bremse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Bremskraft" minOccurs="0" type="typ:typ-Bremskraft" />
+        <xs:element ref="el:ArtDerBremseCode" minOccurs="0" />
+        <xs:element ref="el:ArtDerBremseName" minOccurs="0" />
+        <xs:element ref="el:PositionDerBremseCode" minOccurs="0" />
+        <xs:element ref="el:PositionDerBremseName" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Bremsmessung">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:Achsennummer" minOccurs="0" />
+        <xs:element ref="el:MerkmalEinhaltungReferenzwerte" minOccurs="0" />
+        <xs:element ref="el:Bremsdruck" minOccurs="0" />
+        <xs:element name="BremskraftSoll" minOccurs="0" type="typ:typ-Bremskraft" />
+        <xs:element ref="auskunft:Bremse" minOccurs="0" maxOccurs="unbounded" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DatumAenderungHalterangaben">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="2099-12-31+01:00" />
+        <xs:minInclusive value="1940-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DatumAnlageVersicherung">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="2099-12-31+01:00" />
+        <xs:minInclusive value="1940-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DatumAusgabeREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="2099-12-31+01:00" />
+        <xs:minInclusive value="1940-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DatumEndeVersicherungsschutz">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="9999-12-31+01:00" />
+        <xs:minInclusive value="1998-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DatumLoeschungREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="2099-12-31+01:00" />
+        <xs:minInclusive value="1940-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DatumVerarbeitungREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="2099-12-31+01:00" />
+        <xs:minInclusive value="1940-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DatumZulassungAuslandREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="2099-12-31+01:00" />
+        <xs:minInclusive value="1940-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DatumZulassungDeutschlandREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:date">
+        <xs:maxInclusive value="2099-12-31+01:00" />
+        <xs:minInclusive value="1940-01-01+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="DokumentennummerAusland">
+    <xs:simpleType>
+      <xs:restriction base="typ:typ-DokumentAusland" />
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Empfangsbevollmaechtigter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:DatumEmpfangsbevollmaechtigung" minOccurs="0" />
+        <xs:group ref="auskunft:PundA" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Ergaenzungstext">
+    <xs:annotation>
+      <xs:documentation>Ergänzungstext (Zusatzprotokollierung).
+Ergänzungstext zur Konkretisierung des Abrufanlasses im Rahmen der ZEVIS-Verfahren.</xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="20" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ExakteSuche">
+    <xs:simpleType>
+      <xs:restriction base="xs:boolean">
+        <xs:pattern value="true|1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="FINZulBeschTeil2Bestaetigt">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="\d{3}" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Fahrtenbuchauflage">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:AnordnendeStelleFahrtenbuch" minOccurs="0" />
+        <xs:element ref="el:DatumFahrtenbuchBis" minOccurs="0" />
+        <xs:element ref="el:DatumAnordnungFahrtenbuch" minOccurs="0" />
+        <xs:element ref="el:DatumFahrtenbuchVon" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Fahrzeugidentifizierung">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:SchluesselHersteller" minOccurs="0" />
+        <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+        <xs:element ref="el:PruefzifferFahrzeugidentifizierungsnummer" minOccurs="0" />
+        <xs:element ref="el:MerkmalPlausibilitaetsabweichungFIN" minOccurs="0" />
+        <xs:element ref="el:SchluesselTyp" minOccurs="0" />
+        <xs:element ref="el:SchluesselVarianteVersion" minOccurs="0" />
+        <xs:element ref="el:PruefzifferTypVarianteVersion" minOccurs="0" />
+        <xs:element ref="el:Genehmigungsnummer" minOccurs="0" />
+        <xs:element ref="el:DatumGenehmigung" minOccurs="0" />
+        <xs:element ref="el:TextHersteller" minOccurs="0" />
+        <xs:element ref="el:TextMarke" minOccurs="0" />
+        <xs:element ref="el:TextHandelsbezeichnung" minOccurs="0" />
+        <xs:element ref="el:TextTyp" minOccurs="0" />
+        <xs:element ref="el:TextVariante" minOccurs="0" />
+        <xs:element ref="el:TextVersion" minOccurs="0" />
+        <xs:element ref="el:SchluesselGrundfarbe" minOccurs="0" />
+        <xs:element ref="el:SchluesselZweitfarbe" minOccurs="0" />
+        <xs:element ref="el:NummerFINBestaetigt" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Fehlerhinweise">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:FehlernummerPlausipruefung" minOccurs="0" maxOccurs="10" />
+        <xs:element ref="el:FehlernummerUpdate" minOccurs="0" maxOccurs="10" />
+        <xs:element ref="auskunft:FINZulBeschTeil2Bestaetigt" minOccurs="0" maxOccurs="5" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="GebuehrEntgelt">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:EntgelteGebuehren" minOccurs="0" />
+        <xs:element ref="el:Betrag" minOccurs="0" />
+        <xs:element ref="el:ArtPositionEntgeltGebuehrCode" minOccurs="0" />
+        <xs:element ref="el:ArtPositionEntgeltGebuehrName" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Gegenstandsart">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="\d{4}" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Hinweise">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Hinweis" minOccurs="0" type="typ:typ-Hinweis" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JuristischePerson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:NameJuristischePerson" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Kennzeichen" type="typ:typ-TeilKennzeichen" />
+  <xs:element name="KennzeichenAuslandREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="25" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="KennzeichenDeutschlandREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="25" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Kennzeichendaten">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+        <xs:element ref="auskunft:MerkmalOldtimerkennzeichen" minOccurs="0" />
+        <xs:element ref="el:MerkmalElektrokennzeichen" minOccurs="0" />
+        <xs:element ref="el:MerkmalWechselkennzeichen" minOccurs="0" />
+        <xs:element ref="el:MerkmalKennzeichenart" minOccurs="0" />
+        <xs:element ref="el:BetriebszeitraumVon" minOccurs="0" />
+        <xs:element ref="el:BetriebszeitraumBis" minOccurs="0" />
+        <xs:element ref="auskunft:MerkmalGruenesKennzeichen" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktZuteilungGruenesKennzeichen" minOccurs="0" />
+        <xs:element ref="el:DatumEntstempelungKennzeichen" minOccurs="0" />
+        <xs:element ref="el:DatumKennzeichenGueltigBis" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktZuteilungKennzeichen" minOccurs="0" />
+        <xs:element ref="el:RueckgabegrundRotesKennzeichen" minOccurs="0" />
+        <xs:group ref="auskunft:ZustaendigeBehoerde" />
+        <xs:group ref="auskunft:KennzeichenfuehrendeBehoerde" />
+        <xs:element ref="el:ZeitpunktAusstellungIntZulSchein" minOccurs="0" />
+        <xs:element ref="el:StaatREGINA" minOccurs="0" />
+        <xs:element ref="el:DatumEntstempelungWechselkennzeichen" minOccurs="0" />
+        <xs:element ref="el:DatumAblaufKennzeichenreservierung" minOccurs="0" />
+        <xs:element ref="el:DruckstuecknummerKennz1" minOccurs="0" />
+        <xs:element ref="el:DruckstuecknummerKennz2" minOccurs="0" />
+        <xs:element ref="el:DruckstuecknummerKennzWK" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Maengel">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:SchluesselMangel" minOccurs="0" />
+        <xs:element ref="el:VersionsnummerMangelbaum" minOccurs="0" />
+        <xs:element ref="el:TextMangel" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MerkmalFahrzeugbeschreibung">
+    <xs:simpleType>
+      <xs:restriction base="xs:boolean">
+        <xs:pattern value="true|1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="MerkmalGruenesKennzeichen">
+    <xs:simpleType>
+      <xs:restriction base="xs:boolean">
+        <xs:pattern value="true|1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="MerkmalOldtimerkennzeichen">
+    <xs:simpleType>
+      <xs:restriction base="xs:boolean">
+        <xs:pattern value="true|1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="MerkmalSondererfassungNutzfahrzeuge">
+    <xs:simpleType>
+      <xs:restriction base="xs:boolean">
+        <xs:pattern value="true|1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="MerkmalStornierung" type="typ:typ-MerkmalStornierung" />
+  <xs:element name="NatuerlichePerson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="auskunft:NatuerlichePersonCommon" />
+        <xs:element ref="el:Geschlecht" minOccurs="0" />
+        <xs:element ref="el:Doktorgrad" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NummerZulBeschTeil2AuslandREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="20" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="NummerZulBeschTeil2DeutschlandREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="20" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Person">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:choice>
+          <xs:element ref="auskunft:NatuerlichePerson" />
+          <xs:element ref="auskunft:JuristischePerson" />
+          <xs:element ref="auskunft:Vereinigung" />
+        </xs:choice>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="PhonetischeSuche">
+    <xs:simpleType>
+      <xs:restriction base="xs:boolean" />
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="PruemerVertrag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="auskunft:PruemerVertragCommon" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SISVermerke">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:SchengenID" />
+        <xs:element ref="el:DatumDerAusschreibung" minOccurs="0" />
+        <xs:element ref="el:LandDerAusschreibung" minOccurs="0" />
+        <xs:element ref="el:TextFahrzeugklasseSIS" minOccurs="0" />
+        <xs:element ref="el:Farbe" minOccurs="0" />
+        <xs:element ref="el:TextHerstellerSIS" minOccurs="0" />
+        <xs:element ref="el:TextTyp" minOccurs="0" />
+        <xs:element ref="el:NummerZulBeschTeil1SIS" minOccurs="0" />
+        <xs:element ref="el:NummerZulBeschTeil2SIS" minOccurs="0" />
+        <xs:element ref="el:KennzeichenSIS" minOccurs="0" />
+        <xs:element ref="el:Zulassungsstaat" minOccurs="0" />
+        <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+        <xs:element ref="el:ZeitpunktVerarbeitung" minOccurs="0" />
+        <xs:element ref="el:ZeitpunktUebermittlung" minOccurs="0" />
+        <xs:element ref="el:TextSISVermerk" minOccurs="0" />
+        <xs:element ref="el:DatumVerlustDiebstahlStrafanzeigeSIS" minOccurs="0" />
+        <xs:element ref="el:AusstellungsdatumSIS" minOccurs="0" />
+        <xs:element ref="el:AusstellungsortSIS" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Satz-Fahrzeugliste">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:IdentifikationZulassungsabschnitt" minOccurs="0" />
+        <xs:element ref="el:IdentifizierungsnummerZFZREintrag" minOccurs="0" />
+        <xs:element ref="el:DatumErstzulassung" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktZuteilungKennzeichen" minOccurs="0" />
+        <xs:element ref="el:MerkmalAusserbetriebsetzung" minOccurs="0" />
+        <xs:element ref="el:MerkmalKennzeichenart" minOccurs="0" />
+        <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+        <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0" />
+        <xs:element ref="auskunft:TextFahrzeugklasse" minOccurs="0" />
+        <xs:element ref="auskunft:TextAufbau" minOccurs="0" />
+        <xs:element ref="el:TextTyp" minOccurs="0" />
+        <xs:element ref="el:TextHersteller" minOccurs="0" />
+        <xs:element ref="el:TextMarke" minOccurs="0" />
+        <xs:element ref="el:SchluesselGrundfarbe" minOccurs="0" />
+        <xs:element ref="auskunft:TextGrundfarbe" minOccurs="0" />
+        <xs:element ref="el:SchluesselZweitfarbe" minOccurs="0" />
+        <xs:element ref="auskunft:TextZweitfarbe" minOccurs="0" />
+        <xs:element ref="el:Verkehrsjahr" minOccurs="0" />
+        <xs:element ref="el:MerkmalWechselkennzeichen" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Satz-Personenliste">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="auskunft:NatuerlichePersonCommon" minOccurs="0" />
+        <xs:element ref="el:NameJuristischePerson" minOccurs="0" />
+        <xs:element ref="el:NameVereinigung" minOccurs="0" />
+        <xs:element ref="el:Wohnort" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="SchluesselEmiklasseMaut">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="12" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[A-Z0-9 ]*" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="SchluesselnummerUeberwachungsinstitutionOderZDKExpress">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="[0-9]{4}" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Sicherstellungsort">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:DatumSicherstellungFahrzeug" minOccurs="0" />
+        <xs:element ref="el:MerkmalSicherstellungFahrzeug" />
+        <xs:group ref="auskunft:PundA" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Stichtag" type="typ:typ-SuchzeitraumDatum" />
+  <xs:element name="SuchzeitraumBis" type="typ:typ-SuchzeitraumDatum" />
+  <xs:element name="SuchzeitraumVon" type="typ:typ-SuchzeitraumDatum" />
+  <xs:element name="TextAufbau">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextBestreitungRichtigkeitAngaben">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="150" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextEmissionsklasse">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextErwerberdaten">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="70" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextFahrzeugklasse">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextGrundfarbe" type="typ:typ-TextFarbe" />
+  <xs:element name="TextHinweisRegistrierungREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextKraftstoff">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextMerkmalAusgabeREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextMerkmalHerkunftREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextSuchvermerk">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="150" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextUebermittlungssperre">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="150" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextVerbleibKennzeichenREGINA">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="30" />
+        <xs:minLength value="1" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="TextZweitfarbe" type="typ:typ-TextFarbe" />
+  <xs:element name="Uebermittlungssperre">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:DatumVerfuegung" minOccurs="0" />
+        <xs:element ref="el:ZeitpunktAenderung" minOccurs="0" />
+        <xs:element ref="el:ZeitpunktVerarbeitungZFZR" minOccurs="0" />
+        <xs:element ref="el:AktenzeichenSperrendeStelle" minOccurs="0" />
+        <xs:element ref="el:SchluesselBearbeitendeStelle" minOccurs="0" />
+        <xs:element ref="el:SchluesselSperrendeStelle" minOccurs="0" />
+        <xs:element ref="el:MerkmalAuskunftssperre" minOccurs="0" />
+        <xs:element ref="el:InhaberKennzeichen30Abs6FZV" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Veranlasser">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:group ref="auskunft:MeldendeBehoerde" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VerantwortlichePerson">
+    <xs:annotation>
+      <xs:documentation>Verantwortliche Person (Zusatzprotokollierung).
+Angaben zu der für den Abruf verantwortlichen Person, wie Name/Namenskurzzeichen mit Angabe der Dienststelle/Organisationseinheit, Dienstnummer oder andere eindeutige Identifizierungsmerkmale, wie
+- Anwendergruppe (Bundesland, BGS usw.) mit
+- Dienststellenschlüssel und
+- (Personal-)Identifizierungsnummer des Endnutzers</xs:documentation>
+    </xs:annotation>
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:maxLength value="50" />
+        <xs:minLength value="1" />
+        <xs:pattern value="[\p{IsBasicLatin}\p{IsLatin-1Supplement}-[\t\r\n&#x7F;&#x80;-&#xA0;]]+" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="Vereinigung">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:NameVereinigung" />
+        <xs:element ref="auskunft:NatuerlichePerson" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Verfuegungsberechtigter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:DatumVerfuegungsberechtigungVon" minOccurs="0" />
+        <xs:element ref="el:DatumVerfuegungsberechtigungBis" minOccurs="0" />
+        <xs:element ref="el:HinweisSicherungsuebereignung" minOccurs="0" />
+        <xs:group ref="auskunft:PundA" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Verwertungsnachweis">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:BetriebsnummerDemontagebetrieb" minOccurs="0" />
+        <xs:element ref="el:DatumAusstellung" minOccurs="0" />
+        <xs:element ref="el:MerkmalVerwertungsnachweis" minOccurs="0" />
+        <xs:element ref="el:StaatVerwertung" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="WeitereKennzeichen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Kennzeichen" minOccurs="0" type="typ:typ-Kennzeichen" />
+        <xs:element ref="el:NummerZulBeschTeil1" minOccurs="0" />
+        <xs:element ref="el:DatumRueckgabe" minOccurs="0" />
+        <xs:group ref="auskunft:KennzeichenfuehrendeBehoerde" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ZeitpunktAusfertigungZulBeschTeil1">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="2099-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZeitpunktAusfertigungZulBeschTeil2">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="2099-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZeitpunktBeendigungZulassungsabschnitt">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="9999-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZeitpunktEintragungAusserbetriebsetzungZulBeschTeil1">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="2099-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZeitpunktStornierung">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="2099-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZeitpunktVerbleibZulBeschTeil2">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="2099-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZeitpunktZuteilungGruenesKennzeichen">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="2099-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZeitpunktZuteilungKennzeichen">
+    <xs:simpleType>
+      <xs:restriction base="xs:dateTime">
+        <xs:maxInclusive value="2099-12-31T23:59:59.999+01:00" />
+        <xs:minInclusive value="1940-01-01T00:00:00+01:00" />
+        <xs:pattern value=".+\+02:00|.+\+01:00|.+\+00:00|.+Z" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZulassungsbescheinigungTeil1">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:NummerZulBeschTeil1" minOccurs="0" />
+        <xs:element ref="el:VordrucknummerZB1" minOccurs="0" />
+        <xs:element ref="el:HinweisRueckgabeEinziehung" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktAusfertigungZulBeschTeil1" minOccurs="0" />
+        <xs:element ref="el:DatumRueckgabeEinziehung" minOccurs="0" />
+        <xs:element ref="el:HinweisAusstellungZweitschrift" minOccurs="0" />
+        <xs:element ref="el:DatumAusstellungZweitschrift" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktEintragungAusserbetriebsetzungZulBeschTeil1" minOccurs="0" />
+        <xs:element ref="el:NaechsteHauptuntersuchung" minOccurs="0" />
+        <xs:element ref="el:NaechsteSicherheitspruefung" minOccurs="0" />
+        <xs:element ref="el:NaechsteAbgasuntersuchung" minOccurs="0" />
+        <xs:element ref="el:DruckstuecknummerZB1" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ZulassungsbescheinigungTeil2">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="el:NummerZulBeschTeil2" minOccurs="0" />
+        <xs:element ref="el:VerbleibZulBeschTeil2" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktAusfertigungZulBeschTeil2" minOccurs="0" />
+        <xs:element ref="auskunft:ZeitpunktVerbleibZulBeschTeil2" minOccurs="0" />
+        <xs:element ref="el:ZulBeschTeil2Bestaetigt" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ZustaendigeBehoerdeKreisschluesselUndZusatzziffer">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:pattern value="\d{6}" />
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+  <xs:element name="ZustandImZFZR">
+    <xs:simpleType>
+      <xs:restriction base="xs:string">
+        <xs:enumeration value="l">
+          <xs:annotation>
+            <xs:appinfo>
+              <wertErsteBeschreibungsspalte>l</wertErsteBeschreibungsspalte>
+            </xs:appinfo>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="m">
+          <xs:annotation>
+            <xs:appinfo>
+              <wertErsteBeschreibungsspalte>m</wertErsteBeschreibungsspalte>
+            </xs:appinfo>
+          </xs:annotation>
+        </xs:enumeration>
+        <xs:enumeration value="n">
+          <xs:annotation>
+            <xs:appinfo>
+              <wertErsteBeschreibungsspalte>n</wertErsteBeschreibungsspalte>
+            </xs:appinfo>
+          </xs:annotation>
+        </xs:enumeration>
+      </xs:restriction>
+    </xs:simpleType>
+  </xs:element>
+</xs:schema>
+

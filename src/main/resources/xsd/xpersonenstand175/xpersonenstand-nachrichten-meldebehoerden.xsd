@@ -1,0 +1,1522 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xicgvz="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xima="http://www.osci.de/xinneres/meldeanschrift/3"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2/xinneres-codes-gemeindeverzeichnis.xsd"
+              namespace="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/meldeanschrift/3/xinneres-meldeanschrift.xsd"
+              namespace="http://www.osci.de/xinneres/meldeanschrift/3"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="Nachricht.StA2MB">
+      <xs:annotation>
+         <xs:documentation>Bei jeder Mitteilung von einem Standesamt an eine Meldebehörde werden übermittelt: Nachrichtenkopf mit Angaben zum Absender und Empfänger Angaben zum Erstellungszeitpunkt der Nachricht Angaben über den Grund der Nachricht Identifikationsdaten, um die betroffene Person bei der empfangenden Meldebehörde zu identifizieren.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+            <xs:sequence>
+               <xs:element name="identifikationPerson"
+                           type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                  <xs:annotation>
+                     <xs:documentation>Um das Auffinden der die Mitteilung betreffenden Person beim Empfänger im Melderegister zu erleichtern, teilt das sendende Standesamt der empfangenden Meldebehörde Identifikationsdaten zur Person mit. Bei einer Nachricht mit mehreren Betroffenen ergibt sich aus den Regelungen in , zu welchem Betroffenen in diesem Element Informationen zu übermitteln sind.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.AenderungHinweisPar4Abs3StAG">
+      <xs:annotation>
+         <xs:documentation>Mit diesem Datentyp kann mitgeteilt werden, dass in das Geburtenregister ein Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) eingetragen wurde (Element eintragungHinweisPar4Abs3StAG) oder gestrichen wurde (Element streichungHinweisPar4Abs3StAG).</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="eintragungHinweisPar4Abs3StAG" fixed="true" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Sofern zum Zeitpunkt der Beurkundung im Geburtenregister der Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) eingetragen wurde, ist dieses Element zu verwenden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="streichungHinweisPar4Abs3StAG" fixed="true" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Sofern zum Zeitpunkt der Beurkundung im Geburtenregister der Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) gestrichen wurde, ist dieses Element zu verwenden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Anschrift">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse beinhaltet die Daten zur Anschrift, die der mb übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="anschrift" type="xpersonenstand:StA2MB.Anschrift.Meldebehoerde">
+            <xs:annotation>
+               <xs:documentation>Standardmäßig wird hier die Inlandsanschrift mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staat" type="xpersonenstand:Code.Staat">
+            <xs:annotation>
+               <xs:documentation>Sofern die Anschrift im Ausland liegt, wird hier alternativ nur der Staat übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Anschrift.Meldebehoerde">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse beinhaltet die Daten zur Anschrift, die der mb übermittelt werden. Von den aus der Meldeanschrift übernommenen Elementen wurden die Elemente stockwerkswohnungsnummer, zusatzangaben und wohnungsgeber entfernt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xima:Meldeanschrift">
+            <xs:sequence>
+               <xs:element name="gemeindeschluessel"
+                           type="xicgvz:Code.GemeindeVZ.AmtlicherGemeindeschluessel"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es ist der vom Statistischen Bundesamt herausgegebene bundeseinheitliche Gemeindeschlüssel der Gemeinde anzugeben, in der die Wohnung liegt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="hausnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Hausnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es sind nur die Ziffern einer Hausnummer anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="hausnummerBuchstabeZusatzziffer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.HausnummerBuchstabeZusatzziffer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es sind Buchstaben oder Zusatzziffern zur Hausnummer anzugeben. Beispiel: 124 A, 109.5</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="postleitzahl"
+                           type="xima:Meldeanschrift.Postleitzahl"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es ist die Postleitzahl anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="strasse"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Strasse"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es ist die Bezeichnung der Straße anzugeben. Die Feldlänge ist auf 55 Zeichen beschränkt. Bei Überschreitung einer Länge von 25 Zeichen darf sinnvoll abgekürzt werden. Ist keine Straßenbezeichnung - wohl aber eine Hausnummer - vorhanden, so ist die Zeichenkette Hausnummer anzugeben. Sind weder Straßenbezeichnung noch Hausnummer vorhanden, so ist die Zeichenkette ohne Hausnummer anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="teilnummerDerHausnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.TeilnummerDerHausnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es sind Teilnummern zur Hausnummer anzugeben. Beispiel: 16 1/7</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="wohnort"
+                           type="xima:Meldeanschrift.Wohnort"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es ist die postalische Wohnortsbezeichnung anzugeben. Die Feldlänge ist auf 40 Zeichen beschränkt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="wohnortFruehererGemeindename"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.WohnortFruehererGemeindename"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Dokumentation aus XI:</xs:documentation>
+                     <xs:documentation>Es ist der frühere Gemeindename anzugeben, der als Stadt- bzw. Ortsteilname dem jetzigen Gemeindenamen hinzugefügt werden kann.Der frühere Gemeindename (jetziger Ortsteil- oder Stadtteilname) ist bei Adressierungen unterhalb des Namens (oberhalb der Straßenbezeichnung) anzugeben.Beispiel: Frau Rita Scholl Zuffenhausen Am Stadtpark 12 70123 Stuttgart Die Feldlänge ist auf 40 Zeichen beschränkt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Berichtigung.AngabenEreignis">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Übermittlung von Ereignisdaten im Kontext der Berichtigungen an die Meldebehörden</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container enthält Angaben zum Ereignis im Kontext der Berichtigungen von Standesämtern an Meldebehörden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ereignisTag" type="xida:TeilbekanntesDatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Hier wird das Datum des Ereignisses mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ereignisOrt" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Ort des Ereignisses mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kennzeichnungOrt" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Hier wird die Kreisbezeichnung des Ortes mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staat" minOccurs="0" type="xpersonenstand:Code.Staat">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Staat mitgeteilt, in dem das Ereignis stattfand.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Berichtigung.AngabenPerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Übermittlung von Daten zur Person im Kontext der Berichtigung</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container enthält Angaben zur Person im Kontext der Berichtigungen von Standesämtern an Meldebehörden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="namen" type="xpersonenstand:PersonName.Veraenderung">
+            <xs:annotation>
+               <xs:documentation>Hier sind die Namen einer Person zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Hier ist das Geschlecht einer Person zu übermitteln.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Berichtigung.Aufloesung">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Übermittlung von Aufloesungsdaten im Kontext der Berichtigungen an die Meldebehörden</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container enthält Angaben zur Auflösung einer Ehe oder Lebenspartnerschaft im Kontext der Berichtigungen von Standesämtern an Meldebehörden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="datumBeendigung" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Hier ist das Datum der Auflösung anzugeben.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="beendigungsgrund"
+                     type="xpersonenstand:Code.BeendigungsgrundFamilienstand">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Grund für die Auflösung mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Ereignisort">
+      <xs:annotation>
+         <xs:documentation>Mit diesem Datentyp wird ein Ereignisort zur Kommunikation mit einer Meldebehörde definiert.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Ereignisort">
+            <xs:sequence>
+               <xs:element name="ort" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Bei Orten innerhalb Deutschlands ist die amtlich festgelegte Schreibweise zu verwenden. Bei ausländischen Geburtsorten gilt die folgende Regelung: Allgemein übliche deutsche Bezeichnung. Das Heimatland liefert den Ort in lateinischer Schreibweise. Liefert das Heimatland keine lateinische Schreibweise, ist eine phonetische Übertragung vorzunehmen.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="kreisbezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Die Kreisbezeichnung ermöglicht die Zuordnung der Städte bei gleichen Städtenamen, z. B. Neustadt. Dadurch kann die Ortsbezeichnung präzisiert werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="staat" minOccurs="0" type="xpersonenstand:Code.Staat">
+                  <xs:annotation>
+                     <xs:documentation>Sofern es sich um einen ausländischen Ereignisort handelt, ist hier der Staat anzugeben, in dem der Ereignisort liegt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Geburt">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse fasst die Daten einer Geburt zusammen, die im Kontext einer Datenübermittlung von einem stamt an eine mb benötigt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:StA2MB.Geburt.Veraenderung">
+            <xs:sequence>
+               <xs:element name="geburtsort"
+                           minOccurs="0"
+                           type="xpersonenstand:StA2MB.Ereignisort">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Geburtsort als Ereignisort mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="tagDerGeburt" type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird der Tag der Geburt mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Geburt.Veraenderung">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse fasst die Daten einer Geburt zusammen, die im Kontext einer Datenübermittlung von einem stamt an eine mb benötigt werden. Sie findet überall dort Anwendung, wo es möglich sein muss, Veränderungen an beliebigen Informationen über die Geburt mitzuteilen. Dies ist beispielsweise im Kontext der Berichtigung und bei der Identifikation von Personen der Fall.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="geburtsort"
+                     minOccurs="0"
+                     type="xpersonenstand:StA2MB.Ereignisort">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Geburtsort als Ereignisort mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="tagDerGeburt"
+                     minOccurs="0"
+                     type="xida:TeilbekanntesDatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Hier wird der Tag der Geburt mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Nachweisdaten">
+      <xs:annotation>
+         <xs:appinfo>
+            <implementationHint>Sofern es sich um Nachweisdaten im Sinne des stamtgen handelt, ist die Transformation trivial, da die Klasse StA2MB.Nachweisdaten eine Restriction der Klasse Nachweisdaten ist. Sofern es sich um BeurkundeteDaten im Sinne des stamtgen handelt, gilt Folgendes: Wirksamkeitsdatum Dieses Feld entspricht in ein date umgewandeltes ereignisdatum. Behoerde Dieses Feld entspricht Behoerdenbezeichnung bzw. Standesamtsnummer, je nach Inhalt in dem Choice Registereintrag. Aktenzeichen Dieses Feld entspricht der Konkatenation der Felder Registerart, Eintragsnummer und Erstbeurkundungsjahr, wobei die Felder Registerart und Eintragsnummer durch ein Leerzeichen und die Felder Eintragsnummer und Erstbeurkundungsjahr durch das Zeichen / getrennt sind. Beispielsweise würde das Aktenzeichen G 334/2009 die 334. Geburtsbeurkundung im Jahr 2009 bezeichnen. Sofern bekannt, ist zusätzlich die Standesamtsnummer gefolgt von einem / voranzustellen. Weitere Details sind im Standard XPersonenstandsregister (siehe Datentyp TEintragsnummer) dargestellt.</implementationHint>
+         </xs:appinfo>
+         <xs:documentation>Mit den Nachweisdaten wird in einer mb auf die Quelle verwiesen, bei der Dokumente zur Begründung des Vorliegens eines bestimmten Sachverhalts zu finden sind. Nachweisdaten in diesem Sinne sind in einem stamt sowohl Nachweisdaten als auch BeurkundeteDaten.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Nachweisdaten">
+            <xs:sequence>
+               <xs:element name="wirksamkeitsdatum" type="xida:Tagesdatum">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Datum wird der Tag der Wirksamkeit definiert. Er kann vom Tag der Entscheidung abweichen.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="behoerdenname" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die ausstellende oder beurkundende Behörde mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="aktenzeichen" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Aktenzeichen oder die Registernummer bei der Behörde oder dem Gericht bezeichnet.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Nachweisdaten.Geburt">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse fasst die Daten über eine Beurkundung einer Geburt zusammen, die im Kontext einer Datenübermittlung von einem stamt an eine mb benötigt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:StA2MB.Nachweisdaten.Geburtseintrag">
+            <xs:sequence>
+               <xs:element name="geburtsangaben" type="xpersonenstand:StA2MB.Geburt">
+                  <xs:annotation>
+                     <xs:documentation>Hier werden Tag und Ort der Geburt mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Nachweisdaten.Geburtseintrag" abstract="true">
+      <xs:annotation>
+         <xs:appinfo>
+            <implementationHint>Die Umsetzunghinweise des Datentyps StA2MB.Nachweisdaten die Kindelemente Behoerdenname und Aktenzeichen betreffend gelten für diesen Datentyp entsprechend.</implementationHint>
+         </xs:appinfo>
+         <xs:documentation>In dieser Klasse werden alle Daten zusammengefasst, die einen Registereintrag in einem gebreg aus Sicht der Meldebehörde identifizieren. Diese Klasse selbst wird nie zum Einsatz kommen, da in der Datenübermittlung zusätzlich zu dem Registereintrag der Tag der Geburt und der Geburtsort übermittelt werden. Für eine korrekte Modellierung der Beziehungen zwischen den Klassen Nachweisdaten und StA2MB.Nachweisdaten.Geburt ist sie aus technischer Sicht jedoch trotzdem notwendig.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Nachweisdaten">
+            <xs:sequence>
+               <xs:element name="behoerdenname" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird die ausstellende oder beurkundende Behörde mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="aktenzeichen" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Aktenzeichen oder die Registernummer bei der Behörde oder dem Gericht bezeichnet.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Nachweisdaten.Ort">
+      <xs:annotation>
+         <xs:appinfo>
+            <implementationHint>Die Transformationsregeln entsprechen denen der Klasse StA2MB.Nachweisdaten, ergänzt wird im Folgenden nur der Umgang mit dem Kindelement ereignisOrt. Sofern es sich um BeurkundeteDaten im Sinne des Standesamts handelt, ist die Transformation trivial, da die Kindelemente ereignisOrt entweder der Klasse Ereignisort entsprechen oder eine Restriction von dieser sind. Sofern es sich um Nachweisdaten im Sinne des Standesamts handelt, ist der ereignisOrt entweder leer zu übermitteln oder die Daten sind in der entsprechenden Form neu zu erfassen.</implementationHint>
+         </xs:appinfo>
+         <xs:documentation>Mit den Nachweisdaten wird in einer mb auf die Quelle verwiesen, bei der Dokumente zur Begründung des Vorliegens eines bestimmten Sachverhalts zu finden sind. Sofern für die Begründung ein Ort anzugeben ist, muss diese Klasse statt der Klasse StA2MB.Nachweisdaten verwendet werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:StA2MB.Nachweisdaten">
+            <xs:sequence>
+               <xs:element name="ereignisOrt"
+                           minOccurs="0"
+                           type="xpersonenstand:StA2MB.Ereignisort"/>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Person">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten über eine Person (ohne Anschrift) für eine mb</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Klasse enthält die Daten, die in der Kommunikation zwischen Standesämtern und Meldebehörden eine Person kennzeichnen. Durch die hier übermittelten Daten soll der Empfänger in die Lage versetzt werden, eine eindeutige Identifikation des Betroffenen auf Basis der im eigenen Register vorliegenden Daten vorzunehmen. Für die Kindelemente namen und geburtsangaben wird jeweils der aktuelle Stand der Daten aus dem Personenstandsregister übermittelt. D. h. insbesondere Daten, die aus vorgelegten Dokumenten, etwa Aufenthaltsbescheinigungen, entnommen wurden, werden nicht übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="namen" type="xpersonenstand:PersonName.Aenderung">
+            <xs:annotation>
+               <xs:documentation>In diesem Feld wird der Name der Person mitgeteilt. Für die Nachrichten, die der Sache nach keine Namensänderung enthalten können (031010, 031011, 031012, 031050, 032030, 033030, 035010, 035020), werden nur die aktuellen Namen im Element namenAlt übermittelt. Für die übrigen Nachrichten werden immer die Kindelemente namenAlt und namenNachVeraenderung übermittelt. Sollte es keine Änderung gegeben haben, werden die Elemente mit identischem Inhalt übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsangaben" type="xpersonenstand:StA2MB.Person.Geburt">
+            <xs:annotation>
+               <xs:documentation>Dieses Feld enthält die Daten zur Geburt, die unter anderem für die Identifikation in dem Melderegister verwendet werden. Die optionalen Elemente müssen - soweit beim Absender vorhanden - übermittelt werden. Sie können beim Empfänger verwendet werden, um nicht eindeutige Suchergebnisse weiter einzugrenzen und auf diese Weise eventuell ein eindeutiges Suchergebnis zu erzielen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Hier wird das Geschlecht mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Person.Anschrift">
+      <xs:annotation>
+         <xs:documentation>Hier werden die Daten der Anschrift zwecks Identifikation einer Person in einer mb übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift"
+                     minOccurs="0"
+                     type="xpersonenstand:StA2MB.Anschrift">
+            <xs:annotation>
+               <xs:documentation>Hier können die Anschriftsdaten mitgeteilt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschriftVorVeraenderung"
+                     minOccurs="0"
+                     type="xpersonenstand:StA2MB.Anschrift">
+            <xs:annotation>
+               <xs:documentation>Sofern zur Beurkundung die Anschrift verändert wurde, muss mit diesem Element die Anschrift vor der Veränderung mitgeteilt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Person.Geburt">
+      <xs:annotation>
+         <xs:documentation>Hier werden die Daten der Geburt zwecks Identifikation übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="geburtsdaten" type="xpersonenstand:StA2MB.Geburt">
+            <xs:annotation>
+               <xs:documentation>Hier können die Geburtsdaten übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsdatenVorVeraenderung"
+                     minOccurs="0"
+                     type="xpersonenstand:StA2MB.Geburt.Veraenderung">
+            <xs:annotation>
+               <xs:documentation>Sofern die Beurkundung die Geburtsdaten verändert hat, müssen mit diesem Element die Geburtsdaten vor der Veränderung mitgeteilt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA2MB.Person.MitAnschrift">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten über eine Person (mit Anschrift) für eine mb</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Klasse enthält die Daten, die in der Kommunikation zwischen Standesämtern und Meldebehörden eine Person mit Anschrift kennzeichnen. Durch die hier übermittelten Daten soll der Empfänger in die Lage versetzt werden, eine eindeutige Identifikation des Betroffenen auf Basis der im eigenen Register vorliegenden Daten vorzunehmen. Für die Kindelemente namen und geburtsangaben wird jeweils der aktuelle Stand der Daten aus dem Personenstandsregister übermittelt. D. h. insbesondere Daten, die aus vorgelegten Dokumenten, etwa Aufenthaltsbescheinigungen, entnommen wurden, werden nicht übermittelt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:StA2MB.Person">
+            <xs:sequence>
+               <xs:element name="anschrift" type="xpersonenstand:StA2MB.Person.Anschrift">
+                  <xs:annotation>
+                     <xs:documentation>In diesem Feld wird die Anschrift der Hauptwohnung oder der alleinigen Wohnung übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="stA2MB.Geburt.031010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 1 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung über eine Geburt an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung teilt das stamt die Geburt eines Kindes der mb der Eltern bzw. den mbpl der Elternteile mit. Sofern bei der Geburt zwei Elternteile für das Kind beurkundet werden, wird die Mitteilung über die Geburt des Kindes an die Meldebehörden beider Elternteile adressiert, um dort den Familienverbund einzutragen. Es ist dadurch nicht möglich, allein aus der Tatsache der Übermittlung der Nachricht Rückschlüsse auf die gesetzliche Vertretung des Kindes zu ziehen. Die Angaben zum Geburtstag und -ort des Kindes werden sowohl unter kind/geburt/geburtsdaten als auch unter geburtseintragKind/geburtsangaben übermittelt. Beide Angaben müssen identisch sein.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="elternteil1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Informationen zum ersten Elternteil anzugeben. In der Regel werden hier die Angaben zur Mutter des Kindes übermittelt (§ 1591 BGB).</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternteil2"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Sofern vorhanden, sind hier die Informationen über den zweiten Elternteil anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kind" type="xpersonenstand:StA2MB.Person">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Informationen zum Kind anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtseintragKind"
+                              type="xpersonenstand:StA2MB.Nachweisdaten.Geburt">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Beurkundungsdaten zur Geburt mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind. Der Ort der Geburt ist immer, der Staat der Geburt nur bei Geburten im Ausland mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eintragungHinweisPar4Abs3StAG"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Sofern zum Zeitpunkt der Beurkundung im Geburtenregister der Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) eingetragen wurde, ist dieses Element zu verwenden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesenElternteil1"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität des Elternteil1 nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesenElternteil2"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität des Elternteil2 nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namensfuehrungNichtNachgewiesen"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Namensführung des Kindes nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031011">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 2 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Feststellung der Vaterschaft an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung wird an die mb des Vaters und des Kindes eine Vaterschaftsfeststellung übermittelt. Die Mitteilung über die Vaterschaftsfeststellung wird unabhängig vom Sorgerecht an die Meldebehörde des Vaters adressiert, um dort den Familienverbund einzutragen. Es ist dadurch nicht möglich, allein aus der Tatsache der Übermittlung der Nachricht Rückschlüsse auf das Sorgerecht des Vaters zu ziehen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="elternteil1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Informationen zum ersten Elternteil anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternteil2" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Informationen zum zweiten Elternteil anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kind" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Informationen über das Kind mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtseintragKind"
+                              type="xpersonenstand:StA2MB.Nachweisdaten.Geburt">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Beurkundungsdaten zur Vaterschaftsfeststellung mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aenderungHinweisPar4Abs3StAG"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2MB.AenderungHinweisPar4Abs3StAG">
+                     <xs:annotation>
+                        <xs:documentation>Sofern zum Zeitpunkt der Beurkundung im Geburtenregister der Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) eingetragen oder gestrichen wurde, ist dieses Element zu verwenden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesenElternteil1"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität des Elternteil1 nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesenElternteil2"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität des Elternteil2 nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namensfuehrungNichtNachgewiesen"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Namensführung des Kindes nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031012">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 3 Nr. 2 PStV</rechtsgrundlage>
+            <title>Mitteilung über das Nichtbestehen der Vaterschaft an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt das Standesamt die Feststellung des Nichtbestehens der Vaterschaft der Meldebehörde, bzw. den Meldebehörden von (Schein)Vater und Kind mit.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="elternteil1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Informationen zum ersten Elternteil anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternteil2" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Informationen zum zweiten Elternteil anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kind" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Informationen über das Kind mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtseintragKind"
+                              type="xpersonenstand:StA2MB.Nachweisdaten.Geburt">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Beurkundungsdaten zur Feststellung des Nichtbestehens der Vaterschaft mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aenderungHinweisPar4Abs3StAG"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2MB.AenderungHinweisPar4Abs3StAG">
+                     <xs:annotation>
+                        <xs:documentation>Sofern zum Zeitpunkt der Beurkundung im Geburtenregister der Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) eingetragen oder gestrichen wurde, ist dieses Element zu verwenden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesenElternteil1"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität des Elternteil1 nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesenElternteil2"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität des Elternteil2 nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namensfuehrungNichtNachgewiesen"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Namensführung des Kindes nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 5 Nr. 6 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Annahme als Kind an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung wird das Bestehen der rechtlichen Elternschaft für ein oder zwei Elternteile (elternteil1 und elternteil2) aus folgenden Gründen mitgeteilt: durch Annahme als Kind durch Wiederaufleben der Elternschaft durch Aufhebung der Annahme als Kind Es sind folgende Richtlinien für die Verwendung von elternteil1 und elternteil2 zu beachten: Sofern zwei Personen gemeinsam ein Kind annehmen und es sich um ein verschieden geschlechtliches Paar handelt, dann ist die Frau in elternteil1 und der Mann in elternteil2 mitzuteilen. Bei einem gleich geschlechtlichen Paar können elternteil1 und elternteil2 beliebig befüllt werden. Sofern die Elternschaft eines bestehenden leiblichen Elternteils durch dessen Beziehung mit dem/der Annehmenden weiterhin besteht, wird dieser bestehende Elternteil in elternteil2 mitgeteilt. Sofern nach der Annahme nur ein Elternteil vorhanden ist, wird dieses Elternteil in elternteil1 mitgeteilt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="elternteil1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Informationen über einen annehmenden Elternteil bzw. einen Elternteil, dessen Elternschaft wieder auflebt, mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="elternteil2"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden, sofern vorhanden, die Informationen über einen zweiten annehmenden Elternteil bzw. einen zweiten Elternteil, dessen Elternschaft wieder auflebt oder weiterhin besteht, mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kind" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Informationen über das Kind mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtseintragKind"
+                              type="xpersonenstand:StA2MB.Nachweisdaten.Geburt">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten über den Geburtseintrag des Kindes mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="streichungHinweisPar4Abs3StAG"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Sofern zum Zeitpunkt der Beurkundung im Geburtenregister der Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) gestrichen wurde, ist dieses Element zu verwenden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 4 Nr. 4 PStV</rechtsgrundlage>
+            <title>Mitteilung einer Änderung des Vornamens oder des Geschlechts an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung teilt das Standesamt der Meldebehörde die Änderung des Vornamens und/oder der Geschlechtszugehörigkeit einer Person mit. Die Änderung kann nach § 1 und/oder § 8 TSG oder nach § 45b PStG erfolgen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="geschlechtNeu"
+                              minOccurs="0"
+                              type="xpersonenstand:Code.Geschlecht">
+                     <xs:annotation>
+                        <xs:documentation>Das Geschlecht der Person nach der Änderung.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aenderungNameOderGeschlecht"
+                              type="xpersonenstand:StA2MB.Nachweisdaten.Ort">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Beurkundungsdaten zur Änderung des Geschlechts mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="vornamenNeu"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern sich die Vornamen der Person geändert haben, sind sie hier mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="rechtsgrundlage" type="xpersonenstand:Code.Rechtsgrundlage">
+                     <xs:annotation>
+                        <xs:documentation>Es wird angegeben, ob es sich um eine Änderung nach TSG oder nach § 45b PStG handelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031040">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 4 Nr. 4 PStV, außerdem § 45a PStG
+</rechtsgrundlage>
+            <title>Mitteilung über die Namensänderung eines Kindes an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung teilt das Standesamt der Meldebehörde die Namensänderung eines Kindes mit. Dies umfasst auch die Sortierung des Vornamens nach § 45a PStG.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="nachweisdaten" type="xpersonenstand:StA2MB.Nachweisdaten">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Nachweisdaten zu einer Namensänderung übermittelt. Ist der Wohnsitzstandesbeamte für die Entgegennahme der Erklärung zuständig, weil der Erklärende weder in ein deutsches Geburtenregister eingetragen ist noch die Zuständigkeit eines Eheregisters besteht, wird kein Aktenzeichen übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geaenderterName" type="xpersonenstand:PersonName.Aenderung">
+                     <xs:annotation>
+                        <xs:documentation>Es werden die Namen des betroffenen Kindes übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namensfuehrungNichtNachgewiesen"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Namensführung des Kindes nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031041">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 5 Nr. 6 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Annahme eines Volljährigen als Kind an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung teilt das Standesamt die Annahme eines Volljährigen als Kind der Meldebehörde mit.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="nachweisdaten" type="xpersonenstand:StA2MB.Nachweisdaten">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Nachweisdaten zu einer Namensänderung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geaenderterName" type="xpersonenstand:PersonName.Aenderung">
+                     <xs:annotation>
+                        <xs:documentation>Es werden die Namen des betroffenen Kindes übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031050">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 57 Abs. 1 Nr. 3 PStV oder § 57 Abs. 2 Nr. 3 PStV oder § 57 Abs. 3 Nr. 2 PStV</rechtsgrundlage>
+            <title>Mitteilung über den nachträglichen Eintrag des Hinweises gemäß § 4 Abs. 3 StAG an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird gesendet, wenn nach einer Beurkundung im Geburtenregister zeitversetzt ein Hinweis auf den Staatsangehörigkeitserwerb nach § 4 Abs. 3 StAG eingetragen wurde. Diese Nachricht beinhaltet keine Aussage über die aktuelle Staatsangehörigkeit des Kindes.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="eintragungHinweisPar4Abs3StAG"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Sofern nachträglich im Geburtenregister der Hinweis über die deutsche Staatsangehörigkeit nach § 4 Abs. 3 StAG (Datenfeld 1180 der Anlage 1 der PStV) eingetragen wurde, ist dieses Element zu verwenden.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namensfuehrungNichtNachgewiesen"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Namensführung des Kindes nicht nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Geburt.031100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2 PStV</rechtsgrundlage>
+            <title>Berichtigung Geburtenregister an Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Geburtenregister vorgenommen wurde und diese Berichtigung an die für das Kind zuständige Meldebehörde mitzuteilen ist. Eine Mitteilung von Berichtigungen zu den Daten der Eltern an die zuständige(n) Meldebehörde(n) erfolgt nicht, da die Daten zu diesen Personen ausschließlich der Identifikation im Melderegister dienen. Sollten diese Daten fehlerhaft sein, so hätte die ursprüngliche Nachricht von der Meldebehörde nicht eingearbeitet werden können, da die beigeschriebene Person mit den falschen Daten nicht eindeutig im Melderegister hätte identifiziert werden können und eine konventionelle Klärung nötig wäre.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="geburt" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zur Geburt ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 1040, 1050, 1055, 1057.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="kind" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Kind ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 1101, 1102, 1105, 1106, 1120, 1080, 1199.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vornamen"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier sind Angaben zum Vornamen zu übermitteln.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsname"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier sind Angaben zum Geburtsnamen zu übermitteln.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier sind Angaben zum Geschlecht zu übermitteln.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="existenzHinweisPar4Abs3StAG"
+                                                minOccurs="0"
+                                                fixed="true"
+                                                type="xs:boolean">
+                                       <xs:annotation>
+                                          <xs:documentation>Sofern bei der Beurkundung im Geburtenregister der Hinweis "Deutsche Staatsangehörigkeit (Nur Erwerb nach § 4 Abs. 3 StAG)" (Datenfeld 1180 der Anlage 1 der PStV) eingetragen wurde, ist diese Tatsache in diesem Feld mitzuteilen.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="namensfuehrungNichtNachgewiesen"
+                                                minOccurs="0"
+                                                fixed="true"
+                                                type="xs:boolean">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Namensführung des Kindes nicht nachgewiesen werden konnte.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="neu">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vornamen"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier sind Angaben zum Vornamen zu übermitteln.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsname"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier sind Angaben zum Geburtsnamen zu übermitteln.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geschlecht" type="xpersonenstand:Code.Geschlecht">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier sind Angaben zum Geschlecht zu übermitteln.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="existenzHinweisPar4Abs3StAG"
+                                                minOccurs="0"
+                                                fixed="true"
+                                                type="xs:boolean">
+                                       <xs:annotation>
+                                          <xs:documentation>Sofern bei der Beurkundung im Geburtenregister der Hinweis "Deutsche Staatsangehörigkeit (Nur Erwerb nach § 4 Abs. 3 StAG)" (Datenfeld 1180 der Anlage 1 der PStV) eingetragen wurde, ist diese Tatsache in diesem Feld mitzuteilen.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="namensfuehrungNichtNachgewiesen"
+                                                minOccurs="0"
+                                                fixed="true"
+                                                type="xs:boolean">
+                                       <xs:annotation>
+                                          <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Namensführung des Kindes nicht nachgewiesen werden konnte.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Ehe.032010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 58 Abs. 1 Nr. 5 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Eheschließung an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt das Standesamt eine beurkundete Eheschließung einer zuständigen Meldebehörde mit.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="ehegatte1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zum ersten Ehegatten mitgeteilt. Der Name nach der Eheschließung wird unter namen/namenNachVeraenderung mitgeteilt (Anlage 1 zur PStV Datenfeldnummern 2105 bis 2114). Der Name vor der Eheschließung ist in namen/namenAlt (Anlage 1 zur PStV Datenfeldnummern 2101 bis 2106) zu übermitteln. Sofern kein gemeinsamer Ehename bestimmt oder keine Angleichungserklärung abgegeben wurde, sind die übermittelten Namen identisch.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte2" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zum zweiten Ehegatten mitgeteilt. Der Name nach der Eheschließung wird unter namen/namenNachVeraenderung mitgeteilt (Anlage 1 zur PStV Datenfeldnummern 2205 bis 2214). Der Name vor der Eheschließung ist in namen/namenAlt (Anlage 1 zur PStV Datenfeldnummern 2201 bis 2206) zu übermitteln. Sofern kein gemeinsamer Ehename bestimmt oder keine Angleichungserklärung abgegeben wurde, sind die übermittelten Namen identisch.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessung" type="xpersonenstand:StA2MB.Nachweisdaten.Ort">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur Eheschließung mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind. Der Ort der Eheschließung ist in jedem Fall mitzuteilen und entspricht dem DS-Meld Feld 1408.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehename"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern ein Ehename bestimmt wurde, ist er hier zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="umgewandelteLebenspartnerschaft"
+                              minOccurs="0"
+                              type="xpersonenstand:StA2MB.Nachweisdaten.Ort">
+                     <xs:annotation>
+                        <xs:documentation>Sofern es sich bei der beurkundeten Eheschließung um die Umwandlung einer Lebenspartnerschaft gemäß § 17a PStG handelt, werden hier die Daten der umgewandelten Lebenspartnerschaft mitgeteilt. Die Daten zur Lebenspartnerschaft sind im Sinne des Standesamts BeurkundeteDaten.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Ehe.032020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m § 58 Abs. 2 Nr. 4 PStV, außerdem § 45a PStG</rechtsgrundlage>
+            <title>Mitteilung über die Namensänderung von Ehegatten an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird versandt, nachdem eine Namenserklärung gemäß § 16 Abs. 1 Nr. 5 PStG beurkundet worden ist. Die zuständige Meldebehörde wird hierüber informiert. Diese Mitteilung wird in folgenden Fällen erzeugt: Nachträgliche Namenserklärungen von Ehegatten Hinzufügen eines Namens Widerrufen eines hinzugefügten Namens Wiederannahme eines Namens (typische Fälle: Wiederannahme des Geburtsnamens nach einer Scheidung; Wiederannahme eines früheren Namens) Sortierung von Vornamen Sonstige Fortschreibung von Namen</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="ehegatte1" minOccurs="0" type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Namen des ersten Ehegatten nach der Erklärung zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte2" minOccurs="0" type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Namen des zweiten Ehegatten nach der Erklärung zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namensaenderung" type="xpersonenstand:StA2MB.Nachweisdaten.Ort">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur Namensänderung mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind. Der Ort der Namensänderung ist in jedem Fall mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehename"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern ein Ehename bestimmt wurde, ist er hier zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Ehe.032030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 58 Abs. 3 Nr. 3 PStV oder § 58 Abs. 4 Nr. 2 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Scheidung oder Aufhebung der Ehe an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung teilt das Standesamt die Auflösung einer Ehe den/der mb/mbpl der Ehegatten mit. Im Falle der Feststellung des Nichtbestehens einer Ehe werden der Name und der Familienstand der Ehegatten vor der Ehe auf konventionellem Weg mitgeteilt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="ehegatte1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Informationen zum ersten Ehegatten mitgeteilt. Namensänderungen im Kontext der Scheidung/Aufhebung einer Ehe werden separat mit der Nachricht 032020 - Mitteilung einer Namensänderung im Eheregister (siehe ) übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte2" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden Informationen zum zweiten Ehegatten mitgeteilt. Namensänderungen im Kontext der Scheidung/Aufhebung einer Ehe werden separat mit der Nachricht 032020 - Mitteilung einer Namensänderung im Eheregister (siehe ) übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aufgeloesteEhe" type="xpersonenstand:StA2MB.Nachweisdaten">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur aufgelösten Ehe mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aufloesungEhe" type="xpersonenstand:StA2MB.Nachweisdaten">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden das Gericht, das Aktenzeichen und das Wirksamkeitsdatum der Eheauflösung (Tag der Rechtskraft des Scheidungsurteils) mitgeteilt. Diese Daten sind im Sinne des Standesamts Nachweisdaten.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="neuerFamilienstandEhegatte1"
+                              type="xpersonenstand:Code.FamilienstandMeldewesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Familienstand von ehegatte1 nach der Auflösung der Ehe mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="neuerFamilienstandEhegatte2"
+                              type="xpersonenstand:Code.FamilienstandMeldewesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Familienstand von ehegatte2 nach der Auflösung der Ehe mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beendigungsgrund"
+                              type="xpersonenstand:Code.BeendigungsgrundFamilienstand">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Grund für die Auflösung der Ehe mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Ehe.032100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2 PStV</rechtsgrundlage>
+            <title>Berichtigung Eheregister an Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Eheregister vorgenommen wurde und diese Berichtigung an die zuständige Meldebehörde der Ehegatten mitzuteilen ist. Sind für die Ehegatten unterschiedliche Meldebehörden zuständig, so muss die Berichtigung an beide Meldebehörden übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="ehe" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zur Ehe ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 2040, 2050, 2055, 2057.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ehegatte1" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum ersten Ehegatten ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 2111, 2112, 2113, 2114, 2115, 2116, 2120.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ehegatte2" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum zweiten Ehegatten ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 2211, 2212, 2213, 2214, 2215, 2216, 2220.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="aufloesung" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zur Auflösung der Ehe ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 2390, 2391.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.Aufloesung"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.Aufloesung"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.LP.033010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 59 Abs. 1 Nr. 4 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Begründung der Lebenspartnerschaft an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt das Standesamt eine beurkundete Lebenspartnerschaft einer Meldebehörde mit.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="person1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zu dem Lebenspartner mitgeteilt, der im Personenstandsregister als erster Lebenspartner beurkundet ist.Der Name nach der Begründung der lp wird unter namen/namenNachVeraenderung mitgeteilt (anlpstv Datenfeldnummern 3105 bis 3114). Der Name vor der Begründung der lp ist in namen/namenAlt (anlpstv Datenfeldnummer 3101 bis 3105) zu übermitteln. Sofern kein gemeinsamer Lebenspartnerschaftsname bestimmt oder keine Angleichungserklärung abgegeben wurde, sind die übermittelten Namen identisch.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="person2" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zu dem Lebenspartner mitgeteilt, der im Personenstandsregister als zweiter Lebenspartner beurkundet ist.Der Name nach der Begründung der lp wird unter namen/namenNachVeraenderung mitgeteilt (anlpstv Datenfeldnummern 3205 bis 3214). Der Name vor der Begründung der lp ist in namen/namenAlt (anlpstv Datenfeldnummer 3201 bis 3205) zu übermitteln. Sofern kein gemeinsamer Lebenspartnerschaftsname bestimmt oder keine Angleichungserklärung abgegeben wurde, sind die übermittelten Namen identisch.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="schliessungLebenspartnerschaft"
+                              type="xpersonenstand:StA2MB.Nachweisdaten.Ort">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur Begründung einer lp mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind. Der Begründungsort ist in jedem Fall mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartnerschaftsname"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern ein Lebenspartnerschaftsname bestimmt wurde, ist er hier zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.LP.033020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 59 Abs. 2 Nr. 4 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Namensänderung von Lebenspartnern an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird versandt, nachdem eine Namenserklärung nach § 16 Abs. 1 Nr. 5 PStG beurkundet worden ist. Die zuständige Meldebehörde wird hierüber informiert. Diese Mitteilung wird in folgenden Fällen erzeugt: Nachträgliche Namenserklärungen der Lebenspartner Hinzufügen eines Namens Widerrufen eines hinzugefügten Namens Wiederannahme eines Namens (typische Fälle: Wiederannahme des Geburtsnamens nach der Auflösung einer Lebenspartnerschaft; Wiederannahme eines früheren Namens) Sortierung von Vornamen Sonstige Fortschreibung von Namen</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="lebenspartner1"
+                              minOccurs="0"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Namen des Lebenspartners 1 nach der Erklärung zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartner2"
+                              minOccurs="0"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Namen des Lebenspartners 2 nach der Erklärung zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namensaenderung" type="xpersonenstand:StA2MB.Nachweisdaten.Ort">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur Namensänderung mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind. Der Ort der Namensänderung ist in jedem Fall mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartnerschaftsname"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern ein Lebenspartnerschaftsname bestimmt wurde, ist er hier zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.LP.033030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 59 Abs. 3 PStV oder § 59 Abs. 4 Nr. 2 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Aufhebung einer Lebenspartnerschaft an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Mitteilung teilt das Standesamt die Auflösung einer Lebenspartnerschaft den/der mb/mbpl der Lebenspartner mit. Im Falle der Feststellung des Nichtbestehens einer Lebenspartnerschaft wird der Name und der Familienstand der Lebenspartner vor der Lebenspartnerschaft auf konventionellem Weg mitgeteilt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="person1" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten über den ersten lpt person1 mitgeteilt. Namensänderungen im Kontext der Aufhebung einer Lebenspartnerschaft werden separat mit der Nachricht 033020 - Mitteilung einer Namensänderung im Lebenspartnerschaftsregister (siehe ) übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="person2" type="xpersonenstand:StA2MB.Person.MitAnschrift">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten über den zweiten lpt person2 mitgeteilt. Namensänderungen im Kontext der Aufhebung einer Lebenspartnerschaft werden separat mit der Nachricht 033020 - Mitteilung einer Namensänderung im Lebenspartnerschaftsregister (siehe ) übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aufgeloesteLP" type="xpersonenstand:StA2MB.Nachweisdaten">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Daten zur aufgelösten lp mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aufloesungLP" type="xpersonenstand:StA2MB.Nachweisdaten">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden das Gericht, das Aktenzeichen und das Wirksamkeitsdatum der Auflösung der lp (Tag der Rechtskraft des Urteils) mitgeteilt. Diese Daten sind im Sinne des Standesamts Nachweisdaten.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="neuerFamilienstandPerson1"
+                              type="xpersonenstand:Code.FamilienstandMeldewesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Familienstand der person1 nach der Auflösung der lp mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="neuerFamilienstandPerson2"
+                              type="xpersonenstand:Code.FamilienstandMeldewesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Familienstand der person2 nach der Auflösung der lp mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beendigungsgrund"
+                              type="xpersonenstand:Code.BeendigungsgrundFamilienstand">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird der Grund für die Auflösung der Lebenspartnerschaft mitgeteilt</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.LP.033100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2 PStV</rechtsgrundlage>
+            <title>Berichtigung Lebenspartnerschaftsregister an Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Lebenspartnerschaftsregister vorgenommen wurde und diese Berichtigung an die zuständige Meldebehörde der Lebenspartner mitzuteilen ist. Sind für die Lebenspartner unterschiedliche Meldebehörden zuständig, so muss die Berichtigung an beide Meldebehörden übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="lebenspartnerschaft" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zur Lebenspartnerschaft ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 3040, 3050, 3055, 3057.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="lebenspartner1" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Lebenspartner1 ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 3111, 3112, 3113, 3114, 3115, 3116, 3120.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="lebenspartner2" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Lebenspartner2 ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 3211, 3212, 3213, 3214, 3215, 3216, 3220.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenPerson"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="aufloesung" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zur Auflösung der Lebenspartnerschaft ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 3390, 3391.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.Aufloesung"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.Aufloesung"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Sterbefall.034100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2 PStV</rechtsgrundlage>
+            <title>Berichtigung Sterbefall an Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Sterberegister vorgenommen wurde und diese Berichtigung an die letzte zuständige Meldebehörde des Verstorbenen mitzuteilen ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="sterbefall" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Sterbefall ergeben haben und diese Änderungen dem Leser mitgeteilt werden sollen. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 4140, 4150, 4155, 4157.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                           <xs:element name="neu" type="xpersonenstand:StA2MB.Berichtigung.AngabenEreignis"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Sterbefall.035010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 60 Abs. 1 Nr. 5 PStV oder § 58 Abs. 4 Nr. 2 PStV oder § 59 Abs. 4 Nr. 2 PStV </rechtsgrundlage>
+            <title>Mitteilung über einen Sterbefall an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Mitteilung wird vom stamt an die zuletzt bekannte zuständige mb der alleinigen oder hw des Betroffenen gesendet, um dieser einen im In- oder Ausland beurkundeten Sterbefall mitzuteilen. Dies geschieht unabhängig davon, in welchem Register eine Eintragung über den Sterbefall erfolgt ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="sterbeeintrag" type="xpersonenstand:StA2MB.Nachweisdaten.Ort">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Beurkundungsdaten zum Sterbefall mitgeteilt, die im Sinne des Standesamts BeurkundeteDaten sind. Der Sterbeort, der Sterbetag, das Standesamt und die Nummer des Sterbeeintrages sind in jedem Fall mitzuteilen. Der Staat ist nur bei Sterbefällen im Ausland zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesen"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität der verstorbenen Person nicht durch Urkunden nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA2MB.Sterbefall.035020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Meldebehörde</empfaenger>
+            <rechtsgrundlage>§ 17 Abs. 4 BMG i.V.m. § 58 Abs. 4 Nr. 2 PStV oder § 59 Abs. 4 Nr. 2 PStV </rechtsgrundlage>
+            <title>Mitteilung über die Todeserklärung im Ausland an die Meldebehörde</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Mitteilung wird vom stamt an die zuletzt bekannte zuständige mb der alleinigen oder hw des Betroffenen gesendet, um eine im Ausland erfolgte Todeserklärung oder eine gerichtliche Feststellung der Todeszeit mitzuteilen. Dies geschieht unabhängig davon, in welchem Register eine Eintragung darüber erfolgt ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2MB">
+               <xs:sequence>
+                  <xs:element name="nachweisdaten" type="xpersonenstand:StA2MB.Nachweisdaten">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Nachweisdaten zur Todeserklärung übermittelt, die im Sinne des Standesamts Nachweisdaten sind. Diese umfassen die feststellende Behörde, das Wirksamkeitsdatum und das Aktenzeichen. Das Wirksamkeitsdatum in diesen Nachweisdaten ist der vom Gericht festgestellte Todestag. Bei einer nicht in Deutschland beurkundeten Todeserklärung oder gerichtlichen Feststellung der Todeszeit wird der Staat dem Namen der Behörde im Feld behoerdenname angefügt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="identitaetNichtNachgewiesen"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird mitgeteilt, dass die Identität der verstorbenen Person nicht durch Urkunden nachgewiesen werden konnte.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

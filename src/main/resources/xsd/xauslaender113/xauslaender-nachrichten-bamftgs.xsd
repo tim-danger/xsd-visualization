@@ -1,0 +1,574 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xauslaender="http://www.osci.de/xauslaender1130"
+           xmlns:xian="http://www.osci.de/xinneres/allgemeinername/2"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://www.osci.de/xauslaender1130"
+           version="1.13.0"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XAusländer</nameLang>
+            <nameKurz>XAusländer</nameKurz>
+            <nameTechnisch>xinneres.xauslaender</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xauslaender</kennung>
+            <beschreibung>Das Fachmodul XAusländer des Standards XInneres beschreibt die Datenübermittlung im Ausländerwesen.</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.13.0</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>2.6.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xauslaender-nachrichten-bamf-abh.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/allgemeinername/2/xinneres-name.xsd"
+              namespace="http://www.osci.de/xinneres/allgemeinername/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="AbschlusstestdatenSprache">
+      <xs:annotation>
+         <xs:documentation>Dieses Element enthält die Daten zu einem Abschlusstest des Integrationskurses.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xauslaender:Abschlusstestdaten">
+            <xs:sequence>
+               <xs:element name="abschlusstestart"
+                           type="xauslaender:Code.Int.Abschlusstestartsprache">
+                  <xs:annotation>
+                     <xs:documentation>Es wird die Art des Abschlusstests übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="gesamtergebnis"
+                           minOccurs="0"
+                           type="xauslaender:Code.Int.Abschlusstestdatensprache">
+                  <xs:annotation>
+                     <xs:documentation>Es wird das erreichte Sprachniveau übermittelt (unter A2, A2, B1).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ergebnisHoeren"
+                           minOccurs="0"
+                           type="xauslaender:Code.Int.Abschlusstestergebnisinterpretation">
+                  <xs:annotation>
+                     <xs:documentation>Es wird das erreichte Teilergebnis mit einer Interpretationshilfe (z.B. "A2 sehr gut erfüllt", "B1 erfüllt", etc.) übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="fertigkeitHoeren" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Es werden die erreichten Punktzahlen (z.B. "10 von 25") übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ergebnisSchreiben"
+                           minOccurs="0"
+                           type="xauslaender:Code.Int.Abschlusstestergebnisinterpretation">
+                  <xs:annotation>
+                     <xs:documentation>Es wird das erreichte Teilergebnis mit einer Interpretationshilfe (z.B. "A2 sehr gut erfüllt", "B1 erfüllt", etc.) übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="fertigkeitSchreiben"
+                           minOccurs="0"
+                           type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Es werden die erreichten Punktzahlen (z.B. "10 von 25") übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ergebnisSprechen"
+                           minOccurs="0"
+                           type="xauslaender:Code.Int.Abschlusstestergebnisinterpretation">
+                  <xs:annotation>
+                     <xs:documentation>Es wird das erreichte Teilergebnis mit einer Interpretationshilfe (z.B. "A2 sehr gut erfüllt", "B1 erfüllt", etc.) übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="fertigkeitSprechen" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Es werden die erreichten Punktzahlen (z.B. "10 von 25") übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Int.Ansprechpartner">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Der Ansprechpartner in der Kommunikation mit den TGS/TLA</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Element werden Kontaktdaten für einen Ansprechpartner beschrieben, welcher bezogen auf den Sachverhalt einer Nachricht Auskunft geben kann. In der Regel dürfte dies die Person sein, die die Nachricht ausgelöst hat. Sofern ein Ansprechpartner vorhanden ist, sind dessen Kontaktdaten anzugeben. Dies gilt insbesondere bei Nachrichten, die voraussichtlich zu Rückfragen führen. Im Fall einer funktionsbezogenen Kontaktstelle ist auf jeden Fall das Organisationszeichen zu befüllen, Vorname und Nachname entfallen dann.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="organisationszeichen"
+                     minOccurs="0"
+                     type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Dieses Element bezeichnet das Merkmal, das den Ansprechpartner für den jeweiligen Sachverhalt identifiziert.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienname" minOccurs="0" type="xian:AllgemeinerName"/>
+         <xs:element name="vorname" minOccurs="0" type="xian:AllgemeinerName"/>
+         <xs:element name="kontaktdaten"
+                     maxOccurs="unbounded"
+                     type="xauslaender:Kommunikation"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Int.Dienststelle">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Die Dienststelle in der Kommunikation mit den Trägern der Grundsicherung</title>
+         </xs:appinfo>
+         <xs:documentation>Eine Dienststelle in der Kommunikation mit den Trägern der Grundsicherung ist eine Verwaltungseinheit mit organisatorischer und sachlicher Selbstständigkeit. Sie nimmt einen eigenen Aufgabenbereich wahr.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="dstNummer" type="xauslaender:Code.Int.Dienststelle">
+            <xs:annotation>
+               <xs:documentation>Die Dienststellennummer ist eine eindeutige Kennung zur Identifizierung einer Dienststelle.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="dstBezeichnung" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element kann eine Kurzbezeichnung der Dienststelle angegeben werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kontaktdaten"
+                     maxOccurs="unbounded"
+                     type="xauslaender:Kommunikation"/>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Nachricht.G2G.XA.Int.BAMFTGS">
+      <xs:annotation>
+         <xs:documentation>Dieses Element wird bei jeder Nachricht zwischen dem BAMF und dem TGS/TLA im Themenkreis Integration verwendet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xauslaender:Nachricht.G2G.XA.erweitert">
+            <xs:sequence>
+               <xs:element name="geschaeftszeichen" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Das Geschäftszeichen erlaubt dem Autor der Nachricht den auslösenden Vorgang bei Rückfragen schnell (im Vergleich zur Suche mit Personendaten) zu identifizieren.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ansprechpartner"
+                           minOccurs="0"
+                           type="xauslaender:Int.Ansprechpartner"/>
+               <xs:element name="dienststelleBA"
+                           minOccurs="0"
+                           type="xauslaender:Int.Dienststelle">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element werden Angaben zu einer Dienststelle im Verantwortungsbereich der Bundesagentur für Arbeit übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Verpflichtung.BAMFTGS">
+      <xs:annotation>
+         <xs:documentation>Hiermit werden die Daten der akzeptierten Verpflichtung, so wie sie in InGe abgelegt sind, übermittelt (§ 5 Abs. 2 intv_s und § 6 Abs. 1 und 2 intv_s).</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="art" type="xauslaender:Code.BAMFABH.ArtDerBerechtigung">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Art der Teilnahmeverpflichtung nach § 4 Abs. 1 IntV übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="bamfkennziffer" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die BAMF-Kennziffer der akzeptierten bestehenden Verpflichtung übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gueltigVon" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Beginn der Teilnahmeverpflichtung mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gueltigBis" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das in der Teilnahmeverpflichtung festgelegte Gültigkeitsende mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="teilnahmeUnbefristet" type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Wenn die Angaben in InGe besagen, dass die Teilnahme unbefristet möglich ist, wird dies mit diesem Element übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="austellendeBehoerde" type="xauslaender:Behoerde">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird übermittelt, wer die Berechtigung oder Verpflichtung ausgestellt hat.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="BAMFTGS.Verpflichtung.Akzeptanz.080003">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Akzeptanz einer Teilnahmeverpflichtung</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt das BAMF dem TGS/TLA mit, dass die übermittelten Daten zur Teilnahmeverpflichtung akzeptiert und gespeichert wurden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="verpflichtung" type="xauslaender:Verpflichtung.BAMFTGS">
+                     <xs:annotation>
+                        <xs:documentation>Übermittelt werden die Daten der akzeptierten Berechtigung oder Verpflichtung, so wie sie in InGe abgelegt sind.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="abgeloesteBerechtigung"
+                              minOccurs="0"
+                              type="xauslaender:BerechtigungVerpflichtung">
+                     <xs:annotation>
+                        <xs:documentation>Die übermittelte Verpflichtung hat eine bereits bestehende Berechtigung mit den in diesem Element enthaltenen Daten abgelöst.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.Dublette.080004">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht teilt das BAMF mit, dass eine Person mit den Identifikationsmerkmalen Nachname, Geburtsdatum, Geschlecht, aus der soeben übermittelten Teilnahmeberechtigung/-verpflichtung bereits im Datenbestand von InGe vorhanden ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="informationSachbearbeitung"
+                              type="xauslaender:Code.BAMFABH.Dublettenmeldung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Grund für die Dublettenmeldung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.VerpflichtungNichtMoeglich.080005">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht teilt das BAMF mit, dass und aus welchem Grund keine neue Verpflichtung möglich ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="ablehnungsgrund" type="xauslaender:Code.BAMFABH.Ablehnungsgrund">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Grund für die Ablehnung mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="beschreibung" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Grund für die Ablehnung beschrieben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="aktuelleBerechtigungVerpflichtung"
+                              minOccurs="0"
+                              type="xauslaender:BerechtigungVerpflichtung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Informationen zu der Berechtigung oder Verpflichtung übermittelt, die zum Zeitpunkt der Erzeugung dieser Nachricht gültig ist und die Ablehnung begründet.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kannUebernommenWerden" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Wird mit diesem Element der Wert true übermittelt, ist der Sachbearbeitung kenntlich zu machen, dass die Verpflichtung unter Nutzung der entsprechenden Nachricht übernommen werden kann.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TGSBAMF.Teilnahmeverpflichtung.080010">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht werden die Daten zu einer Verpflichtung gemäß § 44a Abs. 1 Satz 1 Nr. 2 oder Abs. 1 Satz 3 aufenthg_s übermittelt. Diese Nachricht beinhaltet gleichzeitig das Auskunftsersuchen gemäß § 8 Abs. 1 Satz 2 intv_s.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="personalien" type="xauslaender:Personalien.Int.ABHBAMF"/>
+                  <xs:element name="bamfkennziffer" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Sofern der Behörde eine bestehende BAMF-Kennziffer zu der Person bekannt ist, ist diese zu Identifizierungszwecken zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="gueltigBis" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Datum wird das Ende der Teilnahmeverpflichtung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="weitereAngaben" type="xauslaender:Int.WeitereAngaben"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TGSBAMF.BerechtigungVerpflichtungAuskunftsersuchen.080011">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht bittet der TGS/TLA das BAMF um Auskunft über das Bestehen einer Berechtigung oder Verpflichtung für den genannten Ausländer.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="personalien" type="xauslaender:Personalien.Int.ABHBAMF"/>
+                  <xs:element name="bamfkennziffer" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Sofern der Behörde eine bestehende BAMF-Kennziffer zu der Person bekannt ist, ist diese zu Identifizierungszwecken zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.Berechtigungsscheininhalt.080012">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht übermittelt das BAMF entweder die Daten aus dem Berechtigungsschein oder die Information, dass der Integrationskurs bereits vollständig absolviert wurde oder die Information, dass keine Berechtigung oder Verpflichtung vorliegt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="informationBerechtigungsschein"
+                              type="xauslaender:InformationBerechtigungsschein"/>
+                  <xs:element name="informationSachbearbeiter"
+                              type="xauslaender:Code.BAMFABH.InformationBerechtigungsschein">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält klarstellende Informationen für die Sachbearbeitung bei Übermittlung des Berechtigungsscheins.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kannUebernommenWerden" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Wird mit diesem Element der Wert true übermittelt, ist der Sachbearbeitung kenntlich zu machen, dass die Verpflichtung unter Nutzung der entsprechenden Nachricht übernommen werden kann.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TGSBAMF.AuskunftsersuchenKursteilnahmeVerpflichteter.080013">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht kann der TGS/TLA das BAMF um Auskunft über die Anmeldung bzw. das Teilnahmeverhalten eines Verpflichteten ersuchen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="identifikation" type="xauslaender:Identifikation.Int.ABHBAMF"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.AuskunftKursteilnahmeNichtMoeglich.080014">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht teilt das BAMF dem anfragenden TGS/TLA mit, dass auf der Basis der vorhandenen Daten eine Auskunft nicht möglich ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="grundCode" type="xauslaender:Code.BAMFABH.AuskunftNichtMoeglich">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Grund dafür übermittelt, warum eine Auskunft nicht möglich ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="grund" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird zusätzlich eine Erläuterung oder Ergänzung der Begründung angegeben, warum eine Auskunft nicht erteilt werden kann.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.AuskunftKursteilnahme.080015">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Auskunft über alle Daten zur Kursteilnahme</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht übermittelt das BAMF dem TGS/TLA Informationen zur Anmeldung und Kursteilnahme eines Verpflichteten.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="kursabbruch" minOccurs="0" fixed="true" type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Sofern der Kursträger nach einer entsprechenden Mitteilung durch den Teilnehmer den Kursabbruch eines Verpflichteten gemeldet hat, wird diese Information hiermit an den TGS/TLA weitergegeben. Dies schließt eine spätere Wiederaufnahme der Teilnahme nicht aus.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="kursanmeldedaten"
+                              minOccurs="0"
+                              type="xauslaender:Kursanmeldedaten"/>
+                  <xs:element name="kursabschnittsdaten"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xauslaender:Kursabschnittsdaten"/>
+                  <xs:element name="datenAbschlusstestSprache"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xauslaender:AbschlusstestdatenSprache">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Daten zu Abschlusstests des Sprachkurses.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="datenAbschlusstestOrientierung"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xauslaender:Abschlusstestdaten">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält die Daten zu Abschlusstests des Orientierungskurses.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="abgelaufeneVerpflichtung"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xauslaender:VerpflichtungAbgelaufen"/>
+                  <xs:element name="informationBerechtigungVerpflichtung"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xauslaender:InformationBerechtigungVerpflichtung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Informationen zur Berechtigung/Verpflichtung übermittelt. Falls mehrere erloschene Vorgänge vorliegen sollen alle übermittelt werden, damit der Leser die Betroffenheit seiner Vorgänge ermitteln kann.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TGSBAMF.VerpflichtungUebernahmeAuskunft.080016">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht teilt der TGS/TLA dem BAMF mit, dass er eine bereits bestehende Verpflichtung übernehmen will. Gleichzeitig stellt diese Nachricht ein Auskunftsersuchen hinsichtlich des Teilnahmeverhaltens eines Verpflichteten dar.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="identifikation" type="xauslaender:Identifikation.Int.ABHBAMF"/>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.VerpflichtungUebernahmeNichtMoeglich.080017">
+      <xs:annotation>
+         <xs:documentation>Diese Nachricht ist eine Antwort auf die Nachricht zur Übernahme einer Verpflichtung mit gleichzeitigem Auskunftersuchen zur ordnungsgemäßen Kursteilnahme (nachricht.080016). Mit ihr teilt das BAMF im Fehlerfall (z. B. Person unbekannt, keine Verpflichtung) den Grund dafür mit, dass eine Übernahme nicht möglich ist und somit auch keine Auskunft über das Teilnahmeverhalten erteilt werden kann.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="grundCode"
+                              type="xauslaender:Code.BAMFABH.VerpflichtungNichtMoeglich">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Grund (Code) dafür übermittelt, warum keine Übernahme einer Verpflichtung möglich ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="grund" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird (außerhalb der Codeliste) eine Erläuterung oder Ergänzung der Begründung angegeben, warum keine Übernahme einer Verpflichtung möglich ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.VerkuerzteVerpflichtung.080018">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Verkürzung der Verpflichtung</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht teilt das BAMF mit, dass eine übernommene Verpflichtung durch TGS/TLA verkürzt wurde.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="identifikation" type="xauslaender:Identifikation.Int.ABHBAMF">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element soll die Identifikation innerhalb des Datenbestandes der Ausländerbehörde erfolgen. Es ist dabei eine Verbindung über die BAMF-Kennziffer (der übernommenen Verpflichtung) und das Geburtsdatum herzustellen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="gueltigBisVerkuerzt" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält das Datum des Wegfalls der Verpflichtung.Implementierungshinweis:Der Anzeige des Datums sind folgende Worte voranzustellen: Datum des Wegfalls der Verpflichtung:</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anmeldestatus" type="xauslaender:Code.BAMFABH.Anmeldestatus">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird angegeben ob eine Anmeldung bereits erfolgt ist und welche Folgen aus der Verkürzung in Zusammenhang mit dem jeweiligen Anmeldestatus entstehen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="TGSBAMF.VerpflichtungVerkuerzung.080019">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht wird die Verkürzung der Gültigkeitsdauer einer Verpflichtung mitgeteilt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="identifikation" type="xauslaender:Identifikation.Int.ABHBAMF"/>
+                  <xs:element name="gueltigBisVerkuerzt" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Element enthält das Datum des Wegfalls der Verpflichtung.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.VerpflichtungVerkuerzungNichtMoeglich.080020">
+      <xs:annotation>
+         <xs:documentation>Diese Nachricht ist eine Antwort auf die Nachricht zur Verkürzung einer TGS/TLA-Verpflichtung. Mit ihr teilt das BAMF im Fehlerfall (z. B. Person unbekannt, keine Verpflichtung) den Grund dafür mit, dass eine Verkürzung nicht möglich ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS">
+               <xs:sequence>
+                  <xs:element name="grundCode"
+                              type="xauslaender:Code.BAMFTGS.VerkuerzenNichtMoeglich">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird der Grund (Code) dafür übermittelt, warum keine Verkürzung einer Verpflichtung möglich ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="grund" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element wird zusätzlich (außerhalb der Codeliste) eine Erläuterung oder Ergänzung der Begründung angegeben, warum keine Verkürzung einer Verpflichtung möglich ist.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="BAMFTGS.VerpflichtungVerkuerzt.080021">
+      <xs:annotation>
+         <xs:documentation>Mit dieser Nachricht teilt das BAMF mit, dass die Information über die Verkürzung übernommen wurde.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xauslaender:Nachricht.G2G.XA.Int.BAMFTGS"/>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

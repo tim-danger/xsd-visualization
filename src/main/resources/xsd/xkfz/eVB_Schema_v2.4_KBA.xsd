@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:evbkba="http://www.kba.de/eVB/mitteilung" targetNamespace="http://www.kba.de/eVB/mitteilung" version="5.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:group name="Gdv">
+    <xs:sequence>
+      <xs:element ref="evbkba:Nachricht" />
+    </xs:sequence>
+  </xs:group>
+  <xs:element name="Anschrift">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Postleitzahl" minOccurs="0" type="xs:string" />
+        <xs:element name="Wohnort" minOccurs="0" type="xs:string" />
+        <xs:element name="Staat" minOccurs="0" type="xs:string" />
+        <xs:element name="Strasse" minOccurs="0" type="xs:string" />
+        <xs:element name="Hausnummer" minOccurs="0" type="xs:string" />
+        <xs:element name="Adressierungszusaetze" minOccurs="0" type="xs:string" />
+        <xs:element name="Gemeindeschluessel" minOccurs="0" type="xs:string" />
+        <xs:element name="Strassenschluessel" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="AnzeigeAblehnungsgrund" type="xs:string" />
+  <xs:element name="Behoerde">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="ZustaendigeBehoerdeKreisschluessel" type="xs:string" />
+        <xs:element name="ZustaendigeBehoerdeZusatzziffer" type="xs:string" />
+        <xs:element name="ZeitpunktBearbeitung" minOccurs="0" type="xs:string" />
+        <xs:element name="IdentifikationZulassungsabschnitt" minOccurs="0" type="xs:string" />
+        <xs:element name="MitteilungIstNachmeldung" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="DatumAusserbetriebsetzung" type="xs:string" />
+  <xs:element name="DatumEingangAnzeigeZulBeh" type="xs:string" />
+  <xs:element name="DatumEndeVersicherungsschutz" type="xs:string" />
+  <xs:element name="DatumNachversichererAb" type="xs:string" />
+  <xs:element name="Fahrzeug">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SchluesselHersteller" minOccurs="0" type="xs:string" />
+        <xs:element name="Hersteller" minOccurs="0" type="xs:string" />
+        <xs:element name="SchluesselTyp" minOccurs="0" type="xs:string" />
+        <xs:element name="SchluesselVarianteVersion" minOccurs="0" type="xs:string" />
+        <xs:element name="Fahrzeugart" minOccurs="0" type="xs:string" />
+        <xs:element name="SchluesselFahrzeugklasse" minOccurs="0" type="xs:string" />
+        <xs:element name="SchluesselAufbau" minOccurs="0" type="xs:string" />
+        <xs:element name="TextFahrzeugklasse" minOccurs="0" type="xs:string" />
+        <xs:element name="TextAufbau" minOccurs="0" type="xs:string" />
+        <xs:element name="Fahrzeugidentifizierungsnummer" minOccurs="0" type="xs:string" />
+        <xs:element name="Hubraum" minOccurs="0" type="xs:string" />
+        <xs:element name="NennleistungKw" minOccurs="0" type="xs:string" />
+        <xs:element name="MerkmalOldtimer" minOccurs="0" type="xs:string" />
+        <xs:element name="VerwendungFahrzeug" minOccurs="0" type="xs:string" />
+        <xs:element ref="evbkba:ListeVerwendungFahrzeug" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Fehlertext" type="xs:string" />
+  <xs:element name="Fehlertyp" type="xs:string" />
+  <xs:element name="Halter">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="HalterAbweichendVonVersicherungsnehmer" minOccurs="0" type="xs:string" />
+        <xs:element ref="evbkba:NatuerlichePerson" minOccurs="0" />
+        <xs:element ref="evbkba:JuristischePerson" minOccurs="0" />
+        <xs:element ref="evbkba:Vereinigung" minOccurs="0" />
+        <xs:element ref="evbkba:Anschrift" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="JuristischePerson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="NameJuristischePerson" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Kennzeichen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+        <xs:element name="KennzeichenBisher" minOccurs="0" type="xs:string" />
+        <xs:element name="MerkmalKennzeichenart" minOccurs="0" type="xs:string" />
+        <xs:element name="MerkmalWechselkennzeichen" minOccurs="0" type="xs:string" />
+        <xs:element ref="evbkba:ListeMerkmalKennzeichenart" minOccurs="0" />
+        <xs:element name="DatumAblaufKennzeichenreservierung" minOccurs="0" type="xs:string" />
+        <xs:element name="BetriebszeitraumVon" minOccurs="0" type="xs:string" />
+        <xs:element name="BetriebszeitraumBis" minOccurs="0" type="xs:string" />
+        <xs:element name="ZeitpunktZuteilungKennzeichen" minOccurs="0" type="xs:string" />
+        <xs:element name="DatumKennzeichenGueltigBis" minOccurs="0" type="xs:string" />
+        <xs:element name="AblauftageKurzzeitkennzeichen" minOccurs="0" type="xs:string" />
+        <xs:element name="MerkmalElektrokennzeichen" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListeBedingung">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Bedingung" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListeFehlerBei">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="FehlerBei" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListeMerkmalKennzeichenart">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="MerkmalKennzeichenart" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListeNachrichtenId">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="NachrichtenId" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListeTechnischeAbsenderinformationen">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="TechnischeAbsenderinformation" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Kommunikationspartnerkennung" minOccurs="0" type="xs:string" />
+              <xs:element name="Softwareversion" minOccurs="0" type="xs:string" />
+              <xs:element name="ZeitpunktNachrichtengenerierung" minOccurs="0" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListeVbStatusPruefauftrag">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="VbStatusPruefauftrag" minOccurs="0" maxOccurs="unbounded">
+          <xs:complexType>
+            <xs:sequence>
+              <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+              <xs:element name="VbInVerwendungSeit" minOccurs="0" type="xs:string" />
+            </xs:sequence>
+          </xs:complexType>
+        </xs:element>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="ListeVerwendungFahrzeug">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="VerwendungFahrzeug" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="MietfahrzeugFuerSelbstfahrer" type="xs:string" />
+  <xs:element name="Nachricht">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="evbkba:Zeitstempel" minOccurs="0" />
+        <xs:element ref="evbkba:Nachrichtenkopf" minOccurs="0" />
+        <xs:element ref="evbkba:Versicherungsbestaetigungsnummer" minOccurs="0" />
+        <xs:element ref="evbkba:Versicherung" minOccurs="0" />
+        <xs:element ref="evbkba:Versicherungsnehmer" minOccurs="0" />
+        <xs:element ref="evbkba:Halter" minOccurs="0" />
+        <xs:element ref="evbkba:Fahrzeug" minOccurs="0" />
+        <xs:element ref="evbkba:Kennzeichen" minOccurs="0" />
+        <xs:element name="KennzeichenZugehoerigesWechselkennzeichen" minOccurs="0" type="xs:string" />
+        <xs:element ref="evbkba:Behoerde" />
+        <xs:element ref="evbkba:VbAblehnungsgrund" minOccurs="0" />
+        <xs:element ref="evbkba:ListeFehlerBei" minOccurs="0" />
+        <xs:element ref="evbkba:VuArbeitsgang" minOccurs="0" />
+        <xs:element ref="evbkba:AnzeigeAblehnungsgrund" minOccurs="0" />
+        <xs:element ref="evbkba:DatumEingangAnzeigeZulBeh" minOccurs="0" />
+        <xs:element ref="evbkba:DatumNachversichererAb" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Nachrichtenkopf">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Nachrichtentyp" minOccurs="0" type="xs:string" />
+        <xs:element name="Betriebsart" minOccurs="0" type="xs:string" />
+        <xs:element ref="evbkba:ListeNachrichtenId" minOccurs="0" />
+        <xs:element ref="evbkba:ListeTechnischeAbsenderinformationen" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="NatuerlichePerson">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Nachname" minOccurs="0" type="xs:string" />
+        <xs:element name="Namensbestandteil" minOccurs="0" type="xs:string" />
+        <xs:element name="Vorname" minOccurs="0" type="xs:string" />
+        <xs:element name="VornameZuRechtNichtVorhanden" minOccurs="0" type="xs:string" />
+        <xs:element name="Geschlecht" minOccurs="0" type="xs:string" />
+        <xs:element name="Doktorgrad" minOccurs="0" type="xs:string" />
+        <xs:element name="Ordensname" minOccurs="0" type="xs:string" />
+        <xs:element name="Kuenstlername" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VbAblehnungsgrund" type="xs:string" />
+  <xs:element name="Vereinigung">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="NameVereinigung" minOccurs="0" type="xs:string" />
+        <xs:element ref="evbkba:NatuerlichePerson" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Versicherung">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Unternehmensart" minOccurs="0" type="xs:string" />
+        <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+        <xs:element name="GeschaeftsstelleVersicherung" minOccurs="0" type="xs:string" />
+        <xs:element name="AgenturVersicherung" minOccurs="0" type="xs:string" />
+        <xs:element name="DatumVersicherungsbeginn" minOccurs="0" type="xs:string" />
+        <xs:element name="Versicherungsscheinnummer" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Versicherungsbestaetigungsnummer" type="xs:string" />
+  <xs:element name="Versicherungsnehmer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="evbkba:NatuerlichePerson" minOccurs="0" />
+        <xs:element ref="evbkba:JuristischePerson" minOccurs="0" />
+        <xs:element ref="evbkba:Vereinigung" minOccurs="0" />
+        <xs:element ref="evbkba:Anschrift" minOccurs="0" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VuArbeitsgang">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="Mitteilungsart" minOccurs="0" type="xs:string" />
+        <xs:element name="Storno" minOccurs="0" type="xs:string" />
+        <xs:element name="AenderungHalter" minOccurs="0" type="xs:string" />
+        <xs:element name="AenderungVersicherung" minOccurs="0" type="xs:string" />
+        <xs:element name="AenderungKennzeichen" minOccurs="0" type="xs:string" />
+        <xs:element name="AenderungFahrzeugklasse" minOccurs="0" type="xs:string" />
+        <xs:element name="AenderungMerkmalOldtimer" minOccurs="0" type="xs:string" />
+        <xs:element name="AenderungVerwendungFahrzeug" minOccurs="0" type="xs:string" />
+        <xs:element name="AenderungMerkmalElektrokennzeichen" minOccurs="0" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="Zeitstempel" type="xs:string" />
+</xs:schema>
+

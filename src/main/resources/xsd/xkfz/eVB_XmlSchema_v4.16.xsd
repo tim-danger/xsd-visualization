@@ -1,0 +1,1552 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:evb="http://www.evb-online.com/xmlschema" targetNamespace="http://www.evb-online.com/xmlschema" version="5.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:complexType name="Administrator">
+    <xs:all>
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+      <xs:element name="Kontaktdaten" minOccurs="0" type="evb:Kontaktdaten" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Anschrift">
+    <xs:all>
+      <xs:element name="Postleitzahl" minOccurs="0" type="xs:string" />
+      <xs:element name="Postfach" minOccurs="0" type="xs:string" />
+      <xs:element name="PostleitzahlPostfach" minOccurs="0" type="xs:string" />
+      <xs:element name="Wohnort" minOccurs="0" type="xs:string" />
+      <xs:element name="Staat" minOccurs="0" type="xs:string" />
+      <xs:element name="Strasse" minOccurs="0" type="xs:string" />
+      <xs:element name="Hausnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Adressierungszusaetze" minOccurs="0" type="xs:string" />
+      <xs:element name="Gemeindeschluessel" minOccurs="0" type="xs:string" />
+      <xs:element name="Strassenschluessel" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="AnzufragendesVersicherungsunternehmen">
+    <xs:all>
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VUInterneVermittlernummer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Bedingungsdefinition">
+    <xs:all>
+      <xs:element name="Bedingung" minOccurs="0" type="xs:string" />
+      <xs:element name="Bedingungsbeschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeFeldbezeichnung" minOccurs="0" type="evb:ListeFeldbezeichnung" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Behoerde">
+    <xs:all>
+      <xs:element name="ZustaendigeBehoerdeKreisschluessel" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeZusatzziffer" minOccurs="0" type="xs:string" />
+      <xs:element name="ZeitpunktBearbeitung" minOccurs="0" type="xs:string" />
+      <xs:element name="IdentifikationZulassungsabschnitt" minOccurs="0" type="xs:string" />
+      <xs:element name="MitteilungIstNachmeldung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BekannteBedingungsverletzung">
+    <xs:all>
+      <xs:element name="Bedingung" minOccurs="0" type="xs:string" />
+      <xs:element name="Bedingungsbeschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeFelddefinition" minOccurs="0" type="evb:ListeFelddefinition" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Benachrichtigungsauftrag">
+    <xs:all>
+      <xs:element name="Benachrichtigungsausloeser" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSEmpfaenger" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSText" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSAbsenderkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Benachrichtigungszeitpunkt" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Bonitaetsdaten">
+    <xs:all>
+      <xs:element name="Bonitaetsdienstleisternummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetsanfragezeitpunkt" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetsfehlercode" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetsfehlertext" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetsscore" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeBonitaetsmerkmal" minOccurs="0" type="evb:ListeBonitaetsmerkmal" />
+      <xs:element name="BonitaetspruefungPositiv" minOccurs="0" type="xs:string" />
+      <xs:element name="ErmitteltePersonendaten" minOccurs="0" type="evb:ErmitteltePersonendaten" />
+      <xs:element name="ListeAbweichungPersonendaten" minOccurs="0" type="evb:ListeAbweichungPersonendaten" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Bonitaetsmerkmal">
+    <xs:all>
+      <xs:element name="BonitaetsmerkmalCode" minOccurs="0" type="xs:string" />
+      <xs:element name="BonitaetsmerkmalName" minOccurs="0" type="xs:string" />
+      <xs:element name="BonitaetsmerkmalDaten" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Briefkasten">
+    <xs:all>
+      <xs:element name="Zeitstempel" minOccurs="0" type="xs:string" />
+      <xs:element name="LoginToken" minOccurs="0" type="xs:string" />
+      <xs:element name="BriefkastenId" minOccurs="0" type="xs:string" />
+      <xs:element name="BriefkastenIdAnfrage" minOccurs="0" type="xs:string" />
+      <xs:element name="BriefkastenIdAntwort" minOccurs="0" type="evb:BriefkastenIdAntwort" />
+      <xs:element name="BriefkastenAnfrage" minOccurs="0" type="evb:BriefkastenAnfrage" />
+      <xs:element name="BriefkastenAntwort" minOccurs="0" type="evb:BriefkastenAntwort" />
+      <xs:element name="BriefkastenAbruf" minOccurs="0" type="evb:BriefkastenAbruf" />
+      <xs:element name="BriefkastenAbrufAntwort" minOccurs="0" type="evb:BriefkastenAbrufAntwort" />
+      <xs:element name="BriefkastenLeeren" minOccurs="0" type="evb:BriefkastenLeeren" />
+      <xs:element name="BriefkastenGeleert" minOccurs="0" type="evb:BriefkastenGeleert" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenAbruf">
+    <xs:all>
+      <xs:element name="ListeNachrichtenId" minOccurs="0" type="evb:ListeNachrichtenId" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenAbrufAntwort">
+    <xs:all>
+      <xs:element name="ListeNachricht" minOccurs="0" type="evb:ListeNachricht" />
+      <xs:element name="ListeQuittung" minOccurs="0" type="evb:ListeQuittung" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenAnfrage">
+    <xs:all>
+      <xs:element name="AnzahlNachrichtenId" minOccurs="0" type="xs:string" />
+      <xs:element name="AbDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlDatensaetze" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungSpalte" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungRichtung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenAntwort">
+    <xs:all>
+      <xs:element name="AnzahlNachrichten" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlNachrichtenId" minOccurs="0" type="xs:string" />
+      <xs:element name="NaechsteDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeNachrichtenId" minOccurs="0" type="evb:ListeNachrichtenId" />
+      <xs:element name="ListeNachrichtenUebersicht" minOccurs="0" type="evb:ListeNachrichtenUebersicht" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenDaten">
+    <xs:all>
+      <xs:element name="BriefkastenId" minOccurs="0" type="xs:string" />
+      <xs:element name="BriefkastenName" minOccurs="0" type="xs:string" />
+      <xs:element name="IstDefaultBriefkasten" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenGeleert">
+    <xs:all>
+      <xs:element name="ListeNachrichtenId" minOccurs="0" type="evb:ListeNachrichtenId" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenIdAntwort">
+    <xs:all>
+      <xs:element name="AnzahlBriefkastenId" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeBriefkastenDaten" minOccurs="0" type="evb:ListeBriefkastenDaten" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="BriefkastenLeeren">
+    <xs:all>
+      <xs:element name="ListeNachrichtenId" minOccurs="0" type="evb:ListeNachrichtenId" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Datentyp">
+    <xs:all>
+      <xs:element name="DatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="Datenpflegeart" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypBool" minOccurs="0" type="evb:DatentypBool" />
+      <xs:element name="DatentypCode" minOccurs="0" type="evb:DatentypCode" />
+      <xs:element name="DatentypZahl" minOccurs="0" type="evb:DatentypZahl" />
+      <xs:element name="DatentypZeichenkette" minOccurs="0" type="evb:DatentypZeichenkette" />
+      <xs:element name="DatentypUhrzeit" minOccurs="0" type="evb:DatentypUhrzeit" />
+      <xs:element name="DatentypXml" minOccurs="0" type="evb:DatentypXml" />
+      <xs:element name="DatentypFeldIndividualisierung" minOccurs="0" type="evb:DatentypFeldindividualisierung" />
+      <xs:element name="DatentypStruktur" minOccurs="0" type="evb:DatentypStruktur" />
+      <xs:element name="DatentypIndizierteListe" minOccurs="0" type="evb:DatentypIndizierteListe" />
+      <xs:element name="DatentypCodeRelationListe" minOccurs="0" type="evb:DatentypCodeRelationListe" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypBool">
+    <xs:all>
+      <xs:element name="DatentypBoolBedeutungWahr" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypBoolBedeutungFalsch" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypBoolDefault" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypCode">
+    <xs:all>
+      <xs:element name="ListeDatentypCodeDefinition" minOccurs="0" type="evb:ListeDatentypCodeDefinition" />
+      <xs:element name="DatentypCodeDatenQuelle" minOccurs="0" type="evb:DatentypCodeDatenQuelle" />
+      <xs:element name="DatentypCodeDefault" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypCodeDatenQuelle">
+    <xs:all>
+      <xs:element name="Datenpfad" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypCodeDatenQuelleCode" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypCodeDatenQuelleName" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypCodeDatenQuelleBeschreibung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypCodeDefinition">
+    <xs:all>
+      <xs:element name="Datencode" minOccurs="0" type="xs:string" />
+      <xs:element name="CodeName" minOccurs="0" type="xs:string" />
+      <xs:element name="CodeBeschreibung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypCodeRelationListe">
+    <xs:all>
+      <xs:element name="CodeDatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="CodeName" minOccurs="0" type="xs:string" />
+      <xs:element name="CodeBeschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="DateneintragName" minOccurs="0" type="xs:string" />
+      <xs:element name="DateneintragBeschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="DatenDefault" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypFeldindividualisierung">
+    <xs:all>
+      <xs:element name="CodeDatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="VorgangFeldStatus" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypName" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypIndizierteListe">
+    <xs:all>
+      <xs:element name="IndexDatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="IndexName" minOccurs="0" type="xs:string" />
+      <xs:element name="IndexBeschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="DateneintragName" minOccurs="0" type="xs:string" />
+      <xs:element name="DateneintragBeschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypListeMinLaenge" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypListeMaxLaenge" minOccurs="0" type="xs:string" />
+      <xs:element name="DatenDefault" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypStruktur">
+    <xs:all>
+      <xs:element name="ListeDatentypStrukturEintrag" minOccurs="0" type="evb:ListeDatentypStrukturEintrag" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypStrukturEintrag">
+    <xs:all>
+      <xs:element name="Datenkey" minOccurs="0" type="xs:string" />
+      <xs:element name="Datenbedingung" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="DateneintragOptional" minOccurs="0" type="xs:string" />
+      <xs:element name="DateneintragName" minOccurs="0" type="xs:string" />
+      <xs:element name="DateneintragBeschreibung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypUhrzeit">
+    <xs:all>
+      <xs:element name="DatentypUhrzeitMinimum" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypUhrzeitMaximum" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypUhrzeitRelativesMinimum" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypUhrzeitRelativesMaximum" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypUhrzeitGenauigkeit" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypUhrzeitDefault" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypUhrzeitRelativerDefault" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypXml">
+    <xs:all>
+      <xs:element name="DatentypXmlSchema" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypZahl">
+    <xs:all>
+      <xs:element name="DatentypZahlMinimum" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZahlMaximum" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZahlNachkommastellen" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZahlEinheit" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZahlDefault" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="DatentypZeichenkette">
+    <xs:all>
+      <xs:element name="DatentypZeichenketteMinLaenge" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZeichenketteMaxLaenge" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZeichenketteZeichentyp" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZeichenketteMehrzeilig" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZeichenketteRegulaererAusdruck" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypZeichenketteDefault" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ErmitteltePersonendaten">
+    <xs:all>
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+      <xs:element name="JuristischePerson" minOccurs="0" type="evb:JuristischePerson" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Fahrzeug">
+    <xs:all>
+      <xs:element name="SchluesselHersteller" minOccurs="0" type="xs:string" />
+      <xs:element name="Hersteller" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselTyp" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselVarianteVersion" minOccurs="0" type="xs:string" />
+      <xs:element name="Fahrzeugart" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselFahrzeugklasse" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselAufbau" minOccurs="0" type="xs:string" />
+      <xs:element name="TextFahrzeugklasse" minOccurs="0" type="xs:string" />
+      <xs:element name="TextAufbau" minOccurs="0" type="xs:string" />
+      <xs:element name="Fahrzeugidentifizierungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Hubraum" minOccurs="0" type="xs:string" />
+      <xs:element name="NennleistungKw" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalOldtimer" minOccurs="0" type="xs:string" />
+      <xs:element name="VerwendungFahrzeug" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVerwendungFahrzeug" minOccurs="0" type="evb:ListeVerwendungFahrzeug" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="FeldVuIndividualisierung">
+    <xs:all>
+      <xs:element name="FeldXmlPfad" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeFeldvorgaben" minOccurs="0" type="evb:ListeFeldvorgaben" />
+      <xs:element name="ListeFeldauspraegung" minOccurs="0" type="evb:ListeFeldauspraegung" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Feldauspraegung">
+    <xs:all>
+      <xs:element name="Wert" minOccurs="0" type="xs:string" />
+      <xs:element name="Bedeutung" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVorgangsart" minOccurs="0" type="evb:ListeVorgangsart" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Felddefinition">
+    <xs:all>
+      <xs:element name="Feldbezeichnung" minOccurs="0" type="xs:string" />
+      <xs:element name="FeldFormatbeschreibung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Feldvorgaben">
+    <xs:all>
+      <xs:element name="HinweistextWeb" minOccurs="0" type="xs:string" />
+      <xs:element name="HinweistextMobile" minOccurs="0" type="xs:string" />
+      <xs:element name="HinweistextIPhone" minOccurs="0" type="xs:string" />
+      <xs:element name="FeldStatus" minOccurs="0" type="xs:string" />
+      <xs:element name="FreitextZulassen" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVorgangsart" minOccurs="0" type="evb:ListeVorgangsart" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="FzRechercheAnfrage">
+    <xs:all>
+      <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselHersteller" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselTyp" minOccurs="0" type="xs:string" />
+      <xs:element name="Fahrzeugart" minOccurs="0" type="xs:string" />
+      <xs:element name="VerwendungFahrzeug" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalKennzeichenart" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalOldtimer" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalElektrokennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalWechselkennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="KennzeichenZugehoerigesWechselkennzeichenBekannt" minOccurs="0" type="xs:string" />
+      <xs:element name="NameHalter" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeKreisschluessel" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeZusatzziffer" minOccurs="0" type="xs:string" />
+      <xs:element name="AbDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlDatensaetze" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungSpalte" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungRichtung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="FzRechercheAnfrageDetails">
+    <xs:all>
+      <xs:element name="Fahrzeugidentifizierungsnummer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="FzRechercheAntwort">
+    <xs:all>
+      <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselHersteller" minOccurs="0" type="xs:string" />
+      <xs:element name="SchluesselTyp" minOccurs="0" type="xs:string" />
+      <xs:element name="Fahrzeugart" minOccurs="0" type="xs:string" />
+      <xs:element name="Fahrzeugidentifizierungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VerwendungFahrzeug" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalKennzeichenart" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalWechselkennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="KennzeichenZugehoerigesWechselkennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalElektrokennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalOldtimer" minOccurs="0" type="xs:string" />
+      <xs:element name="NameHalter" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeKreisschluessel" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeZusatzziffer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="FzRechercheAntwortDetails">
+    <xs:all>
+      <xs:element name="Kennzeichen" minOccurs="0" type="evb:Kennzeichen" />
+      <xs:element name="KennzeichenZugehoerigesWechselkennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="evb:Fahrzeug" />
+      <xs:element name="Versicherung" minOccurs="0" type="evb:Versicherung" />
+      <xs:element name="Halter" minOccurs="0" type="evb:Halter" />
+      <xs:element name="NeueVb" minOccurs="0" type="evb:NeueVb" />
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeKreisschluessel" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeZusatzziffer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="GDV_EMAIL_001.EmailParameter">
+    <xs:all>
+      <xs:element name="Name" minOccurs="0" type="xs:string" />
+      <xs:element name="Wert" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="GDV_EMAIL_001.ListeEmailParameter">
+    <xs:sequence>
+      <xs:element name="EmailParameter" minOccurs="0" maxOccurs="unbounded" type="evb:GDV_EMAIL_001.EmailParameter" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GDV_ITD_060.ListeVkzProduktionsauftrag">
+    <xs:sequence>
+      <xs:element name="VkzProduktionsauftrag" minOccurs="0" maxOccurs="unbounded" type="evb:GDV_ITD_060.VkzProduktionsauftrag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GDV_ITD_060.ListeVkzProduktionsauftrag.Ansprechpartner">
+    <xs:all>
+      <xs:element name="Name1" minOccurs="0" type="xs:string" />
+      <xs:element name="Telefonnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Faxnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Email" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="GDV_ITD_060.ListeVkzProduktionsauftrag.ListeBuchstabenblock">
+    <xs:sequence>
+      <xs:element name="Buchstabenblock" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="GDV_ITD_060.ListeVkzProduktionsauftrag.ZiffernblockIntervall">
+    <xs:all>
+      <xs:element name="Von" minOccurs="0" type="xs:string" />
+      <xs:element name="Bis" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="GDV_ITD_060.VkzProduktionsauftrag">
+    <xs:all>
+      <xs:element name="VkzProduktionAuftragsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VkzGroesse" minOccurs="0" type="xs:string" />
+      <xs:element name="Verkehrsjahr" minOccurs="0" type="xs:string" />
+      <xs:element name="Farbe" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeBuchstabenblock" minOccurs="0" type="evb:GDV_ITD_060.ListeVkzProduktionsauftrag.ListeBuchstabenblock" />
+      <xs:element name="ZiffernblockIntervall" minOccurs="0" type="evb:GDV_ITD_060.ListeVkzProduktionsauftrag.ZiffernblockIntervall" />
+      <xs:element name="AnzahlSchilder" minOccurs="0" type="xs:string" />
+      <xs:element name="AuslieferdatumWunsch" minOccurs="0" type="xs:string" />
+      <xs:element name="LogistikEmpfaenger" minOccurs="0" type="evb:LogistikEmpfaenger" />
+      <xs:element name="AbsenderIstGdvdl" minOccurs="0" type="xs:string" />
+      <xs:element name="Ansprechpartner" minOccurs="0" type="evb:GDV_ITD_060.ListeVkzProduktionsauftrag.Ansprechpartner" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Gruppe">
+    <xs:all>
+      <xs:element name="Gruppennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Gruppenname" minOccurs="0" type="xs:string" />
+      <xs:element name="Obergruppennummer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Gruppenrecht">
+    <xs:all>
+      <xs:element name="Gruppennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Gruppenname" minOccurs="0" type="xs:string" />
+      <xs:element name="Kommunikationspartnerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechteklassennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechtnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="ListenrechtEintragKey" minOccurs="0" type="xs:string" />
+      <xs:element name="ListenrechtEintragName" minOccurs="0" type="xs:string" />
+      <xs:element name="Minimalwert" minOccurs="0" type="xs:string" />
+      <xs:element name="Maximalwert" minOccurs="0" type="xs:string" />
+      <xs:element name="MinMinimalwert" minOccurs="0" type="xs:string" />
+      <xs:element name="MaxMaximalwert" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechtstatus" minOccurs="0" type="xs:string" />
+      <xs:element name="NurReversierbar" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Halter">
+    <xs:all>
+      <xs:element name="HalterAbweichendVonVersicherungsnehmer" minOccurs="0" type="xs:string" />
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+      <xs:element name="JuristischePerson" minOccurs="0" type="evb:JuristischePerson" />
+      <xs:element name="Vereinigung" minOccurs="0" type="evb:Vereinigung" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ITD_GDV_060.AuftragStatus">
+    <xs:all>
+      <xs:element name="VkzProduktionAuftragsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VkzProduktionStatus" minOccurs="0" type="xs:string" />
+      <xs:element name="AuftragsnummerZulieferer" minOccurs="0" type="xs:string" />
+      <xs:element name="AuslieferdatumGeplant" minOccurs="0" type="xs:string" />
+      <xs:element name="ZeitpunktVersand" minOccurs="0" type="xs:string" />
+      <xs:element name="Versanddienstleister" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeTrackingId" minOccurs="0" type="evb:ListeTrackingId" />
+      <xs:element name="TrackingLink" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVkzLogistikDaten" minOccurs="0" type="evb:ITD_GDV_060.ListeAuftragStatus.ListeVkzLogistikDaten" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ITD_GDV_060.ListeAuftragStatus">
+    <xs:sequence>
+      <xs:element name="AuftragStatus" minOccurs="0" maxOccurs="unbounded" type="evb:ITD_GDV_060.AuftragStatus" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ITD_GDV_060.ListeAuftragStatus.ListeVkzLogistikDaten">
+    <xs:sequence>
+      <xs:element name="VkzLogistikDaten" minOccurs="0" maxOccurs="unbounded" type="evb:ITD_GDV_060.ListeAuftragStatus.VkzLogistikDaten" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ITD_GDV_060.ListeAuftragStatus.VkzLogistikDaten">
+    <xs:all>
+      <xs:element name="Buchstabenblock" minOccurs="0" type="xs:string" />
+      <xs:element name="Ziffern" minOccurs="0" type="xs:string" />
+      <xs:element name="VkeNummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VpeNummer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ITD_GDV_062.ListeVpeNummer">
+    <xs:sequence>
+      <xs:element name="VpeNummer" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="JuristischePerson">
+    <xs:all>
+      <xs:element name="NameJuristischePerson" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Kennzeichen">
+    <xs:all>
+      <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="KennzeichenBisher" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalKennzeichenart" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeMerkmalKennzeichenart" minOccurs="0" type="evb:ListeMerkmalKennzeichenart" />
+      <xs:element name="MerkmalWechselkennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumAblaufKennzeichenreservierung" minOccurs="0" type="xs:string" />
+      <xs:element name="BetriebszeitraumVon" minOccurs="0" type="xs:string" />
+      <xs:element name="BetriebszeitraumBis" minOccurs="0" type="xs:string" />
+      <xs:element name="ZeitpunktZuteilungKennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumKennzeichenGueltigBis" minOccurs="0" type="xs:string" />
+      <xs:element name="AblauftageKurzzeitkennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="MerkmalElektrokennzeichen" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Kommunikationspartner">
+    <xs:all>
+      <xs:element name="Kommunikationspartnertyp" minOccurs="0" type="xs:string" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeKreisschluessel" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeZusatzziffer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Kontaktdaten">
+    <xs:all>
+      <xs:element name="Telefonnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Faxnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Email" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Korrekturen">
+    <xs:all>
+      <xs:element name="KorrekturGeschaeftsstelleVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="KorrekturVersicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="KorrekturFahrzeugidentifizierungsnummer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ListeAbweichungPersonendaten">
+    <xs:sequence>
+      <xs:element name="AbweichungPersonendaten" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeAnzufragendesVersicherungsunternehmen">
+    <xs:sequence>
+      <xs:element name="AnzufragendesVersicherungsunternehmen" minOccurs="0" maxOccurs="unbounded" type="evb:AnzufragendesVersicherungsunternehmen" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeBedingung">
+    <xs:sequence>
+      <xs:element name="Bedingung" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeBedingungsdefinition">
+    <xs:sequence>
+      <xs:element name="Bedingungsdefinition" minOccurs="0" maxOccurs="unbounded" type="evb:Bedingungsdefinition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeBekannteBedingungsverletzung">
+    <xs:sequence>
+      <xs:element name="BekannteBedingungsverletzung" minOccurs="0" maxOccurs="unbounded" type="evb:BekannteBedingungsverletzung" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeBenachrichtigungsauftrag">
+    <xs:sequence>
+      <xs:element name="Benachrichtigungsauftrag" minOccurs="0" maxOccurs="unbounded" type="evb:Benachrichtigungsauftrag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeBonitaetsdaten">
+    <xs:sequence>
+      <xs:element name="Bonitaetsdaten" minOccurs="0" maxOccurs="unbounded" type="evb:Bonitaetsdaten" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeBonitaetsmerkmal">
+    <xs:sequence>
+      <xs:element name="Bonitaetsmerkmal" minOccurs="0" maxOccurs="unbounded" type="evb:Bonitaetsmerkmal" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeBriefkastenDaten">
+    <xs:sequence>
+      <xs:element name="BriefkastenDaten" minOccurs="0" maxOccurs="unbounded" type="evb:BriefkastenDaten" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeDatenpfad">
+    <xs:sequence>
+      <xs:element name="Datenpfad" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeDatentyp">
+    <xs:sequence>
+      <xs:element name="Datentyp" minOccurs="0" maxOccurs="unbounded" type="evb:Datentyp" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeDatentypCodeDefinition">
+    <xs:sequence>
+      <xs:element name="DatentypCodeDefinition" minOccurs="0" maxOccurs="unbounded" type="evb:DatentypCodeDefinition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeDatentypStrukturEintrag">
+    <xs:sequence>
+      <xs:element name="DatentypStrukturEintrag" minOccurs="0" maxOccurs="unbounded" type="evb:DatentypStrukturEintrag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeEmailEmpfaenger">
+    <xs:sequence>
+      <xs:element name="Email" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeEmailEmpfaengerBcc">
+    <xs:sequence>
+      <xs:element name="Email" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeEmailEmpfaengerCc">
+    <xs:sequence>
+      <xs:element name="Email" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFehlerBei">
+    <xs:sequence>
+      <xs:element name="FehlerBei" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFeldVuIndividualisierung">
+    <xs:sequence>
+      <xs:element name="FeldVuIndividualisierung" minOccurs="0" maxOccurs="unbounded" type="evb:FeldVuIndividualisierung" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFeldXmlPfad">
+    <xs:sequence>
+      <xs:element name="FeldXmlPfad" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFeldauspraegung">
+    <xs:sequence>
+      <xs:element name="Feldauspraegung" minOccurs="0" maxOccurs="unbounded" type="evb:Feldauspraegung" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFeldbezeichnung">
+    <xs:sequence>
+      <xs:element name="Feldbezeichnung" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFelddefinition">
+    <xs:sequence>
+      <xs:element name="Felddefinition" minOccurs="0" maxOccurs="unbounded" type="evb:Felddefinition" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFeldvorgaben">
+    <xs:sequence>
+      <xs:element name="Feldvorgaben" minOccurs="0" maxOccurs="unbounded" type="evb:Feldvorgaben" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeFzRechercheAntwort">
+    <xs:sequence>
+      <xs:element name="FzRechercheAntwort" minOccurs="0" maxOccurs="unbounded" type="evb:FzRechercheAntwort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeGruppe">
+    <xs:sequence>
+      <xs:element name="Gruppe" minOccurs="0" maxOccurs="unbounded" type="evb:Gruppe" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeGruppenrecht">
+    <xs:sequence>
+      <xs:element name="Gruppenrecht" minOccurs="0" maxOccurs="unbounded" type="evb:Gruppenrecht" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeKommunikationspartner">
+    <xs:sequence>
+      <xs:element name="Kommunikationspartner" minOccurs="0" maxOccurs="unbounded" type="evb:Kommunikationspartner" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeKommunikationspartnerkennung">
+    <xs:sequence>
+      <xs:element name="Kommunikationspartnerkennung" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeLogistikArtikel">
+    <xs:sequence>
+      <xs:element name="LogistikArtikel" minOccurs="0" maxOccurs="unbounded" type="evb:LogistikArtikel" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeLogistikOption">
+    <xs:sequence>
+      <xs:element name="LogistikOption" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeMerkmalKennzeichenart">
+    <xs:sequence>
+      <xs:element name="MerkmalKennzeichenart" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeNachricht">
+    <xs:sequence>
+      <xs:element name="Nachricht" minOccurs="0" maxOccurs="unbounded" type="evb:Nachricht" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeNachrichtenId">
+    <xs:sequence>
+      <xs:element name="NachrichtenId" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeNachrichtenUebersicht">
+    <xs:sequence>
+      <xs:element name="NachrichtenUebersicht" minOccurs="0" maxOccurs="unbounded" type="evb:NachrichtenUebersicht" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeNutzerRechercheAntwort">
+    <xs:sequence>
+      <xs:element name="NutzerRechercheAntwort" minOccurs="0" maxOccurs="unbounded" type="evb:NutzerRechercheAntwort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeQuittung">
+    <xs:sequence>
+      <xs:element name="Quittung" minOccurs="0" maxOccurs="unbounded" type="evb:Quittung" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeRecht">
+    <xs:sequence>
+      <xs:element name="Recht" minOccurs="0" maxOccurs="unbounded" type="evb:Recht" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeRechteklasse">
+    <xs:sequence>
+      <xs:element name="Rechteklasse" minOccurs="0" maxOccurs="unbounded" type="evb:Rechteklasse" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeReversierungVM">
+    <xs:sequence>
+      <xs:element name="ReversierungVM" minOccurs="0" maxOccurs="unbounded" type="evb:ReversierungVM" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeReversierungVU">
+    <xs:sequence>
+      <xs:element name="ReversierungVU" minOccurs="0" maxOccurs="unbounded" type="evb:ReversierungVU" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeReversierungsrecht">
+    <xs:sequence>
+      <xs:element name="Rechtnummer" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeReversierungsstatus">
+    <xs:sequence>
+      <xs:element name="Reversierungsstatus" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeStrukturOderNachrichtentyp">
+    <xs:sequence>
+      <xs:element name="StrukturOderNachrichtentyp" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeTechnischeAbsenderinformationen">
+    <xs:sequence>
+      <xs:element name="TechnischeAbsenderinformation" minOccurs="0" maxOccurs="unbounded" type="evb:TechnischeAbsenderinformation" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeTeilnahmeReversierung">
+    <xs:sequence>
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeTrackingId">
+    <xs:sequence>
+      <xs:element name="TrackingId" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeUebermittlungsRechercheAntwort">
+    <xs:sequence>
+      <xs:element name="UebermittlungsRechercheAntwort" minOccurs="0" maxOccurs="unbounded" type="evb:UebermittlungsRechercheAntwort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeUebermittlungsVerarbeitungshistorie">
+    <xs:sequence>
+      <xs:element name="UebermittlungsVerarbeitungshistorie" minOccurs="0" maxOccurs="unbounded" type="evb:UebermittlungsVerarbeitungshistorie" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVbRechercheAntwort">
+    <xs:sequence>
+      <xs:element name="VbRechercheAntwort" minOccurs="0" maxOccurs="unbounded" type="evb:VbRechercheAntwort" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVbStatusPruefauftrag">
+    <xs:sequence>
+      <xs:element name="VbStatusPruefauftrag" minOccurs="0" maxOccurs="unbounded" type="evb:VbStatusPruefauftrag" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVbVerarbeitungshistorie">
+    <xs:sequence>
+      <xs:element name="VbVerarbeitungshistorie" minOccurs="0" maxOccurs="unbounded" type="evb:VbVerarbeitungshistorie" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVerarbeitungskontext">
+    <xs:sequence>
+      <xs:element name="Verarbeitungskontext" minOccurs="0" maxOccurs="unbounded" type="evb:Verarbeitungskontext" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVerarbeitungsschritt">
+    <xs:sequence>
+      <xs:element name="Verarbeitungsschritt" minOccurs="0" maxOccurs="unbounded" type="evb:Verarbeitungsschritt" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVersicherung">
+    <xs:sequence>
+      <xs:element name="Versicherung" minOccurs="0" maxOccurs="unbounded" type="evb:Versicherung" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVersicherungsbestaetigungsnummer">
+    <xs:sequence>
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVerwendungFahrzeug">
+    <xs:sequence>
+      <xs:element name="VerwendungFahrzeug" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVkzFehler">
+    <xs:sequence>
+      <xs:element name="VkzFehler" minOccurs="0" maxOccurs="unbounded" type="evb:VkzFehler" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVorgangsart">
+    <xs:sequence>
+      <xs:element name="Vorgangsart" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="ListeVorlage">
+    <xs:sequence>
+      <xs:element name="VorlageUebersicht" minOccurs="0" maxOccurs="unbounded" type="evb:VorlageUebersicht" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Login">
+    <xs:all>
+      <xs:element name="Zeitstempel" minOccurs="0" type="xs:string" />
+      <xs:element name="SetLoginToken" minOccurs="0" type="xs:string" />
+      <xs:element name="SetLoginTokenGueltigBis" minOccurs="0" type="xs:string" />
+      <xs:element name="LoginAnfrage" minOccurs="0" type="evb:LoginAnfrage" />
+      <xs:element name="LoginAntwort" minOccurs="0" type="evb:LoginAntwort" />
+      <xs:element name="Logoff" minOccurs="0" type="evb:Logoff" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="LoginAnfrage">
+    <xs:all>
+      <xs:element name="Nutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="AlternativeNutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="PIN" minOccurs="0" type="xs:string" />
+      <xs:element name="NeuePIN" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="LoginAntwort">
+    <xs:all>
+      <xs:element name="StatusCode" minOccurs="0" type="xs:string" />
+      <xs:element name="StatusText" minOccurs="0" type="xs:string" />
+      <xs:element name="Nutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="LetzteAnmeldung" minOccurs="0" type="xs:string" />
+      <xs:element name="KontoGesperrt" minOccurs="0" type="xs:string" />
+      <xs:element name="PINAenderung" minOccurs="0" type="xs:string" />
+      <xs:element name="PINGueltigkeit" minOccurs="0" type="xs:string" />
+      <xs:element name="PINFehlversuche" minOccurs="0" type="xs:string" />
+      <xs:element name="PINErlaubteFehlversuche" minOccurs="0" type="xs:string" />
+      <xs:element name="PINUnterschiede" minOccurs="0" type="xs:string" />
+      <xs:element name="LogoutFehlt" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="LogistikArtikel">
+    <xs:all>
+      <xs:element name="Artikelnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Anzahl" minOccurs="0" type="xs:string" />
+      <xs:element name="ArtikelBeschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="ArtikelDetails" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="LogistikEmpfaenger">
+    <xs:all>
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+      <xs:element name="JuristischePerson" minOccurs="0" type="evb:JuristischePerson" />
+      <xs:element name="NameEmpfaenger" minOccurs="0" type="evb:NameEmpfaenger" />
+      <xs:element name="EmpfaengerZusatzinformation" minOccurs="0" type="xs:string" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+      <xs:element name="ListeEmpfangsberechtigt" minOccurs="0" type="evb:LogistikEmpfaenger.ListeEmpfangsberechtigt" />
+      <xs:element name="SMSEmpfaenger" minOccurs="0" type="xs:string" />
+      <xs:element name="Email" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="LogistikEmpfaenger.ListeEmpfangsberechtigt">
+    <xs:sequence>
+      <xs:element name="Empfangsberechtigt" minOccurs="0" maxOccurs="unbounded" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Logoff">
+    <xs:all>
+      <xs:element name="Logoff" minOccurs="0" type="xs:string" />
+      <xs:element name="Nutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="LoginTokenLogoff" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Nachricht">
+    <xs:all>
+      <xs:element name="Zeitstempel" minOccurs="0" type="xs:string" />
+      <xs:element name="LoginToken" minOccurs="0" type="xs:string" />
+      <xs:element name="Nachrichtenkopf" minOccurs="0" type="evb:Nachrichtenkopf" />
+      <xs:element name="DatumEndeVersicherungsschutz" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumAusserbetriebsetzung" minOccurs="0" type="xs:string" />
+      <xs:element name="Ping" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Sonderzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Anfragenummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbArt" minOccurs="0" type="xs:string" />
+      <xs:element name="VbAbrufbarBis" minOccurs="0" type="xs:string" />
+      <xs:element name="VbIstNochZuDrucken" minOccurs="0" type="xs:string" />
+      <xs:element name="VbFormular" minOccurs="0" type="xs:string" />
+      <xs:element name="VbFormularGewuenscht" minOccurs="0" type="xs:string" />
+      <xs:element name="Pruefergebnis" minOccurs="0" type="xs:string" />
+      <xs:element name="VkzPruefergebnis" minOccurs="0" type="xs:string" />
+      <xs:element name="PruefergebnisKommentar" minOccurs="0" type="xs:string" />
+      <xs:element name="Zulassungsfahrten" minOccurs="0" type="xs:string" />
+      <xs:element name="ZeitpunktAenderung" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherung" minOccurs="0" type="evb:Versicherung" />
+      <xs:element name="Bonitaetszugangsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetszugangspasswort" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetspruefungscode" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetsanfragegrund" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsnehmer" minOccurs="0" type="evb:Versicherungsnehmer" />
+      <xs:element name="Halter" minOccurs="0" type="evb:Halter" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="evb:Fahrzeug" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="evb:Kennzeichen" />
+      <xs:element name="Behoerde" minOccurs="0" type="evb:Behoerde" />
+      <xs:element name="VbAblehnungsgrund" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeFehlerBei" minOccurs="0" type="evb:ListeFehlerBei" />
+      <xs:element name="VuArbeitsgang" minOccurs="0" type="evb:VuArbeitsgang" />
+      <xs:element name="AnzeigeAblehnungsgrund" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumEingangAnzeigeZulBeh" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumNachversichererAb" minOccurs="0" type="xs:string" />
+      <xs:element name="VbStatus" minOccurs="0" type="xs:string" />
+      <xs:element name="VuMitteilungsart" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlVersicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVersicherungsbestaetigungsnummer" minOccurs="0" type="evb:ListeVersicherungsbestaetigungsnummer" />
+      <xs:element name="ZustaendigeBehoerdeKreisschluessel" minOccurs="0" type="xs:string" />
+      <xs:element name="ZustaendigeBehoerdeZusatzziffer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbVerwenden" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVbStatusPruefauftrag" minOccurs="0" type="evb:ListeVbStatusPruefauftrag" />
+      <xs:element name="VbRechercheAnfrage" minOccurs="0" type="evb:VbRechercheAnfrage" />
+      <xs:element name="WeitereDatensaetzeVorhanden" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVbRechercheAntwort" minOccurs="0" type="evb:ListeVbRechercheAntwort" />
+      <xs:element name="VbRechercheAnfrageDetails" minOccurs="0" type="evb:VbRechercheAnfrageDetails" />
+      <xs:element name="VbRechercheAntwortDetails" minOccurs="0" type="evb:VbRechercheAntwortDetails" />
+      <xs:element name="Aktion" minOccurs="0" type="xs:string" />
+      <xs:element name="KorrekturFahrzeugidentifizierungsnummerUmgehen" minOccurs="0" type="xs:string" />
+      <xs:element name="KorrekturZustaendigeBehoerdeUmgehen" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSEingangBehoerde" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSEmpfaenger" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSTextEingangBehoerde" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSTextVersicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSTextVersicherungswechsel" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSTextZulassung" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSVersicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSVersicherungswechsel" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSZulassung" minOccurs="0" type="xs:string" />
+      <xs:element name="ZuordnungGDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="BonitaetspruefungSteuerung" minOccurs="0" type="xs:string" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Pflegeart" minOccurs="0" type="xs:string" />
+      <xs:element name="GruppenrechtPflegeart" minOccurs="0" type="xs:string" />
+      <xs:element name="GruppePflegeart" minOccurs="0" type="xs:string" />
+      <xs:element name="Nutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Zugangsberechtigung" minOccurs="0" type="xs:string" />
+      <xs:element name="NutzerPinNeu" minOccurs="0" type="xs:string" />
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+      <xs:element name="JuristischePerson" minOccurs="0" type="evb:JuristischePerson" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+      <xs:element name="Kontaktdaten" minOccurs="0" type="evb:Kontaktdaten" />
+      <xs:element name="Korrekturen" minOccurs="0" type="evb:Korrekturen" />
+      <xs:element name="ListeBekannteBedingungsverletzung" minOccurs="0" type="evb:ListeBekannteBedingungsverletzung" />
+      <xs:element name="IHKRegistrierungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VUNutzerId" minOccurs="0" type="xs:string" />
+      <xs:element name="PinGueltigBis" minOccurs="0" type="xs:string" />
+      <xs:element name="NutzerAngemeldet" minOccurs="0" type="xs:string" />
+      <xs:element name="IstInAdmingruppe" minOccurs="0" type="xs:string" />
+      <xs:element name="Gruppennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Gruppenname" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechtnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeReversierungsstatus" minOccurs="0" type="evb:ListeReversierungsstatus" />
+      <xs:element name="ListenrechtEintragKey" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechteklassenname" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechteklassennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Beschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="Minimalwert" minOccurs="0" type="xs:string" />
+      <xs:element name="Maximalwert" minOccurs="0" type="xs:string" />
+      <xs:element name="Kommunikationspartnerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Kommunikationspartnertyp" minOccurs="0" type="xs:string" />
+      <xs:element name="Obergruppennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Kommunikationspartnerursprung" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeKommunikationspartner" minOccurs="0" type="evb:ListeKommunikationspartner" />
+      <xs:element name="ListeKommunikationspartnerkennung" minOccurs="0" type="evb:ListeKommunikationspartnerkennung" />
+      <xs:element name="ListeAnzufragendesVersicherungsunternehmen" minOccurs="0" type="evb:ListeAnzufragendesVersicherungsunternehmen" />
+      <xs:element name="UngebundenerVermittler" minOccurs="0" type="evb:UngebundenerVermittler" />
+      <xs:element name="Administrator" minOccurs="0" type="evb:Administrator" />
+      <xs:element name="VUInterneVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Reversierungsstatus" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeReversierungsrecht" minOccurs="0" type="evb:ListeReversierungsrecht" />
+      <xs:element name="ListeReversierungVM" minOccurs="0" type="evb:ListeReversierungVM" />
+      <xs:element name="ListeReversierungVU" minOccurs="0" type="evb:ListeReversierungVU" />
+      <xs:element name="AlleUntergruppen" minOccurs="0" type="xs:string" />
+      <xs:element name="eVBDaten" minOccurs="0" type="evb:eVBDaten" />
+      <xs:element name="NutzerRechercheAnfrage" minOccurs="0" type="evb:NutzerRechercheAnfrage" />
+      <xs:element name="ListeNutzerRechercheAntwort" minOccurs="0" type="evb:ListeNutzerRechercheAntwort" />
+      <xs:element name="ListeGruppe" minOccurs="0" type="evb:ListeGruppe" />
+      <xs:element name="ListeGruppenrecht" minOccurs="0" type="evb:ListeGruppenrecht" />
+      <xs:element name="ListeRecht" minOccurs="0" type="evb:ListeRecht" />
+      <xs:element name="ListeRechteklasse" minOccurs="0" type="evb:ListeRechteklasse" />
+      <xs:element name="ListeTeilnahmeReversierung" minOccurs="0" type="evb:ListeTeilnahmeReversierung" />
+      <xs:element name="KorrekturFahrzeugidentifizierungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="FzRechercheAnfrage" minOccurs="0" type="evb:FzRechercheAnfrage" />
+      <xs:element name="ListeFzRechercheAntwort" minOccurs="0" type="evb:ListeFzRechercheAntwort" />
+      <xs:element name="FzRechercheAnfrageDetails" minOccurs="0" type="evb:FzRechercheAnfrageDetails" />
+      <xs:element name="FzRechercheAntwortDetails" minOccurs="0" type="evb:FzRechercheAntwortDetails" />
+      <xs:element name="ListeVkzFehler" minOccurs="0" type="evb:ListeVkzFehler" />
+      <xs:element name="EintragungImZfzrErfolgt" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVorlage" minOccurs="0" type="evb:ListeVorlage" />
+      <xs:element name="VorlageNummer" minOccurs="0" type="xs:string" />
+      <xs:element name="NeuanlageMoeglich" minOccurs="0" type="xs:string" />
+      <xs:element name="VorlageDetail" minOccurs="0" type="evb:VorlageDetail" />
+      <xs:element name="VorlagePflegeart" minOccurs="0" type="xs:string" />
+      <xs:element name="VorlageName" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsart" minOccurs="0" type="xs:string" />
+      <xs:element name="VorlageInhalt" minOccurs="0" type="xs:string" />
+      <xs:element name="UebermittlungsRechercheAnfrage" minOccurs="0" type="evb:UebermittlungsRechercheAnfrage" />
+      <xs:element name="UebermittlungsRechercheAnfrageDetails" minOccurs="0" type="evb:UebermittlungsRechercheAnfrageDetails" />
+      <xs:element name="ListeUebermittlungsRechercheAntwort" minOccurs="0" type="evb:ListeUebermittlungsRechercheAntwort" />
+      <xs:element name="UebermittlungsRechercheAntwortDetails" minOccurs="0" type="evb:UebermittlungsRechercheAntwortDetails" />
+      <xs:element name="ListeVorgangsart" minOccurs="0" type="evb:ListeVorgangsart" />
+      <xs:element name="ListeFeldVuIndividualisierung" minOccurs="0" type="evb:ListeFeldVuIndividualisierung" />
+      <xs:element name="FeldXmlPfad" minOccurs="0" type="xs:string" />
+      <xs:element name="PortalTyp" minOccurs="0" type="xs:string" />
+      <xs:element name="Begruendung" minOccurs="0" type="xs:string" />
+      <xs:element name="Datenpfad" minOccurs="0" type="xs:string" />
+      <xs:element name="DatentypName" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeDatentyp" minOccurs="0" type="evb:ListeDatentyp" />
+      <xs:element name="Daten" minOccurs="0" type="xs:string" />
+      <xs:element name="Profilpflegeergebnis" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeDatenpfad" minOccurs="0" type="evb:ListeDatenpfad" />
+      <xs:element name="DatenAbfragezeitpunkt" minOccurs="0" type="xs:string" />
+      <xs:element name="DatenAnzahlEbenen" minOccurs="0" type="xs:string" />
+      <xs:element name="DatenIndirektePflege" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeFeldXmlPfad" minOccurs="0" type="evb:ListeFeldXmlPfad" />
+      <xs:element name="ListeVersicherung" minOccurs="0" type="evb:ListeVersicherung" />
+      <xs:element name="Versicherungsscheinnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="AbDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlDatensaetze" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungSpalte" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungRichtung" minOccurs="0" type="xs:string" />
+      <xs:element name="NaechsteDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeStrukturOderNachrichtentyp" minOccurs="0" type="evb:ListeStrukturOderNachrichtentyp" />
+      <xs:element name="ListeBedingungsdefinition" minOccurs="0" type="evb:ListeBedingungsdefinition" />
+      <xs:element name="ListeFeldbezeichnung" minOccurs="0" type="evb:ListeFeldbezeichnung" />
+      <xs:element name="ListeFelddefinition" minOccurs="0" type="evb:ListeFelddefinition" />
+      <xs:element name="Vorgangsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="NurKontextUebersicht" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVerarbeitungskontext" minOccurs="0" type="evb:ListeVerarbeitungskontext" />
+      <xs:element name="ListeBenachrichtigungsauftrag" minOccurs="0" type="evb:ListeBenachrichtigungsauftrag" />
+      <xs:element name="KennzeichenZugehoerigesWechselkennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Bonitaetsdaten" minOccurs="0" type="evb:Bonitaetsdaten" />
+      <xs:element name="ListeBonitaetsdaten" minOccurs="0" type="evb:ListeBonitaetsdaten" />
+      <xs:element name="Bonitaetsvorgangsstatus" minOccurs="0" type="xs:string" />
+      <xs:element name="PruefergebnisPositiv" minOccurs="0" type="xs:string" />
+      <xs:element name="ITDienstleisterId" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSText" minOccurs="0" type="xs:string" />
+      <xs:element name="SMSAbsenderkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="AlternativeNutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Suchtext" minOccurs="0" type="xs:string" />
+      <xs:element name="VkzLogistikAuftrag" minOccurs="0" type="evb:VkzLogistikAuftrag" />
+      <xs:element name="AnschreibenPdf" minOccurs="0" type="xs:string" />
+      <xs:element name="Storno" minOccurs="0" type="xs:string" />
+      <xs:element name="LogistikEmpfaenger" minOccurs="0" type="evb:LogistikEmpfaenger" />
+      <xs:element name="ListeLogistikArtikel" minOccurs="0" type="evb:ListeLogistikArtikel" />
+      <xs:element name="ListeLogistikOption" minOccurs="0" type="evb:ListeLogistikOption" />
+      <xs:element name="LogistikZustellStatus" minOccurs="0" type="xs:string" />
+      <xs:element name="TrackingId" minOccurs="0" type="xs:string" />
+      <xs:element name="TrackingLink" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeEmailEmpfaenger" minOccurs="0" type="evb:ListeEmailEmpfaenger" />
+      <xs:element name="ListeEmailEmpfaengerCc" minOccurs="0" type="evb:ListeEmailEmpfaengerCc" />
+      <xs:element name="ListeEmailEmpfaengerBcc" minOccurs="0" type="evb:ListeEmailEmpfaengerBcc" />
+      <xs:element name="AdresslabelFreitext" minOccurs="0" type="xs:string" />
+      <xs:element name="Details" minOccurs="0" type="xs:string" />
+      <xs:element name="EmailVorlage" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeEmailParameter" minOccurs="0" type="evb:GDV_EMAIL_001.ListeEmailParameter" />
+      <xs:element name="ListeVkzProduktionsauftrag" minOccurs="0" type="evb:GDV_ITD_060.ListeVkzProduktionsauftrag" />
+      <xs:element name="ListeAuftragStatus" minOccurs="0" type="evb:ITD_GDV_060.ListeAuftragStatus" />
+      <xs:element name="ListeVpeNummer" minOccurs="0" type="evb:ITD_GDV_062.ListeVpeNummer" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="NachrichtenUebersicht">
+    <xs:all>
+      <xs:element name="Zeitstempel" minOccurs="0" type="xs:string" />
+      <xs:element name="Nachrichtentyp" minOccurs="0" type="xs:string" />
+      <xs:element name="NachrichtenId" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Nachrichtenkopf">
+    <xs:all>
+      <xs:element name="Nachrichtentyp" minOccurs="0" type="xs:string" />
+      <xs:element name="Betriebsart" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeNachrichtenId" minOccurs="0" type="evb:ListeNachrichtenId" />
+      <xs:element name="ListeTechnischeAbsenderinformationen" minOccurs="0" type="evb:ListeTechnischeAbsenderinformationen" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="NameEmpfaenger">
+    <xs:all>
+      <xs:element name="Name1" minOccurs="0" type="xs:string" />
+      <xs:element name="Name2" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="NatuerlichePerson">
+    <xs:all>
+      <xs:element name="Nachname" minOccurs="0" type="xs:string" />
+      <xs:element name="Namensbestandteil" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorname" minOccurs="0" type="xs:string" />
+      <xs:element name="VornameZuRechtNichtVorhanden" minOccurs="0" type="xs:string" />
+      <xs:element name="TagDerGeburt" minOccurs="0" type="xs:string" />
+      <xs:element name="Geschlecht" minOccurs="0" type="xs:string" />
+      <xs:element name="Doktorgrad" minOccurs="0" type="xs:string" />
+      <xs:element name="Ordensname" minOccurs="0" type="xs:string" />
+      <xs:element name="Kuenstlername" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="NeueVb">
+    <xs:all>
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="GeschaeftsstelleVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="AgenturVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsscheinnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginn" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="NutzerRechercheAnfrage">
+    <xs:all>
+      <xs:element name="Nutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Gruppennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Nachname" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorname" minOccurs="0" type="xs:string" />
+      <xs:element name="Namensbestandteil" minOccurs="0" type="xs:string" />
+      <xs:element name="Zugangsberechtigung" minOccurs="0" type="xs:string" />
+      <xs:element name="Wohnort" minOccurs="0" type="xs:string" />
+      <xs:element name="Telefonnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="IHKRegistrierungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VUNutzerId" minOccurs="0" type="xs:string" />
+      <xs:element name="NutzerAngemeldet" minOccurs="0" type="xs:string" />
+      <xs:element name="NutzerkennungIndividuell" minOccurs="0" type="xs:string" />
+      <xs:element name="AbDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlDatensaetze" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungSpalte" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungRichtung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="NutzerRechercheAntwort">
+    <xs:all>
+      <xs:element name="Nutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Nachname" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorname" minOccurs="0" type="xs:string" />
+      <xs:element name="Namensbestandteil" minOccurs="0" type="xs:string" />
+      <xs:element name="Zugangsberechtigung" minOccurs="0" type="xs:string" />
+      <xs:element name="Telefonnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="IHKRegistrierungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VUNutzerId" minOccurs="0" type="xs:string" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Quittung">
+    <xs:all>
+      <xs:element name="Zeitstempel" minOccurs="0" type="xs:string" />
+      <xs:element name="LoginToken" minOccurs="0" type="xs:string" />
+      <xs:element name="Nachrichtenkopf" minOccurs="0" type="evb:Nachrichtenkopf" />
+      <xs:element name="Fehlertyp" minOccurs="0" type="xs:string" />
+      <xs:element name="Fehlertext" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeBedingung" minOccurs="0" type="evb:ListeBedingung" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Recht">
+    <xs:all>
+      <xs:element name="Rechteklassennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechtnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechtname" minOccurs="0" type="xs:string" />
+      <xs:element name="Beschreibung" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechteart" minOccurs="0" type="xs:string" />
+      <xs:element name="Funktionsrechtnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Kommunikationspartnertyp" minOccurs="0" type="xs:string" />
+      <xs:element name="Minimalwert" minOccurs="0" type="xs:string" />
+      <xs:element name="Maximalwert" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Rechteklasse">
+    <xs:all>
+      <xs:element name="Rechteklassennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Rechteklassenname" minOccurs="0" type="xs:string" />
+      <xs:element name="Beschreibung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ReversierungVM">
+    <xs:all>
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Reversierungsstatus" minOccurs="0" type="xs:string" />
+      <xs:element name="Reversierungszeitstempel" minOccurs="0" type="xs:string" />
+      <xs:element name="VUInterneVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeReversierungsrecht" minOccurs="0" type="evb:ListeReversierungsrecht" />
+      <xs:element name="Begruendung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="ReversierungVU">
+    <xs:all>
+      <xs:element name="VUInterneVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="UngebundenerVermittler" minOccurs="0" type="evb:UngebundenerVermittler" />
+      <xs:element name="Reversierungsstatus" minOccurs="0" type="xs:string" />
+      <xs:element name="Reversierungszeitstempel" minOccurs="0" type="xs:string" />
+      <xs:element name="Gruppennummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Begruendung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="TechnischeAbsenderinformation">
+    <xs:all>
+      <xs:element name="Kommunikationspartnerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="Softwareversion" minOccurs="0" type="xs:string" />
+      <xs:element name="ZeitpunktNachrichtengenerierung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="UebermittlungsRechercheAnfrage">
+    <xs:all>
+      <xs:element name="NachrichtenId" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsart" minOccurs="0" type="xs:string" />
+      <xs:element name="UebermittlungsvorgaengeVon" minOccurs="0" type="xs:string" />
+      <xs:element name="UebermittlungsvorgaengeBis" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginnVon" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginnBis" minOccurs="0" type="xs:string" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsscheinnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="AbDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlDatensaetze" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungSpalte" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungRichtung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="UebermittlungsRechercheAnfrageDetails">
+    <xs:all>
+      <xs:element name="Vorgangsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="UebermittlungsVerarbeitungshistorieVon" minOccurs="0" type="xs:string" />
+      <xs:element name="UebermittlungsVerarbeitungshistorieBis" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="UebermittlungsRechercheAntwort">
+    <xs:all>
+      <xs:element name="ZeitpunktBeginnUebermittlungsvorgang" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsscheinnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsart" minOccurs="0" type="xs:string" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VUInterneVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginn" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="UebermittlungsRechercheAntwortDetails">
+    <xs:all>
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsscheinnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsart" minOccurs="0" type="xs:string" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginn" minOccurs="0" type="xs:string" />
+      <xs:element name="WeitereDatensaetzeVorhanden" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeUebermittlungsVerarbeitungshistorie" minOccurs="0" type="evb:ListeUebermittlungsVerarbeitungshistorie" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="UebermittlungsVerarbeitungshistorie">
+    <xs:all>
+      <xs:element name="ZeitpunktVerarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="Verarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="Behoerde" minOccurs="0" type="evb:Behoerde" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="UngebundenerVermittler">
+    <xs:all>
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+      <xs:element name="JuristischePerson" minOccurs="0" type="evb:JuristischePerson" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+      <xs:element name="Kontaktdaten" minOccurs="0" type="evb:Kontaktdaten" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VbRechercheAnfrage">
+    <xs:all>
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbArt" minOccurs="0" type="xs:string" />
+      <xs:element name="VbEinstelldatumVon" minOccurs="0" type="xs:string" />
+      <xs:element name="VbEinstelldatumBis" minOccurs="0" type="xs:string" />
+      <xs:element name="GeschaeftsstelleVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="AgenturVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginnVon" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginnBis" minOccurs="0" type="xs:string" />
+      <xs:element name="NameVersicherungsnehmer" minOccurs="0" type="xs:string" />
+      <xs:element name="NameHalter" minOccurs="0" type="xs:string" />
+      <xs:element name="PostleitzahlVersicherungsnehmer" minOccurs="0" type="xs:string" />
+      <xs:element name="WohnortVersicherungsnehmer" minOccurs="0" type="xs:string" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="AbDatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="AnzahlDatensaetze" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungSpalte" minOccurs="0" type="xs:string" />
+      <xs:element name="SortierungRichtung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VbRechercheAnfrageDetails">
+    <xs:all>
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbVerarbeitungshistorieVon" minOccurs="0" type="xs:string" />
+      <xs:element name="VbVerarbeitungshistorieBis" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VbRechercheAntwort">
+    <xs:all>
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbArt" minOccurs="0" type="xs:string" />
+      <xs:element name="VbAbrufbarBis" minOccurs="0" type="xs:string" />
+      <xs:element name="Zulassungsfahrten" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherung" minOccurs="0" type="evb:Versicherung" />
+      <xs:element name="Versicherungsnehmer" minOccurs="0" type="evb:Versicherungsnehmer" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsnummer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VbRechercheAntwortDetails">
+    <xs:all>
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbStatus" minOccurs="0" type="xs:string" />
+      <xs:element name="VbArt" minOccurs="0" type="xs:string" />
+      <xs:element name="VbAbrufbarBis" minOccurs="0" type="xs:string" />
+      <xs:element name="Zulassungsfahrten" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherung" minOccurs="0" type="evb:Versicherung" />
+      <xs:element name="Versicherungsnehmer" minOccurs="0" type="evb:Versicherungsnehmer" />
+      <xs:element name="Halter" minOccurs="0" type="evb:Halter" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="evb:Fahrzeug" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="evb:Kennzeichen" />
+      <xs:element name="WeitereDatensaetzeVorhanden" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVbVerarbeitungshistorie" minOccurs="0" type="evb:ListeVbVerarbeitungshistorie" />
+      <xs:element name="UngebundenerVermittler" minOccurs="0" type="evb:UngebundenerVermittler" />
+      <xs:element name="Nutzerkennung" minOccurs="0" type="xs:string" />
+      <xs:element name="GDVVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VUInterneVermittlernummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbEinstelldatum" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsnummer" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VbStatusPruefauftrag">
+    <xs:all>
+      <xs:element name="Versicherungsbestaetigungsnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VbInVerwendungSeit" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VbVerarbeitungshistorie">
+    <xs:all>
+      <xs:element name="ZeitpunktVerarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="Verarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="VbStatus" minOccurs="0" type="xs:string" />
+      <xs:element name="Behoerde" minOccurs="0" type="evb:Behoerde" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Verarbeitungskontext">
+    <xs:all>
+      <xs:element name="DatensatzId" minOccurs="0" type="xs:string" />
+      <xs:element name="ZeitpunktVerarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="KategorieVerarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="Verarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="Verarbeitungsdetail" minOccurs="0" type="xs:string" />
+      <xs:element name="ErweitertesVerarbeitungsdetail" minOccurs="0" type="xs:string" />
+      <xs:element name="ListeVerarbeitungsschritt" minOccurs="0" type="evb:ListeVerarbeitungsschritt" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Verarbeitungsschritt">
+    <xs:all>
+      <xs:element name="ZeitpunktVerarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="KategorieVerarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="Verarbeitungsschritt" minOccurs="0" type="xs:string" />
+      <xs:element name="Prozessname" minOccurs="0" type="xs:string" />
+      <xs:element name="Verarbeitungsdetail" minOccurs="0" type="xs:string" />
+      <xs:element name="ErweitertesVerarbeitungsdetail" minOccurs="0" type="xs:string" />
+      <xs:element name="Verarbeitungsdetaillevel" minOccurs="0" type="xs:string" />
+      <xs:element name="HierarchieEbene" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Vereinigung">
+    <xs:all>
+      <xs:element name="NameVereinigung" minOccurs="0" type="xs:string" />
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Versicherung">
+    <xs:all>
+      <xs:element name="Unternehmensart" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsunternehmensnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="Name1" minOccurs="0" type="xs:string" />
+      <xs:element name="Name2" minOccurs="0" type="xs:string" />
+      <xs:element name="Name3" minOccurs="0" type="xs:string" />
+      <xs:element name="Name4" minOccurs="0" type="xs:string" />
+      <xs:element name="GeschaeftsstelleVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="AgenturVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="DatumVersicherungsbeginn" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherungsscheinnummer" minOccurs="0" type="xs:string" />
+      <xs:element name="InterneVermerkeVersicherung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="Versicherungsnehmer">
+    <xs:all>
+      <xs:element name="NatuerlichePerson" minOccurs="0" type="evb:NatuerlichePerson" />
+      <xs:element name="JuristischePerson" minOccurs="0" type="evb:JuristischePerson" />
+      <xs:element name="Vereinigung" minOccurs="0" type="evb:Vereinigung" />
+      <xs:element name="Anschrift" minOccurs="0" type="evb:Anschrift" />
+      <xs:element name="KundennummerVU" minOccurs="0" type="xs:string" />
+      <xs:element name="KundennummerVM" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VkzFehler">
+    <xs:all>
+      <xs:element name="VkzFehlercode" minOccurs="0" type="xs:string" />
+      <xs:element name="VkzFehlertext" minOccurs="0" type="xs:string" />
+      <xs:element name="VkzFehlerbeschreibung" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VkzLogistikAuftrag">
+    <xs:all>
+      <xs:element name="VkzGroesse" minOccurs="0" type="xs:string" />
+      <xs:element name="VkzTraegerplatteVersenden" minOccurs="0" type="xs:string" />
+      <xs:element name="EmpfaengerIstHalter" minOccurs="0" type="xs:string" />
+      <xs:element name="LogistikEmpfaenger" minOccurs="0" type="evb:LogistikEmpfaenger" />
+      <xs:element name="ListeLogistikOption" minOccurs="0" type="evb:ListeLogistikOption" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VorlageDetail">
+    <xs:all>
+      <xs:element name="VorlageNummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VorlageName" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsart" minOccurs="0" type="xs:string" />
+      <xs:element name="VorlageInhalt" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VorlageUebersicht">
+    <xs:all>
+      <xs:element name="VorlageNummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VorlageName" minOccurs="0" type="xs:string" />
+      <xs:element name="Vorgangsart" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="VuArbeitsgang">
+    <xs:all>
+      <xs:element name="Mitteilungsart" minOccurs="0" type="xs:string" />
+      <xs:element name="Storno" minOccurs="0" type="xs:string" />
+      <xs:element name="AenderungHalter" minOccurs="0" type="xs:string" />
+      <xs:element name="AenderungVersicherung" minOccurs="0" type="xs:string" />
+      <xs:element name="AenderungKennzeichen" minOccurs="0" type="xs:string" />
+      <xs:element name="AenderungFahrzeugklasse" minOccurs="0" type="xs:string" />
+      <xs:element name="AenderungMerkmalOldtimer" minOccurs="0" type="xs:string" />
+      <xs:element name="AenderungVerwendungFahrzeug" minOccurs="0" type="xs:string" />
+      <xs:element name="AenderungMerkmalElektrokennzeichen" minOccurs="0" type="xs:string" />
+    </xs:all>
+  </xs:complexType>
+  <xs:complexType name="eVBDaten">
+    <xs:all>
+      <xs:element name="Anfragenummer" minOccurs="0" type="xs:string" />
+      <xs:element name="VorgangsnummerVU" minOccurs="0" type="xs:string" />
+      <xs:element name="VorgangsnummerVM" minOccurs="0" type="xs:string" />
+      <xs:element name="Versicherung" minOccurs="0" type="evb:Versicherung" />
+      <xs:element name="Versicherungsnehmer" minOccurs="0" type="evb:Versicherungsnehmer" />
+      <xs:element name="Halter" minOccurs="0" type="evb:Halter" />
+      <xs:element name="Fahrzeug" minOccurs="0" type="evb:Fahrzeug" />
+      <xs:element name="Kennzeichen" minOccurs="0" type="evb:Kennzeichen" />
+      <xs:element name="Behoerde" minOccurs="0" type="evb:Behoerde" />
+    </xs:all>
+  </xs:complexType>
+  <xs:element name="EvbOnlineNachricht">
+    <xs:annotation>
+      <xs:documentation>Struktur zur Verwendung im XKfz-Standard</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="Nachricht" type="evb:Nachricht" />
+        <xs:element name="Quittung" type="evb:Quittung" />
+        <xs:element name="VeelaRequest">
+          <xs:complexType>
+            <xs:choice>
+              <xs:element name="Login" type="evb:Login" />
+              <xs:element name="Nachricht" type="evb:Nachricht" />
+              <xs:element name="Quittung" type="evb:Quittung" />
+              <xs:element name="Briefkasten" type="evb:Briefkasten" />
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+        <xs:element name="VeelaResult">
+          <xs:complexType>
+            <xs:choice>
+              <xs:element name="Login" type="evb:Login" />
+              <xs:element name="Nachricht" type="evb:Nachricht" />
+              <xs:element name="Quittung" type="evb:Quittung" />
+              <xs:element name="Briefkasten" type="evb:Briefkasten" />
+            </xs:choice>
+          </xs:complexType>
+        </xs:element>
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VeelaRequest">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="Login" type="evb:Login" />
+        <xs:element name="Nachricht" type="evb:Nachricht" />
+        <xs:element name="Quittung" type="evb:Quittung" />
+        <xs:element name="Briefkasten" type="evb:Briefkasten" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="VeelaResult">
+    <xs:complexType>
+      <xs:choice>
+        <xs:element name="Login" type="evb:Login" />
+        <xs:element name="Nachricht" type="evb:Nachricht" />
+        <xs:element name="Quittung" type="evb:Quittung" />
+        <xs:element name="Briefkasten" type="evb:Briefkasten" />
+      </xs:choice>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

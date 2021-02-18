@@ -1,0 +1,320 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="Nachricht.StA1B2StA">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Allgemeine Nachricht für alle Nachrichten zwischen dem Standesamt 1 Berlin und Standesämtern</title>
+         </xs:appinfo>
+         <xs:documentation>Basisnachrichtentyp für Datenübermittlungen zwischen dem Standesamt 1 in Berlin und anderen Standesämtern. Bei jeder Mitteilung werden übermittelt: Nachrichtenkopf mit Angaben zum Absender und zum Empfänger und zum Erstellungszeitpunkt und Grund der Nachricht Angaben, um den Registereintrag auf Seiten des empfangenden stamtgen zu identifizieren, bei dem eine personenstandsrechtliche Veränderung und / oder Ergänzung vorzunehmen ist Optional Angaben zum Auffinden des zum Eheeintrag umgewidmeten Familienbuches</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+            <xs:sequence>
+               <xs:element name="registereintrag"
+                           type="xpersonenstand:StA1B2StA.Identifikation.Zieleintrag">
+                  <xs:annotation>
+                     <xs:documentation>Mit Hilfe dieser Daten erfolgt die Identifikation eines Registereintrags.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="familienbuch"
+                           minOccurs="0"
+                           type="xpersonenstand:Identifikation.Familienbuch">
+                  <xs:annotation>
+                     <xs:documentation>Um das Auffinden von zu Eheeinträgen umgewidmeten früheren Familienbüchern zu erleichtern, soll das mitteilende Standesamt das Kennzeichen des früheren Familienbuches angeben, sofern vorhanden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="StA1B2StA.Identifikation.Zieleintrag">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Identifikation des fortzuführenden Eintrages beim Leser</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesen Daten kann eine Nachricht durch das empfangende Standesamt einem Registereintrag zugeordnet werden. Grundsätzlich erfolgt eine Identifikation des betroffenen Registereintrags anhand der Registereintragsidentifikation, diese enthalten Daten zur Identifikation des Registereintrags. Angaben über Namen und das Geburtsdatum werden ausschließlich zu dem Zweck übermittelt, um dem empfangenden Standesamt eine Plausibilisierung des gefundenen Registereintrags zu ermöglichen. Dabei handelt es sich stets um die Namen und das Geburtsdatum vor der Beurkundung. Zum Beispiel: bei Namensänderungen, bei Eheschließungen und bei Berichtigungen von Namen werden die Daten vor Änderung übermittelt. Werden Differenzen zwischen dem Namen des Betroffenen in dem vom empfangenden Standesamt geführten Register und dem Namen in der Mitteilung (bzw. im Geburtsdatum) festgestellt, so hat das empfangende Standesamt diese Differenzen zu klären.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="registereintragsidentifikation"
+                     type="xpersonenstand:StA1B2StA.Zieleintrag">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die den Registereintrag identifizierenden Daten mitgeteilt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Um die Überprüfung zu ermöglichen, ob der richtige Registereintrag gefunden wurde, werden die Vornamen, der Familienname und der ggf. vom Familienname abweichende Geburtsname der betroffenen Person übermittelt. Bei dem Vergleich der Vornamen muss der Inhalt ausländische Namensart des Kindelementes Namensart ignoriert werden. Sofern nur der Geburtsname und kein davon abweichender Familienname (z.B. ein Ehename oder Lebenspartnerschaftsname) existiert, wird der Geburtsname im Element familienname übermittelt. Gibt es zu dem Geburtsnamen einen abweichenden Familiennamen, wird der Geburtsname im Element geburtsname und der Familienname im Element familienname übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsdatum"
+                     minOccurs="0"
+                     type="xida:TeilbekanntesDatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Um die Überprüfung zu ermöglichen, ob der richtige Registereintrag gefunden wurde, kann das Geburtsdatum der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburtsort" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Um die Überprüfung zu ermöglichen, ob der richtige Registereintrag gefunden wurde, kann der Geburtsort der betroffenen Person übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="StA1B2StA.Zieleintrag">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Datentyp zur Identifikation eines Eintrages beim Leser der Nachricht</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container enthält die Identifikationsdaten für einen Eintrag in dem Register des Lesers der Mitteilung vom Standesamt 1 in Berlin. Abweichend zum Zieleintrag sind in StA1B2StA.Zieleintrag die Angaben erstbeurkundungsjahr und eintragsnumer nur anzugeben, sofern diese Daten dem Standesamt 1 in Berlin vorliegen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xpersonenstand:Registereintrag">
+            <xs:sequence>
+               <xs:element name="behoerdenname" type="xpersonenstand:Behoerdenbezeichnung">
+                  <xs:annotation>
+                     <xs:documentation>Es ist die Bezeichnung des Register führenden Standesamts anzugeben. Sofern es sich dabei um ein verwaltetes Standesamt handelt, wird der Name des verwalteten Standesamts übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="standesamtsnummer" type="xpersonenstand:Code.Standesamtsnummer">
+                  <xs:annotation>
+                     <xs:documentation>Es ist die Standesamtsnummer des Register führenden stamtgen zu übermitteln. Sofern es sich dabei um ein verwaltetes Standesamt handelt, wird die Nummer des verwalteten Standesamts übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="registerart"
+                           minOccurs="0"
+                           type="xpersonenstand:Code.Registerart">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird die Art des jeweiligen Registers bezeichnet. § 3 Abs. 1 PStG benennt die vier Arten von Registern, die von Standesämtern für ihren Zuständigkeitsbereich geführt werden können. In xpers ergibt sich die zu nutzende Kennung aus dem Inhalt der Codeliste für Registerarten.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="erstbeurkundungsjahr" minOccurs="0" type="xs:gYear">
+                  <xs:annotation>
+                     <xs:documentation>Sofern vorhanden, ist das Jahr der Erstbeurkundung zu übermitteln.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="eintragsnummer" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Sofern vorhanden, ist die Eintragsnummer zu übermitteln.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="stA1B2StA.SammlungUeberTodeserklaerungen.094011">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt I Berlin</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 60 Abs. 2 Nr. 1 PStV</rechtsgrundlage>
+            <title>Mitteilung Standesamts I in Berlin über die Todeserklärung zum Geburtseintrag</title>
+         </xs:appinfo>
+         <xs:documentation>Die Nachricht wird übermittelt, um in dem Geburtseintrag des Betroffenen einen Hinweis über dessen Todeserklärung einzutragen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA1B2StA">
+               <xs:sequence>
+                  <xs:element name="istBerichtigung"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Feld zeigt an, ob es sich um eine berichtigte Mitteilung handelt. In diesem Fall ist true zu übermitteln und alle Inhalte sind erneut zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachweisdatenTodeserklaerung"
+                              type="xpersonenstand:NachweisdatenTodeserklaerung">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zu den Nachweisdaten der Todeserklärung mitgeteilt. Bei Beschlüssen deutscher Gerichte ist das Element Staat nicht zu übermitteln</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anschriftDesFuerTotErklaerten"
+                              minOccurs="0"
+                              type="xpersonenstand:Anschrift.Inland">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier für Personen die im Ausland für Tod erklärt worden sind die letzte inländische Meldeanschrift mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B2StA.SammlungUeberTodeserklaerungen.094012">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt I Berlin</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 60 Abs. 2 Nr. 2 PStV</rechtsgrundlage>
+            <title>Mitteilung Standesamts I in Berlin über die Todeserklärung zum Eheeintrag</title>
+         </xs:appinfo>
+         <xs:documentation>Die Nachricht wird übermittelt, um in dem Eheeintrag des Betroffenen eine Folgebeurkundung über dessen Todeserklärung einzutragen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA1B2StA">
+               <xs:sequence>
+                  <xs:element name="istBerichtigung"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Feld zeigt an, ob es sich um eine berichtigte Mitteilung handelt. In diesem Fall ist true zu übermitteln und alle Inhalte sind erneut zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachweisdatenTodeserklaerung"
+                              type="xpersonenstand:NachweisdatenTodeserklaerung">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zu den Nachweisdaten der Todeserklärung mitgeteilt. Bei Beschlüssen deutscher Gerichte ist das Element Staat nicht zu übermitteln</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="datumDerEheschliessung" minOccurs="0" type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird zur Plausibilisierung eines ermittelten Eintrags das Datum der Eheschliessung mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ortDerEheschliessung"
+                              minOccurs="0"
+                              type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird zur Plausibilisierung eines ermittelten Eintrags der Ort der Eheschliessung mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anschriftDesFuerTotErklaerten"
+                              minOccurs="0"
+                              type="xpersonenstand:Anschrift.Inland">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier für Personen die im Ausland für Tod erklärt worden sind die letzte inländische Meldeanschrift mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B2StA.SammlungUeberTodeserklaerungen.094013">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt I Berlin</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 60 Abs. 2 Nr. 2 PStV</rechtsgrundlage>
+            <title>Mitteilung Standesamts I in Berlin über die Todeserklärung zum Lebenspartnerschaftseintrag</title>
+         </xs:appinfo>
+         <xs:documentation>Die Nachricht wird übermittelt, um in dem Lebenspartnerschaftseintrag des Betroffenen eine Folgebeurkundung über dessen Todeserklärung einzutragen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA1B2StA">
+               <xs:sequence>
+                  <xs:element name="istBerichtigung"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Feld zeigt an, ob es sich um eine berichtigte Mitteilung handelt. In diesem Fall ist true zu übermitteln und alle Inhalte sind erneut zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachweisdatenTodeserklaerung"
+                              type="xpersonenstand:NachweisdatenTodeserklaerung">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zu den Nachweisdaten der Todeserklärung mitgeteilt. Bei Beschlüssen deutscher Gerichte ist das Element Staat nicht zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="datumDerBeurkundungDerLebenspartnerschaft"
+                              minOccurs="0"
+                              type="xida:Tagesdatum">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird zur Plausibilisierung eines ermittelten Eintrags das Datum der Beurkundung der Lebenspartnerschaft mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ortDerBeurkundungDerLebenspartnerschaft"
+                              minOccurs="0"
+                              type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird zur Plausibilisierung eines ermittelten Eintrags der Ort der Beurkundung der Lebenspartnerschaft mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="anschriftDesFuerTotErklaerten"
+                              minOccurs="0"
+                              type="xpersonenstand:Anschrift.Inland">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, wird hier für Personen die im Ausland für Tod erklärt worden sind die letzte inländische Meldeanschrift mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B2StA.SammlungUeberTodeserklaerungen.094014">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt I Berlin</sender>
+            <empfaenger>Standesamt</empfaenger>
+            <rechtsgrundlage>§ 60 Abs. 2 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung des Standesamts I in Berlin über die Todeserklärung zum Sterbeeintrag</title>
+         </xs:appinfo>
+         <xs:documentation>Die Nachricht wird übermittelt, um in dem Sterbeeintrag des Betroffenen einen Hinweis über dessen Todeserklärung einzutragen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA1B2StA">
+               <xs:sequence>
+                  <xs:element name="istBerichtigung"
+                              minOccurs="0"
+                              fixed="true"
+                              type="xs:boolean">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Feld zeigt an, ob es sich um eine berichtigte Mitteilung handelt. In diesem Fall ist true zu übermitteln und alle Inhalte sind erneut zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachweisdatenTodeserklaerung"
+                              type="xpersonenstand:NachweisdatenTodeserklaerung">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die Angaben zu den Nachweisdaten der Todeserklärung mitgeteilt. Bei Beschlüssen deutscher Gerichte ist das Element Staat nicht zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="sterbeort" minOccurs="0" type="xoev-lc:String.Latin">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird zur Plausibilisierung eines zu ermittelnden Eintrags der Sterbeort, der bereits im Sterberegister eingetragen ist, mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

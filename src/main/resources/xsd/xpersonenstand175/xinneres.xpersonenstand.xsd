@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:include schemaLocation="xpersonenstand-basisdatentypen.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-codes.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-auslaenderbehoerden.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-familienkasse.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-gesundheitsbehoerden.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-meldebehoerden.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-portale.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-standesamtiberlin.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-standesamtiberlinstandesamt.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-standesamtintern.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-statistik.xsd"/>
+   <xs:include schemaLocation="xpersonenstand-nachrichten-ztr.xsd"/>
+</xs:schema>

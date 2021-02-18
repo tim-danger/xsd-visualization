@@ -1,0 +1,1020 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xmeld="http://www.osci.de/xmeld243"
+           xmlns:xian="http://www.osci.de/xinneres/allgemeinername/2"
+           xmlns:xicgvz="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           xmlns:xima="http://www.osci.de/xinneres/meldeanschrift/3"
+           xmlns:xoev-lc="http://xoev.de/latinchars/1_1/datatypes"
+           targetNamespace="http://www.osci.de/xmeld243"
+           version="2.4.3"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XMeld</nameLang>
+            <nameKurz>XMeld</nameKurz>
+            <nameTechnisch>xinneres.xmeld</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xmeld</kennung>
+            <beschreibung>OSCI–XMeld ist das XInneres-Fachmodul der Innenverwaltung für den elektronischen Datenaustausch
+im Meldewesen und mit dem Meldewesen. Es ist Kern eines elektronischen Informationsverbundes zwischen
+den Meldebehörden und den Kommunikationspartnern der Meldebehörden. Weitere Bestandteile
+des elektronischen Informationsverbundes sind die Intermediäre und Clearingstellenbetreiber, deren
+Aufgabe die Übermittlung und Zustellung der XMeld-Nachrichten ist. Für die Übermittlung wird OSCITransport
+genutzt. Für die Zustellung und Adressierung der XMeld-Nachrichten das Deutsche Verwaltungsdienste-
+Verzeichnis (DVDV).
+Entwickelt wird OSCI–XMeld durch ein Expertengremium mit Vertreterinnen und Vertretern aus der
+Verwaltung und von Verfahrensherstellern. Die Koordnierungsstelle für IT-Standards (KoSIT) ist dabei
+federführend. Auftraggeber für die Erstellung und Weiterentwicklung ist der Arbeitskreis I (AK I) der
+Innenministerkonferenz (IMK).
+Seit 2007 ist OSCI–XMeld im praktischen Einsatz für die Kommunikation von und mit den Meldebehörden
+und wird seit dem kontinuierlich weiterentwickelt und an geänderte rechtliche Vorgaben angepasst.
+Zur Einführung des Bundesmeldegesetzes wurde OSCI–XMeld vollständig überarbeitet und setzt die
+Anforderungen des Bundesmeldegesetzes in der praktischen Datenübermittlung um.</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>2.4.3</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+         <title>Datenübermittlung zum Zensus 2021</title>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xmeld-nachrichten-basistypen.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/allgemeinername/2/xinneres-name.xsd"
+              namespace="http://www.osci.de/xinneres/allgemeinername/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2/xinneres-codes-gemeindeverzeichnis.xsd"
+              namespace="http://www.osci.de/xinneres/codes/gemeindeverzeichnis/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/meldeanschrift/3/xinneres-meldeanschrift.xsd"
+              namespace="http://www.osci.de/xinneres/meldeanschrift/3"/>
+   <xs:import schemaLocation="http://xoev.de/latinchars/1_1/datatypes/latinchars.xsd"
+              namespace="http://xoev.de/latinchars/1_1/datatypes"/>
+   <xs:complexType name="type.Zensus.AnschriftMelderecht.Inland">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Anschrift einer Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden alle Informationen zur Anschrift der Person im Kontext des Zensus 2021 abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xmeld:type.AnschriftMelderecht.Inland">
+            <xs:sequence>
+               <xs:element name="strassenschluessel" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Straßenschlüssel zur Anschrift der betroffenen Person übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.AnschriftMelderecht.InlandOhneWohnungsinhaber">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Inlandsanschrift einer Person ohne Angaben zum Wohnungsinhaber</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden Informationen zur Inlandsanschrift einer Person ohne Angaben zum Wohnungsinhaber abgebildet. Er basiert auf der Anschrift des xinneres-basismoduls. Die Kindelemente gemeindeschluessel, strasse, postleitzahl und wohnort sind mandatorisch, da sie nach den gesetzlichen Vorschriften (dsm) unverzichtbare Bestandteile einer Anschrift sind.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.AnschriftMelderecht.Inland">
+            <xs:sequence>
+               <xs:element name="gemeindeschluessel"
+                           type="xicgvz:Code.GemeindeVZ.AmtlicherGemeindeschluessel"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:appinfo>
+                        <implementationHint>Solange die Aktualität der verwendeten Schlüsseltabelle nicht gegeben ist, wird vollständig auf die Plausibilisierung der listVersionID verzichtet.</implementationHint>
+                     </xs:appinfo>
+                     <xs:documentation>Es ist der vom Statistischen Bundesamt herausgegebene bundeseinheitliche Gemeindeschlüssel der Gemeinde anzugeben, in der die Wohnung liegt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="hausnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Hausnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind nur die Ziffern einer Hausnummer anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="hausnummerBuchstabeZusatzziffer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.HausnummerBuchstabeZusatzziffer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Buchstaben oder Zusatzziffern zur Hausnummer anzugeben. Beispiel: 124 A, 109.5</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="postleitzahl"
+                           type="xima:Meldeanschrift.Postleitzahl"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es ist die Postleitzahl anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="stockwerkswohnungsnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Stockwerkswohnungsnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Stockwerks- und Wohnungsnummern anzugeben, soweit sie für die Adressierung erforderlich sind; Beispiel: IV. Stockwerk, Wohnung 115.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="strasse"
+                           type="xima:Meldeanschrift.Strasse"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es ist die Bezeichnung der Straße anzugeben. Die Feldlänge ist auf 55 Zeichen beschränkt. Bei Überschreitung einer Länge von 25 Zeichen darf sinnvoll abgekürzt werden. Ist keine Straßenbezeichnung - wohl aber eine Hausnummer - vorhanden, so ist die Zeichenkette Hausnummer anzugeben. Sind weder Straßenbezeichnung noch Hausnummer vorhanden, so ist die Zeichenkette ohne Hausnummer anzugeben.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="teilnummerDerHausnummer"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.TeilnummerDerHausnummer"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Teilnummern zur Hausnummer anzugeben. Beispiel: 16 1/7</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="wohnort"
+                           type="xima:Meldeanschrift.Wohnort"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es ist die postalische Wohnortsbezeichnung anzugeben. Die Feldlänge ist auf 40 Zeichen beschränkt. Des Weiteren gelten die Regelungen des DSMeld-Blattes 1203.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="wohnortFruehererGemeindename"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.WohnortFruehererGemeindename"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es ist der frühere Gemeindename anzugeben, der als Stadt- bzw. Ortsteilname dem jetzigen Gemeindenamen hinzugefügt werden kann.Der frühere Gemeindename (jetziger Ortsteil- oder Stadtteilname) ist bei Adressierungen unterhalb des Namens (oberhalb der Straßenbezeichnung) anzugeben.Beispiel: Frau Rita Scholl Zuffenhausen Am Stadtpark 12 70123 Stuttgart Die Feldlänge ist auf 40 Zeichen beschränkt. Des Weiteren gelten die Regelungen des DSMeld-Blattes 1204.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="zusatzangaben"
+                           minOccurs="0"
+                           type="xima:Meldeanschrift.Zusatzangaben"
+                           form="unqualified">
+                  <xs:annotation>
+                     <xs:documentation>Es sind Zusatzangaben zur Anschrift anzugeben. Beispiele: Hinterhaus, Gartenhaus. Bei Überschreitung einer Länge von 21 Zeichen darf sinnvoll abgekürzt werden.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.BetroffenePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten der betroffenen Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden alle Daten der aktuell gemeldeten Person abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xmeld:type.Zensus.BetroffenePersonOhneReligion">
+            <xs:sequence>
+               <xs:element name="religion" type="xmeld:type.Religion">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird die Information zur Zugehörigkeit einer Person zu einer öffentlich-rechtlichen Religionsgesellschaft übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.BetroffenePersonOhneReligion">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten der betroffenen Person, ohne Angaben zur Religion, im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden alle Daten der aktuell gemeldeten Person, ohne die Angaben zur Religion, im Kontext des Zensus 2021 abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ordnungsmerkmal" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal zur betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="nichtMeldepflichtigePerson"
+                     minOccurs="0"
+                     fixed="true"
+                     type="xs:boolean">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Tatsache, dass eine Person gemäß § 2 Abs. 4 S. 2 BMG nicht meldepflichtig ist, übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name" type="xmeld:type.Zensus.NameNatuerlichePerson">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Name der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" type="xmeld:type.Zensus.Geburt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten zur Geburt der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" type="xmeld:Code.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geschlecht entsprechend Schlüsseltabelle Geschlecht übermittelt. Wenn ein Kind weder dem weiblichen noch dem männlichen Geschlecht zugeordnet werden kann, wird im Melderegister der Wert 1 gespeichert. In der Datenübermittlung ist statt des Wertes 1 der Wert x zu übertragen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesetzlicherVertreter"
+                     minOccurs="0"
+                     maxOccurs="4"
+                     type="xmeld:type.Zensus.GesetzlicherVertreter">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Daten zum gesetzlichen Vertreter der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="staatsangehoerigkeit"
+                     maxOccurs="4"
+                     type="xmeld:Code.Staatsangehoerigkeit">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Staatsangehörigkeit der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="aktuelleWohnung"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Zensus.Wohnung.Aktuell">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Angaben zur aktuellen Wohnung der betroffenen Person übermittelt. Es dürfen nur Wohnungen innerhalb der Gemeinde übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="letzteFruehereAnschrift"
+                     minOccurs="0"
+                     type="xmeld:type.Zensus.LetzteAnschrift">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anschrift der letzten früheren Wohnung der betroffenen Person übermittelt, aus der die betroffene Person in die Gemeinde zugezogen ist. Bei der letzten früheren Wohnung handelt es sich immer um eine Haupt- oder alleinige Wohnung, die noch aktuell sein kann (Zuzug mit Nebenwohnung). In DSMeld-Blatt 1213a muss für die letzte frühere Wohnung immer der Wert 1 eingetragen sein.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="familienstand" type="xmeld:type.Zensus.Familienstand">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden Daten zum Familienstand der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="partner" minOccurs="0" type="xmeld:type.Zensus.Partner">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten zum Ehegatten oder Lebenspartner der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="kind"
+                     minOccurs="0"
+                     maxOccurs="unbounded"
+                     type="xmeld:type.Zensus.Kind">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten zum Kind der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zuzugBund" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Bundesrepublik Deutschland übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="zuzugGemeinde" minOccurs="0" type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Gemeinde übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="identifikation.ereignis"
+                     type="xmeld:type.Identifikation.Ereignis">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind. Im Rahmen von Bestandsdatenlieferungen ist im Element ereignis.zeitpunkt der Zeitpunkt des Datenabzugs zum Stichtag zu verwenden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.Familienstand">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Familienstand einer Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die für den Zensus 2021 relevanten Informationen zum Familienstand einer Person abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.Familienstand">
+            <xs:sequence>
+               <xs:element name="datumBeginn" minOccurs="0" type="xida:Tagesdatum">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Datum der letzten Eheschließung oder der Begründung der letzten Lebenspartnerschaft übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="datumEnde" minOccurs="0" type="xida:Tagesdatum">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Datum der Beendigung oder Nichtigkeit der letzten Ehe oder der letzten Lebenspartnerschaft übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="familienstand" type="xmeld:Code.Familienstand">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der personenstandsrechtliche Familienstand der Person übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.Geburt">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Geburtsinformationen der Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die für den Zensus 2021 relevanten Geburtsinformationen einer Person abgebildet. Dabei ist es erlaubt, unvollständige Angaben zum Geburtstag zu machen, sofern dieser nicht vollständig bekannt ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.GeburtMitHistorie">
+            <xs:sequence>
+               <xs:element name="geburtsort" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element ist der Geburtsort der Person zu übermitteln.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsortStaat" minOccurs="0" type="xmeld:Code.Gebiet">
+                  <xs:annotation>
+                     <xs:appinfo>
+                        <implementationHint>Deutschland wird immer durch Weglassen dieses Elementes abgebildet.</implementationHint>
+                     </xs:appinfo>
+                     <xs:documentation>Mit diesem Element wird der Geburtsstaat der Person übermittelt.Eine Angabe in diesem Feld erfolgt nur bei nicht in der Bundesrepublik Deutschland geborenen Personen. In diesen Fällen ist das Staatsgebiet anzugeben, in dem der Einwohner geboren ist. Die Erfassung des Ersatzwertes 994 für von/nach See ist nicht zulässig.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Geburtsdatum übermittelt. Sofern das vollständige Geburtsdatum vorliegt, ist das Element jahrMonatTag zu befüllen, sofern die Tagesangabe fehlt, das Element jahrMonat, sofern die Tagesangabe und die Monatsangabe fehlen, das Element jahr und sofern alle Angaben zum Geburtsdatum fehlen, das Element unbekannt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="fruehereGeburtsdaten"
+                           minOccurs="0"
+                           type="xmeld:type.FruehereGeburtsdaten">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element werden Informationen zu früheren Geburtsdaten übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.GesetzlicherVertreter">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten zum gesetzlichen Vertreter</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die für den Zensus 2021 relevanten Daten eines gesetzlichen Vertreters der betroffenen Person abgebildet. Es dürfen nur natürliche Personen übermittelt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ordnungsmerkmal" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal des gesetzlichen Vertreters übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name"
+                     type="xmeld:type.Zensus.NameNatuerlichePerson.BeigeschriebenePerson">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element werden die Namensinformationen des gesetzlichen Vertreters übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geburtsdatum des gesetzlichen Vertreters übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="gesetzlicherVertreterSchluessel"
+                     type="xmeld:Code.Gesetzlicher.Vertreter">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Art der Vertretung übermittelt. Es dürfen nur natürliche Personen (Schlüssel 1, 2 und 3 des DSMeld-Blattes 0001) übermittelt werden.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.Kind">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten des Kindes im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die für den Zensus 2021 relevanten Daten des Kindes abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="ordnungsmerkmal" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal des Kindes übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name"
+                     type="xmeld:type.Zensus.NameNatuerlichePerson.BeigeschriebenePerson">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Name des Kindes übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geburtsdatum des Kindes übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geschlecht des Kindes, falls bekannt, übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.LetzteAnschrift">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Letzte frühere Anschrift einer Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden alle Informationen zur letzten früheren Anschrift der Person im Kontext des Zensus 2021 abgebildet. Es ist sowohl die Angabe einer inländischen Anschrift als auch einer Staatenbezeichnung möglich.</xs:documentation>
+      </xs:annotation>
+      <xs:choice>
+         <xs:element name="anschrift.inland" type="xmeld:type.Zensus.LetzteAnschrift.Inland">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Inlandsanschrift der Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="anschrift.ausland" type="xmeld:type.AnschriftMelderecht.Ausland">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Wegzugs- oder Zuzugsstaat der betroffenen Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:choice>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.LetzteAnschrift.Inland">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Letzte Anschrift einer Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden alle Informationen zur letzten bekannten oder letzten früheren Anschrift der Person im Kontext des Zensus 2021 abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xmeld:type.Zensus.AnschriftMelderecht.InlandOhneWohnungsinhaber">
+            <xs:sequence>
+               <xs:element name="strassenschluessel" minOccurs="0" type="xoev-lc:String.Latin">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Straßenschlüssel zur Anschrift der betroffenen Person übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.LetzteBekannteWohnung">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Letzte bekannte Wohnung einer Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die Daten zur letzten bekannten Wohnung einer Person im Kontext des Zensus 2021 abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xmeld:type.Zensus.Wohnung.Aktuell">
+            <xs:sequence>
+               <xs:element name="datumAbmeldungBeiAnmeldebehoerde"
+                           minOccurs="0"
+                           type="xida:Tagesdatum">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Datum der tatsächlichen Abmeldung durch den Meldepflichtigen übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="datumDerAbmeldungVonAmtsWegen"
+                           minOccurs="0"
+                           type="xida:Tagesdatum">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird das Datum der Abmeldung von Amts wegen übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="datumDesAuszugs"
+                           minOccurs="0"
+                           type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:appinfo>
+                        <implementationHint>Der DSMeld erlaubt für dieses Datum keine nur teilweise bekannte oder unbekannte Angabe eines Auszugsdatums. Die Möglichkeit der Angabe eines teilweise bekannten oder unbekannten Datums für inaktuelle Wohnungen, zu denen das Auszugsdatum fehlt oder nur nicht vollständig vorliegt, wird in XMeld aber geschaffen, da in der Praxis nicht immer ein vollständiges Datum vorliegt.</implementationHint>
+                     </xs:appinfo>
+                     <xs:documentation>Mit diesem Element wird das Datum des Auszugs aus der Wohnung übermittelt. Besteht nach dem Auszug aus der Wohnung keine Wohnung mehr im Zuständigkeitsbereich der Meldebehörde, so ist das Auszugsdatum identisch mit dem Wegzugsdatum aus dem Zuständigkeitsbereich der Meldebehörde (siehe auch DSMeld-Blatt 1306). Das Auszugsdatum wird für verstorbene Personen nicht übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.NameNatuerlichePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Namen einer Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden alle für den Zensus 2021 relevanten Informationen zum Namen einer Person abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.NameNatuerlichePerson">
+            <xs:sequence>
+               <xs:element name="familienname" type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der aktuelle Familienname einer Person in strukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="familienname.unstrukturiert"
+                           minOccurs="0"
+                           type="xmeld:type.FamiliennameUnstrukturiert">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der aktuelle Familienname einer Person in unstrukturierter Form übermittelt. Wenn es sich bei dem Namen um einen Blocknamen handelt, wird der vollständige Name als Nachname der Person übermittelt, während für den Vornamen statt einer Zeichenkette das Kindelement nichtVorhanden verwendet wird, um auszudrücken, dass die Person zu Recht keinen Vornamen führt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ehename" minOccurs="0" type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Ehename der Person in strukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="ehename.unstrukturiert"
+                           minOccurs="0"
+                           type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Ehename der Person in unstrukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="lebenspartnerschaftsname"
+                           minOccurs="0"
+                           type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Lebenspartnerschaftsname der Person in strukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="lebenspartnerschaftsname.unstrukturiert"
+                           minOccurs="0"
+                           type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Lebenspartnerschaftsname der Person in unstrukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsname" minOccurs="0" type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Geburtsname einer Person in strukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="geburtsname.unstrukturiert"
+                           minOccurs="0"
+                           type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der Geburtsname einer Person in unstrukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="frueherer.familienname"
+                           minOccurs="0"
+                           maxOccurs="unbounded"
+                           type="xmeld:type.FruehererFamilienname">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird ein früherer Familienname in strukturierter und unstrukturierter Darstellung übermittelt. Die Änderung eines Geburtsnamens durch Adoption wird nicht als Namensänderung behandelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="vornamen" type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element werden die Vornamen der Person übermittelt. Alle Vornamen sind - durch Leerzeichen getrennt - im Kindelement name anzugeben; in der Reihenfolge, wie sie in einer deutschen Personenstandsurkunde eingetragen sind. Bei Ausländern ohne deutsche Personenstandsurkunde ist die Eintragung im Pass maßgebend. Das Kindelement name darf nur fehlen, wenn durch den Schalter nichtVorhanden angezeigt wird, dass ein Vorname zu Recht nicht vorhanden ist.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="rufname" minOccurs="0" type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der gebräuchliche Vorname der betroffenen Person übermittelt. Es sind alle zum gebräuchlichen Vornamen gehörenden Vornamen anzugeben, durch Leerzeichen getrennt. Sofern in einer XMeld-Nachricht die Übermittlung des gebräuchlichen Vornamens vorgesehen ist, soll dieser immer angegeben werden (und nicht nur dann, wenn sich der gebräuchliche Vorname vom ersten Vornamen unterscheidet).</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="fruehereVornamen"
+                           minOccurs="0"
+                           maxOccurs="unbounded"
+                           type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element werden die Vornamen übermittelt, die die betroffene Person vor Änderung des Vornamens (falls es eine solche gegeben hat) geführt hat.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="doktorgrad" minOccurs="0" type="xmeld:type.Doktorgrad">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element werden die Doktorgrade einer Person übermittelt. Es sind nur diejenigen Doktorgrade anzugeben, die in Pässe eingetragen werden dürfen. Zulässig sind: DR., Dr., DR.HC., Dr.hc., Dr.EH. und Dr.eh. Sind mehrere Doktorgrade anzugeben, so sind sie durch ein Leerzeichen zu trennen.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.NameNatuerlichePerson.BeigeschriebenePerson">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Namen der beigeschriebenen Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden alle für den Zensus 2021 relevanten Namensinformationen für beigeschriebene Personen abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:restriction base="xmeld:type.NameNatuerlichePerson">
+            <xs:sequence>
+               <xs:element name="familienname" minOccurs="0" type="xmeld:type.Nachname">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der aktuelle Familienname der beigeschriebenen Person in strukturierter Form übermittelt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="familienname.unstrukturiert"
+                           minOccurs="0"
+                           type="xmeld:type.FamiliennameUnstrukturiert">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element wird der aktuelle Familienname der beigeschriebenen Person in unstrukturierter Form übermittelt. Wenn es sich bei dem Namen um einen Blocknamen handelt, wird der vollständige Name als Nachname der Person übermittelt, während für den Vornamen statt einer Zeichenkette das Kindelement nichtVorhanden verwendet wird, um auszudrücken, dass die Person zu Recht keinen Vornamen führt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+               <xs:element name="vornamen" minOccurs="0" type="xian:AllgemeinerName">
+                  <xs:annotation>
+                     <xs:documentation>Mit diesem Element werden die Vornamen der beigeschriebenen Person übermittelt. Alle Vornamen sind - durch Leerzeichen getrennt - im Kindelement name anzugeben; in der Reihenfolge, wie sie in einer deutschen Personenstandsurkunde eingetragen sind. Bei Ausländern ohne deutsche Personenstandsurkunde ist die Eintragung im Pass maßgebend. Das Kindelement name darf nur fehlen, wenn durch den Schalter nichtVorhanden angezeigt wird, dass ein Vorname zu Recht nicht vorhanden ist.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:restriction>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.Partner">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Daten des Partners im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die für den Zensus 2021 relevanten Daten des Ehegatten oder Lebenspartners abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="partnerschaftstyp" type="xmeld:Code.Ehegatte.oder.Lebenspartner">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird übermittelt, ob es sich um einen Ehegatten oder einen Lebenspartner handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="ordnungsmerkmal" minOccurs="0" type="xoev-lc:String.Latin">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal des Partners übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="name"
+                     type="xmeld:type.Zensus.NameNatuerlichePerson.BeigeschriebenePerson">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Name des Ehegatten oder Lebenspartners übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geburt" minOccurs="0" type="xmeld:type.Geburtsdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geburtsdatum des Ehegatten oder Lebenspartners übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="geschlecht" minOccurs="0" type="xmeld:type.Geschlecht">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Geschlecht des Ehegatten oder Lebenspartners übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="type.Zensus.Wohnung.Aktuell">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Aktuelle Wohnung einer Person im Kontext des Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit diesem Datentyp werden die für den Zensus 2021 relevanten Daten zur aktuellen Wohnung einer Person abgebildet.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="anschrift" type="xmeld:type.Zensus.AnschriftMelderecht.Inland">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird die Anschrift der Wohnung übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumAnmeldungBeiAnmeldebehoerde"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum der tatsächlichen Anmeldung durch den Meldepflichtigen übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDerAnmeldungVonAmtsWegen"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum der Anmeldung von Amts wegen übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesBeziehens"
+                     minOccurs="0"
+                     type="xida:TagesdatumMitUnbekannt">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Beziehens der Wohnung übermittelt; vgl. Blatt 1301.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesWohnungsstatuswechselsVonAmtsWegen"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Wohnungsstatuswechsels von Amts wegen übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumMitteilungWohnungsstatuswechsel"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum der tatsächlichen Mitteilung des Wohnungsstatuswechsels durch die betroffene Person übermittelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="datumDesWohnungsstatuswechsels"
+                     minOccurs="0"
+                     type="xida:Tagesdatum">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird das Datum des Wirksamwerdens des neuen Wohnungsstatus übermittelt (siehe DSMeld-Blatt 1301a).</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="statusderwohnung" type="xmeld:Code.Wohnungsstatus">
+            <xs:annotation>
+               <xs:documentation>Mit diesem Element wird der Status der Wohnung übermittelt. Es ist zu unterscheiden, ob es sich um die alleinige bzw. die Haupt- oder eine Nebenwohnung handelt.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:element name="zensus.lieferung.0851">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung zur ersten Lieferung zum Zensus 2021</title>
+            <implementationHint>Diese Nachricht muss spätestens zu xmeld.release.t (Wirksamkeit 01.11.2019) umgesetzt werden.</implementationHint>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht liefert die Meldebehörde die abgezogenen Daten gemäß statistik.zensus.zensusgesetz an die Statistischen Landesämter. Die Nachricht wird zur ersten Bestandsdatenlieferung verwendet. Diese Nachricht wird versendet von der: alleinigewohnungs_mb, hauptwohnungs_mb oder der nebenwohnungs_mb im Rahmen der ersten Bestandsdatenlieferung zum Zensus 2021 (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="paketierung" type="xmeld:type.paketierung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Paketierungsinformationen zur Lieferung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="betroffenePerson" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten der betroffenen Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="ordnungsmerkmal" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal zur betroffenen Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="nichtMeldepflichtigePerson"
+                                       minOccurs="0"
+                                       fixed="true"
+                                       type="xs:boolean">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die Tatsache, dass eine Person gemäß § 2 Abs. 4 S. 2 BMG nicht meldepflichtig ist, übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="name" type="xmeld:type.Zensus.NameNatuerlichePerson">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird der Name der betroffenen Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburt" type="xmeld:type.Zensus.Geburt">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Daten zur Geburt der betroffenen Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geschlecht" type="xmeld:Code.Geschlecht">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Geschlecht entsprechend Schlüsseltabelle Geschlecht übermittelt. Wenn ein Kind weder dem weiblichen noch dem männlichen Geschlecht zugeordnet werden kann, wird im Melderegister der Wert 1 gespeichert. In der Datenübermittlung ist statt des Wertes 1 der Wert x zu übertragen.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="staatsangehoerigkeit"
+                                       maxOccurs="4"
+                                       type="xmeld:Code.Staatsangehoerigkeit">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die Staatsangehörigkeit der betroffenen Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="aktuelleWohnung"
+                                       maxOccurs="unbounded"
+                                       type="xmeld:type.Zensus.Wohnung.Aktuell">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Angaben zur aktuellen Wohnung der betroffenen Person übermittelt. Es dürfen nur Wohnungen innerhalb der Gemeinde übermittelt werden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="letzteFruehereAnschrift"
+                                       minOccurs="0"
+                                       type="xmeld:type.Zensus.LetzteAnschrift">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die Anschrift der letzten früheren Wohnung der betroffenen Person übermittelt, aus der die betroffene Person in die Gemeinde zugezogen ist. Bei der letzten früheren Wohnung handelt es sich immer um eine Haupt- oder alleinige Wohnung, die noch aktuell sein kann (Zuzug mit Nebenwohnung). In DSMeld-Blatt 1213a muss für die letzte frühere Wohnung immer der Wert 1 eingetragen sein.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="familienstand" type="xmeld:type.Zensus.Familienstand">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden Daten zum Familienstand der betroffenen Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zuzugBund" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Bundesrepublik Deutschland übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zuzugGemeinde" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Gemeinde übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="identifikation.ereignis"
+                                       type="xmeld:type.Identifikation.Ereignis">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind. Im Rahmen von Bestandsdatenlieferungen ist im Element ereignis.zeitpunkt der Zeitpunkt des Datenabzugs zum Stichtag zu verwenden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="zensus.lieferung.0852">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung zur zweiten Bestandsdatenlieferung zum Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht liefert die Meldebehörde die abgezogenen Daten gemäß statistik.zensus.zensusgesetz an die Statistischen Landesämter. Die Nachricht wird für die zweite Bestandsdatenlieferung verwendet. Diese Nachricht wird versendet von der: alleinigewohnungs_mb, hauptwohnungs_mb, der nebenwohnungs_mb oder der letzten_inlands_mb im Rahmen der zweiten Bestandsdatenlieferung zum Zensus 2021 (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="paketierung" type="xmeld:type.paketierung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Paketierungsinformationen zur Lieferung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="betroffenePerson"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.Zensus.BetroffenePersonOhneReligion">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten der betroffenen Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="zensus.lieferung.0853">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung zur dritten Bestandsdatenlieferung zum Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht liefert die Meldebehörde die abgezogenen Daten gemäß statistik.zensus.zensusgesetz an die Statistischen Landesämter. Die Nachricht wird für die dritte Bestandsdatenlieferung verwendet. Diese Nachricht wird versendet von der: alleinigewohnungs_mb, hauptwohnungs_mb, der nebenwohnungs_mb oder der letzten_inlands_mb im Rahmen der dritten Bestandsdatenlieferung zum Zensus 2021 (Prozess siehe ) .</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="paketierung" type="xmeld:type.paketierung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Paketierungsinformationen zur Lieferung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="betroffenePerson"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.Zensus.BetroffenePerson">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten der betroffenen Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="zensus.lieferung.0854">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Mitteilung zur vierten Bestandsdatenlieferung zum Zensus 2021</title>
+         </xs:appinfo>
+         <xs:documentation>Mit dieser Nachricht liefert die Meldebehörde die abgezogenen Daten gemäß statistik.zensus.zensusgesetz an die Statistischen Landesämter. Die Nachricht wird für die vierte Bestandsdatenlieferung verwendet. Diese Nachricht wird versendet von der: alleinigewohnungs_mb, hauptwohnungs_mb, der nebenwohnungs_mb oder der letzten_inlands_mb im Rahmen der vierten Bestandsdatenlieferung zum Zensus 2021 (Prozess siehe ).</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xmeld:type.Nachricht.G2G">
+               <xs:sequence>
+                  <xs:element name="paketierung" type="xmeld:type.paketierung">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden Paketierungsinformationen zur Lieferung übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="betroffenePerson"
+                              minOccurs="0"
+                              maxOccurs="unbounded"
+                              type="xmeld:type.Zensus.BetroffenePerson">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten der betroffenen Person übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="erweiterterPersonenkreis" minOccurs="0" maxOccurs="unbounded">
+                     <xs:annotation>
+                        <xs:documentation>Mit diesem Element werden die Daten der Person aus dem erweiterten Personenkreis übermittelt.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="ordnungsmerkmal" type="xoev-lc:String.Latin">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Ordnungsmerkmal zur Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="nichtMeldepflichtigePerson"
+                                       minOccurs="0"
+                                       fixed="true"
+                                       type="xs:boolean">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die Tatsache, dass eine Person gemäß § 2 Abs. 4 S. 2 BMG nicht meldepflichtig ist, übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="name" type="xmeld:type.Zensus.NameNatuerlichePerson">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird der Name der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geburt" type="xmeld:type.Zensus.Geburt">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Daten zur Geburt der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="geschlecht" type="xmeld:Code.Geschlecht">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Geschlecht entsprechend Schlüsseltabelle Geschlecht übermittelt. Wenn ein Kind weder dem weiblichen noch dem männlichen Geschlecht zugeordnet werden kann, wird im Melderegister der Wert 1 gespeichert. In der Datenübermittlung ist statt des Wertes 1 der Wert x zu übertragen.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="gesetzlicherVertreter"
+                                       minOccurs="0"
+                                       maxOccurs="4"
+                                       type="xmeld:type.Zensus.GesetzlicherVertreter">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden Daten zum gesetzlichen Vertreter der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="staatsangehoerigkeit"
+                                       maxOccurs="4"
+                                       type="xmeld:Code.Staatsangehoerigkeit">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die Staatsangehörigkeit der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="religion" type="xmeld:type.Religion">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die Information zur Zugehörigkeit einer Person zu einer öffentlich-rechtlichen Religionsgesellschaft übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="letzteBekannteWohnung"
+                                       maxOccurs="unbounded"
+                                       type="xmeld:type.Zensus.LetzteBekannteWohnung">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die letzte bekannte Wohnung der Person innerhalb der Gemeinde übermittelt. Im Falle eines Wegzugs ist dies diejenige Wohnung mit dem jüngsten Auszugsdatum. Sollte es mehrere Wohnungen mit identischem letzten Auszugsdatum innerhalb der Gemeinde geben, so sind alle Wohnungen mit diesem Auszugsdatum zu übermitteln. Bei einem Sterbefall sind die letzten bekannten Wohnungen die aktuell für die Person eingetragenen Wohnungen innerhalb der Gemeinde.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="letzteFruehereAnschrift"
+                                       minOccurs="0"
+                                       type="xmeld:type.Zensus.LetzteAnschrift">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird die Anschrift der letzten früheren Wohnung der betroffenen Person übermittelt, aus der die betroffene Person in die Gemeinde zugezogen ist. Bei der letzten früheren Wohnung handelt es sich immer um eine Haupt- oder alleinige Wohnung, die noch aktuell sein kann (Zuzug mit Nebenwohnung). In DSMeld-Blatt 1213a muss für die letzte frühere Wohnung immer der Wert 1 eingetragen sein.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="familienstand" type="xmeld:type.Zensus.Familienstand">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden Daten zum Familienstand der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="partner" minOccurs="0" type="xmeld:type.Zensus.Partner">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Daten zum Ehegatten oder Lebenspartner der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="kind"
+                                       minOccurs="0"
+                                       maxOccurs="unbounded"
+                                       type="xmeld:type.Zensus.Kind">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Daten zum Kind der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zuzugBund" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Bundesrepublik Deutschland übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="zuzugGemeinde" minOccurs="0" type="xida:Tagesdatum">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Datum des Zuzugs in die Gemeinde übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="sterbedatum" minOccurs="0" type="xmeld:type.Sterbetag">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element wird das Sterbedatum der Person übermittelt.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                           <xs:element name="identifikation.ereignis"
+                                       type="xmeld:type.Identifikation.Ereignis">
+                              <xs:annotation>
+                                 <xs:documentation>Mit diesem Element werden die Daten übermittelt, die zur Identifikation und zeitlichen Einordnung des Ereignisses notwendig sind. Im Rahmen von Bestandsdatenlieferungen ist im Element ereignis.zeitpunkt der Zeitpunkt des Datenabzugs zum Stichtag zu verwenden.</xs:documentation>
+                              </xs:annotation>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe REFERENZDATEI DRUCKSTÜCKNUMMER- UND SICHERHEITSCODE, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-basisdatentypen.xsd" />
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:complexType name="Type.AbrufReferenzdatei">
+    <xs:annotation>
+      <xs:documentation>Abruf einer Referenzdatei. Diese Datenstruktur wird im Rahmen der Anfrage zum Abruf einer Referenzdatei für Druckstücknummern und Sicherheitscodes z.B. über einen Web Service verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="kennung" type="xkfz:Type.KennungReferenzdatei">
+        <xs:annotation>
+          <xs:documentation>eindeutige Kennung der abgerufenen Referenzdatei für Druckstücknummern und Sicherheitscodes</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="referenzNutzer" minOccurs="0" type="xkfz:Type.ReferenzStrassenverkehrsBehoerde">
+        <xs:annotation>
+          <xs:documentation>Referenz des Nutzers (z.B. Kfz-Zulassungsstelle etc.). Hier ist der tatsächliche Nutzer und nicht der (technische) XKfz-Kommunikationspartner gemeint.</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.Referenzdatei.AnfrageReferenzdatei.0901">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'referenzdatei.anfragereferenzdatei.0901'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:referenzdateiAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0901'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Referenzdatei.Referenzdatei.0902">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'referenzdatei.referenzdatei.0902'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:referenzdatei">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0902'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="referenzdatei">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'referenzdatei.referenzdatei.0902'. Diese Datenstruktur wird im Rahmen der Übermittlung einer Referenzdatei für Druckstücknummern und Sicherheitscodes verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Referenzdatei" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="referenzdateiAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht  'referenzdatei.anfragereferenzdatei.0901'. Diese Datenstruktur wird im Rahmen der Anfrage zum Abruf einer Referenzdatei für Druckstücknummern und Sicherheitscodes verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AbrufReferenzdatei" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="referenzdatei.anfragereferenzdatei.0901">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zur Übermittlung der Referenzdatei', vgl. Verweis zu XKfz-Nachricht 0901 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Referenzdatei.AnfrageReferenzdatei.0901" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="referenzdatei.referenzdatei.0902">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übermittlung der Referenzdatei', vgl. Verweis zu XKfz-Nachricht 0902 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Referenzdatei.Referenzdatei.0902" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

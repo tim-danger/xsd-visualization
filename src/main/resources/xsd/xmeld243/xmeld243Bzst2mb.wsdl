@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Service -->
+<definitions xmlns="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:xs="http://www.w3.org/2001/XMLSchema"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xmlns:ns="http://schemas.xmlsoap.org/soap/encoding/"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
+             xmlns:osci="http://www.osci.de/2006/07/wsdl/"
+             xmlns:tpl="http://www.dvdv.de/dvdv/template/"
+             xmlns:ds="http://www.w3.org/2000/09/xmldsig#"
+             xmlns:tns="http://www.osci.de/xmeld243/xmeld243Bzst2mb.wsdl"
+             xmlns:xmeld="http://www.osci.de/xmeld243"
+             name="xmeld243Bzst2mb"
+             targetNamespace="http://www.osci.de/xmeld243/xmeld243Bzst2mb.wsdl"
+             xsi:schemaLocation="http://schemas.xmlsoap.org/wsdl/ http://schemas.xmlsoap.org/wsdl/">
+   <documentation><![CDATA[<html><head><title>Dienst zur Datenübermittlung vom BZSt an Meldebehörden gemäß OSCI-XMeld</title></head><body><h1>Dienst zur Datenübermittlung vom BZSt an Meldebehörden gemäß OSCI-XMeld</h1><p>Dieses WSDL-Dokument beschreibt den Dienst zur Datenübermittlung vom BZSt an Meldebehörden gemäß OSCI-XMeld (siehe: <link>http://www.osci.de</link>).</p><p>Folgende Datenübermittlungs-Nachrichten des XMeld-Schemas sind als Input der einzigen Operation <i>sendeDatenuebermittlung</i> zulässig:<ul><ul>
+            <li>xmeld:datenuebermittlung.antwortidnr.0501</li>
+            <li>xmeld:datenuebermittlung.konfliktmitteilungAnAusloeser.0503</li>
+            <li>xmeld:datenuebermittlung.fehlerhafteNachricht.0508</li>
+            <li>xmeld:datenuebermittlung.hinweisaufinkonsistenz.0516</li>
+            <li>xmeld:datenuebermittlung.zuteilungidnreglpausserhalb.0517</li>
+            <li>xmeld:datenuebermittlung.antwortIdnrPartnerAuswaertig.0519</li>
+            <li>xmeld:datenuebermittlung.aussteuerungManuelleKlaerung.0520</li>
+            <li>xmeld:datenuebermittlung.aenderungIdNr.0522</li>
+         </ul></ul></p><p>Behördenschlüssel für <i>find.servicedescription</i>-Anfragen ist der achtstellige Amtliche Gemeindeschlüssel (AGS); der zu verwendende Präfix lautet "<b>ags:</b>". </p><p>Zulässige Dienstanbieter sind ausschließlich Behörden der DVDV-Behördenkategorie "<b>Meldebehörde</b>". Zulässiger Dienstnutzer ist ausschließlich das Bundeszentralamt für Steuern (BZSt). Anfragen ans DVDV vom Typ <i>verify.category</i> sollten daher die Zuordnung zu dieser Kategorie prüfen lassen.</p></body></html>]]></documentation>
+   <import namespace="http://www.osci.de/2006/07/wsdl/"
+           location="http://www.osci.de/wsdl-osci-binding/WSDL-OSCI-Binding_1.2.xsd"/>
+   <wsdl:types>
+      <xs:schema xmlns="http://www.osci.de/xmeld243"
+                 targetNamespace="http://www.osci.de/xmeld243/xmeld243Bzst2mb.wsdl">
+         <xs:import namespace="http://www.osci.de/xmeld243"
+                    schemaLocation="http://www.osci.de/xmeld243/xmeld-nachrichten-datenuebermittlung.xsd"/>
+         <xs:complexType name="bzst2mbSchemata">
+            <xs:choice>
+               <xs:element name="datenuebermittlung.aenderungIdNr.0522"/>
+               <xs:element name="datenuebermittlung.antwortIdnrPartnerAuswaertig.0519"/>
+               <xs:element name="datenuebermittlung.antwortidnr.0501"/>
+               <xs:element name="datenuebermittlung.aussteuerungManuelleKlaerung.0520"/>
+               <xs:element name="datenuebermittlung.fehlerhafteNachricht.0508"/>
+               <xs:element name="datenuebermittlung.hinweisaufinkonsistenz.0516"/>
+               <xs:element name="datenuebermittlung.konfliktmitteilungAnAusloeser.0503"/>
+               <xs:element name="datenuebermittlung.zuteilungidnreglpausserhalb.0517"/>
+            </xs:choice>
+         </xs:complexType>
+      </xs:schema>
+   </wsdl:types>
+   <message name="bzst2mbNachricht">
+      <part name="bzst2mbNachricht" type="tns:bzst2mbSchemata"/>
+      <part name="optionaleNachricht" type="xs:anyType"/>
+   </message>
+   <portType name="osciBzst2mbInterface">
+      <operation name="sendeBzst2mb">
+         <input message="tns:bzst2mbNachricht"/>
+      </operation>
+   </portType>
+   <binding name="osciBinding" type="tns:osciBzst2mbInterface">
+      <osci:binding signatureLevel="none" encrypted="true">
+         <osci:reader name="Inhaltsdaten-Verschlüsselungszertifikat">
+            <tpl:certificate/>
+         </osci:reader>
+      </osci:binding>
+      <!-- Vorbelegung der Richtlinien zur Signatur und Verschlüsselung der Nutzdaten für alle Operationen -->
+      <operation name="sendeBzst2mb">
+         <osci:operation communicationType="one-way-active" subject="XMeld 2.4.3 Bzst2mb"/>
+         <input>
+            <osci:container signatureLevel="advanced"
+                            encrypted="true"
+                            name="XMELD_DATA"
+                            required="true">
+               <osci:readerRef ref="Inhaltsdaten-Verschlüsselungszertifikat"/>
+               <osci:part>
+                  <osci:content part="tns:bzst2mbNachricht"/>
+               </osci:part>
+            </osci:container>
+            <osci:container signatureLevel="none" encrypted="false" required="false">
+               <osci:part>
+                  <osci:content part="tns:optionaleNachricht"/>
+               </osci:part>
+            </osci:container>
+         </input>
+      </operation>
+   </binding>
+   <service name="osciBzst2mbService"><!-- OSCI Infrastrukturserver -->
+      <osci:devices>
+         <osci:intermediary uri="" name="InternetIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:intermediary uri="" name="TESTAIntermediär">
+            <osci:signatureCertificate>
+               <tpl:certificate/>
+            </osci:signatureCertificate>
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:intermediary>
+         <osci:addressee name="InternetEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+         <osci:addressee name="TESTAEmpfänger">
+            <osci:cipherCertificate>
+               <tpl:certificate/>
+            </osci:cipherCertificate>
+         </osci:addressee>
+      </osci:devices>
+      <!-- Endpunkt im Internet -->
+      <port name="osciBzst2mbInternetPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>required</tpl:use> Dieser Port ist nicht optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="InternetIntermediär"/>
+            <osci:addresseeRef ref="InternetEmpfänger"/>
+         </osci:address>
+      </port>
+      <!-- Endpunkt im TESTA -->
+      <port name="osciBzst2mbTestaPort" binding="tns:osciBinding">
+         <documentation>
+            <tpl:use>optional</tpl:use> Dieser Port ist optional </documentation>
+         <osci:address>
+            <osci:intermediaryRef ref="TESTAIntermediär"/>
+            <osci:addresseeRef ref="TESTAEmpfänger"/>
+         </osci:address>
+      </port>
+   </service>
+</definitions>

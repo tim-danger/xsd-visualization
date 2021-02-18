@@ -1,0 +1,503 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" xmlns:el="http://www.kba.de/elemente" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe GUTACHTEN, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:import schemaLocation="Elementdefinitionen.xsd" namespace="http://www.kba.de/elemente" />
+  <xs:complexType name="Type.AnfrageGutachtenFreigeben">
+    <xs:annotation>
+      <xs:documentation>Freigabe eines zuvor genutzten Gutachtens durch eine Kfz-Zulassungsstelle. Es ist stets eine Gutachtennummer und die statistische Kennziffer der das Gutachten nutzende Kfz-Zulassungsstelle anzugeben.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachtennummer" type="xkfz:Type.Gutachtennummer">
+        <xs:annotation>
+          <xs:documentation>Nummer des freizugebenden Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="verwendendeBehoerde" type="xkfz:Type.ReferenzStrassenverkehrsBehoerde">
+        <xs:annotation>
+          <xs:documentation>statistische Kennziffer (STBA-Nummer) der das Gutachten nutzenden Kfz-Zulassungsstelle</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.AnfrageGutachtenGenutzt">
+    <xs:annotation>
+      <xs:documentation>Signalisierung der Nutzung eines Gutachtens für einen Kfz-Zulassungsprozess durch eine Kfz-Zulassungsbehörde.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachtennummer" type="xkfz:Type.Gutachtennummer">
+        <xs:annotation>
+          <xs:documentation>Nummer des genutzten Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="verwendendeBehoerde" type="xkfz:Type.ReferenzStrassenverkehrsBehoerde">
+        <xs:annotation>
+          <xs:documentation>statistische Kennziffer (STBA-Nummer) der das Gutachten nutzenden Kfz-Zulassungsstelle</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="zeitpunktDerVerwendung" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Zeitpunkt der Nutzung des Gutachtens für einen Kfz-Zulassungsprozess</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.AnfrageGutachtenStorno">
+    <xs:annotation>
+      <xs:documentation>Stornierung der Nutzung eines Gutachtens durch eine Kfz-Zulassungsstelle im Rahmen eines Zulassungsprozesses. Es ist stets eine Gutachtennummer und die statistische Kennziffer der das Gutachten nutzende Kfz-Zulassungsstelle anzugeben.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachtennummer" type="xkfz:Type.Gutachtennummer">
+        <xs:annotation>
+          <xs:documentation>Nummer des freizugebenden Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="verwendendeBehoerde" type="xkfz:Type.ReferenzStrassenverkehrsBehoerde">
+        <xs:annotation>
+          <xs:documentation>statistische Kennziffer (STBA-Nummer) der das Gutachten nutzenden Kfz-Zulassungsstelle</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.AnfrageGutachtennummerPruefen">
+    <xs:annotation>
+      <xs:documentation>Prüfung eines gutachtens im Rahmen von Plausibilitätsprüfungen. Neben der Gutachtennummer ist stets die Fahrzeugidentifizierungsnummer des Fahrzeugs anzugeben, für das das Gutachten verwendet werden soll.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachtennummer" type="xkfz:Type.Gutachtennummer">
+        <xs:annotation>
+          <xs:documentation>Nummer des zu prüfenden Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugidentifizierungsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.AnfrageUebermittlungGutachten">
+    <xs:annotation>
+      <xs:documentation>Anfrage einer Kfz-Zulassungsstelle zur Nutzung eines Gutachtens für einen Kfz-Zulassungsprozess</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachtennummer" type="xkfz:Type.Gutachtennummer">
+        <xs:annotation>
+          <xs:documentation>Nummer des Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="abrufendeBehoerde" type="xkfz:Type.ReferenzStrassenverkehrsBehoerde">
+        <xs:annotation>
+          <xs:documentation>abrufende Kfz-Zulassungsbehörde</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugidentifizierungsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="merkmalPDFBereitstellen" type="xs:boolean">
+        <xs:annotation>
+          <xs:documentation>Merkmal, ob das Gutachten auch als PDF-Dokument übermittelt werden soll</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.AnfrageGutachtenFreigeben.0205">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.anfragegutachtenfreigeben.0205'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:gutachtenFreigeben">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0205'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.AnfrageGutachtenGenutzt.0204">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.anfragegutachtengenutzt.0204'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:gutachtenVerwenden">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0204'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.AnfrageGutachtenStorno.0206">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.anfragegutachtenstorno.0206'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:gutachtenStornieren">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0206'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.AnfrageGutachtennummerPruefen.0207">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.anfragegutachtennummerpruefen.0207'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:gutachtennummerPruefen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0207'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.AnfrageUebermittlungGutachten.0201">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.anfrageuebermittlunggutachten.0201'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:uebermittlungGutachtenAnfragen">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0201'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.ErgebnisGutachtenstatus.0208">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.ergebnisgutachtenstatus.0208'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:statusGutachten">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0208'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.ErgebnisUebermittlungGutachten.0202">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.ergebnisuebermittlunggutachten.0202'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:uebermittlungGutachten">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0202'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Gutachten.FehlerUebermittlungGutachten.0203">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'gutachten.fehleruebermittlunggutachten.0203'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:nutzungsinformationGutachten">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0203'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.NutzungsinformationGutachten">
+    <xs:annotation>
+      <xs:documentation>Übermittlung der aktuellen Nutzungsinformationen zu einem Gutachten. Wird das Gutachten verwendet, wird zusätzlich zum Status auch die nutzende Kfz-Zulassungsbehörde angegeben.</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachtennummer" type="xkfz:Type.Gutachtennummer">
+        <xs:annotation>
+          <xs:documentation>Nummer des Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="status" type="xkfz:Code.StatusGutachten">
+        <xs:annotation>
+          <xs:documentation>aktueller Status des Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="zeitpunktStatus" type="xs:dateTime">
+        <xs:annotation>
+          <xs:documentation>Zeitpunkt des Status</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="verwendendeBehoerde" minOccurs="0" type="xkfz:Type.ReferenzStrassenverkehrsBehoerde">
+        <xs:annotation>
+          <xs:documentation>das Gutachten nutzende Kfz-Zulassungsbehörde</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.StatusGutachten">
+    <xs:annotation>
+      <xs:documentation>Statusübermittlung zu einem Gutachten im Rahmen der Plausibilitätsprüfung</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachtennummer" type="xkfz:Type.Gutachtennummer">
+        <xs:annotation>
+          <xs:documentation>Nummer des Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element ref="el:Fahrzeugidentifizierungsnummer" minOccurs="0">
+        <xs:annotation>
+          <xs:documentation>Fahrzeugidentifizierungsnummer</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="status" type="xkfz:Code.StatusGutachten">
+        <xs:annotation>
+          <xs:documentation>aktueller Status des Gutachtens</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="Type.UebermittlungGutachten">
+    <xs:annotation>
+      <xs:documentation>Übermittlung eines Gutachtens für einen Kfz-Zulassungsprozess</xs:documentation>
+    </xs:annotation>
+    <xs:sequence>
+      <xs:element name="gutachten" type="xkfz:Type.Gutachten">
+        <xs:annotation>
+          <xs:documentation>Gutachtendaten (XML)</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+      <xs:element name="gutachtenPDF" minOccurs="0" type="xkfz:Type.ElektronischesDokument">
+        <xs:annotation>
+          <xs:documentation>Gutachten als PDF-Dokument</xs:documentation>
+        </xs:annotation>
+      </xs:element>
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="gutachtenFreigeben">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.anfragegutachtenfreigeben.0205'. Diese Datenstruktur wird im Rahmen der Freigabe eines zuvor genutzten Gutachtens durch eine Kfz-Zulassungsstelle verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageGutachtenFreigeben" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachtenStornieren">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.anfragegutachtenstorno.0206'. Diese Datenstruktur wird im Rahmen der Stornierung der Nutzung eines Gutachtens durch eine Kfz-Zulassungsstelle im Rahmen eines Zulassungsprozesses verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageGutachtenStorno" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachtenVerwenden">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.anfragegutachtengenutzt.0204'. Diese Datenstruktur wird im Rahmen Signalisierung der Nutzung eines Gutachtens für einen Kfz-Zulassungsprozess durch eine Kfz-Zulassungsbehörde verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageGutachtenGenutzt" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachtennummerPruefen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.anfragegutachtennummerpruefen.0207'. Diese Datenstruktur wird im Rahmen der Plausibilitätsprüfung eines Gutachtens durch eine Kfz-Zulassungsanwendung etc. verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageGutachtennummerPruefen" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="nutzungsinformationGutachten">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.fehleruebermittlunggutachten.0203'. Diese Datenstruktur wird im Rahmen Übermittlung der aktuellen Nutzungsinformationen zu einem Gutachten verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.NutzungsinformationGutachten" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="statusGutachten">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.ergebnisgutachtenstatus.0208'. Diese Datenstruktur wird im Rahmen der Statusübermittlung zu einem Gutachten im Rahmen der Plausibilitätsprüfung  verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.StatusGutachten" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="uebermittlungGutachten">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.ergebnisuebermittlunggutachten.0202'. Diese Datenstruktur wird im Rahmen der Übermittlung eines Gutachtens für einen Kfz-Zulassungsprozess verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.UebermittlungGutachten" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="uebermittlungGutachtenAnfragen">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'gutachten.ergebnisuebermittlunggutachten.0202'. Diese Datenstruktur wird im Rahmen Anfrage einer Kfz-Zulassungsstelle zur Nutzung eines Gutachtens für einen Kfz-Zulassungsprozess verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AnfrageUebermittlungGutachten" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.anfrageuebermittlunggutachten.0201">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage Übermittlung Gutachten', vgl. Verweis zu XKfz-Nachricht 0201 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.AnfrageUebermittlungGutachten.0201" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.ergebnisuebermittlunggutachten.0202">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Auskunft Übermittlung Gutachten', vgl. Verweis zu XKfz-Nachricht 0202 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.ErgebnisUebermittlungGutachten.0202" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.fehleruebermittlunggutachten.0203">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übermittlung Status bei Abruf Gutachten', vgl. Verweis zu XKfz-Nachricht 0203 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.FehlerUebermittlungGutachten.0203" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.anfragegutachtengenutzt.0204">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Gutachten für Zulassungsprozess genutzt', vgl. Verweis zu XKfz-Nachricht 0204 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.AnfrageGutachtenGenutzt.0204" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.anfragegutachtenfreigeben.0205">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Gutachten freigeben', vgl. Verweis zu XKfz-Nachricht 0205 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.AnfrageGutachtenFreigeben.0205" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.anfragegutachtenstorno.0206">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Storno', vgl. Verweis zu XKfz-Nachricht 0206 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.AnfrageGutachtenStorno.0206" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.anfragegutachtennummerpruefen.0207">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Gutachtennummer prüfen', vgl. Verweis zu XKfz-Nachricht 0207 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.AnfrageGutachtennummerPruefen.0207" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="gutachten.ergebnisgutachtenstatus.0208">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Gutachtennummer bestätigen', vgl. Verweis zu XKfz-Nachricht 0208 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Gutachten.ErgebnisGutachtenstatus.0208" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+

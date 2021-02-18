@@ -1,0 +1,898 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+           xmlns:xpersonenstand="http://xpsw.domap.de/xpsw175"
+           xmlns:xida="http://www.osci.de/xinneres/datum/2"
+           targetNamespace="http://xpsw.domap.de/xpsw175"
+           version="1.7.5"
+           elementFormDefault="qualified"
+           attributeFormDefault="unqualified">
+   <xs:annotation>
+      <xs:appinfo>
+         <standard>
+            <nameLang>XPersonenstand</nameLang>
+            <nameKurz>XPersonenstand</nameKurz>
+            <nameTechnisch>xinneres.xpersonenstand</nameTechnisch>
+            <kennung>urn:xoev-de:kosit:standard:xinneres.xpersonenstand</kennung>
+            <beschreibung>Projektziel ist die elektronische Kommunikation der Standesämter untereinander und mit anderen Behörden und Institutionen, welche Daten von den Standesämtern erhalten oder an Standesämter senden. Der Nutzen des Projektes besteht in der Kostenreduktion und einer Verbesserung der Qualität der Personenstandsdaten sowie einer Verbesserung der Interoperabilität in der Kommunikation der Standesämter untereinander und zu weiteren Kommunikationspartnern.
+</beschreibung>
+         </standard>
+         <versionStandard>
+            <version>1.7.5</version>
+            <versionXOEVProfil>1.5.1</versionXOEVProfil>
+            <versionXOEVHandbuch>2.1</versionXOEVHandbuch>
+            <versionXGenerator>3.0.1</versionXGenerator>
+            <versionModellierungswerkzeug>18.0 SP6</versionModellierungswerkzeug>
+            <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+         </versionStandard>
+      </xs:appinfo>
+   </xs:annotation>
+   <xs:include schemaLocation="xpersonenstand-baukasten.xsd"/>
+   <xs:import schemaLocation="http://www.osci.de/xinneres/datum/2/xinneres-datum.xsd"
+              namespace="http://www.osci.de/xinneres/datum/2"/>
+   <xs:complexType name="Fortschreibung.PersonName">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Fortschreibung von Namen einer Person im sta1b</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container fasst die Informationen über den Namen einer Person zusammen, die für die Fortschreibung der Nachbeurkundungsverzeichnisse des sta1bgen benötigt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:sequence>
+         <xs:element name="vorNamensaenderung" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Für Plausibilitätsprüfungen sind hier die unmittelbar vor der Namensänderung geführten Namen einer Person mitzuteilen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+         <xs:element name="nachNamensaenderung" type="xpersonenstand:PersonName">
+            <xs:annotation>
+               <xs:documentation>Hier sind die Namen einer Person nach der Namensänderung mitzuteilen.</xs:documentation>
+            </xs:annotation>
+         </xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Fortschreibung.PersonName.Geburtsdatum">
+      <xs:annotation>
+         <xs:appinfo>
+            <title>Fortschreibung von Namen einer Person im sta1b mit Angabe des Geburtsdatums</title>
+         </xs:appinfo>
+         <xs:documentation>Dieser Container fasst die Informationen über den Namen und das Geburtsdatum einer Person zusammen, die für die Fortschreibung der Verzeichnisse des sta1bgen benötigt werden.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Fortschreibung.PersonName">
+            <xs:sequence>
+               <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                  <xs:annotation>
+                     <xs:documentation>Hier wird das Geburtsdatum der Person mitgeteilt.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:complexType name="Nachricht.StA2StA1B.Nachbeurkundung" abstract="true">
+      <xs:annotation>
+         <xs:documentation>Diese Klasse bildet den abstrakten, allgemeinen Typ einer Nachricht von einem stamt an Nachbeurkundungsverzeichnisse des sta1bgen.</xs:documentation>
+      </xs:annotation>
+      <xs:complexContent>
+         <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+            <xs:sequence>
+               <xs:element name="verzeichniseintragsidentifikation"
+                           minOccurs="0"
+                           type="xpersonenstand:Quelleintrag">
+                  <xs:annotation>
+                     <xs:documentation>Dieser Container enthält die Daten, die für die Identifikation eines Eintrags in einem Verzeichnis des sta1bgen benötigt werden, um diesen Eintrag fortzuführen. Dies sind die Identifikationsdaten der Grundbeurkundung im stamt, das die Nachbeurkundung vorgenommen hat. Dementsprechend ist dieser Container im Falle einer Grundbeurkundung nicht mitzuteilen.</xs:documentation>
+                  </xs:annotation>
+               </xs:element>
+            </xs:sequence>
+         </xs:extension>
+      </xs:complexContent>
+   </xs:complexType>
+   <xs:element name="stA1B.Geburt.021010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 57 Abs. 1 Nr. 2 PStV</rechtsgrundlage>
+            <title>Mitteilung über eine Geburt im Ausland an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Nachbeurkundung einer Geburt im Ausland.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="vornamen"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Vornamen mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsname"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist der Geburtsname mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachbeurkundeteGeburt"
+                              type="xpersonenstand:BeurkundeteDaten.Quelleintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die in Deutschland beurkundeten Daten der Geburt im Ausland übermittelt. Der Registereintrag und der Ereignisort sind in jedem Fall mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Geburt.021020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 57 Abs. 4 Nr. 2 PStV;§  57 Abs. 5 Nr. 5 PStV, außerdem § 45a PStG</rechtsgrundlage>
+            <title>Mitteilung über die Folgebeurkundung zu einer Geburt im Ausland an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Folgebeurkundung einer in Deutschland nachbeurkundeten Geburt im Ausland.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="fortschreibungNameKind"
+                              type="xpersonenstand:Fortschreibung.PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Informationen über den geänderten Namen des Kindes zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibungGeburtsdatumKind"
+                              minOccurs="0"
+                              type="xpersonenstand:Berichtigung.Zeitpunkt">
+                     <xs:annotation>
+                        <xs:documentation>Sofern sich mit der Namensänderung des Kindes auch das Geburtsdatum des Kindes geändert hat, sind hier die Informationen über das geänderte Geburtsdatum des Kindes zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="fortschreibungGeburtsortKind"
+                              minOccurs="0"
+                              type="xpersonenstand:Berichtigung.Ereignisort">
+                     <xs:annotation>
+                        <xs:documentation>Sofern sich mit der Namensänderung des Kindes auch der Geburtsort des Kindes geändert hat, sind hier die Informationen über den geänderten Geburtsort des Kindes zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Geburt.021100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt 1 Berlin</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2 PStV</rechtsgrundlage>
+            <title>Berichtigung Geburtenregister an Standesamt 1 Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Geburtenregister vorgenommen wurde und diese Berichtigung dem Standesamt 1 Berlin mitzuteilen ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="kind" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Kind ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 1101, 1102, 1105 und 1106.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorname"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Vornamen übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsname"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsnamen übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="neu">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="vorname"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Vornamen übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsname"
+                                                type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsnamen übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="nachbeurkundeteGeburt" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zur Geburt ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 1040, 1050, 1055, 1057.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:BeurkundeteDaten.Quelleintrag"/>
+                           <xs:element name="neu" type="xpersonenstand:BeurkundeteDaten.Quelleintrag"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Ehe.022010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 58 Abs. 1 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung über eine Eheschließung im Ausland an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Nachbeurkundung einer Eheschließung im Ausland.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="namenNachEheschliessungEhegatte1"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen nach der Eheschließung mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenNachEheschliessungEhegatte2"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen nach der Eheschließung mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenVorEheschliessungEhegatte1" type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen vor der Eheschließung mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenVorEheschliessungEhegatte2" type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen vor der Eheschließung mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsdatumEhegatte1" type="xida:TeilbekanntesDatumMitUnbekannt"/>
+                  <xs:element name="geburtsdatumEhegatte2" type="xida:TeilbekanntesDatumMitUnbekannt"/>
+                  <xs:element name="ehename"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern vorhanden wird hier der Ehename mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachbeurkundeteEhe"
+                              type="xpersonenstand:BeurkundeteDaten.Quelleintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die in Deutschland beurkundeten Daten der Eheschließung im Ausland übermittelt. Der Registereintrag und der Ereignisort sind in jedem Fall mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Ehe.022020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 58 Abs. 2 Nr. 3 PStV sowie § 45a PStG</rechtsgrundlage>
+            <title>Mitteilung über die Folgebeurkundung zu einer Eheschließung im Ausland an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Folgebeurkundung einer in Deutschland nachbeurkundeten Eheschließung im Ausland.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="ehegatte1"
+                              minOccurs="0"
+                              type="xpersonenstand:Fortschreibung.PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Sofern sich durch die Namensänderung der Name des ersten Ehegatten geändert hat, ist dieser hier zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte2"
+                              minOccurs="0"
+                              type="xpersonenstand:Fortschreibung.PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Sofern sich durch die Namensänderung der Name des zweiten Ehegatten geändert hat, ist dieser hier zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehename"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern nachträglich ein Ehename bestimmt oder ein bereits bestehender Ehename geändert wurde, ist dieser hier mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Ehe.022100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt 1 Berlin</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2  PStV</rechtsgrundlage>
+            <title>Berichtigung Eheregister an Standesamt 1 Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Eheregister vorgenommen wurde und diese Berichtigung dem Standesamt 1 Berlin mitzuteilen ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="ehegatte1" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum ersten Ehegatten ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 2101 - 2116, sowie 2140.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="namenVorEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zu Namen vor der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="namenNachEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier müssen Angaben zu Namen nach der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsdatum übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="neu">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="namenVorEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zu Namen vor der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="namenNachEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier müssen Angaben zu Namen nach der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsdatum übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ehegatte2" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum zweiten Ehegatten ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 2201 - 2216, sowie 2240.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="namenVorEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zu Namen vor der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="namenNachEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier müssen Angaben zu Namen nach der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsdatum übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="neu">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="namenVorEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zu Namen vor der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="namenNachEheschliessung"
+                                                type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier müssen Angaben zu Namen nach der Eheschliessung übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsdatum übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="ehename" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen am bestimmten Ehenamen ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss der Stand vor und nach der Berichtigung übermittelt werden. Vgl. anlpstv Feld 2078.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt"
+                                       minOccurs="0"
+                                       type="xpersonenstand:AllgemeinerName.Personenstandswesen"/>
+                           <xs:element name="neu"
+                                       minOccurs="0"
+                                       type="xpersonenstand:AllgemeinerName.Personenstandswesen"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="nachbeurkundeteEhe" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zur Ehe ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 2040, 2050, 2055, 2057.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:BeurkundeteDaten.Quelleintrag"/>
+                           <xs:element name="neu" type="xpersonenstand:BeurkundeteDaten.Quelleintrag"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.LP.023010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 59 Abs. 1 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Begründung einer Lebenspartnerschaft im Ausland an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Nachbeurkundung einer Lebenspartnerschaft im Ausland.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="namenNachBegruendungLebenspartner1"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen nach der Begründung der Lebenspartnerschaft mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenNachBegruendungLebenspartner2"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen nach der Begründung der Lebenspartnerschaft mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenVorBegruendungLebenspartner1"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen vor der Begründung der Lebenspartnerschaft mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="namenVorBegruendungLebenspartner2"
+                              type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen vor der Begründung der Lebenspartnerschaft mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsdatumLebenspartner1"
+                              type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist das Geburtsdatum der als Lebenspartner1 übermittelten Person anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsdatumLebenspartner2"
+                              type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist das Geburtsdatum der als Lebenspartner2 übermittelten Person anzugeben.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartnerschaftsname"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern vorhanden wird hier der Lebenspartnerschaftsname mitgeteilt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachbeurkundeteLP"
+                              type="xpersonenstand:BeurkundeteDaten.Quelleintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die in Deutschland beurkundeten Daten der Begründung einer Lebenspartnerschaft im Ausland übermittelt. Der Registereintrag und der Ereignisort sind in jedem Fall mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.LP.023020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 59 Abs. 2 Nr. 3 PStV sowie § 45a PStG</rechtsgrundlage>
+            <title>Mitteilung über die Folgebeurkundung zu einer im Ausland begründeten Lebenspartnerschaft an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Folgebeurkundung einer in Deutschland nachbeurkundeten Begründung einer Lebenspartnerschaft im Ausland.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="lebenspartner"
+                              minOccurs="0"
+                              maxOccurs="2"
+                              type="xpersonenstand:Fortschreibung.PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Sofern sich durch die Namensänderung der Name eines oder beider Lebenspartner geändert hat, ist dieser Sachverhalt hier zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartnerschaftsname"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Sofern nachträglich ein Lebenspartnerschaftsname bestimmt oder ein bereits bestehender Lebenspartnerschaftsname geändert wurde, ist dieser hier mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Sterbefall.024010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 60 Abs. 1 Nr. 4 PStV</rechtsgrundlage>
+            <title>Mitteilung über einen Sterbefall im Ausland an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Nachbeurkundung eines Sterbefalls im Ausland.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="verstorbener" type="xpersonenstand:PersonName">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist der Name des Verstorbenen mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist das Geburtsdatum des Verstorbenen mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="nachbeurkundeterSterbefall"
+                              type="xpersonenstand:BeurkundeteDaten.Quelleintrag">
+                     <xs:annotation>
+                        <xs:documentation>Hier werden die in Deutschland beurkundeten Daten des Sterbefalls im Ausland übermittelt. Der Registereintrag und der Ereignisort sind in jedem Fall mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Sterbefall.024100">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt 1 Berlin</empfaenger>
+            <rechtsgrundlage>§ 47 Abs. 1 und 2 PStV</rechtsgrundlage>
+            <title>Berichtigung Sterberegister an Standesamt 1 Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Berichtigungsmitteilung ist zu versenden, wenn eine Berichtigung in einem Sterberegister vorgenommen wurde und diese Berichtigung dem Standesamt 1 Berlin mitzuteilen ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.StA2StA1B.Nachbeurkundung">
+               <xs:sequence>
+                  <xs:element name="verstorbener" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Verstorbenen ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 4201 - 4206, sowie 4240.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="namenVerstorbener" type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zu Namen übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsdatum übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                           <xs:element name="neu">
+                              <xs:complexType>
+                                 <xs:sequence>
+                                    <xs:element name="namenVerstorbener" type="xpersonenstand:PersonName.Veraenderung">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zu Namen übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                    <xs:element name="geburtsdatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                                       <xs:annotation>
+                                          <xs:documentation>Hier werden Angaben zum Geburtsdatum übermittelt.</xs:documentation>
+                                       </xs:annotation>
+                                    </xs:element>
+                                 </xs:sequence>
+                              </xs:complexType>
+                           </xs:element>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+                  <xs:element name="nachbeurkundeterSterbefall" minOccurs="0">
+                     <xs:annotation>
+                        <xs:documentation>Dieses Kindelement ist genau dann zu übermitteln, wenn sich im Rahmen der Berichtigung Änderungen an den Angaben zum Sterbefall ergeben haben und diese Änderung dem Leser mitgeteilt werden soll. In diesem Fall muss für die folgenden Felder der anlpstv der Stand vor und nach der Berichtigung übermittelt werden: 4140, 4150, 4155, 4157.</xs:documentation>
+                     </xs:annotation>
+                     <xs:complexType>
+                        <xs:sequence>
+                           <xs:element name="alt" type="xpersonenstand:BeurkundeteDaten.Quelleintrag"/>
+                           <xs:element name="neu" type="xpersonenstand:BeurkundeteDaten.Quelleintrag"/>
+                        </xs:sequence>
+                     </xs:complexType>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Familienrecht.025010">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 62 Abs. 1 Nr. 1 PStV in Verbindung mit § 57 Abs. 4 Nr. 2 PStV. </rechtsgrundlage>
+            <title>Mitteilung über die Namensänderung eines Kindes an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Änderung oder Bestimmung des Geburtsnamens eines Kindes, wenn das Kind in keinem deutschen Geburtenregister beurkundet ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="standesamtsnummer" type="xpersonenstand:Code.Standesamtsnummer">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Standesamtsnummer des Standesamts, das die Erklärung aufnimmt, mitgeteilt. Die Nummer muss identisch sein mit der Standesamtsnummer des Autors im Nachrichtenkopf.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="vornamen"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier sind die Vornamen des Kindes mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsnameVorErklaerung"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist der Geburtsname vor der Erklärung mitzuteilen. Beim sta1b wird diese Information als Fruehere Namen geführt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsnameNachErklaerung"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist der Geburtsname nach der Erklärung mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsdatum"
+                              minOccurs="0"
+                              type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, werden hier Angaben zum Tag der Geburt übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsort" minOccurs="0" type="xpersonenstand:Ereignisort">
+                     <xs:annotation>
+                        <xs:documentation>Sofern bekannt, werden hier Angaben zum Ort der Geburt übermittelt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Familienrecht.025020">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 62 Abs. 1 Nr. 1 PStV in Verbindung mit § 57 Abs. 2 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Namensänderung von Ehegatten an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Namenserklärung von Ehegatten, wenn die Eheschließung in keinem deutschen Eheregister beurkundet ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="standesamtsnummer" type="xpersonenstand:Code.Standesamtsnummer">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Standesamtsnummer des Standesamts, das die Erklärung aufnimmt, mitgeteilt. Die Nummer muss identisch sein mit der Standesamtsnummer des Autors im Nachrichtenkopf.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte1"
+                              minOccurs="0"
+                              type="xpersonenstand:Fortschreibung.PersonName.Geburtsdatum">
+                     <xs:annotation>
+                        <xs:documentation>Sofern der erste Ehegatte eine Namenserklärung abgibt, sind die Namen des ersten Ehegatten vor und nach der Erklärung sowie dessen Geburtsdatum mitzuteilen. Das heißt insbesondere, dass die Daten des ersten Ehegatten auch dann übermittelt werden, wenn die Namenserklärung keine Änderungen an dem Namen des ersten Ehegatten zur Folge hat. Beim sta1b wird die Information des Namens vor der Erklärung als Fruehere Namen geführt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehegatte2"
+                              minOccurs="0"
+                              type="xpersonenstand:Fortschreibung.PersonName.Geburtsdatum">
+                     <xs:annotation>
+                        <xs:documentation>Sofern der zweite Ehegatte eine Namenserklärung abgibt, sind die Namen des zweiten Ehegatten vor und nach der Erklärung sowie dessen Geburtsdatum mitzuteilen. Das heißt insbesondere, dass die Daten des zweiten Ehegatten auch dann übermittelt werden, wenn die Namenserklärung keine Änderungen an dem Namen des zweiten Ehegatten zur Folge hat. Beim sta1b wird die Information des Namens vor der Erklärung als Fruehere Namen geführt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="ehenameNachErklaerung"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Außer bei der Wiederannahme eines Geburtsnamens oder des bis zur Bestimmung des Ehenamens geführten Namens ist der Ehename zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessungOrt" type="xpersonenstand:Ereignisort">
+                     <xs:annotation>
+                        <xs:documentation>Ort der Eheschließung</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="eheschliessungDatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Datum der Eheschließung</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Familienrecht.025030">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 62 Abs. 1 Nr. 1 PStV in Verbindung mit § 59 Abs. 2 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Namensänderung von Lebenspartnern an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt nach einer Namenserklärung von Lebenspartnern, wenn die Lebenspartnerschaft in keinem deutschen Lebenspartnerschaftsregister beurkundet ist.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="standesamtsnummer" type="xpersonenstand:Code.Standesamtsnummer">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Standesamtsnummer des Standesamts, das die Erklärung aufnimmt, mitgeteilt. Die Nummer muss identisch sein mit der Standesamtsnummer des Autors im Nachrichtenkopf.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartner1"
+                              minOccurs="0"
+                              type="xpersonenstand:Fortschreibung.PersonName.Geburtsdatum">
+                     <xs:annotation>
+                        <xs:documentation>Sofern die als Lebenspartner1 bezeichnete Person eine Namenserklärung abgibt, sind die Namen von Lebenspartner1 vor und nach der Erklärung sowie dessen Geburtsdatum mitzuteilen. Das heißt insbesondere, dass die Namen des Lebenspartners1 auch dann übermittelt werden, wenn die Namenserklärung keine Änderungen an dem Namen des Lebenspartners1 zur Folge hat. Beim sta1b wird die Information des Namens vor der Erklärung als Fruehere Namen geführt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartner2"
+                              minOccurs="0"
+                              type="xpersonenstand:Fortschreibung.PersonName.Geburtsdatum">
+                     <xs:annotation>
+                        <xs:documentation>Sofern die als Lebenspartner2 bezeichnete Person eine Namenserklärung abgibt, sind die Namen von Lebenspartner2 vor und nach der Erklärung sowie dessen Geburtsdatum mitzuteilen. Das heißt insbesondere, dass die Namen des Lebenspartners2 auch dann übermittelt werden, wenn die Namenserklärung keine Änderungen an dem Namen des Lebenspartners2 zur Folge hat. Beim sta1b wird die Information des Namens vor der Erklärung als Fruehere Namen geführt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="lebenspartnerschaftsnameNachErklaerung"
+                              minOccurs="0"
+                              type="xpersonenstand:AllgemeinerName.Personenstandswesen">
+                     <xs:annotation>
+                        <xs:documentation>Außer bei der Wiederannahme eines Geburtsnamens oder des bis zur Bestimmung des Lebenspartnerschaftsnamens geführten Namens ist der Lebenspartnerschaftsname zu übermitteln.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="begruendungOrt" type="xpersonenstand:Ereignisort">
+                     <xs:annotation>
+                        <xs:documentation>Ort der Begründung der Lebenspartnerschaft</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="begruendungDatum" type="xida:TeilbekanntesDatumMitUnbekannt">
+                     <xs:annotation>
+                        <xs:documentation>Datum der Begründung der Lebenspartnerschaft</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+   <xs:element name="stA1B.Familienrecht.025040">
+      <xs:annotation>
+         <xs:appinfo>
+            <sender>Standesamt</sender>
+            <empfaenger>Standesamt I in Berlin</empfaenger>
+            <rechtsgrundlage>§ 62 Abs. 1 Nr. 1 PStV in Verbindung mit § 57 Abs. 4 Nr. 2, § 58 Abs. 2 Nr. 3 und 59 Abs. 2 Nr. 3 PStV</rechtsgrundlage>
+            <title>Mitteilung über die Namensangleichung an das Standesamt I in Berlin</title>
+         </xs:appinfo>
+         <xs:documentation>Diese Nachricht wird übermittelt, wenn eine Angleichung eines Namens beurkundet wurde. Findet eine Namensangleichung innerhalb eines Familienverbundes statt, so wird für jede Person eine Mitteilung versandt.</xs:documentation>
+      </xs:annotation>
+      <xs:complexType>
+         <xs:complexContent>
+            <xs:extension base="xpersonenstand:Nachricht.G2GXP">
+               <xs:sequence>
+                  <xs:element name="standesamtsnummer" type="xpersonenstand:Code.Standesamtsnummer">
+                     <xs:annotation>
+                        <xs:documentation>Hier wird die Standesamtsnummer des Standesamts, das die Angleichung vornimmt, mitgeteilt. Die Nummer muss identisch sein mit der Standesamtsnummer des Autors im Nachrichtenkopf.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="geburtsort" type="xpersonenstand:Ereignisort">
+                     <xs:annotation>
+                        <xs:documentation>Hier ist der Geburtsort und der Geburtsstaat mitzuteilen.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+                  <xs:element name="person"
+                              type="xpersonenstand:Fortschreibung.PersonName.Geburtsdatum">
+                     <xs:annotation>
+                        <xs:documentation>Es sind die Namen der Person vor und nach der Angleichung mitzuteilen sowie dessen Geburtsdatum. Beim sta1b wird die Information des Namens vor der Angleichung als Fruehere Namen geführt.</xs:documentation>
+                     </xs:annotation>
+                  </xs:element>
+               </xs:sequence>
+            </xs:extension>
+         </xs:complexContent>
+      </xs:complexType>
+   </xs:element>
+</xs:schema>

@@ -1,0 +1,392 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:xkfz="http://www.xoev.de/schemata/xkfz/5" targetNamespace="http://www.xoev.de/schemata/xkfz/5" version="5.3" elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xs:annotation>
+    <xs:documentation>Nachrichtengruppe ZULASSUNG AUS VORSYSTEMEN, vgl.   XKfz-Spezifikation</xs:documentation>
+    <xs:appinfo>
+      <standard>
+        <nameLang>XKfz</nameLang>
+        <nameKurz>XKfz</nameKurz>
+        <nameTechnisch>xkfz</nameTechnisch>
+        <kennung>urn:xoev-de:kba:standard:xkfz</kennung>
+        <beschreibung>Der XKfz-Standard beschreibt den Rahmen für alle Kommunikationsstrukturen im Fahrzeug-Zulassungswesen, die nicht Bestandteil der vom Kraftfahrt-Bundesamt definierten „Standards für die Datenübermittlung an das Kraftfahrt-Bundesamt“ (SDÜ) sind.</beschreibung>
+      </standard>
+      <versionStandard>
+        <version>5.3</version>
+        <versionXOEVHandbuch>2.1.0</versionXOEVHandbuch>
+        <versionXGenerator>2.6.1</versionXGenerator>
+        <versionModellierungswerkzeug>19.0 SP3</versionModellierungswerkzeug>
+        <nameModellierungswerkzeug>MagicDraw</nameModellierungswerkzeug>
+      </versionStandard>
+    </xs:appinfo>
+  </xs:annotation>
+  <xs:include schemaLocation="xkfz-baukasten.xsd" />
+  <xs:complexType name="Type.Vorsystem.AnfrageExport.0705">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.anfrageexport.0705'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:referenzElektronischerAntrag">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0705'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="dokument" minOccurs="0" maxOccurs="5" type="xkfz:Type.VorgangskomponenteDokument">
+            <xs:annotation>
+              <xs:documentation>Mitgeliefertes Dokument, z. B. Vollmacht. Die Struktur wird z. B. von i-Kfz Großkundenschnittstellen zur Übertragung einer digitalen Vollmacht verwendet.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.AnfrageImport.0702">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.anfrageimport.0702'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:elektronischerAntrag">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0702'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.AnfragePruefung.0701">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.anfragepruefung.0701'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:elektronischerAntrag">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0701'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.AnfrageStatus.0703">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.anfragestatus.0703'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:referenzElektronischerAntrag">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0703'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="dokument" minOccurs="0" maxOccurs="5" type="xkfz:Type.VorgangskomponenteDokument">
+            <xs:annotation>
+              <xs:documentation>Mitgeliefertes Dokument, z. B. Vollmacht. Die Struktur wird z. B. von i-Kfz Großkundenschnittstellen zur Übertragung einer digitalen Vollmacht verwendet.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.AnfrageStatuswechsel.0704">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.anfragestatuswechsel.0704'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:referenzElektronischerAntragMitStatus">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0704'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+          <xs:element name="dokument" minOccurs="0" maxOccurs="5" type="xkfz:Type.VorgangskomponenteDokument">
+            <xs:annotation>
+              <xs:documentation>Mitgeliefertes Dokument, z. B. Vollmacht. Die Struktur wird z. B. von i-Kfz Großkundenschnittstellen zur Übertragung einer digitalen Vollmacht verwendet.</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.Antrag.0707">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.antrag.0707'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:elektronischerAntrag">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0707'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.AntragAusserbetriebsetzungGrosskunde.0708">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.antragausserbetriebsetzunggrosskunde.0708'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:ausserbetriebsetzungGrosskunde">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0708'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.Antragskopie.0709">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.antragskopie.0709'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:elektronischerAntrag">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0709'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.Status.0706">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.status.0706'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:referenzElektronischerAntragMitStatus">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0706'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:complexType name="Type.Vorsystem.Zustaendigkeit.0710">
+    <xs:annotation>
+      <xs:documentation>Datentyp zur XKfz-Nachricht 'vorsystem.zustaendigkeit.0710'</xs:documentation>
+    </xs:annotation>
+    <xs:complexContent>
+      <xs:extension base="xkfz:Type.XKfzBasisNachricht">
+        <xs:sequence>
+          <xs:element ref="xkfz:referenzElektronischerAntragMitZustaendigkeit">
+            <xs:annotation>
+              <xs:documentation>Nutzdaten der Nachricht '0710'</xs:documentation>
+            </xs:annotation>
+          </xs:element>
+        </xs:sequence>
+      </xs:extension>
+    </xs:complexContent>
+  </xs:complexType>
+  <xs:element name="ausserbetriebsetzungGrosskunde">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachrichten 'vorsystem.antragausserbetriebsetzunggrosskunde.0708'. Diese Nachrichtenstruktur wird zur internetbasierten Außerbetriebsetzung von Fahrzeugen über eine Großkundenschnittstelle verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.AntragAusserbetriebsetzungGrosskunde" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="elektronischerAntrag">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachrichten 'vorsystem.anfragepruefung.0701',  'vorsystem.anfrageimport.0702', und  'vorsystem.antrag.0707'. Diese Datenstruktur wird im Rahmen des Austauschs elektronischer Anträge verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.ElektronischerAntrag" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="referenzElektronischerAntrag">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachrichten 'vorsystem.anfragestatus.0703' und 'vorsystem.anfrageexport.0705'. Diese Datenstruktur wird im Rahmen der Anfragen zu zuvor übermittelten elektronischen Anträgen verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Referenz" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="referenzElektronischerAntragMitStatus">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachrichten  'vorsystem.anfragestatuswechsel.0704' und 'vorsystem.status.0706'. Diese Datenstruktur wird im Rahmen der Übermittlung von Anfragen und Ergebnissen zu zuvor übermittelten elektronischen Anträgen und deren Status verwendet.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.ReferenzElektronischerAntragMitStatus" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="referenzElektronischerAntragMitZustaendigkeit">
+    <xs:annotation>
+      <xs:documentation>Nutzdaten der Nachricht 'vorsystem.zustaendigkeit.0710'.</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.ReferenzElektronischerAntragMitZustaendigkeit" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="statusElektronischerAntrag">
+    <xs:annotation>
+      <xs:appinfo>
+        <codeliste />
+      </xs:appinfo>
+      <xs:documentation>Status eines elektronischen Antrags</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Code.StatusElektronischerAntrag" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.anfragepruefung.0701">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zur Prüfung eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0701 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.AnfragePruefung.0701" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.anfrageimport.0702">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zur Übernahme (Import) des aktuellen Stands eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0702 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.AnfrageImport.0702" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.anfragestatus.0703">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zum aktuellen Status eines zuvor übermittelten elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0703 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.AnfrageStatus.0703" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.anfragestatuswechsel.0704">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zum Statuswechsel eines zuvor übermittelten elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0704 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.AnfrageStatuswechsel.0704" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.anfrageexport.0705">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Anfrage zur Rückübernahme (Export) des aktuellen Stands eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0705 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.AnfrageExport.0705" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.status.0706">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übertragung des Status eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0706 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.Status.0706" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.antrag.0707">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übertragung des aktuellen Inhalts eines elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0707 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.Antrag.0707" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.antragausserbetriebsetzunggrosskunde.0708">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Großkundenantrag auf Außerbetriebsetzung', vgl. Verweis zu XKfz-Nachricht 0708 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.AntragAusserbetriebsetzungGrosskunde.0708" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.antragskopie.0709">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übertragung einer Kopie des elektronischen Zulassungsantrags', vgl. Verweis zu XKfz-Nachricht 0709 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.Antragskopie.0709" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="vorsystem.zustaendigkeit.0710">
+    <xs:annotation>
+      <xs:appinfo>
+        <rechtsgrundlage>Beschluss der Verkehrsministerkonferenz auf der Sitzung vom 22. und 23. April 2009 zur Entwicklung des XKfz-Standards, Priorisierung für Version 1.0 durch die Arbeitsgruppe XKfz</rechtsgrundlage>
+      </xs:appinfo>
+      <xs:documentation>Nachricht 'Übertragung der Zuständigkeit für einen elektronischen Zulassungsantrag', vgl. Verweis zu XKfz-Nachricht 0710 in Anhang A der XKfz-Spezifikation,</xs:documentation>
+    </xs:annotation>
+    <xs:complexType>
+      <xs:complexContent>
+        <xs:extension base="xkfz:Type.Vorsystem.Zustaendigkeit.0710" />
+      </xs:complexContent>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
+
