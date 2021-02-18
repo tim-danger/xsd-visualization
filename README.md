@@ -1,1 +1,2 @@
 # xsd-visualization
+A simple JavaFX based tool, that helps visualizing xsd-files. Simply start the main-class in the TreeViewSample class and load an xsd scheme using the button "Load elements from file (XSD)". Note, there are some example xsds in the src/main/resources package. However, feel free to load your own schemes. You can then select an xsd-element from the combo-box and load that element using the "Load element"-Button. The application allows you to browse through the xsd-file. Just try it!
