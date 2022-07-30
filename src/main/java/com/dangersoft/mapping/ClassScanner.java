@@ -6,11 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.lang.reflect.Field;
 import java.lang.reflect.ParameterizedType;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.namespace.QName;
@@ -48,41 +44,33 @@ import org.w3c.dom.ls.LSInput;
  *
  */
 public class ClassScanner {
+	private int limitCounter = 0;
+	private int limit = 5000;
+	private boolean isSimple = false;
 
-	private int counter = 0;
+	private static final String JAVA_LANG_BOOLEAN_WRAPPER = "java.lang.Boolean";
+	private static final String JAVA_LANG_BOOLEAN = "java.lang.boolean";
+	private static final String JAVA_LANG_STRING = "java.lang.String";
+	private static final String JAVA_XML_GREGORIAN = "javax.xml.datatype.XMLGregorianCalendar";
+	private static final String UNKNOWN = "unknown";
 
-	public static void main(String[] args) {
-		ClassScanner scanner = new ClassScanner();
-		// ClassTree tree = scanner.getClassAsTree(FortschreibungName0091.class, null);
-		// scanner.traverse(tree);
-		// scanner.listRootClasses("com.dangersoft.mapping.xmeld243").stream().forEach(c
-		// -> System.out.println(c));
-		try {
-			ClassTree tree = scanner.getClassAsTree(
-					"src/main/resources/xsd/xmeld243/xmeld-nachrichten-fortschreibung.xsd",
-					"fortschreibung.dokument.0065");
-			if (tree != null) {
-				scanner.traverse(tree);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+	private final static Map<String, String> TYPE_MAP = new HashMap<>();
+
+	static {
+		TYPE_MAP.put("string", JAVA_LANG_STRING);
+		TYPE_MAP.put("String", JAVA_LANG_STRING);
+		TYPE_MAP.put("anyURI", JAVA_LANG_STRING);
+		TYPE_MAP.put("date", JAVA_XML_GREGORIAN);
+		TYPE_MAP.put("boolean", JAVA_LANG_BOOLEAN);
+		TYPE_MAP.put("Boolean", JAVA_LANG_BOOLEAN_WRAPPER);
+		TYPE_MAP.put("gYear", JAVA_XML_GREGORIAN);
+		TYPE_MAP.put("base64", "java.lang.byte");
+		TYPE_MAP.put("decimal", "java.lang.BigDecimal");
+		TYPE_MAP.put("int", "java.lang.int");
+		TYPE_MAP.put("long", "java.lang.long");
 	}
 
-	private void traverse(ClassTree tree) {
-		if (tree.isRoot()) {
-			counter = 0;
-		}
-		for (int i = 0; i < counter; i++) {
-			System.out.print("-");
-		}
-		System.out.println(tree.getSelf().getName() + " / " + tree.getSelf().getType());
-		counter++;
-		for (ClassTree son : tree.getChildren()) {
-			traverse(son);
-		}
-		counter--;
-	}
+	private List<String> visitedElements = new ArrayList<>();
 
 	public ClassTree getClassAsTree(Class<?> className, ClassTree parent, String... name) {
 
@@ -99,14 +87,14 @@ public class ClassScanner {
 			if (field.getType().isAssignableFrom(List.class)) {
 				ParameterizedType listType = (ParameterizedType) field.getGenericType();
 				Class<?> listClass = (Class<?>) listType.getActualTypeArguments()[0];
-				tree.addChild(getClassAsTree(listClass, tree, new String[] { field.getName() + " (List)" }));
+				tree.addChild(getClassAsTree(listClass, tree, field.getName() + " (List)"));
 			} else
 			// no recursive call
 			if (isSimple(field.getType())) {
 				tree.addChild(
 						new ClassTree(new ClassItem(field.getType().getName(), field.getName(), false, false), tree));
 			} else {
-				tree.addChild(getClassAsTree(field.getType(), tree, new String[] { field.getName() }));
+				tree.addChild(getClassAsTree(field.getType(), tree, field.getName()));
 			}
 		}
 		return tree;
@@ -132,9 +120,9 @@ public class ClassScanner {
 
 	private boolean isSimple(Class<?> className) {
 		// the list of simple types and / or wrapper types
-		List<String> typeList = Arrays.asList("java.lang.String", "java.lang.Integer", "java.lang.Boolean",
-				"javax.xml.datatype.XMLGregorianCalendar", "java.lang.Short", "java.lang.Byte", "java.lang.Long",
-				"java.lang.int", "java.lang.short", "java.lang.boolean", "java.lang.byte");
+		List<String> typeList = Arrays.asList(JAVA_LANG_STRING, "java.lang.Integer", JAVA_LANG_BOOLEAN_WRAPPER,
+				JAVA_XML_GREGORIAN, "java.lang.Short", "java.lang.Byte", "java.lang.Long",
+				"java.lang.int", "java.lang.short", JAVA_LANG_BOOLEAN, "java.lang.byte");
 		return className.isPrimitive() || typeList.contains(className.getName()) || className.isArray();
 	}
 
@@ -142,7 +130,7 @@ public class ClassScanner {
 
 		List<String> classNames = new ArrayList<>();
 
-		List<ClassLoader> classLoadersList = new LinkedList<ClassLoader>();
+		List<ClassLoader> classLoadersList = new LinkedList<>();
 		classLoadersList.add(ClasspathHelper.contextClassLoader());
 		classLoadersList.add(ClasspathHelper.staticClassLoader());
 
@@ -161,7 +149,7 @@ public class ClassScanner {
 	}
 
 	public List<String> getElementsInFile(String pathToScheme) throws ClassNotFoundException, InstantiationException,
-			IllegalAccessException, ClassCastException, FileNotFoundException {
+			IllegalAccessException, FileNotFoundException {
 
 		DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 		XSImplementation impl = (XSImplementation) registry.getDOMImplementation("XS-Loader");
@@ -183,8 +171,9 @@ public class ClassScanner {
 		return elements;
 	}
 
-	public ClassTree getClassAsTree(String pathToScheme, String elementName) throws ClassNotFoundException,
-			InstantiationException, IllegalAccessException, ClassCastException, FileNotFoundException {
+	public ClassTree getClassAsTree(String pathToScheme, String elementName)
+			throws ClassNotFoundException, InstantiationException, IllegalAccessException,
+			FileNotFoundException, LimitExceededException {
 
 		DOMImplementationRegistry registry = DOMImplementationRegistry.newInstance();
 		XSImplementation impl = (XSImplementation) registry.getDOMImplementation("XS-Loader");
@@ -209,14 +198,19 @@ public class ClassScanner {
 
 	}
 
-	private ClassTree getClassAsTree(QName name, XSModel model) {
+	private ClassTree getClassAsTree(QName name, XSModel model) throws LimitExceededException {
+		limitCounter = 0;
 		XSElementDeclaration element = model.getElementDeclaration(name.getLocalPart(), name.getNamespaceURI());
 		return getClassAsTree(new XMLElement(element, 1, 1), null);
 
 	}
 
-	private ClassTree getClassAsTree(XMLElement xmlElement, ClassTree parent) {
+	private ClassTree getClassAsTree(XMLElement xmlElement, ClassTree parent) throws LimitExceededException {
 
+		limitCounter++;
+		if (limitCounter > limit) {
+			throw new LimitExceededException("The limit of " + limit + " is reached. XSD is too big!");
+		}
 		// TODO : AnonType entsprechend berücksichtigen
 		ClassTree tree = null;
 		XSElementDeclaration element = xmlElement.getElement();
@@ -224,54 +218,85 @@ public class ClassScanner {
 
 		if (definition instanceof XSSimpleTypeDefinition) {
 
-			XSSimpleTypeDefinition simple = (XSSimpleTypeDefinition) definition;
-			String name = null;
-			if (definition.getName() != null) {
-				name = getType(definition.getName(), xmlElement.getMinoccurs() == 0);
-				if (name.equals("unknown")) {
-					name = getType(simple.getPrimitiveType().toString(), xmlElement.getMinoccurs() == 0);
-				}
-			} else {
-				name = getType(simple.getPrimitiveType().toString(), xmlElement.getMinoccurs() == 0);
-			}
-			ClassItem item = new ClassItem(name, element.getName(), false,
-					xmlElement.getMaxoccurs() == -1 || xmlElement.getMaxoccurs() > 1);
-			tree = new ClassTree(item, parent);
-			addAttributes(definition, tree);
-			return tree;
+			return handleSimpleTypeDefintion(xmlElement, parent, element, definition);
 
 		} else if (definition instanceof XSComplexTypeDecl) {
 
-			XSComplexTypeDecl complexDef = (XSComplexTypeDecl) definition;
-			String typeName = complexDef.getTypeName();
-			typeName = camelCaseWithoutDot(typeName, true);
-			ClassItem item = new ClassItem(typeName, camelCaseWithoutDot(element.getName(), false), true,
-					xmlElement.getMaxoccurs() == -1 || xmlElement.getMaxoccurs() > 1);
-			tree = new ClassTree(item, parent);
-			XSParticle particle = complexDef.getParticle();
-			if (particle != null) {
-				XSTerm term = particle.getTerm();
-				if (term instanceof XSModelGroup) {
-					XSModelGroup xsModelGroup = (XSModelGroup) term;
-					List<XMLElement> elementDeclarations = getElementDeclarations(xsModelGroup);
-					for (XMLElement elem : elementDeclarations) {
-						tree.addChild(getClassAsTree(elem, tree));
-					}
-					addAttributes(definition, tree);
-					return tree;
-				} else {
-					System.err.println("Unknown type: " + term.getClass().toString());
-				}
-
-			} else {
-				// keine Kindelemente
-				addAttributes(definition, tree);
-				return tree;
-			}
+			ClassTree result = handleComplexTypeDefinition(xmlElement, parent, element, definition);
+			if (result != null) return result;
 		} else {
 			System.err.println("Unknown type " + definition.getClass().toString());
 		}
 		return null;
+	}
+
+	private ClassTree handleComplexTypeDefinition(XMLElement xmlElement, ClassTree parent, XSElementDeclaration element, XSTypeDefinition definition) throws LimitExceededException {
+		ClassTree tree;
+		String complexName = camelCaseWithoutDot(element.getName(), false);
+		XSComplexTypeDecl complexDef = (XSComplexTypeDecl) definition;
+		String typeName = complexDef.getTypeName();
+		String complexNameAndType = complexName + typeName;
+		typeName = camelCaseWithoutDot(typeName, true);
+		ClassItem item = new ClassItem(typeName, complexName, true,
+				xmlElement.getMaxoccurs() == -1 || xmlElement.getMaxoccurs() > 1);
+		tree = new ClassTree(item, parent);
+		if (visitedElements.contains(complexNameAndType)) {
+			return tree;
+		} else {
+			visitedElements.add(complexNameAndType);
+		}
+		XSParticle particle = complexDef.getParticle();
+		if (particle != null) {
+			XSTerm term = particle.getTerm();
+			if (term instanceof XSModelGroup) {
+				XSModelGroup xsModelGroup = (XSModelGroup) term;
+				List<XMLElement> elementDeclarations = getElementDeclarations(xsModelGroup);
+				for (XMLElement elem : elementDeclarations) {
+					tree.addChild(getClassAsTree(elem, tree));
+				}
+				addAttributes(definition, tree);
+				visitedElements.remove(complexNameAndType);
+				return tree;
+			} else {
+				System.err.println("Unknown type: " + term.getClass().toString());
+				visitedElements.remove(complexNameAndType);
+			}
+
+		} else {
+			// keine Kindelemente
+			addAttributes(definition, tree);
+			visitedElements.remove(complexNameAndType);
+			return tree;
+		}
+		return null;
+	}
+
+	private ClassTree handleSimpleTypeDefintion(XMLElement xmlElement, ClassTree parent, XSElementDeclaration element, XSTypeDefinition definition) {
+		ClassTree tree;
+		XSSimpleTypeDefinition simple = (XSSimpleTypeDefinition) definition;
+		String name = getTypeName(xmlElement, definition, simple);
+		ClassItem item = new ClassItem(name, element.getName(), false,
+				xmlElement.getMaxoccurs() == -1 || xmlElement.getMaxoccurs() > 1);
+		tree = new ClassTree(item, parent);
+		addAttributes(definition, tree);
+		return tree;
+	}
+
+	private String getTypeName(XMLElement xmlElement, XSTypeDefinition definition, XSSimpleTypeDefinition simple) {
+		String name = null;
+		if (definition.getName() != null) {
+			name = getType(definition.getName(), xmlElement.getMinoccurs() == 0);
+			if (name.equals(UNKNOWN)) {
+				if (simple == null || simple.getPrimitiveType() == null) {
+					name = UNKNOWN;
+				} else {
+					name = getType(simple.getPrimitiveType().toString(), xmlElement.getMinoccurs() == 0);
+				}
+			}
+		} else {
+			name = getType(simple.getPrimitiveType().toString(), xmlElement.getMinoccurs() == 0);
+		}
+		return name;
 	}
 
 	private void addAttributes(XSTypeDefinition definition, ClassTree tree) {
@@ -294,39 +319,20 @@ public class ClassScanner {
 	}
 
 	private String getType(String string, boolean isWrapper) {
-		if (string.contains("string")) {
-			return "java.lang.String";
-		} else if (string.contains("date")) {
-			return "javax.xml.datatype.XMLGregorianCalendar";
-		} else if (string.contains("Boolean")) {
-			return "java.lang.Boolean";
-		} else if (string.contains("boolean")) {
-			if (isWrapper) {
-				return "java.lang.Boolean";
+
+		for (Map.Entry<String, String> entry : TYPE_MAP.entrySet()) {
+			if (string.contains(entry.getKey())) {
+				return entry.getValue();
 			}
-			return "java.lang.boolean";
-		} else if (string.contains("gYear")) {
-			return "javax.xml.datatype.XMLGregorianCalendar";
-		} else if (string.contains("String")) {
-			return "java.lang.String";
-		} else if (string.contains("anyURI")) {
-			return "java.lang.String";
-		} else if (string.contains("base64")) {
-			return "java.lang.byte";
-		} else if (string.contains("decimal")) {
-			return "java.lang.BigDecimal";
-		} else if (string.contains("int")) {
-			if (isWrapper) {
-				return "java.lang.Integer";
-			}
-			return "java.lang.int";
-		} else if (string.contains("long")) {
-			if (isWrapper) {
-				return "java.lang.Long";
-			}
-			return "java.lang.long";
 		}
-		return "unknown";
+		if (string.contains("boolean") && isWrapper) {
+			return JAVA_LANG_BOOLEAN_WRAPPER;
+		} else if (string.contains("int") && isWrapper) {
+			return "java.lang.Integer";
+		} else if (string.contains("long") && isWrapper) {
+			return "java.lang.Long";
+		}
+		return UNKNOWN;
 	}
 
 	private String camelCaseWithoutDot(String typeName, boolean firstLetterUppercase) {
@@ -349,6 +355,11 @@ public class ClassScanner {
 	private List<XMLElement> getElementDeclarations(XSModelGroup modelgroup) {
 		List<XMLElement> result = new ArrayList<>();
 
+		if (visitedElements.contains(modelgroup.toString())) {
+			return result;
+		} else {
+			visitedElements.add(modelgroup.toString());
+		}
 		XSObjectList xsol = modelgroup.getParticles();
 		for (Object p : xsol) {
 			XSParticle part = (XSParticle) p;
@@ -359,12 +370,29 @@ public class ClassScanner {
 				XSElementDeclaration elem = (XSElementDeclaration) pterm;
 				result.add(new XMLElement(elem, minoccurs, maxoccurs));
 			} else if (pterm instanceof XSModelGroup) {
-				result.addAll(getElementDeclarations((XSModelGroup) pterm));
+				XSModelGroup mg = (XSModelGroup) pterm;
+				result.addAll(getElementDeclarations(mg));
 			} else {
 				// TODO : instance org.apache.xerces.impl.xs.XSWildcardDecl, AZR
+				System.out.println(modelgroup.toString());
 				System.err.println("Unknown instance " + pterm.getClass().toString());
 			}
 		}
+
+		// wenn man den simplen Ansatz wählt, werden sich im Baum wiederholende Elemente
+		// nicht mehr gesetzt (das COLLADA-Scheme enthält bspw. weit mehr als 5.000
+		// Elemente, was dazu führt, dass der Heap-Speicher nicht mehr ausreicht)
+		if (!isSimple) {
+			visitedElements.remove(modelgroup.toString());
+		}
 		return result;
+	}
+
+	public boolean isSimple() {
+		return isSimple;
+	}
+
+	public void setSimple(boolean isSimple) {
+		this.isSimple = isSimple;
 	}
 }

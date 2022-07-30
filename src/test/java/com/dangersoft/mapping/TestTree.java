@@ -15,7 +15,7 @@ public class TestTree {
 
 	@Test
 	public void testTreeCreation() throws ClassNotFoundException, InstantiationException, IllegalAccessException,
-			ClassCastException, FileNotFoundException {
+			ClassCastException, FileNotFoundException, LimitExceededException {
 
 		ClassScanner scanner = new ClassScanner();
 		ClassTree treeFromClasses = scanner.getClassAsTree(FortschreibungDokument0065.class, null);

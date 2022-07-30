@@ -13,6 +13,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -50,7 +51,7 @@ public class TreeViewSample extends Application {
 		if (tree == null) {
 			return null;
 		}
-		TreeItem<ClassItem> root = new TreeItem<ClassItem>(tree.getSelf(),
+		TreeItem<ClassItem> root = new TreeItem<>(tree.getSelf(),
 				tree.isRoot() ? rootIcon : new ImageView(getIconFromClassItem(tree.getSelf())));
 		for (ClassTree child : tree.getChildren()) {
 			root.getChildren().add(getJavaFXTreeViewFromClassTree(child));
@@ -111,17 +112,105 @@ public class TreeViewSample extends Application {
 		scene.setFill(Color.LIGHTGRAY);
 
 		// TODO : messages
-		rootNode = new TreeItem<ClassItem>(new ClassItem("-- messages --", "", true, false), rootIcon);
-		TreeView<ClassItem> treeView = new TreeView<ClassItem>(rootNode);
+		rootNode = new TreeItem<>(new ClassItem("-- messages --", "", true, false), rootIcon);
+		TreeView<ClassItem> treeView = new TreeView<>(rootNode);
 		treeView.setShowRoot(true);
 
-		ComboBox<String> comboBox = new ComboBox<String>();
+		ComboBox<String> comboBox = new ComboBox<>();
 		comboBox.setPromptText("-- select items --");
 
 		// chose a file
 		Button openFile = new Button();
-		openFile.setText("Load elemets from file (XSD)");
-		openFile.setOnAction(new EventHandler<ActionEvent>() {
+		openFile.setText("Load elements from file (XSD)");
+		openFile.setOnAction(setOpenFileHandler(comboBox));
+
+		CheckBox checkBox = new CheckBox();
+
+		// load xsd- File
+		Button loadXSD = new Button();
+		loadXSD.setText("Load element");
+		loadXSD.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				// check if there is a value selected in the combobox
+
+				if (comboBox.getSelectionModel().getSelectedItem() == null
+						|| comboBox.getSelectionModel().getSelectedItem().equals("-- select items --")) {
+					showAlert(AlertType.ERROR, "Please select an element from the combobox!");
+					return;
+				}
+
+				// check if the file is loaded
+				if (pathToLoadedFile == null) {
+					showAlert(AlertType.ERROR, "Please load elements from a xsd-file first!");
+					return;
+				}
+
+				// load the class-tree from file
+				ClassScanner scanner = new ClassScanner();
+				scanner.setSimple(checkBox.isSelected());
+				ClassTree tree = null;
+				try {
+					tree = scanner.getClassAsTree(pathToLoadedFile, comboBox.getValue());
+				} catch (Exception e) {
+					showAlert(AlertType.ERROR, e.getMessage());
+					return;
+				}
+
+				// set the tree to the UI
+				TreeItem<ClassItem> classTree = getJavaFXTreeViewFromClassTree(tree);
+				if (classTree != null) {
+					rootNode.setValue(classTree.getValue());
+					rootNode.getChildren().clear();
+					rootNode.getChildren().addAll(classTree.getChildren());
+					rootNode.setExpanded(true);
+				} else {
+					showAlert(AlertType.ERROR, "Beim Laden des XSD ist ein Fehler aufgetreten!");
+				}
+
+			}
+		});
+
+		// load xsd- File
+		Button countElements = new Button();
+		countElements.setText("Count elements");
+		countElements.setOnAction(new EventHandler<ActionEvent>() {
+
+			@Override
+			public void handle(ActionEvent event) {
+
+				showAlert(AlertType.INFORMATION, "There are " + countElements(rootNode) + " Elements");
+
+			}
+
+			private int countElements(TreeItem<ClassItem> tree) {
+				if (tree == null) {
+					return 0;
+				}
+				// + 1 für dieses Element
+				int result = 1;
+				for (TreeItem<ClassItem> child : tree.getChildren()) {
+					// + Kindelemente
+					result += countElements(child);
+				}
+				return result;
+			}
+		});
+
+		box.getChildren().add(treeView);
+		box.getChildren().add(comboBox);
+		box.getChildren().add(openFile);
+		box.getChildren().add(loadXSD);
+		box.getChildren().add(countElements);
+		box.getChildren().add(checkBox);
+		stage.setScene(scene);
+		stage.show();
+	}
+
+	private EventHandler<ActionEvent> setOpenFileHandler(ComboBox<String> comboBox) {
+		return new EventHandler<ActionEvent>() {
 
 			@Override
 			public void handle(ActionEvent event) {
@@ -145,60 +234,7 @@ public class TreeViewSample extends Application {
 
 			}
 
-		});
-
-		// load xsd- File
-		Button loadXSD = new Button();
-		loadXSD.setText("Load elemet");
-		loadXSD.setOnAction(new EventHandler<ActionEvent>() {
-
-			@Override
-			public void handle(ActionEvent event) {
-
-				// check if there is a value selected in the combobox
-
-				if (comboBox.getSelectionModel().getSelectedItem() == null
-						|| comboBox.getSelectionModel().getSelectedItem().equals("-- select items --")) {
-					showAlert(AlertType.ERROR, "Please select an element from the combobox!");
-					return;
-				}
-
-				// check if the file is loaded
-				if (pathToLoadedFile == null) {
-					showAlert(AlertType.ERROR, "Please load elements from a xsd-file first!");
-					return;
-				}
-
-				// load the class-tree from file
-				ClassScanner scanner = new ClassScanner();
-				ClassTree tree = null;
-				try {
-					tree = scanner.getClassAsTree(pathToLoadedFile, comboBox.getValue());
-				} catch (Exception e) {
-					showAlert(AlertType.ERROR, e.getMessage());
-					return;
-				}
-
-				// set the tree to the UI
-				TreeItem<ClassItem> classTree = getJavaFXTreeViewFromClassTree(tree);
-				if (classTree != null) {
-					rootNode.setValue(classTree.getValue());
-					rootNode.getChildren().clear();
-					rootNode.getChildren().addAll(classTree.getChildren());
-					rootNode.setExpanded(true);
-				} else {
-					showAlert(AlertType.ERROR, "Beim Laden des XSD ist ein Fehler aufgetreten!");
-				}
-
-			}
-		});
-
-		box.getChildren().add(treeView);
-		box.getChildren().add(comboBox);
-		box.getChildren().add(openFile);
-		box.getChildren().add(loadXSD);
-		stage.setScene(scene);
-		stage.show();
+		};
 	}
 
 	private void showAlert(AlertType type, String text) {
@@ -220,8 +256,7 @@ public class TreeViewSample extends Application {
 		fileChooser.getExtensionFilters().add(extentionFilter);
 
 		// Set to user directory or go to default if cannot access
-		String userDirectoryString = System.getProperty("user.home");
-		userDirectoryString = lastVisitedPath == null ? "/home/tim/mapping/src/main/resources/xsd/xmeld243"
+		String userDirectoryString = lastVisitedPath == null ? "/home/tim/mapping/src/main/resources/xsd/xmeld243"
 				: lastVisitedPath;
 		File userDirectory = new File(userDirectoryString);
 		if (!userDirectory.canRead()) {

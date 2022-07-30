@@ -16,10 +16,8 @@ public class SAXParseHandler extends DefaultHandler {
 
 	@Override
 	public void startElement(String uri, String localName, String qName, Attributes attributes) {
-		if (qName.contains("import")) {
-			if (attributes.getValue("schemaLocation") != null) {
-				urls.add(attributes.getValue("schemaLocation"));
-			}
+		if (qName.contains("import") && attributes.getValue("schemaLocation") != null) {
+			urls.add(attributes.getValue("schemaLocation"));
 		}
 	}
 

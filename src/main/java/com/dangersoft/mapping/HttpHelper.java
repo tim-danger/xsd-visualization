@@ -26,17 +26,19 @@ public class HttpHelper {
 		return null;
 	}
 
+	// tag::readResponse[]
 	private String readResponse(HttpURLConnection con) {
-		try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) {
+		try (BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()))) { // <1>
 			String inputLine;
-			StringBuffer content = new StringBuffer();
-			while ((inputLine = in.readLine()) != null) {
-				content.append(inputLine);
+			StringBuilder content = new StringBuilder();
+			while ((inputLine = in.readLine()) != null) { // <2>
+				content.append(inputLine); // <3>
 			}
-			return content.toString();
+			return content.toString(); // <4>
 		} catch (IOException e) {
-			return null;
+			return null; // <5>
 		}
 	}
+	// end::readResponse[]
 
 }
