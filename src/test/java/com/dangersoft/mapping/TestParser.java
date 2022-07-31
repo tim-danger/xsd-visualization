@@ -94,8 +94,7 @@ public class TestParser {
 
 	private String downloadFileContent(String url) {
 		HttpHelper helper = new HttpHelper();
-		String fileConten = helper.readFile(url);
-		return fileConten;
+		return helper.readFile(url);
 	}
 
 	private void saveFile(String fileContent, String path) {

@@ -34,6 +34,8 @@ import org.reflections.scanners.SubTypesScanner;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 import org.reflections.util.FilterBuilder;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.bootstrap.DOMImplementationRegistry;
 import org.w3c.dom.ls.LSInput;
 
@@ -54,7 +56,8 @@ public class ClassScanner {
 	private static final String JAVA_XML_GREGORIAN = "javax.xml.datatype.XMLGregorianCalendar";
 	private static final String UNKNOWN = "unknown";
 
-	private final static Map<String, String> TYPE_MAP = new HashMap<>();
+	private static final Map<String, String> TYPE_MAP = new HashMap<>();
+	private static Logger logger = LoggerFactory.getLogger(ClassScanner.class);
 
 	static {
 		TYPE_MAP.put("string", JAVA_LANG_STRING);
@@ -212,7 +215,6 @@ public class ClassScanner {
 			throw new LimitExceededException("The limit of " + limit + " is reached. XSD is too big!");
 		}
 		// TODO : AnonType entsprechend berücksichtigen
-		ClassTree tree = null;
 		XSElementDeclaration element = xmlElement.getElement();
 		XSTypeDefinition definition = element.getTypeDefinition();
 
@@ -225,7 +227,8 @@ public class ClassScanner {
 			ClassTree result = handleComplexTypeDefinition(xmlElement, parent, element, definition);
 			if (result != null) return result;
 		} else {
-			System.err.println("Unknown type " + definition.getClass().toString());
+			String unknownType = definition.getClass().toString();
+			logger.error("Unknown type: {}", unknownType);
 		}
 		return null;
 	}
@@ -258,7 +261,8 @@ public class ClassScanner {
 				visitedElements.remove(complexNameAndType);
 				return tree;
 			} else {
-				System.err.println("Unknown type: " + term.getClass().toString());
+				String unknownType = term.getClass().toString();
+				logger.error("Unknown type: {}", unknownType);
 				visitedElements.remove(complexNameAndType);
 			}
 
@@ -373,9 +377,11 @@ public class ClassScanner {
 				XSModelGroup mg = (XSModelGroup) pterm;
 				result.addAll(getElementDeclarations(mg));
 			} else {
-				// TODO : instance org.apache.xerces.impl.xs.XSWildcardDecl, AZR
-				System.out.println(modelgroup.toString());
-				System.err.println("Unknown instance " + pterm.getClass().toString());
+				// unknown instances
+				String modelGroupAsString = modelgroup.toString();
+				String classAsString = pterm.getClass().toString();
+				logger.info("Name of Modelgroup: {}", modelGroupAsString);
+				logger.error("Unknown instance: {}", classAsString);
 			}
 		}
 

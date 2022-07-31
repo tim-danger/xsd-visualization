@@ -1,5 +1,8 @@
 package com.dangersoft.mapping;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -7,6 +10,8 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class HttpHelper {
+
+	private static Logger logger = LoggerFactory.getLogger(HttpHelper.class);
 
 	public String readFile(String urlAsString) {
 		HttpURLConnection con = null;
@@ -16,7 +21,8 @@ public class HttpHelper {
 			con.setRequestMethod("GET");
 			return readResponse(con);
 		} catch (Exception e) {
-			e.printStackTrace();
+			String message = e.getMessage();
+			logger.error("Could not read file, message: {}", message);
 		} finally {
 			if (con != null) {
 				con.disconnect();

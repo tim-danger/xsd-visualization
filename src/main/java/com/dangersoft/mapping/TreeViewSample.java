@@ -244,7 +244,7 @@ public class TreeViewSample extends Application {
 	}
 
 	private List<String> getElementsInFile(String pathToFile) throws ClassNotFoundException, InstantiationException,
-			IllegalAccessException, ClassCastException, FileNotFoundException {
+			IllegalAccessException, FileNotFoundException {
 		return new ClassScanner().getElementsInFile(pathToFile);
 	}
 
